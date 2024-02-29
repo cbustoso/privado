@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "../assets/css/bootstrap.css"
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Script from 'next/script'
 import TanstackProvider from "@/providers/TanstackProvider";
 import AuthProvider from "@/providers/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <script src="https://kit.fontawesome.com/a790242b27.js" crossOrigin="anonymous"></script>
+        <Script src="https://kit.fontawesome.com/a790242b27.js"></Script>
       </head>
       <body className={inter.className}>
         <AuthProvider>
