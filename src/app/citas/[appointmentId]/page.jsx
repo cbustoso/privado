@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
