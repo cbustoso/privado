@@ -2,8 +2,8 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import Headerudp from "../Headerudp";
-import Sidebar from "../Sidebar";
+// import Headerudp from "../Headerudp";
+import Sidebar from "../../../components/Sidebar";
 import { Link, useParams } from "react-router-dom";
 import { favicon, imagesend } from "../imagepath";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
@@ -86,7 +86,7 @@ const EditDoctor = () => {
 
   return (
     <div>
-      <Headerudp />
+      {/* <Headerudp /> */}
       <Sidebar
         id="menu-item1"
         id1="menu-items1"

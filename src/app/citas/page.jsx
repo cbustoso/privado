@@ -2,13 +2,14 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Table } from 'antd';
-import Headerudp from '../Headerudp';
-import Sidebar from '../Sidebar';
+// import Headerudp from '../Headerudp';
+import Sidebar from '../../components/Sidebar';
 import {
   imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
-} from '../imagepath';
+} from '../../components/imagepath';
 import { onShowSizeChange, itemRender } from '../Pagination'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 
 import { fetchAppointments, changeStatusAppointment, search } from '../../services/AppointmentsServices'
@@ -55,14 +56,14 @@ const AppoinmentList = () => {
       render: (text, record) => (
         <>
           <h2 className="profile-image">
-            {/* <Link to="#" className="avatar avatar-sm me-2">
+            {/* <Link href="#" className="avatar avatar-sm me-2">
               <img
                 className="avatar-img rounded-circle"
                 src={record.Img}
                 alt="User Image"
               />
             </Link> */}
-            <Link to="#">{record.nombre_alumno}</Link>
+            <Link href="#">{record.nombre_alumno}</Link>
           </h2>
         </>
       )
@@ -88,7 +89,7 @@ const AppoinmentList = () => {
       sorter: (a, b) => a['mail_alumno'].length - b['mail_alumno'].length,
       render: (text, record) => (
         <>
-          <Link to="#">{record.mail_alumno}</Link>
+          <Link href="#">{record.mail_alumno}</Link>
         </>
       )
     }, {
@@ -111,7 +112,7 @@ const AppoinmentList = () => {
           <div className="text-end">
             <div className="dropdown dropdown-action">
               <Link
-                to="#"
+                href="#"
                 className="action-icon dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -119,11 +120,12 @@ const AppoinmentList = () => {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to={`/editappoinments/${record.id}`}>
+                <Link className="dropdown-item" href={`/editappoinments/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
                 <Link
+                  href="#"
                   className="dropdown-item"
                   data-bs-toggle="modal"
                   data-bs-target="#delete_patient"
@@ -141,7 +143,7 @@ const AppoinmentList = () => {
 
   return (
     <>
-      <Headerudp />
+      {/* <Headerudp /> */}
       <Sidebar id='menu-item4' id1='menu-items4' activeClassName='appoinment-list' />
       <>
         <div className="page-wrapper">
@@ -152,7 +154,7 @@ const AppoinmentList = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Agenda </Link>
+                      <Link href="#">Agenda </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -184,7 +186,7 @@ const AppoinmentList = () => {
                                     placeholder="Busca aquí"
                                     onChange={(e) => { handleSearch(e.target.value) }}
                                   />
-                                  <Link className="btn">
+                                  <Link className="btn" href="#">
                                     <img
                                       src={searchnormal}
                                       alt="#"
@@ -193,12 +195,13 @@ const AppoinmentList = () => {
                                 </form>
                               </div>
                               <div className="add-group">
-                                <Link to="/addappoinments"
+                                <Link href="/addappoinments"
                                   className="btn btn-primary add-pluss ms-2"
                                 >
                                   <img src={plusicon} alt="#" />
                                 </Link>
                                 <Link
+                                  href="#"
                                   onClick={handleRefresh}
                                   className="btn btn-primary doctor-refresh ms-2"
                                 >
@@ -209,15 +212,15 @@ const AppoinmentList = () => {
                           </div>
                         </div>
                         <div className="col-auto text-end float-end ms-auto download-grp">
-                          <Link to="#" className=" me-2">
+                          <Link href="#" className=" me-2">
                             <img src={pdficon} alt="#" />
                           </Link>
-                          <Link to="#" className=" me-2">
+                          <Link href="#" className=" me-2">
                           </Link>
-                          <Link to="#" className=" me-2">
+                          <Link href="#" className=" me-2">
                             <img src={pdficon3} alt="#" />
                           </Link>
-                          <Link to="#">
+                          <Link href="#">
                             <img src={pdficon4} alt="#" />
                           </Link>
                         </div>
@@ -254,7 +257,7 @@ const AppoinmentList = () => {
               <div className="drop-scroll msg-list-scroll" id="msg_list">
                 <ul className="list-box">
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -271,7 +274,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item new-message">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -288,7 +291,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -305,7 +308,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -322,7 +325,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -339,7 +342,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">D</span>
@@ -356,7 +359,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">B</span>
@@ -373,7 +376,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -390,7 +393,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -407,7 +410,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -424,7 +427,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -441,7 +444,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">L</span>
@@ -458,7 +461,7 @@ const AppoinmentList = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -477,7 +480,7 @@ const AppoinmentList = () => {
                 </ul>
               </div>
               <div className="topnav-dropdown-footer">
-                <Link to="#">See all messages</Link>
+                <Link href="#">See all messages</Link>
               </div>
             </div>
           </div> */}
@@ -490,7 +493,7 @@ const AppoinmentList = () => {
                 <h3>¿Está seguro que desea cancelar la cita?</h3>
                 <div className="m-t-20">
                   {" "}
-                  <Link to="#" className="btn btn-white me-2" data-bs-dismiss="modal">
+                  <Link href="#" className="btn btn-white me-2" data-bs-dismiss="modal">
                     Cerrar
                   </Link>
                   <button
@@ -512,7 +515,7 @@ const AppoinmentList = () => {
                   <h3>Are you sure want to delete this ?</h3>
                   <div className="m-t-20">
                     {" "}
-                    <Link to="#" className="btn btn-white me-2" data-bs-dismiss="modal">
+                    <Link href="#" className="btn btn-white me-2" data-bs-dismiss="modal">
                       Close
                     </Link>
                     <button type="submit" className="btn btn-danger">

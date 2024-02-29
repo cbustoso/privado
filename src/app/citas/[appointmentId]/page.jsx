@@ -2,12 +2,13 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import Headerudp from "../Headerudp";
-import Sidebar from "../Sidebar";
-import { imagesend } from "../imagepath";
+// import Headerudp from "../Headerudp";
+import Sidebar from "../../../components/Sidebar"
+import { imagesend } from "../../../components/imagepath";
 import { DatePicker } from "antd";
 import FeatherIcon from "feather-icons-react";
-import { Link, useParams } from "react-router-dom";
+// import { Link, useParams } from "react-router-dom";
+import Link from "next/link";
 import dayjs from "dayjs";
 import Select from "react-select";
 import { TextField } from "@mui/material";
@@ -16,8 +17,8 @@ import { fetchAppointment, updateAppointment } from "../../../services/Appointme
 import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 
-const EditAppoinments = () => {
-  const { id } = useParams();
+const EditAppoinments = ({ params }) => {
+  // const { id } = useParams();
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -73,7 +74,7 @@ const EditAppoinments = () => {
   const { register, handleSubmit, watch, control,
     formState: { errors }
   } = useForm({
-    defaultValues: async () => fetchAppointment(id)
+    defaultValues: async () => fetchAppointment(params.id)
       .then(appointment => {
 
         const filterDoc = doctor.filter(doc => doc.label === appointment.nombre_profesional)
@@ -133,7 +134,7 @@ const EditAppoinments = () => {
 
   return (
     <div>
-      <Headerudp />
+      {/* <Headerudp /> */}
       <Sidebar
         id="menu-item4"
         id1="menu-items4"
@@ -148,7 +149,7 @@ const EditAppoinments = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Cita </Link>
+                      <Link href="#">Cita </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -559,7 +560,7 @@ const EditAppoinments = () => {
                               style={{ display: show ? "none" : "block" }}
                             >
                               <img src={favicon} alt="Image" />
-                              <Link to="#" className="btn-icon logo-hide-btn">
+                              <Link href="#" className="btn-icon logo-hide-btn">
                                 <i
                                   className="feather-x-circle"
                                   onClick={() => setShow((s) => !s)}
@@ -583,7 +584,7 @@ const EditAppoinments = () => {
                               // type="submit"
                               className="btn btn-primary cancel-form"
                             >
-                              <Link to={'/appoinmentlist'}>
+                              <Link href={'/appoinmentlist'}>
                                 Cancelar
                               </Link>
                             </button>
@@ -604,7 +605,7 @@ const EditAppoinments = () => {
               <div className="drop-scroll msg-list-scroll" id="msg_list">
                 <ul className="list-box">
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -621,7 +622,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item new-message">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -638,7 +639,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -658,7 +659,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -675,7 +676,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -695,7 +696,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">D</span>
@@ -715,7 +716,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">B</span>
@@ -735,7 +736,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -755,7 +756,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -772,7 +773,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -789,7 +790,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -806,7 +807,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">L</span>
@@ -823,7 +824,7 @@ const EditAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -844,7 +845,7 @@ const EditAppoinments = () => {
                 </ul>
               </div>
               <div className="topnav-dropdown-footer">
-                <Link to="#">See all messages</Link>
+                <Link href="#">See all messages</Link>
               </div>
             </div>
           </div>
@@ -861,7 +862,7 @@ const EditAppoinments = () => {
                 <h3>Are you sure want to delete this ?</h3>
                 <div className="m-t-20">
                   {" "}
-                  <Link to="#" className="btn btn-white me-2" data-bs-dismiss="modal">
+                  <Link href="#" className="btn btn-white me-2" data-bs-dismiss="modal">
                     Close
                   </Link>
                   <button type="submit" className="btn btn-danger">
