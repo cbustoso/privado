@@ -4,8 +4,9 @@
 import { useEffect, useState } from "react";
 // import Headerudp from "../Headerudp";
 import Sidebar from "../../../components/Sidebar";
-import { Link, useParams } from "react-router-dom";
-import { favicon, imagesend } from "../imagepath";
+// import { Link, useParams } from "react-router-dom";
+import Link from "next/link";
+import { favicon, imagesend } from "../../../components/imagepath";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { DatePicker } from "antd";
 import Select from "react-select";
@@ -13,8 +14,8 @@ import { useForm, Controller } from 'react-hook-form'
 import { fetchDoctor, updateDoctor } from "../../../services/DoctorsServices";
 
 
-const EditDoctor = () => {
-  const { id } = useParams();
+const EditDoctor = ({params}) => {
+  // const { id } = useParams();
 
   const [initial, setInitial] = useState({})
   const [selectedOption, setSelectedOption] = useState(null);
@@ -50,7 +51,7 @@ const EditDoctor = () => {
 
   useEffect(() => {
     const fetchDataDoctor = async() => {
-      const data = await fetchDoctor(id)
+      const data = await fetchDoctor(params.id)
       setInitial(data)
     }
     fetchDataDoctor()
@@ -60,7 +61,7 @@ const EditDoctor = () => {
   const { register, handleSubmit, watch, control,
     formState: { errors }
   } = useForm({
-    defaultValues: async () => fetchDoctor(id).then(user => {
+    defaultValues: async () => fetchDoctor(params.id).then(user => {
       const obj = {
         name: user.nombre,
         lastName: user.apellido,

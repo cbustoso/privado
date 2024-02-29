@@ -7,7 +7,7 @@ import Sidebar from '../../components/Sidebar';
 import {
   imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
 } from '../../components/imagepath';
-import { onShowSizeChange, itemRender } from '../Pagination'
+import { onShowSizeChange, itemRender } from '../../components/Pagination'
 // import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
