@@ -455,7 +455,7 @@ const AddDoctor = () => {
                               defaultValue={selectedOption}
                               onChange={setSelectedOption}
                               options={options}
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
@@ -495,7 +495,7 @@ const AddDoctor = () => {
                               defaultValue={selectedOption}
                               onChange={setSelectedOption}
                               options={option}
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
@@ -537,7 +537,7 @@ const AddDoctor = () => {
                               defaultValue={selectedOption}
                               onChange={setSelectedOption}
                               options={options}
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
