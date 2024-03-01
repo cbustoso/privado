@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { logo, baricon, baricon1 } from "./imagepath";
 import ReserveBtn from "./ReserveBtn";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const handlesidebar = () => {
@@ -16,13 +16,10 @@ const Navbar = () => {
   };
 
   const { data: session } = useSession()
-  console.log('session', session);
 
   const { status } = useSession()
-  console.log('status', status);
 
   return (
-
     <div className="main-wrapper">
       <div className="header" style={{ justifyContent: 'space-between', display: 'flex', alignItems: 'center' }}>
         <div className="header-left">
@@ -37,26 +34,26 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="nav user-menu float-end ">
-
-          <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
-            <li>TÓPICOS </li>
-          </Link>
-
-
-          <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
-            <li> TEST AUTODIAGNÓSTICO</li>
-          </Link>
-
-
-          <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
-            <li> EVENTOS</li>
-          </Link>
-
-
-          <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
-            <li> PREGUNTAS FRECUENTES</li>
-          </Link>
-
+          <li>
+            <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              TÓPICOS
+            </Link>
+          </li>
+          <li>
+            <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              TEST AUTODIAGNÓSTICO
+            </Link>
+          </li>
+          <li>
+            <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              EVENTOS
+            </Link>
+          </li>
+          <li>
+            <Link className="sailec" href="#" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              PREGUNTAS FRECUENTES
+            </Link>
+          </li>
           <li>
             <ReserveBtn text={'Reservar'} bgColor={'#FF5253'} color={'#fff'} />
           </li>
@@ -64,12 +61,6 @@ const Navbar = () => {
             <li>MIDDLEWARE</li>
           </Link> */}
 
-          {session?.user &&
-            (<>
-              <button className='btn btn-rounded seilac' onClick={() => signOut()}> Log out</button>
-            </>
-            ) 
-          }
         </ul>
       </div>
     </div>

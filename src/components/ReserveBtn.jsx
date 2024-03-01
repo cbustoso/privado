@@ -14,7 +14,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
     <>
       {/* <Link href="#" > */}
         <button
-        onClick={() => signIn()}
+        onClick={() => signIn('google', { callbackUrl: '/pacientes' })}
           className='btn btn-rounded seilac'
           style={{ margin: '16px 0', backgroundColor: bgColor, color: color }}
           // onClick={handleOpen}

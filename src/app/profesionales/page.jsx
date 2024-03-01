@@ -19,6 +19,7 @@ import { search } from '../../services/AppointmentsServices'
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([])
   const [results, setResults] = useState([])
+  const [show, setShow] = useState({ state: false, id: '' })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,10 +123,18 @@ const DoctorList = () => {
                 className="action-icon dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                onClick={() => { setShow({ ...show, state: !show.state, id: record.id }) }}
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
-              <div className="dropdown-menu dropdown-menu-end">
+              <div
+                style={{ right: 0 }}
+                className=
+                {show.state === true && show.id === record.id
+                  ? "dropdown-menu dropdown-menu-end show"
+                  : "dropdown-menu dropdown-menu-end "
+                }
+              >
                 <Link href="#" className="dropdown-item" to={`/editdoctor/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar

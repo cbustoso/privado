@@ -10,7 +10,7 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Alert } from "@mui/material";
 
-import { addDoctor } from "../../services/DoctorsServices";
+import { addDoctor } from "../../../services/DoctorsServices";
 
 const AddDoctor = () => {
   const { register, handleSubmit, watch, control,

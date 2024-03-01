@@ -3,7 +3,7 @@
 // const doctorList = arr => arr.map(user => user.id)
 
 export const fetchSchedules = async () => {
-  const SCHEDULES_URL = import.meta.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
   // const doctors = await fetchUsers(SCHEDULES_URL)
 
   // const docList = doctorList(doctors)
@@ -23,7 +23,7 @@ export const fetchSchedules = async () => {
 }
 
 export const fetchSchedule = async (id) => {
-  const SCHEDULES_URL = import.meta.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
 
   const data = await fetch(SCHEDULES_URL, {
     headers: {
@@ -36,7 +36,7 @@ export const fetchSchedule = async (id) => {
 }
 
 export const createSchedule = async (schedule) => {
-  const SCHEDULES_URL = import.meta.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
 
   const data = await fetch(SCHEDULES_URL, {
     method: "POST",
@@ -58,7 +58,7 @@ export const createSchedule = async (schedule) => {
 }
 
 export const updateSchedule = async (schedule, id) => {
-  const SCHEDULES_URL = import.meta.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
 
   const data = await fetch(SCHEDULES_URL, {
     method: "PUT",
@@ -79,7 +79,7 @@ export const updateSchedule = async (schedule, id) => {
 
 
 export const deleteSchedule = async (id) => {
-  const SCHEDULES_URL = import.meta.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules/${id}`
   const data = await fetch(SCHEDULES_URL, {
     method: "DELETE",
     headers: {

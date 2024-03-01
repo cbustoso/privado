@@ -19,6 +19,7 @@ const AppoinmentList = () => {
   const [appointments, setAppointments] = useState([])
   const [idAppointment, setIdAppointment] = useState('')
   const [results, setResults] = useState([])
+  const [show, setShow] = useState({ state: false, id: '' })
 
   useEffect(() => {
     fetchAppointments(setAppointments)
@@ -116,10 +117,17 @@ const AppoinmentList = () => {
                 className="action-icon dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                onClick={() => { setShow({ ...show, state: !show.state, id: record.id }) }}
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
-              <div className="dropdown-menu dropdown-menu-end">
+              <div
+                className=
+                {show.state === true && show.id === record.id
+                  ? "dropdown-menu dropdown-menu-end show"
+                  : "dropdown-menu dropdown-menu-end "
+                }
+              >
                 <Link className="dropdown-item" href={`/editappoinments/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar
@@ -188,7 +196,7 @@ const AppoinmentList = () => {
                                   />
                                   <Link className="btn" href="#">
                                     <img
-                                      src={searchnormal}
+                                      src={searchnormal.src}
                                       alt="#"
                                     />
                                   </Link>
@@ -198,14 +206,14 @@ const AppoinmentList = () => {
                                 <Link href="/addappoinments"
                                   className="btn btn-primary add-pluss ms-2"
                                 >
-                                  <img src={plusicon} alt="#" />
+                                  <img src={plusicon.src} alt="#" />
                                 </Link>
                                 <Link
                                   href="#"
                                   onClick={handleRefresh}
                                   className="btn btn-primary doctor-refresh ms-2"
                                 >
-                                  <img src={refreshicon} alt="#" />
+                                  <img src={refreshicon.src} alt="#" />
                                 </Link>
                               </div>
                             </div>
@@ -213,15 +221,15 @@ const AppoinmentList = () => {
                         </div>
                         <div className="col-auto text-end float-end ms-auto download-grp">
                           <Link href="#" className=" me-2">
-                            <img src={pdficon} alt="#" />
+                            <img src={pdficon.src} alt="#" />
                           </Link>
                           <Link href="#" className=" me-2">
                           </Link>
                           <Link href="#" className=" me-2">
-                            <img src={pdficon3} alt="#" />
+                            <img src={pdficon3.src} alt="#" />
                           </Link>
                           <Link href="#">
-                            <img src={pdficon4} alt="#" />
+                            <img src={pdficon4.src} alt="#" />
                           </Link>
                         </div>
                       </div>
@@ -489,7 +497,7 @@ const AppoinmentList = () => {
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-body text-center">
-                <img src={imagesend} alt="#" width={50} height={46} />
+                <img src={imagesend.src} alt="#" width={50} height={46} />
                 <h3>¿Está seguro que desea cancelar la cita?</h3>
                 <div className="m-t-20">
                   {" "}

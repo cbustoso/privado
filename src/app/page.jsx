@@ -36,7 +36,7 @@ export default function Home() {
     setIndex(selectedIndex);
   };
   return (
-    <main className={styles.main}>
+    <main >
       {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
         {blogs.length > 0 && <ImageSlider slides={blogs} matches={matches} />}

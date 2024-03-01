@@ -17,7 +17,7 @@ const PatientsList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [users, setUsers] = useState([])
   const [results, setResults] = useState([])
-  const [show, setShow] = useState({state: false, id: ''})
+  const [show, setShow] = useState({ state: false, id: '' })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,29 +122,29 @@ const PatientsList = () => {
                 className="action-icon dropdown-toggle"
                 // data-bs-toggle="dropdown"
                 // aria-expanded="false"
-                onClick={() => {setShow({...show, state: !show.state, id: record.id})}}
+                onClick={() => { setShow({ ...show, state: !show.state, id: record.id }) }}
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
-                 <div 
-                  className=
-                  {show.state === true && show.id === record.id 
-                    ? "dropdown-menu dropdown-menu-end show"
-                    : "dropdown-menu dropdown-menu-end "
-                  } 
-                  >
-                  <Link className="dropdown-item" href={`/pacientes/${record.id}`}>
-                    <i className="far fa-edit me-2" />
-                    Editar
-                  </Link>
-                  <Link className="dropdown-item" href="#" 
-                    // data-bs-toggle="modal" 
-                    // data-bs-target="#delete_patient"
-                    >
-                    <i className="fa fa-trash-alt m-r-5"></i>
-                    Eliminar
-                  </Link>
-                </div>
+              <div
+                className=
+                {show.state === true && show.id === record.id
+                  ? "dropdown-menu dropdown-menu-end show"
+                  : "dropdown-menu dropdown-menu-end "
+                }
+              >
+                <Link className="dropdown-item" href={`/pacientes/${record.id}`}>
+                  <i className="far fa-edit me-2" />
+                  Editar
+                </Link>
+                <Link className="dropdown-item" href="#"
+                // data-bs-toggle="modal" 
+                // data-bs-target="#delete_patient"
+                >
+                  <i className="fa fa-trash-alt m-r-5"></i>
+                  Eliminar
+                </Link>
+              </div>
             </div>
           </div>
         </>
@@ -194,7 +194,7 @@ const PatientsList = () => {
                                   placeholder="Busca aquí"
                                   onChange={(e) => { handleSearch(e.target.value) }}
                                 />
-                                <Link href="#"className="btn">
+                                <Link href="#" className="btn">
                                   <img
                                     src={searchnormal.src}
                                     alt="#"
@@ -259,7 +259,7 @@ const PatientsList = () => {
             </div>
           </div>
         </div>
-       
+
       </div>
       <div id="delete_patient" className="modal fade delete-modal" role="dialog">
         <div className="modal-dialog modal-dialog-centered">
@@ -270,10 +270,10 @@ const PatientsList = () => {
               <div className="m-t-20">
                 {" "}
                 <Link href="#" className="btn btn-white me-2" data-bs-dismiss="modal">
-                  Close
+                  Cerrar
                 </Link>
                 <button type="submit" className="btn btn-danger">
-                  Delete
+                  Eliminar
                 </button>
               </div>
             </div>

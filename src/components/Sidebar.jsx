@@ -4,6 +4,8 @@
 import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import { blog, doctor, doctorschedule, logout, menuicon04,  patients } from './imagepath';
+import { signOut } from "next-auth/react";
+
 // import Scrollbars from "react-custom-scrollbars-2";
 
 
@@ -156,7 +158,7 @@ const Sidebar = (props) => {
                   </Link>
                   <ul style={{ display: "none" }} className="menu-items4">
                     <li>
-                      <Link className={props?.activeClassName === 'appoinment-list' ? 'active' : ''} href="/appoinmentlist">Lista de Citas</Link>
+                      <Link className={props?.activeClassName === 'appoinment-list' ? 'active' : ''} href="/citas">Lista de Citas</Link>
                     </li>
                     <li>
                       <Link className={props?.activeClassName === 'add-appoinment' ? 'active' : ''} href="/addappoinments">Agregar Cita</Link>
@@ -523,7 +525,7 @@ const Sidebar = (props) => {
                 </li> */}
               </ul>
               <div className="logout-btn">
-                <Link href="/login">
+                <Link href="/"  onClick={() => signOut({callbackUrl:'http://localhost:3000'})}>
                   <span className="menu-side">
                     <img src={logout.src} alt="" />
                   </span>{" "}

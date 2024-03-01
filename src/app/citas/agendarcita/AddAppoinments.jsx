@@ -13,9 +13,9 @@ import Headerudp from "../Headerudp"
 import { TextField, Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-import { fetchDoctors } from "../../services/DoctorsServices";
-import { fetchUsers } from "../../services/UsersServices";
-import { createAppointment } from "../../services/AppointmentsServices"
+import { fetchDoctors } from "../../../services/DoctorsServices";
+import { fetchUsers } from "../../../services/UsersServices";
+import { createAppointment } from "../../../services/AppointmentsServices"
 
 const AddAppoinments = () => {
   const { register, handleSubmit, watch, control,

@@ -3,19 +3,21 @@
 import { useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import Select from "react-select";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from "next/link";
 import { useForm, Controller } from 'react-hook-form';
 
-import Sidebar from "../Sidebar";
-import Modal from "../Modal";
+import Sidebar from "../../../components/Sidebar";
+import Modal from "../../../components/Modal";
 
-import Headerudp from "../Headerudp"
+// import Headerudp from "../Headerudp"
 import { TextField, Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-import { fetchDoctors } from "../../services/DoctorsServices";
-import { fetchUsers } from "../../services/UsersServices";
-import { createAppointment } from "../../services/AppointmentsServices"
+import { fetchDoctors } from "../../../services/DoctorsServices";
+import { fetchUsers } from "../../../services/UsersServices";
+import { createAppointment } from "../../../services/AppointmentsServices"
+import { Contact } from "../../../components/Contact"
 
 const AddFirstAppoinments = () => {
   const { register, handleSubmit, watch, control,
@@ -108,7 +110,7 @@ const AddFirstAppoinments = () => {
   return (
     <div>
       {/* <Header /> */}
-      <Headerudp />
+      {/* <Headerudp /> */}
       <Sidebar
         id="menu-item4"
         id1="menu-items4"
@@ -123,7 +125,7 @@ const AddFirstAppoinments = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Agenda </Link>
+                      <Link href="#">Agenda </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -575,64 +577,9 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-12">
-                          <h5>Segunda Opción</h5>
+                          <h5>Agregar contacto</h5>
                         </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Nombres y apellidos <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="text"
-                              defaultValue={""}
-                              {...register('address')} />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Parentesco <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="text"
-                              defaultValue={""}
-                              {...register('address')} />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Fono domicilio <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="tel"
-                              defaultValue={""}
-                              {...register('address')} />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Celular <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="tel"
-                              defaultValue={""}
-                              placeholder="+56"
-                              {...register('address')} />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Correo electrónico <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="text"
-                              defaultValue={""}
-                              {...register('address')} />
-                          </div>
-                        </div>
+                        <Contact />
                       </div>
 
                       {/* Antecedentes sociales */}
@@ -1261,7 +1208,7 @@ const AddFirstAppoinments = () => {
               <div className="drop-scroll msg-list-scroll" id="msg_list">
                 <ul className="list-box">
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -1278,7 +1225,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item new-message">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -1295,7 +1242,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -1315,7 +1262,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -1332,7 +1279,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -1352,7 +1299,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">D</span>
@@ -1372,7 +1319,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">B</span>
@@ -1392,7 +1339,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -1412,7 +1359,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -1429,7 +1376,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -1446,7 +1393,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -1463,7 +1410,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">L</span>
@@ -1480,7 +1427,7 @@ const AddFirstAppoinments = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -1501,7 +1448,7 @@ const AddFirstAppoinments = () => {
                 </ul>
               </div>
               <div className="topnav-dropdown-footer">
-                <Link to="#">See all messages</Link>
+                <Link href="#">See all messages</Link>
               </div>
             </div>
           </div>
