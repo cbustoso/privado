@@ -2,11 +2,12 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import Headerudp from "../Headerudp";
-import Sidebar from "../Sidebar";
+// import Headerudp from "../Headerudp";
+import Sidebar from "../../../components/Sidebar";
 import { DatePicker } from "antd";
 import Select from "react-select";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from "next/link";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Alert } from "@mui/material";
@@ -93,7 +94,7 @@ const AddDoctor = () => {
 
   return (
     <div>
-      <Headerudp />
+      {/* <Headerudp /> */}
       <Sidebar id="menu-item1" id1="menu-items1" activeClassName="add-doctor" />
       <>
         <div className="page-wrapper">
@@ -104,7 +105,7 @@ const AddDoctor = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Profesionales </Link>
+                      <Link href="#">Profesionales </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -701,7 +702,7 @@ const AddDoctor = () => {
               <div className="drop-scroll msg-list-scroll" id="msg_list">
                 <ul className="list-box">
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -718,7 +719,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item new-message">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -735,7 +736,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -755,7 +756,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -772,7 +773,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -792,7 +793,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">D</span>
@@ -812,7 +813,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">B</span>
@@ -832,7 +833,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">R</span>
@@ -852,7 +853,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">C</span>
@@ -869,7 +870,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">M</span>
@@ -886,7 +887,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">J</span>
@@ -903,7 +904,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">L</span>
@@ -920,7 +921,7 @@ const AddDoctor = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#">
+                    <Link href="#">
                       <div className="list-item">
                         <div className="list-left">
                           <span className="avatar">T</span>
@@ -941,7 +942,7 @@ const AddDoctor = () => {
                 </ul>
               </div>
               <div className="topnav-dropdown-footer">
-                <Link to="#">See all messages</Link>
+                <Link href="#">See all messages</Link>
               </div>
             </div>
           </div>
@@ -987,13 +988,13 @@ const AddDoctor = () => {
         </div>
         {/* <div className="card-box">
          { statusPetition.warning && <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            Un <Link to="#" className="alert-link">problema</Link> ha ocurrido mientras se enviaba la información.
+            Un <Link href="#" className="alert-link">problema</Link> ha ocurrido mientras se enviaba la información.
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
               <span aria-hidden="true"> </span>
             </button>
           </div>}
           {statusPetition.success && <div className="alert alert-success alert-dismissible fade show" role="alert">
-            El <Link to="#" className="alert-link">usuario</Link> ha sido creado.
+            El <Link href="#" className="alert-link">usuario</Link> ha sido creado.
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
               <span aria-hidden="true"> </span>
             </button>
@@ -1007,7 +1008,7 @@ const AddDoctor = () => {
                 <h3>Are you sure want to delete this ?</h3>
                 <div className="m-t-20">
                   {" "}
-                  <Link to="#" className="btn btn-white me-2 w-25 " data-bs-dismiss="modal">
+                  <Link href="#" className="btn btn-white me-2 w-25 " data-bs-dismiss="modal">
                     Cerrar
                   </Link>
                   <button
