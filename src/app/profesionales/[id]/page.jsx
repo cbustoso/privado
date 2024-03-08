@@ -2,20 +2,17 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-// import Headerudp from "../Headerudp";
 import Sidebar from "../../../components/Sidebar";
-// import { Link, useParams } from "react-router-dom";
 import Link from "next/link";
 import { favicon, imagesend } from "../../../components/imagepath";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { DatePicker } from "antd";
 import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form'
-import { fetchDoctor, updateDoctor } from "../../../services/DoctorsServices";
+import { fetchDoctor } from "../../../services/DoctorsServices";
 
 
 const EditDoctor = ({params}) => {
-  // const { id } = useParams();
 
   const [initial, setInitial] = useState({})
   const [selectedOption, setSelectedOption] = useState(null);
@@ -50,6 +47,7 @@ const EditDoctor = ({params}) => {
   };
 
   useEffect(() => {
+    console.log(params.id)
     const fetchDataDoctor = async() => {
       const data = await fetchDoctor(params.id)
       setInitial(data)
@@ -435,7 +433,7 @@ const EditDoctor = ({params}) => {
                               Ciudad <span className="login-danger">*</span>
                             </label>
                             <Select
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{
                                 menuPortal: (base) => ({
                                   ...base,
@@ -478,7 +476,7 @@ const EditDoctor = ({params}) => {
                               País <span className="login-danger">*</span>
                             </label>
                             <Select
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{
                                 menuPortal: (base) => ({
                                   ...base,
@@ -526,7 +524,7 @@ const EditDoctor = ({params}) => {
                               defaultValue={selectedOption}
                               onChange={setSelectedOption}
                               options={statevalue}
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{
                                 menuPortal: (base) => ({
                                   ...base,

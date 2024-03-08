@@ -14,7 +14,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   const handleSignIn = async () => {
     try {
       // Realiza la autenticación
-      await signIn('google', { callbackUrl: '/pacientes' }) // Puedes pasar el nombre del proveedor que estés utilizando
+      await signIn('google', { callbackUrl: '/citas/agendarentrevista' }) // Puedes pasar el nombre del proveedor que estés utilizando
       // Si la autenticación es exitosa, se redirigirá automáticamente a la página de destino configurada en NextAuth
       
     } catch (error) {

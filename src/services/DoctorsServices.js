@@ -67,7 +67,7 @@ export const addDoctor = async (user) => {
     "direccion": "random",
     "region": "santiago",
     "comuna": "santiago",
-    "status": user.status,
+    "status": "activo",
     "especialidad":user.speciality.label,
   }
   console.log('body', body);

@@ -24,8 +24,6 @@ const Error = () => {
               </Typography> */}
               <Typography variant="body2">
                 Solo alumnos regulares pueden acceder a la plataforma.
-                <br />
-                {'"a benevolent smile"'}
               </Typography>
             </CardContent>
             <CardActions>

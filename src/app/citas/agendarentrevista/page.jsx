@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import { DatePicker } from "antd";
+import { DatePicker, TimePicker } from "antd";
 import Select from "react-select";
 import Link from "next/link";
 import { useForm, Controller } from 'react-hook-form';
@@ -12,14 +12,14 @@ import Sidebar from "../../../components/Sidebar";
 import Modal from "../../../components/Modal";
 import Contact from "../../../components/Contact"
 
-import { TextField, Alert } from "@mui/material";
+import { Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import PlusCircle from "feather-icons-react/build/IconComponents/PlusCircle";
 
 import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment } from "../../../services/AppointmentsServices"
-import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../selects";
+import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
 import { formatRut } from "@/utils/managedata";
 
 import dayjs from 'dayjs';
@@ -1120,10 +1120,13 @@ const AddFirstAppoinments = () => {
                               Hora <span className="login-danger">*</span>
                             </label>
                             <div className="">
-                              <TextField
+                              <TimePicker
                                 className="form-control"
                                 // id="outlined-controlled"
-                                type="time"
+                                minuteStep={15} secondStep={10} hourStep={1}
+                                // type="time"
+                                format='HH:mm'
+                                showNow= {false}
                                 value={startTime}
                                 onChange={(event) => {
                                   setStartTime(event.target.value);

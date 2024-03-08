@@ -10,7 +10,8 @@ import Select from "react-select";
 import Link from "next/link";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Alert } from "@mui/material";
+import { Alert } from "@mui/material";
+import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
 
 import { addDoctor } from "../../../services/DoctorsServices";
 
@@ -962,7 +963,7 @@ const AddDoctor = () => {
                   }}
                   spacing={2}
                 >
-                  El paciente se ha ingresado exitosamente.
+                  El profesional se ha ingresado exitosamente.
                 </Alert>
 
                 : success === 'fail'

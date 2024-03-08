@@ -7,16 +7,16 @@ import Select from "react-select";
 import Link from "next/link";
 import { useForm, Controller } from 'react-hook-form';
 
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
 import { TextField, Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-import { fetchDoctors } from "../../services/DoctorsServices";
-import { fetchUsers } from "../../services/UsersServices";
-import { createAppointment } from "../../services/AppointmentsServices"
-import Contact from "../../components/Contact"
-import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../citas/selects";
+import { fetchDoctors } from "../../../services/DoctorsServices";
+import { fetchUsers } from "../../../services/UsersServices";
+import { createAppointment } from "../../../services/AppointmentsServices"
+import Contact from "../../../components/Contact"
+import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
 import { formatRut } from "@/utils/managedata";
 
 const AddFirstAppoinments = () => {
@@ -111,6 +111,13 @@ const AddFirstAppoinments = () => {
     { value: 6, label: "Ingenieria" },
   ];
 
+  
+  const estdo_atencion = [
+    { value: 2, label: "Reagendada" },
+    { value: 3, label: "Realizada" },
+    { value: 4, label: "Cancelada" }
+  ];
+
   const handleAddContact = () => {
     const newContact = [
       ...contacts,
@@ -159,7 +166,7 @@ const AddFirstAppoinments = () => {
                         <FeatherIcon icon="chevron-right" />
                       </i>
                     </li>
-                    <li className="breadcrumb-item active">Agregar ficha</li>
+                    <li className="breadcrumb-item active">Registrar atención</li>
                   </ul>
                 </div>
               </div>
@@ -169,12 +176,67 @@ const AddFirstAppoinments = () => {
               <div className="col-sm-12">
                 <div className="card">
                   <div className="card-body">
+                    <h4>Registrar atención</h4>
                     <form>
                       {/* Detalles del paciente */}
                       <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '10px', margin: '10px' }}>
                         <div className="col-12">
                           <div className="form-heading">
                             <h4>Detalles del Paciente</h4>
+                          </div>
+                        </div>
+                        <div className="col-12 col-md-12 col-xl-12">
+                          <div className="form-group local-forms">
+                            <label>Estado atención</label>
+                            <Controller
+                              control={control}
+                              name="doctor"
+                              {...register('doctor', {
+                                required: {
+                                  value: true,
+                                  message: 'Especialista es requerido',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="professional"
+                                  defaultValue={selectedOption}
+                                  onChange={onChange}
+                                  options={estdo_atencion}
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="professional"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+                                      zIndex: 1000
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                            {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
+
                           </div>
                         </div>
                         <div className="col-12 col-md-4 col-xl-4">
@@ -314,7 +376,7 @@ const AddFirstAppoinments = () => {
                         </div>
                         <div className="form-group select-gender">
                           <label className="gen-label">
-                            Tratamientos anteriores en el servicio <span className="login-danger">*</span>
+                            Tratamientos anteriores en el servicio
                           </label>
                           <div className="form-check-inline">
                             <label className="form-check-label">
@@ -349,53 +411,11 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>Profesional</label>
-                            <Controller
-                              control={control}
-                              name="doctor"
-                              {...register('doctor', {
-                                required: {
-                                  value: true,
-                                  message: 'Especialista es requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
-                                  instanceId="professional"
-                                  defaultValue={selectedOption}
-                                  onChange={onChange}
-                                  options={doctor}
-                                  // menuPortalTarget={document.body}
-                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="professional"
-                                  components={{
-                                    IndicatorSeparator: () => null
-                                  }}
-
-                                  styles={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      },
-                                      borderRadius: '10px',
-                                      fontSize: "14px",
-                                      minHeight: "45px",
-                                    }),
-                                    dropdownIndicator: (base, state) => ({
-                                      ...base,
-                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                      transition: '250ms',
-                                      width: '35px',
-                                      height: '35px',
-                                    }),
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
+                            
+                            <input
+                              className="form-control" type="text"
+                              defaultValue={""}
+                              {...register('profesional')} />
 
                           </div>
                         </div>
@@ -403,71 +423,97 @@ const AddFirstAppoinments = () => {
                           <div className="form-group local-forms cal-icon">
                             <label>
                               Día de la Cita{" "}
-                              <span className="login-danger">*</span>
                             </label>
-                            <Controller
-                              control={control}
-                              name="appointment_date"
-                              {...register('appointment_date', {
-                                required: {
-                                  value: true,
-                                  message: 'Días es requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <DatePicker
-                                  className="form-control datetimepicker"
-                                  onChange={onChange}
-                                  suffixIcon={null}
-                                  format={'YYYY-MM-DD'}
-                                  style={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: isClicked ? '#2E37A4' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : 'none',
-                                      },
-                                    })
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.appointment_date && <span><small>{errors.appointment_date.message}</small></span>}
-
+                            <input
+                              className="form-control" type="text"
+                              defaultValue={""}
+                              {...register('fecha')} />
                           </div>
                         </div>
-                        <div className="col-12 col-md-6 col-xl-4">
+                     
+                        <div className="col-12 col-sm-12">
                           <div className="form-group local-forms">
                             <label>
-                              Hora <span className="login-danger">*</span>
+                              Antecedentes médicos relevantes 
                             </label>
-                            <div className="">
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time', {
-                                  required: {
-                                    value: true,
-                                    message: 'Hora es requerida',
-                                  }
-                                })}
-                              />
-                              {errors.start_time && <span><small>{errors.start_time.message}</small></span>}
+                            <textarea
+                              className="form-control"
+                              rows={3}
+                              cols={30}
+                              defaultValue={""}
+                              style={{ resize: 'none' }}
+                            />
+                          </div>
+                        </div>
 
-                            </div>
+
+                        <div className="col-12 col-sm-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Descripción sintomatología <span className="login-danger">*</span>
+                            </label>
+                            <textarea
+                              className="form-control"
+                              rows={3}
+                              cols={30}
+                              defaultValue={""}
+                              style={{ resize: 'none' }}
+                            />
                           </div>
                         </div>
 
                         <div className="col-12 col-sm-12">
                           <div className="form-group local-forms">
                             <label>
-                              Antecedentes médicos relevantes <span className="login-danger">*</span>
+                              Expectativas <span className="login-danger">*</span>
+                            </label>
+                            <textarea
+                              className="form-control"
+                              rows={3}
+                              cols={30}
+                              defaultValue={""}
+                              {...register('expectativas')}
+                              style={{ resize: 'none' }}
+                            />
+                          </div>
+                        </div>
+
+
+                        <div className="col-12 col-sm-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Impresión diagnóstica <span className="login-danger">*</span>
+                            </label>
+                            <textarea
+                              className="form-control"
+                              rows={3}
+                              cols={30}
+                              defaultValue={""}
+                              style={{ resize: 'none' }}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="col-12 col-sm-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Acuerdos <span className="login-danger">*</span>
+                            </label>
+                            <textarea
+                              className="form-control"
+                              rows={3}
+                              cols={30}
+                              defaultValue={""}
+                              {...register('acuerdos')}
+                              style={{ resize: 'none' }}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="col-12 col-sm-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Observaciones <span className="login-danger">*</span>
                             </label>
                             <textarea
                               className="form-control"
@@ -479,6 +525,7 @@ const AddFirstAppoinments = () => {
                             />
                           </div>
                         </div>
+                        
 
                         <div className="col-12">
                           <div className="doctor-submit text-end">

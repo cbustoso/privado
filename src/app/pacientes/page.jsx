@@ -22,7 +22,7 @@ const PatientsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { users } = await fetchUsers()
-      console.log(users);
+      // console.log(users);
       const newArray = [...users.filter(user => user.tipo_usuario === 'alumno')]
 
       setUsers(newArray)
@@ -221,7 +221,7 @@ const PatientsList = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-auto text-end float-end ms-auto download-grp">
+                      {/* <div className="col-auto text-end float-end ms-auto download-grp">
                         <Link href="#" className=" me-2">
                           <img src={pdficon.src} alt="#" />
                         </Link>
@@ -233,7 +233,7 @@ const PatientsList = () => {
                         <Link href="#">
                           <img src={pdficon4.src} alt="#" />
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   {/* /Table Header */}

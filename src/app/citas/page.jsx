@@ -135,7 +135,11 @@ const AppoinmentList = () => {
                   : "dropdown-menu dropdown-menu-end "
                 }
               >
-                <Link className="dropdown-item" href={`/editappoinments/${record.id_cita}`}>
+                <Link className="dropdown-item" href={`/fichas/${record.id_cita}`}>
+                  <i className="far fa-edit me-2" />
+                  Registrar atención
+                </Link>
+                <Link className="dropdown-item" href={`/citas/${record.id_cita}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
@@ -227,7 +231,7 @@ const AppoinmentList = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-auto text-end float-end ms-auto download-grp">
+                        {/* <div className="col-auto text-end float-end ms-auto download-grp">
                           <Link href="#" className=" me-2">
                             <img src={pdficon.src} alt="#" />
                           </Link>
@@ -239,7 +243,7 @@ const AppoinmentList = () => {
                           <Link href="#">
                             <img src={pdficon4.src} alt="#" />
                           </Link>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     {/* /Table Header */}

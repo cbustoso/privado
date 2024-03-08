@@ -22,7 +22,7 @@ const DoctorList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { users } = await fetchDoctors()
-      console.log('DATA', users);
+      // console.log('DATA', users);
       setDoctors(users)
       setResults(users)
     }
@@ -32,7 +32,7 @@ const DoctorList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    // console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -133,7 +133,7 @@ const DoctorList = () => {
                   : "dropdown-menu dropdown-menu-end "
                 }
               >
-                <Link className="dropdown-item" href={`profesionales/${record.id}`}>
+                <Link className="dropdown-item" href={`/profesionales/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
@@ -225,7 +225,7 @@ const DoctorList = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-auto text-end float-end ms-auto download-grp">
+                        {/* <div className="col-auto text-end float-end ms-auto download-grp">
                           <Link href="#" className=" me-2">
                             <img src={pdficon.src} alt="#" />
                           </Link>
@@ -237,7 +237,7 @@ const DoctorList = () => {
                           <Link href="#">
                             <img src={pdficon4.src} alt="#" />
                           </Link>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     {/* /Table Header */}

@@ -2,12 +2,10 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-// import Headerudp from "../Headerudp";
 import Sidebar from "../../../components/Sidebar";
 import { favicon, imagesend } from "../../../components/imagepath";
 import { DatePicker } from "antd";
 import FeatherIcon from "feather-icons-react";
-// import { Link, useParams } from "react-router-dom";
 import Link from "next/link";
 import Select from "react-select";
 import { fetchUser, updateUser } from "../../../services/UsersServices";
@@ -15,8 +13,6 @@ import { useForm } from 'react-hook-form'
 import { Skeleton } from "@mui/material";
 
 const EditPatients = ({ params }) => {
-  // const { id } = useParams();
-  console.log('PARAMS', params);
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm({

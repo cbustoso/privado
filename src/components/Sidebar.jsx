@@ -89,14 +89,14 @@ const Sidebar = (props) => {
                     <Link className={props?.activeClassName === 'doctor-list' ? 'active' : ''} href="/profesionales">Lista de Profesionales</Link>
                   </li>
                   <li>
-                    <Link className={props?.activeClassName === 'add-doctor' ? 'active' : ''} href="/add-doctor">Agregar Profesional</Link>
+                    <Link className={props?.activeClassName === 'add-doctor' ? 'active' : ''} href="/profesionales/agregarprofesional">Agregar Profesional</Link>
                   </li>
                   {/* <li>
                       <Link className={props?.activeClassName === 'edit-doctor' ? 'active' : ''} href="/editdoctor">Editar Doctor</Link>
                     </li> */}
-                  <li>
+                  {/* <li>
                     <Link className={props?.activeClassName === 'doctor-profile' ? 'active' : ''} href="/doctorprofile">Perfil Profesional</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
               <li className="submenu">
@@ -110,15 +110,15 @@ const Sidebar = (props) => {
                   <li>
                     <Link className={props?.activeClassName === 'patient-list' ? 'active' : ''} href="/pacientes">Lista de Pacientes</Link>
                   </li>
-                  <li>
-                    <Link className={props?.activeClassName === 'add-patient' ? 'active' : ''} href="/addpatients">Agregar Pacientes</Link>
-                  </li>
+                  {/* <li>
+                    <Link className={props?.activeClassName === 'add-patient' ? 'active' : ''} href="/pacientes">Agregar Pacientes</Link>
+                  </li> */}
                   {/* <li>
                       <Link className={props?.activeClassName === 'edit-patient' ? 'active' : ''} href="/editpatients">Editar Pacientes</Link>
                     </li> */}
-                  <li>
+                  {/* <li>
                     <Link className={props?.activeClassName === 'patient' ? 'active' : ''} href="/patientsprofile">Perfil Paciente</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
               {/* <li className="submenu">
@@ -182,17 +182,17 @@ const Sidebar = (props) => {
                   <li>
                     <Link className={props?.activeClassName === 'shedule-list' ? 'active' : ''} href="/schedulelist">Lista de Horarios</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link className={props?.activeClassName === 'add-shedule' ? 'active' : ''} href="/addschedule">Agregar Horarios</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
                       <Link className={props?.activeClassName === 'edit-shedule' ? 'active' : ''} href="/editschedule">Editar Horario</Link>
                     </li> */}
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <Link className={props?.activeClassName === 'add-medical-record' ? 'active' : ''} href="/fichas">Fichas</Link>
-              </li>
+              </li> */}
               {/* <li className="submenu">
                   <Link href="#" id="menu-item6" onClick={(e) => handleClick(e, "menu-item6", "menu-items6")}>
                     <span className="menu-side">
