@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
-import "../assets/css/bootstrap.css"
 import "./globals.css";
+import "../assets/css/bootstrap.css"
 import Navbar from "@/components/Navbar";
 import Script from 'next/script'
 import TanstackProvider from "@/providers/TanstackProvider";
