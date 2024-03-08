@@ -24,27 +24,6 @@ const Login = () => {
   } = useForm()
   const { login } = AuthData()
 
-  // const handleCallbackResponse = response => {
-  //   console.log('Encoded jwt id token:', response.credential);
-  //   const userObject = jwtDecode(response.credential)
-  //   console.log(userObject.email);
-  //   if (!userObject.email.includes('mail.udp.cl')) {
-  //     console.log('NO AUTORIZADO')
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   /* global google */
-  //   google.accounts.id.initialize({
-  //     client_id: "537718634857-rtb387t8kvdm3qjd6qi526t922ml7of9.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse
-  //   });
-  //   google.accounts.id.renderButton(
-  //     document.getElementById('signInDiv'),
-  //     { theme: 'outline', size: 'large' }
-  //   )
-  // })
-
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -181,19 +160,19 @@ const Login = () => {
                       {/* /Form */}
                       <div className="next-sign">
                         <p className="account-subtitle">
-                          ¿No tienes una cuenta? <Link href="/signup">Regístrate</Link>
+                          {/* ¿No tienes una cuenta? <Link href="/signup">Regístrate</Link> */}
                         </p>
                         {/* Social Login */}
                         <div className="social-login">
                           {/* <div id='signInDiv'></div> */}
-                          <button
+                          {/* <button
                             onClick={() => signIn()}
                             className='btn btn-rounded seilac'
                             style={{ margin: '16px 0' }}
                           // onClick={handleOpen}
                           >
                             Login
-                          </button>
+                          </button> */}
                         </div>
                         {/* /Social Login */}
                       </div>

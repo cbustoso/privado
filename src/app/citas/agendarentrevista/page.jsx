@@ -69,13 +69,14 @@ const AddFirstAppoinments = () => {
 
   const fetchData = async () => {
     const { users } = await fetchDoctors()
-    // console.log(users);
+    console.log(users);
     const docs  = users.map((doc, i) => {
       return {
         value: i + 2,
         label: doc.nombre + ' ' + doc.apellido,
         id: doc.id,
-        email: doc.email
+        email: doc.email,
+        // especialidad: doc.
       }
     })
     setDoctor(docs)
@@ -147,6 +148,12 @@ const AddFirstAppoinments = () => {
     { value: 6, label: "Ingenieria" },
   ];
 
+  const especialidad = [
+    { value: 2, label: "Psicologia" },
+    { value: 3, label: "Psicopedagoia" },
+    { value: 4, label: "Psiquiatria" }
+  ];
+
   const handleAddContact = () => {
     const newContact = [
       ...contacts,
@@ -168,6 +175,10 @@ const AddFirstAppoinments = () => {
     const formattedRut = formatRut(e.target.value)
     // setRut(formattedRut)
     console.log(formattedRut)
+  }
+
+  const handleChange = () => {
+    console.log(doctor)
   }
 
   return (
@@ -453,7 +464,7 @@ const AddFirstAppoinments = () => {
                               {...register('career', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Carrera es requerido',
                                 }
                               })}
                               ref={null}
@@ -787,7 +798,7 @@ const AddFirstAppoinments = () => {
                               {...register('motivo', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Motivo es requerido',
                                 }
                               })}
                               ref={null}
@@ -840,7 +851,7 @@ const AddFirstAppoinments = () => {
                               {...register('como', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Campo requerido',
                                 }
                               })}
                               ref={null}
@@ -893,7 +904,7 @@ const AddFirstAppoinments = () => {
                               {...register('derivado_desde', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Campo requerido',
                                 }
                               })}
                               ref={null}
@@ -963,7 +974,7 @@ const AddFirstAppoinments = () => {
                               {...register('diagnostico_previo', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Campo requerido',
                                 }
                               })}
                               ref={null}
@@ -1010,7 +1021,54 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>Especialidad </label>
-                            <input className="form-control" type="text" {...register('speciality')} />
+                            <Controller
+                              control={control}
+                              name="speciality"
+                              {...register('speciality', {
+                                required: {
+                                  value: true,
+                                  message: 'Especialidad es requerida',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="especialidad"
+                                  defaultValue={selectedOption}
+                                  onChange={() => {handleChange()}}
+                                  options={especialidad}
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="especialidad"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                            {errors.speciality && <span><small>{errors.speciality.message}</small></span>}
+
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-6">
@@ -1022,7 +1080,7 @@ const AddFirstAppoinments = () => {
                               {...register('doctor', {
                                 required: {
                                   value: true,
-                                  message: 'Especialista es requerido',
+                                  message: 'Profesional es requerido',
                                 }
                               })}
                               ref={null}
