@@ -1,8 +1,30 @@
-import React from 'react'
+'use client'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { MinusCircle } from 'feather-icons-react/build/IconComponents';
 
-const Contact = () => {
+const Contact = ({ index, deleteContact }) => {
+  const { register,
+    formState: { errors }
+  } = useForm()
+
+  const handleClick = () => {
+    deleteContact(index)
+  }
+
   return (
     <>
+      <div className="col-12 col-sm-6">
+        <h6 style={{ lineHeight: '30px' }}>
+          Nuevo contacto
+        </h6>
+      </div>
+      <div className="col-12 col-sm-6">
+        <h6 style={{ lineHeight: '30px', textAlign: 'right' }} onClick={handleClick}>
+          Eliminar <MinusCircle />
+        </h6>
+      </div>
+
       <div className="col-12 col-sm-6">
         <div className="form-group local-forms">
           <label>
@@ -63,4 +85,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default Contact;

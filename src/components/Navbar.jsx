@@ -15,9 +15,7 @@ const Navbar = () => {
     document.getElementsByClassName("sidebar-overlay")[0].classList.toggle("opened");
   };
 
-  const { data: session } = useSession()
-
-  const { status } = useSession()
+  const { status, data: session } = useSession()
 
   return (
     <div className="main-wrapper">
