@@ -76,9 +76,7 @@ const EditAppoinments = ({ params }) => {
   } = useForm({
     defaultValues: async () => fetchAppointment(params.id)
       .then(appointment => {
-
-        const filterDoc = doctor.filter(doc => doc.label === appointment.nombre_profesional)
-        console.log('quesesesto', appointment);
+        // const filterDoc = doctor.filter(doc => doc.label === appointment.nombre_profesional)
         const obj = {
           especialidad: {
             "value": "Psiquiatría",
@@ -415,7 +413,7 @@ const EditAppoinments = ({ params }) => {
                                     defaultValue={selectedOption}
                                     onChange={onChange}
                                     options={doctor}
-                                    menuPortalTarget={document.body}
+                                    // menuPortalTarget={document.body}
                                     styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                     id="search-commodity"
                                     components={{
