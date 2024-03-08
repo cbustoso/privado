@@ -35,3 +35,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# por ahoraa
+src/app/api/zones.json
+src/services/Ciudades.js
+src/utils/prueba.json

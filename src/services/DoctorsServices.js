@@ -26,8 +26,6 @@ export const fetchDoctors = async () => {
 }
 
 export const fetchDoctor = async (id) => {
-  
-  // const USERS_API = process.env.VITE_USERS_API + `/api/professionals/${id}`
   const USERS_API = process.env.NEXT_PUBLIC_SHOW_PROFESSIONALS_BY_ID
   try {
     const data = await fetch(USERS_API, {

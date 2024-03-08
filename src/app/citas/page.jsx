@@ -2,13 +2,11 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Table } from 'antd';
-// import Headerudp from '../Headerudp';
 import Sidebar from '../../components/Sidebar';
 import {
   imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
 } from '../../components/imagepath';
 import { onShowSizeChange, itemRender } from '../../components/Pagination'
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 
@@ -17,8 +15,8 @@ import { fetchAppointments, changeStatusAppointment, search } from '../../servic
 const AppoinmentList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [appointments, setAppointments] = useState([])
-  const [idAppointment, setIdAppointment] = useState('')
   const [results, setResults] = useState([])
+  const [idAppointment, setIdAppointment] = useState('')
   const [show, setShow] = useState({ state: false, id: '' })
 
   useEffect(() => {
@@ -67,22 +65,26 @@ const AppoinmentList = () => {
             <Link href="#">{record.nombre_alumno}</Link>
           </h2>
         </>
-      )
+      ),
+      key: 'nombre_alumno'
     },
     {
-      title: "Médico",
+      title: "Profesional",
       dataIndex: "nombre_profesional",
-      sorter: (a, b) => a['nombre_profesional'].length - b['nombre_profesional'].length
+      sorter: (a, b) => a['nombre_profesional'].length - b['nombre_profesional'].length,
+      key: 'nombre_profesional'
     },
     {
       title: "Especialidad",
       dataIndex: "especialidad",
-      sorter: (a, b) => a.especialidad.length - b.especialidad.length
+      sorter: (a, b) => a.especialidad.length - b.especialidad.length,
+      key: 'especialidad'
     },
     {
       title: "Teléfono",
       dataIndex: "telefono_alumno",
-      sorter: (a, b) => a['telefono_alumno'].length - b['telefono_alumno'].length
+      sorter: (a, b) => a['telefono_alumno'].length - b['telefono_alumno'].length,
+      key: 'telefono_alumno'
     },
     {
       title: "Correo electrónico",
@@ -92,22 +94,26 @@ const AppoinmentList = () => {
         <>
           <Link href="#">{record.mail_alumno}</Link>
         </>
-      )
+      ),
+      key: 'mail_alumno'
     }, {
       title: "Día",
-      dataIndex: "fecha_cita",
-      sorter: (a, b) => a['fecha_cita'].length - b['fecha_cita'].length
+      dataIndex: "fecha",
+      sorter: (a, b) => a['fecha'].length - b['fecha'].length,
+      key: 'fecha'
     }, {
       title: "Hora",
-      dataIndex: "hora_cita",
-      sorter: (a, b) => a['hora_cita'].length - b['hora_cita'].length
+      dataIndex: "hora",
+      sorter: (a, b) => a['hora'].length - b['hora'].length,
+      key: 'hora'
     }, {
       title: "Estado",
       dataIndex: "estado",
-      sorter: (a, b) => a.estado.length - b.estado.length
+      sorter: (a, b) => a.estado.length - b.estado.length,
+      key: 'estado'
     }, {
       title: "",
-      dataIndex: "FIELD8",
+      dataIndex: "field",
       render: (text, record) => (
         <>
           <div className="text-end">
@@ -117,18 +123,19 @@ const AppoinmentList = () => {
                 className="action-icon dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                onClick={() => { setShow({ ...show, state: !show.state, id: record.id }) }}
+                onClick={() => { setShow({ ...show, state: !show.state, id: record.id_cita }) }}
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div
+                style={{ right: 0 }}
                 className=
-                {show.state === true && show.id === record.id
+                {show.state === true && show.id === record.id_cita
                   ? "dropdown-menu dropdown-menu-end show"
                   : "dropdown-menu dropdown-menu-end "
                 }
               >
-                <Link className="dropdown-item" href={`/editappoinments/${record.id}`}>
+                <Link className="dropdown-item" href={`/editappoinments/${record.id_cita}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
@@ -136,8 +143,8 @@ const AppoinmentList = () => {
                   href="#"
                   className="dropdown-item"
                   data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
-                  onClick={() => setIdAppointment(record.id)}>
+                  data-bs-target="#delete_appointment"
+                  onClick={() => setIdAppointment(record.id_cita)}>
                   <i className="fa fa-trash-alt m-r-5"></i>
                   Cancelar cita
                 </Link>
@@ -146,6 +153,7 @@ const AppoinmentList = () => {
           </div>
         </>
       ),
+      key: 'field'
     },
   ]
 
@@ -235,12 +243,12 @@ const AppoinmentList = () => {
                       </div>
                     </div>
                     {/* /Table Header */}
-                    <div className="table-responsive doctor-list">
+                    <div className="table-responsive patient-list">
                       <Table
                         pagination={{
                           total: results.length,
                           showTotal: (total, range) =>
-                            `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                            `Mostrando ${range[0]} a ${range[1]} de ${total} entradas`,
                           //showSizeChanger: true,
                           onShowSizeChange: onShowSizeChange,
                           itemRender: itemRender,
@@ -257,241 +265,7 @@ const AppoinmentList = () => {
               </div>
             </div>
           </div>
-          {/* <div className="notification-box">
-            <div className="msg-sidebar notifications msg-noti">
-              <div className="topnav-dropdown-header">
-                <span>Messages</span>
-              </div>
-              <div className="drop-scroll msg-list-scroll" id="msg_list">
-                <ul className="list-box">
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Richard Miles </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item new-message">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">John Doe</span>
-                          <span className="message-time">1 Aug</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Tarah Shropshire </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Mike Litorus</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Catherine Manseau </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">D</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Domenic Houston </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">B</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Buster Wigton </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Rolland Webber </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Claire Mapes </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Melita Faucher</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Jeffery Lalor</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">L</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Loren Gatlin</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Tarah Shropshire</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="topnav-dropdown-footer">
-                <Link href="#">See all messages</Link>
-              </div>
-            </div>
-          </div> */}
+          
         </div>
         <div id="delete_patient" className="modal fade delete-modal" role="dialog">
           <div className="modal-dialog modal-dialog-centered">

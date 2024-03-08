@@ -3,14 +3,12 @@
 import React from 'react'
 import { Table } from "antd";
 import { onShowSizeChange, itemRender } from '../../components/Pagination'
-// import Headerudp from '../Headerudp';
 import Sidebar from '../../components/Sidebar';
 import {
   blogimg10, imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal, blogimg12,
   blogimg2, blogimg4, blogimg6, blogimg8
 } from '../../components/imagepath';
 import { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor } from '../../services/DoctorsServices';
@@ -135,11 +133,15 @@ const DoctorList = () => {
                   : "dropdown-menu dropdown-menu-end "
                 }
               >
-                <Link href="#" className="dropdown-item" to={`/editdoctor/${record.id}`}>
+                <Link className="dropdown-item" href={`profesionales/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
-                <Link href="#" className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
+                <Link 
+                  href="#" 
+                  className="dropdown-item" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#delete_patient">
                   <i className="fa fa-trash-alt m-r-5"></i>
                   Eliminar
                 </Link>
@@ -244,7 +246,7 @@ const DoctorList = () => {
                         pagination={{
                           total: results.length,
                           showTotal: (total, range) =>
-                            `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                            `Mostrando ${range[0]} a ${range[1]} de ${total} entradas`,
                           // showSizeChanger: true,
                           onShowSizeChange: onShowSizeChange,
                           itemRender: itemRender,
