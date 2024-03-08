@@ -390,7 +390,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={career}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -735,7 +735,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={doctor}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -787,7 +787,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={doctor}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -839,7 +839,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={doctor}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -910,7 +910,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={doctor}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -968,7 +968,7 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={doctor}
-                                  menuPortalTarget={document.body}
+                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
