@@ -16,15 +16,24 @@ const handler = NextAuth({
   })],
   callbacks: {
     async signIn({ account, profile }) {
-      const user = searchUser(profile.email)
+      try {
+        const user = await searchUser(profile.email)
+        console.log('USER', user);
+        if (user.length === 0) {
+          console.log('ENTRÓ AL ERROR');
+            // Si el usuario no tiene un correo electrónico, significa que la autenticación ha fallado.
+            throw new Error('No se pudo acceder. Correo no autorizado.');
+        }
 
-      // if (user.length === 0) redirect('/profesionales')
+        if (account.provider === "google") {
+          return profile.email_verified && profile.email.endsWith("@gmail.com")
+        }
 
-      if (account.provider === "google") {
-
-        return profile.email_verified && profile.email.endsWith("@gmail.com")
+        return true // Do different verification for other providers that don't have `email_verified`
+      } catch (error) {
+        console.log('ERRRRRRRRR', error);
       }
-      return true // Do different verification for other providers that don't have `email_verified`
+
     },
   }
 })
