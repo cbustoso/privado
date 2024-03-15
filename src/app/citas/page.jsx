@@ -12,12 +12,22 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 
 import { fetchAppointments, changeStatusAppointment, search } from '../../services/AppointmentsServices'
 
+import { useAuthorization } from '../../../hooks/useAuthorization';
+import { useSession } from "next-auth/react";
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+
 const AppoinmentList = () => {
+  const { data: session } = useSession()
+// console.log('session', session);
+  // useAuthorization(['alumno'])
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [appointments, setAppointments] = useState([])
   const [results, setResults] = useState([])
   const [idAppointment, setIdAppointment] = useState('')
   const [show, setShow] = useState({ state: false, id: '' })
+  const matches = useMediaQuery('(min-width:600px)');
 
   useEffect(() => {
     fetchAppointments(setAppointments)
@@ -52,6 +62,7 @@ const AppoinmentList = () => {
     {
       title: "Estudiante",
       dataIndex: "nombre_alumno",
+      fixed: 'left',
       render: (text, record) => (
         <>
           <h2 className="profile-image">
@@ -114,6 +125,7 @@ const AppoinmentList = () => {
     }, {
       title: "",
       dataIndex: "field",
+      fixed: 'right',
       render: (text, record) => (
         <>
           <div className="text-end">
@@ -196,9 +208,9 @@ const AppoinmentList = () => {
                       <div className="row align-items-center">
                         <div className="col">
                           <div className="doctor-table-blk">
-                            <h3>Lista de citas </h3>
+                            {matches && <h3>Lista de citas </h3>}
                             <div className="doctor-search-blk">
-                              <div className="top-nav-search table-search-blk">
+                              <div className="top-nav-search table-search-blk col-6">
                                 <form>
                                   <input
                                     type="text"

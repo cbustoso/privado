@@ -1,9 +1,10 @@
+'use client'
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import Headerudp from '../Headerudp';
-import Sidebar from '../Sidebar';
-import {Link } from 'react-router-dom';
+import Sidebar from '../../../../components/Sidebar';
+// import {Link } from 'react-router-dom';
+import Link from 'next/link';
 import { DatePicker} from 'antd';
 import { TextField } from '@mui/material';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
@@ -18,15 +19,14 @@ const AddSchedule = () => {
   };
   const [selectedOption, setSelectedOption] = useState(null);
   const [options, setOptions] = useState([
-    { value: 1, label: "Select Department"},
-    { value: 2, label: "Cardiology" },
-    { value: 3, label: "Uriology" },
-    { value: 4, label: "Radiology" },
+    { value: 1, label: "Seleccione especialidad"},
+    { value: 2, label: "Psicologia" },
+    { value: 3, label: "Psicopedagogia" },
+    { value: 4, label: "Psiquiatria" },
   ]);
 
   return (
     <div>
-        <Headerudp />
         <Sidebar id='menu-item5' id1='menu-items5' activeClassName='add-shedule'/>
         <>
   <div className="page-wrapper">
@@ -37,14 +37,14 @@ const AddSchedule = () => {
           <div className="col-sm-12">
             <ul className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="schedule.html">Doctor Shedule </Link>
+                <Link href="schedule.html">Horario </Link>
               </li>
               <li className="breadcrumb-item">
                 <i className="feather-chevron-right">
                   <FeatherIcon icon="chevron-right"/>
                 </i>
               </li>
-              <li className="breadcrumb-item active">Add Schedule</li>
+              <li className="breadcrumb-item active">Agregar horario</li>
             </ul>
           </div>
         </div>
@@ -58,13 +58,13 @@ const AddSchedule = () => {
                 <div className="row">
                   <div className="col-12">
                     <div className="form-heading">
-                      <h4>Add Schedule</h4>
+                      <h4>Agregar horario</h4>
                     </div>
                   </div>
                   <div className="col-12 col-md-6 col-xl-6">
                     <div className="form-group local-forms">
                       <label>
-                        Doctor Name <span className="login-danger">*</span>
+                        Nombre  profesional <span className="login-danger">*</span>
                       </label>
                       <input className="form-control" type="text" />
                     </div>
@@ -72,13 +72,13 @@ const AddSchedule = () => {
                   <div className="col-12 col-md-6 col-xl-6">
                     <div className="form-group local-forms">
                       <label>
-                        Department <span className="login-danger">*</span>
+                        Especialidad <span className="login-danger">*</span>
                       </label>
                       <Select
                               defaultValue={selectedOption}
                               onChange={setSelectedOption}
                               options={options}
-                              menuPortalTarget={document.body}
+                              // menuPortalTarget={document.body}
                               styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
@@ -116,7 +116,7 @@ const AddSchedule = () => {
                   <div className="col-12 col-md-6 col-xl-4">
                     <div className="form-group local-forms cal-icon">
                       <label>
-                        Available Days <span className="login-danger">*</span>
+                        Días disponibles <span className="login-danger">*</span>
                       </label>
                       <DatePicker className="form-control datetimepicker" onChange={onChange}
                          suffixIcon={null}
@@ -130,7 +130,7 @@ const AddSchedule = () => {
                   <div className="col-12 col-md-6 col-xl-4">
                     <div className="form-group local-forms">
                       <label>
-                        From <span className="login-danger">*</span>
+                        Desde <span className="login-danger">*</span>
                       </label>
 
                       <div className="">
@@ -154,7 +154,7 @@ const AddSchedule = () => {
                   <div className="col-12 col-md-6 col-xl-4">
                     <div className="form-group local-forms">
                       <label>
-                        To <span className="login-danger">*</span>
+                        Hasta <span className="login-danger">*</span>
                       </label>
 
                       <div className="">
@@ -170,7 +170,7 @@ const AddSchedule = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-12 col-sm-12">
+                  {/* <div className="col-12 col-sm-12">
                     <div className="form-group local-forms">
                       <label>
                         Notes <span className="login-danger">*</span>
@@ -182,11 +182,11 @@ const AddSchedule = () => {
                         defaultValue={""}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-12 col-md-6 col-xl-4">
                     <div className="form-group select-gender">
                       <label className="gen-label">
-                        Status <span className="login-danger">*</span>
+                        Estado <span className="login-danger">*</span>
                       </label>
                       <div className="form-check-inline">
                         <label className="form-check-label">
@@ -195,7 +195,7 @@ const AddSchedule = () => {
                             name="gender"
                             className="form-check-input"
                           />
-                          Active
+                          Activo
                         </label>
                       </div>
                       <div className="form-check-inline">
@@ -205,26 +205,26 @@ const AddSchedule = () => {
                             name="gender"
                             className="form-check-input"
                           />
-                          In Active
+                          Inactivo
                         </label>
                       </div>
                     </div>
                   </div>
                   <div className="col-12">
                     <div className="doctor-submit text-end">
-                        <Link to="/addschedule" >
+                        <Link href="/addschedule" >
                       <button
                         type="submit"
                         className="btn btn-primary submit-form me-2"
                       >
-                        Create Schedule
+                        Agregar horario
                       </button>
                       </Link>
                       <button
                         type="submit"
                         className="btn btn-primary cancel-form"
                       >
-                        Cancel
+                        Cancelar
                       </button>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ const AddSchedule = () => {
         <div className="drop-scroll msg-list-scroll" id="msg_list">
           <ul className="list-box">
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">R</span>
@@ -260,7 +260,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item new-message">
                   <div className="list-left">
                     <span className="avatar">J</span>
@@ -277,7 +277,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">T</span>
@@ -294,7 +294,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">M</span>
@@ -311,7 +311,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">C</span>
@@ -328,7 +328,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">D</span>
@@ -345,7 +345,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">B</span>
@@ -362,7 +362,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">R</span>
@@ -379,7 +379,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">C</span>
@@ -396,7 +396,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">M</span>
@@ -413,7 +413,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">J</span>
@@ -430,7 +430,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">L</span>
@@ -447,7 +447,7 @@ const AddSchedule = () => {
               </Link>
             </li>
             <li>
-              <Link to="#">
+              <Link href="#">
                 <div className="list-item">
                   <div className="list-left">
                     <span className="avatar">T</span>
@@ -466,7 +466,7 @@ const AddSchedule = () => {
           </ul>
         </div>
         <div className="topnav-dropdown-footer">
-          <Link to="#">See all messages</Link>
+          <Link href="#">See all messages</Link>
         </div>
       </div>
     </div>

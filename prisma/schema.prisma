@@ -14,63 +14,17 @@ generator client {
   previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          String?
-  accounts      Account[]
-  sessions      Session[]
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
 model usuarios {
-  id                Int              @id
+  id                Int       @id @default(autoincrement())
   nombre            String
   apellido          String
   telefono          String
   email             String
   contrasena        String
   fecha_nacimiento  DateTime?
-  genero            String[] //'femenino','masculino','otro') 
-  tipo_usuario      String[] // enum('profesional','administrador','alumno')
-  status            String[] // enum('activo','inactivo') 
+  genero            String?
+  tipo_usuario      String?
+  status            String?
   rut               String?
   carrera           String?
   anoIngresoCarrera String?
@@ -79,20 +33,21 @@ model usuarios {
   region            String?
   comuna            String?
   fechamod          DateTime?
-  citas             citas[]
-  especialidades    especialidades[]
-  horarios          horarios[]
+  profesional       citas[]   @relation("profesional")
+  alumno            citas[]   @relation("alumno")
 
   @@unique([email])
 }
 
 model citas {
-  id                 Int      @id
-  profesional_id     usuarios @relation(fields: [id], references: [id], onDelete: Cascade)
-  alumno_id          usuarios @relation(fields: [id], references: [id], onDelete: Cascade)
+  id                 Int      @id @default(autoincrement())
+  profesional        usuarios @relation("profesional", fields: [profesional_id], references: [id])
+  profesional_id     Int
+  alumno             usuarios @relation("alumno", fields: [alumno_id], references: [id])
+  alumno_id          Int
   fecha              DateTime
   hora               DateTime
-  estado             String[] // enum('pendiente','confirmada','cancelada') DEFAULT 'pendiente',
+  estado             String // enum('pendiente','confirmada','cancelada') DEFAULT 'pendiente',
   fechamod           DateTime
   modalidad          String?
   campus             String?
@@ -105,29 +60,29 @@ model citas {
 }
 
 model especialidades {
-  id           Int
-  usuario_id   usuarios @relation(fields: [id], references: [id], onDelete: Cascade)
+  id           Int      @id @default(autoincrement())
+  usuario_id   Int
   especialidad String
   fechamod     DateTime
 }
 
 model horarios {
-  id          Int
-  usuario_id  usuarios @relation(fields: [id], references: [id], onDelete: Cascade)
-  dia_semana  String[]
+  id          Int      @id @default(autoincrement())
+  usuario_id  Int
+  dia_semana  String
   hora_inicio DateTime
   hora_fin    DateTime
   fechamod    DateTime
 }
 
 model blog {
-  id               Int       @id
+  id               Int       @id @default(autoincrement())
   title            String
   author_name      String
-  tags             String[]
-  status_blog      String[] // enum('activo','inactivo') DEFAULT NULL,
-  category         String[] // enum('psicologia','psiquiatria','psicopedagogia') DEFAULT NULL,
-  subcategory      String[] // enum('estudios','consejos','tests') DEFAULT NULL,
+  tags             String
+  status_blog      String // enum('activo','inactivo') DEFAULT NULL,
+  category         String // enum('psicologia','psiquiatria','psicopedagogia') DEFAULT NULL,
+  subcategory      String // enum('estudios','consejos','tests') DEFAULT NULL,
   content          String?
   image            String?
   publication_date DateTime?

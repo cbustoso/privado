@@ -3,7 +3,6 @@ import Image from "next/image";
 // import styles from "./page.module.css";
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-// import {Link} from 'react-router-dom';
 
 import { fetchBlogs } from '../services/BlogServices';
 import ImageSlider from '../components/ImageSlider';
@@ -11,11 +10,8 @@ import TestSlider from '../components/TestSlider';
 import Events from '../components/Events';
 import FrequentAskedQuestions from '../components/FAQ';
 import Footer from '../components/Footer';
-// import Headerudp from '../../Headerudp';
 import ReserveBtn from '../components/ReserveBtn'
 
-// import {styled} from '@mui/material/styles';
-// import {Today} from '@mui/icons-material';
 import { Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 

@@ -157,7 +157,7 @@ const AddAppoinments = () => {
                           <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
-                                Correo electrónico <span className="login-danger">*</span>
+                                Correo electrónico {/* <span className="login-danger">*</span> */}
                               </label>
                               <input
                                 className="form-control"
@@ -181,7 +181,7 @@ const AddAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
-                              Nombres <span className="login-danger">*</span>
+                              Nombres {/* <span className="login-danger">*</span> */}
                             </label>
                             <input
                               className="form-control"
@@ -205,7 +205,7 @@ const AddAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
-                              Apellidos <span className="login-danger">*</span>
+                              Apellidos {/* <span className="login-danger">*</span> */}
                             </label>
                             <input
                               className="form-control"
@@ -229,7 +229,7 @@ const AddAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms">
                             <label>
-                              Rut <span className="login-danger">*</span>
+                              Rut {/* <span className="login-danger">*</span> */}
                             </label>
                             <input
                               className="form-control"
@@ -716,7 +716,7 @@ const AddAppoinments = () => {
                             </div>
                           </div>
                         </div>
-
+{/* 
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
                             <label>Motivo de la consulta</label>
@@ -767,8 +767,8 @@ const AddAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
                           </div>
-                        </div>
-
+                        </div> */}
+{/* 
                         <div className="col-12 col-md-12 col-xl-6">
                           <div className="form-group local-forms">
                             <label>¿Cómo se enteró de la existencia del servicio?</label>
@@ -819,8 +819,8 @@ const AddAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
                           </div>
-                        </div>
-
+                        </div> */}
+{/* 
                         <div className="col-12 col-md-12 col-xl-6">
                           <div className="form-group local-forms">
                             <label>¿Quién realizó la derivación?</label>
@@ -871,10 +871,10 @@ const AddAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
                           </div>
-                        </div>
+                        </div> */}
 
 
-                        <div className="form-group select-gender">
+                        {/* <div className="form-group select-gender">
                           <label className="gen-label">
                             Tratamientos anteriores en el servicio <span className="login-danger">*</span>
                           </label>
@@ -890,9 +890,9 @@ const AddAppoinments = () => {
                               Sí
                             </label>
                           </div>
-                        </div>
+                        </div> */}
 
-                        <div className="col-12 col-md-12 col-xl-12">
+                        {/* <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
                             <label>¿Has sido diagnosticado/a por un/a profesional de salud mental en los últimos 2 años?</label>
                             <Controller
@@ -942,7 +942,7 @@ const AddAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
@@ -1080,7 +1080,7 @@ const AddAppoinments = () => {
                         <div className="col-12 col-sm-12">
                           <div className="form-group local-forms">
                             <label>
-                              Antecedentes médicos relevantes <span className="login-danger">*</span>
+                              Observaciones <span className="login-danger">*</span>
                             </label>
                             <textarea
                               className="form-control"

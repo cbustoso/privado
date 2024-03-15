@@ -3,24 +3,26 @@ import { fetchDoctor } from './DoctorsServices';
 import dayjs from 'dayjs';
 
 export const sendEmail = async (body) => {
-  console.log('body', body);
+  console.log('el body', body);
   const SEND_EMAIL = process.env.NEXT_PUBLIC_SEND_EMAIL;
+  const lebody = {
+    "tarjet":"estefania.osses.v@gmail.com",
+    "paciente":true
+  }
+  console.log('lebody', lebody);
   try {
-    const data = fetch(SEND_EMAIL, {
+    const data = await fetch(SEND_EMAIL, {
       method: "POST",
-      cors: "no-cors",
+      // cors: "no-cors",
       headers: {
-        'content-type': 'application/json',
-        'access-control-allow-origin': '*'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify({
-        "tarjet":"niennaestel@gmail.com",
-        "paciente":false
-        })
+      body: JSON.stringify(lebody)
     })
-
-    console.log('data', data);
-    return data.json()
+    // const resp = await data.json()
+    console.log('RESP', data);
+    return data
   } catch (error) {
     console.log('ERROR', error)
   }
@@ -28,33 +30,32 @@ export const sendEmail = async (body) => {
 
 export const createAppointment = async (appointment) => {
   const APPOINTMENT_API = process.env.NEXT_PUBLIC_CREATE_APPOINTMENT
-  console.log("appointment", appointment);
 
   const body = {
-    profesional_id: (appointment.doctor.id).toString(),
+    profesional_id: (appointment.professional.id).toString(),
     alumno_id: (appointment.patient_id).toString(),
     fecha: appointment.fecha,
-    hora: appointment.start_time.concat(':00'),
+    hora: '12:00:00',
     estado: "pendiente",
-    modalidad: appointment.modalidad,
-    campus: appointment.campus,
-    notas: appointment.notas,
-    motivo: appointment.motivo.label,
-    como: appointment.como.label,
-    derivado_desde: appointment.derivado_desde.label,
-    tratamiento: appointment.tratamiento,
-    diagnostico_previo: appointment.diagnostico_previo.label
+    modalidad: appointment.modalidad || 'modalidad',
+    campus: appointment.campus || 'campus',
+    notas: 'notas',
+    motivo: appointment.motivo.label|| 'motivo',
+    como: 'como se entero',
+    derivado_desde: 'derivado',
+    tratamiento: 'tratamientos',
+    diagnostico_previo: 'diagnosticos',
   }
 
-  const bodyEmailPatient = {
-    "tarjet": appointment.email,
-    "paciente": true
-  }
+  // const bodyEmailPatient = {
+  //   "tarjet": appointment.email,
+  //   "paciente": true
+  // }
 
-  const bodyEmailProfessional = {
-    "tarjet": appointment.doctor.email,
-    "paciente": false
-  }
+  // const bodyEmailProfessional = {
+  //   "tarjet": appointment.doctor.email,
+  //   "paciente": false
+  // }
 
   try {
     const data = await fetch(APPOINTMENT_API, {

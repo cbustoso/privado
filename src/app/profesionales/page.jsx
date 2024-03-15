@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor } from '../../services/DoctorsServices';
+import { getSpecialities } from '@/services/SchedulesServices';
 import { search } from '../../services/AppointmentsServices'
 
 const DoctorList = () => {
@@ -22,9 +23,18 @@ const DoctorList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { users } = await fetchDoctors()
+      const { response } = await getSpecialities()
+
       // console.log('DATA', users);
-      setDoctors(users)
-      setResults(users)
+      const usersAndSPeciality = users.map(user => {
+        const result = response.find(el => el.usuario_id === user.id)
+        return {
+          ...user,
+          especialidad: !result ? 'Psicologia' : result.especialidad
+        }
+      })
+      setDoctors(usersAndSPeciality)
+      setResults(usersAndSPeciality)
     }
     fetchData()
   }, [])
@@ -61,14 +71,14 @@ const DoctorList = () => {
       render: (text, record) => (
         <>
           <h2 className="profile-image">
-            {record.img && <Link href="#" className="avatar avatar-sm me-2">
+            {record.img && <Link href={`/profesionales/${record.id}`} className="avatar avatar-sm me-2">
               <img
                 className="avatar-img rounded-circle"
                 src={record.src}
                 alt="User Image"
               />
             </Link>}
-            <Link href="#">{record.nombre + ' ' + record.apellido}</Link>
+            <Link href={`/profesionales/${record.id}`}>{record.nombre + ' ' + record.apellido}</Link>
           </h2>
 
         </>
@@ -107,7 +117,21 @@ const DoctorList = () => {
     {
       title: "Estado",
       dataIndex: "status",
-      sorter: (a, b) => a.status.length - b.status.length
+      sorter: (a, b) => a.status.length - b.status.length,
+      render: (text, record) => (
+        <div>
+          {record.status === "activo" && (
+            <span className="custom-badge status-green">
+              {record.status}
+            </span>
+          )}
+          {record.status === "inactivo" && (
+            <span className="custom-badge status-pink">
+              {record.status}
+            </span>
+          )}
+        </div>
+      )
     },
     {
       title: "",
@@ -133,14 +157,18 @@ const DoctorList = () => {
                   : "dropdown-menu dropdown-menu-end "
                 }
               >
-                <Link className="dropdown-item" href={`/profesionales/${record.id}`}>
+                <Link className="dropdown-item" href={`/horarios/agregarhorario/${record.id}`}>
+                  <i className="far fa-edit me-2" />
+                  Agregar horario
+                </Link>
+                <Link className="dropdown-item" href={`/profesionales/editar/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Editar
                 </Link>
-                <Link 
-                  href="#" 
-                  className="dropdown-item" 
-                  data-bs-toggle="modal" 
+                <Link
+                  href="#"
+                  className="dropdown-item"
+                  data-bs-toggle="modal"
                   data-bs-target="#delete_patient">
                   <i className="fa fa-trash-alt m-r-5"></i>
                   Eliminar

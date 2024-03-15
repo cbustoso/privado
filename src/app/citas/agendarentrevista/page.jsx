@@ -12,55 +12,64 @@ import Sidebar from "../../../components/Sidebar";
 import Modal from "../../../components/Modal";
 import Contact from "../../../components/Contact"
 
-import { Alert } from "@mui/material";
+import { Alert, TextField } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import PlusCircle from "feather-icons-react/build/IconComponents/PlusCircle";
 
 import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
-import { createAppointment } from "../../../services/AppointmentsServices"
-import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
+import { createAppointment, sendEmail } from "../../../services/AppointmentsServices"
+import { regiones, comunas, motivo_consulta } from "../../../utils/selects";
 import { formatRut } from "@/utils/managedata";
+import { fetchScheduleByDate, fetchScheduleByUser } from "@/services/SchedulesServices";
+import DatePick from "@/components/Datepicker";
 
 import dayjs from 'dayjs';
 
 const AddFirstAppoinments = () => {
-  const { data: session } = useSession()
-  // console.log(session.user);
-
-
-  const { register, handleSubmit, watch, control,
-    formState: { errors }
-  } = useForm({
-    defaultValues: async () => fetchUsers().then(response => {
-      const patient = response.users.filter(user => user.email === session.user.email)
-      const obj = {
-        name: patient[0].nombre,
-        lastName: patient[0].apellido,
-        email: session.user.email,
-        birthday: dayjs(patient[0].fecha_nacimiento).format('DD-MM-YYYY'),
-        genero: patient[0].genero,
-        mobile: patient[0].telefono
-
-      }
-      console.log('obj', patient);
-      return obj
-    })
-  })
+  const { data: session, loading } = useSession()
 
   const [isClicked, setIsClicked] = useState(false);
   const [startTime, setStartTime] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
   const [doctor, setDoctor] = useState([]);
   const [contacts, setContacts] = useState([])
-
   const [success, setSuccess] = useState('initial')
   const [error, setError] = useState('')
-  const [allRegions, setAllRegions] = useState(regiones)
-  const [selectedCities, setSelectedCities] = useState([])
-  const [rut, setRut] = useState('')
-
   const [open, setOpen] = useState(false);
+
+  const { register, handleSubmit, watch, control,
+    formState: { errors }
+  } = useForm({
+    defaultValues: async () => fetchUsers().then(response => {
+      console.log('response', response);
+      if (session?.user) {
+        // console.log('session?.user', session?.user)
+        const patient = response.users.filter(user => user.email === session?.user.email)
+        console.log('SESSION async', session);
+        const obj = {
+          name: patient[0].nombre,
+          lastName: patient[0].apellido,
+          email: session.user.email,
+          birthday: dayjs(patient[0].fecha_nacimiento).format('DD-MM-YYYY'),
+          genero: patient[0].genero,
+          mobile: patient[0].telefono
+
+        }
+        console.log('obj', patient);
+        return obj
+      } else {
+        console.log('No encuentra al usuario')
+      }
+    })
+      .catch(error =>
+        console.log('err', error)
+      )
+  })
+
+  const selectedProfessional = watch('doctor')
+  const selectedRegion= watch('region')
+
   const handleOpen = (e) => {
     e.preventDefault()
     setOpen(true)
@@ -69,8 +78,8 @@ const AddFirstAppoinments = () => {
 
   const fetchData = async () => {
     const { users } = await fetchDoctors()
-    console.log(users);
-    const docs  = users.map((doc, i) => {
+    // console.log(users);
+    const docs = users.map((doc, i) => {
       return {
         value: i + 2,
         label: doc.nombre + ' ' + doc.apellido,
@@ -86,7 +95,6 @@ const AddFirstAppoinments = () => {
   useEffect(() => {
     fetchData()
     fetchDoctors()
-
   }, [])
 
   const onChange = (date, dateString) => {
@@ -97,29 +105,68 @@ const AddFirstAppoinments = () => {
     // Handle file loading logic here
   };
 
+  // const onSubmit = handleSubmit(async data => {
+  //   setSuccess('initial')
+  //   const patientName = watch("name")
+  //   const patientLastname = watch("lastName")
+  //   const patients = await fetchUsers()
+
+  //   console.log('data', data);
+
+  //   const patient = patients.users.filter(user =>
+  //     user.nombre === patientName
+  //     & user.apellido === patientLastname
+  //     & user.tipo_usuario === 'alumno'
+  //     & user.email === session.user.email
+  //   )
+
+  //   try {
+  //     const appointment = await createAppointment({
+  //       ...data,
+  //       "patient_id": patient[0].id,
+  //       "fecha": dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD')
+  //     })
+  //     // if (appointment.detalle === 'fail!!!') setSuccess('fail')
+  //     // setSuccess('success')
+  //     console.log('appointment', appointment);
+  //   } catch (err) {
+  //     setSuccess('fail')
+  //     console.log('ERRRR', err.message)
+  //     if (err.message === "Cannot read properties of undefined (reading 'id')") {
+  //       setError(`No se encontró al paciente`);
+  //     }
+  //   } finally {
+  //     setOpen(false)
+  //   }
+  // })
+
+
   const onSubmit = handleSubmit(async data => {
+    console.log('data', data);
     setSuccess('initial')
     const patientName = watch("name")
     const patientLastname = watch("lastName")
     const patients = await fetchUsers()
 
-    console.log('data', data);
-
+    console.log('session.user.email', session.user.email);
     const patient = patients.users.filter(user =>
-      user.nombre === patientName
-      & user.apellido === patientLastname
-      & user.tipo_usuario === 'alumno'
-      & user.email === session.user.email
+      // user.nombre === patientName
+      // & user.apellido === patientLastname
+      // & user.tipo_usuario === 'alumno'
+      // & 
+      user.email === session.user.email
     )
+      console.log('patient', patient);
+    const body = {
+      ...data,
+      "patient_id": patient[0].id,
+      "fecha": dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD')
+    }
+    console.log('body', body);
 
     try {
-      const appointment = await createAppointment({ 
-        ...data, 
-        "patient_id": patient[0].id, 
-        "fecha": dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD') 
-      })
-      // return bleh
-      if(appointment.detalle === 'fail!!!') setSuccess('fail')
+      const appointment = await createAppointment(body)
+      if (appointment.detalle === 'fail!!!') setSuccess('fail')
       setSuccess('success')
 
     } catch (err) {
@@ -132,13 +179,14 @@ const AddFirstAppoinments = () => {
       setOpen(false)
     }
   })
-  const [gender, setGender] = useState([
-    { value: 1, label: "Femenino" },
-    { value: 2, label: "Masculino" },
-    { value: 3, label: "No binario" },
-    { value: 4, label: "Otro" },
-    { value: 5, label: "Prefiero no decir" }
-  ]);
+
+  const gender = [
+    { value: 1, label: "Hombre" },
+    { value: 2, label: "Mujer" },
+    { value: 3, label: "Hombre trans" },
+    { value: 4, label: "Mujer trans" },
+    { value: 5, label: "No binarie" }
+  ]
 
   const career = [
     { value: 2, label: "Antropologia" },
@@ -146,12 +194,6 @@ const AddFirstAppoinments = () => {
     { value: 4, label: "Contador" },
     { value: 5, label: "Derecho" },
     { value: 6, label: "Ingenieria" },
-  ];
-
-  const especialidad = [
-    { value: 2, label: "Psicologia" },
-    { value: 3, label: "Psicopedagoia" },
-    { value: 4, label: "Psiquiatria" }
   ];
 
   const handleAddContact = () => {
@@ -177,14 +219,24 @@ const AddFirstAppoinments = () => {
     console.log(formattedRut)
   }
 
-  const handleChange = () => {
-    console.log(doctor)
+  const fetchScheduleByDay = async (id, date) => {
+    // console.log('selectedProfessional', selectedProfessional);
+    try {
+      const resp = await fetchScheduleByDate('6', '2024-03-01')
+      const byProf = await fetchScheduleByUser('6')
+      // const response = await resp.json()
+      // console.log('respuesta de la fecha', resp);
+      // console.log('respuesta del profesional', byProf);
+    } catch (error) {
+      console.log('error de fecha', error)
+    }
   }
+  selectedProfessional?.id && fetchScheduleByDay('6', '2024-03-01')
+  fetchScheduleByDay('6', '2024-03-01')
 
   return (
     <div>
       {/* <Header /> */}
-      {/* <Headerudp /> */}
       <Sidebar
         id="menu-item4"
         id1="menu-items4"
@@ -221,13 +273,14 @@ const AddFirstAppoinments = () => {
                       <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '10px', margin: '10px' }}>
                         <div className="col-12">
                           <div className="form-heading">
-                            <h4>Detalles del Paciente</h4>
+                            <h4 style={{ margin: 0 }}>Detalles del Paciente</h4>
+                            <h5 style={{ fontSize: '12px', margin: '5px 0 25px' }}>Los campos son editables, pero solo afectarán la información en este portal, no para SAP</h5>
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
-                              Nombres <span className="login-danger">*</span>
+                              Nombre legal <span className="login-danger">*</span>
                             </label>
                             <input
                               className="form-control"
@@ -251,7 +304,7 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
-                              Apellidos <span className="login-danger">*</span>
+                              Nombre social <span className="login-danger">*</span>
                             </label>
                             <input
                               className="form-control"
@@ -338,32 +391,6 @@ const AddFirstAppoinments = () => {
 
                           </div>
                         </div>
-
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Edad <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="number"
-                              {...register('age', {
-                                required: {
-                                  value: true,
-                                  message: 'Edad es requerida'
-                                },
-                                minLength: {
-                                  value: 2,
-                                  message: 'Edad debe ser un número válido'
-                                }
-                              })}
-                            />
-                            {
-                              errors.age && <span><small>{errors.age.message}</small></span>
-                            }
-                          </div>
-                        </div>
-
                         <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms">
                             <label>Género<span className="login-danger">*</span>
@@ -505,56 +532,6 @@ const AddFirstAppoinments = () => {
                               )}
                             />
                             {errors.career && <span><small>{errors.career.message}</small></span>}
-
-                            {/* <select className="form-control select">
-                        <option>Select Doctor</option>
-                        <option>Dr.Bernardo James</option>
-                        <option>Dr.Andrea Lalema</option>
-                        <option>Dr.William Stephin</option>
-                      </select> */}
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-3">
-                          <div className="form-group local-forms">
-                            <label>
-                              Año de ingreso <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="number"
-                              {...register('yearOfAdmission')}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-3">
-                          <div className="form-group select-gender">
-                            <label className="gen-label">
-                              Horario <span className="login-danger">*</span>
-                            </label>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  name="daytime"
-                                  value="diurno"
-                                  className="form-check-input"
-                                  {...register('daytime')}
-                                />
-                                Diurno
-                              </label>
-                            </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  name="daytime"
-                                  value="nocturno"
-                                  className="form-check-input"
-                                  {...register('daytime')}
-                                />
-                                Nocturno
-                              </label>
-                            </div>
                           </div>
                         </div>
 
@@ -634,10 +611,53 @@ const AddFirstAppoinments = () => {
                             <label>
                               Comuna <span className="login-danger">*</span>
                             </label>
-                            <input
-                              className="form-control" type="text"
-                              defaultValue={""}
-                              {...register('city')} />
+                            <Controller
+                              control={control}
+                              name="region"
+                              {...register('region', {
+                                required: {
+                                  value: true,
+                                  message: 'Región es requerida',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="select-region"
+                                  defaultValue={selectedOption}
+                                  onChange={onChange}
+                                  options={comunas[selectedRegion?.name]  }
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="select-region"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
                           </div>
                         </div>
                       </div>
@@ -650,7 +670,7 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
                         <div className="col-12 col-md-12 col-xl-12">
-                          <h5>Primera Opción (debe ser familiar)</h5>
+                          <h5>Primera Opción <span className="login-danger">*</span> </h5>
                         </div>
                         <div className="col-12 col-sm-6">
                           <div className="form-group local-forms">
@@ -666,23 +686,12 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-sm-6">
                           <div className="form-group local-forms">
                             <label>
-                              Parentesco <span className="login-danger">*</span>
+                              Parentesco o tipo de relación <span className="login-danger">*</span>
                             </label>
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('relationship_contact')} />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Fono domicilio <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control" type="tel"
-                              defaultValue={""}
-                              {...register('phone_contact')} />
                           </div>
                         </div>
                         <div className="col-12 col-sm-6">
@@ -700,7 +709,7 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-sm-6">
                           <div className="form-group local-forms">
                             <label>
-                              Correo electrónico <span className="login-danger">*</span>
+                              Correo electrónico
                             </label>
                             <input
                               className="form-control" type="text"
@@ -833,6 +842,7 @@ const AddFirstAppoinments = () => {
                                       transition: '250ms',
                                       width: '35px',
                                       height: '35px',
+                                      zIndex: '90000000'
                                     }),
                                   }}
                                 />
@@ -842,253 +852,26 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-                        <div className="col-12 col-md-12 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>¿Cómo se enteró de la existencia del servicio?</label>
-                            <Controller
-                              control={control}
-                              name="como"
-                              {...register('como', {
-                                required: {
-                                  value: true,
-                                  message: 'Campo requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
-                                  instanceId="como"
-                                  defaultValue={selectedOption}
-                                  onChange={onChange}
-                                  options={existencia_servicio}
-                                  // menuPortalTarget={document.body}
-                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="como"
-                                  components={{
-                                    IndicatorSeparator: () => null
-                                  }}
-
-                                  styles={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      },
-                                      borderRadius: '10px',
-                                      fontSize: "14px",
-                                      minHeight: "45px",
-                                    }),
-                                    dropdownIndicator: (base, state) => ({
-                                      ...base,
-                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                      transition: '250ms',
-                                      width: '35px',
-                                      height: '35px',
-                                    }),
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.como && <span><small>{errors.como.message}</small></span>}
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-md-12 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>¿Quién realizó la derivación?</label>
-                            <Controller
-                              control={control}
-                              name="derivado_desde"
-                              {...register('derivado_desde', {
-                                required: {
-                                  value: true,
-                                  message: 'Campo requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
-                                  instanceId="who-derived"
-                                  defaultValue={selectedOption}
-                                  onChange={onChange}
-                                  options={quien_derivo}
-                                  // menuPortalTarget={document.body}
-                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="who-derived"
-                                  components={{
-                                    IndicatorSeparator: () => null
-                                  }}
-
-                                  styles={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      },
-                                      borderRadius: '10px',
-                                      fontSize: "14px",
-                                      minHeight: "45px",
-                                    }),
-                                    dropdownIndicator: (base, state) => ({
-                                      ...base,
-                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                      transition: '250ms',
-                                      width: '35px',
-                                      height: '35px',
-                                    }),
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.derivado_desde && <span><small>{errors.derivado_desde.message}</small></span>}
-                          </div>
-                        </div>
-
-
-                        <div className="form-group select-gender">
-                          <label className="gen-label">
-                            Tratamientos anteriores en el servicio <span className="login-danger">*</span>
-                          </label>
-                          <div className="form-check-inline">
-                            <label className="form-check-label">
-                              <input
-                                type="checkbox"
-                                className="form-check-input"
-                                {...register('tratamiento')}
-                              />
-                              Sí
-                            </label>
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-md-12 col-xl-12">
-                          <div className="form-group local-forms">
-                            <label>¿Has sido diagnosticado/a por un/a profesional de salud mental en los últimos 2 años?</label>
-                            <Controller
-                              control={control}
-                              name="diagnostico_previo"
-                              {...register('diagnostico_previo', {
-                                required: {
-                                  value: true,
-                                  message: 'Campo requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
-                                  instanceId="diagnosis"
-                                  defaultValue={selectedOption}
-                                  onChange={onChange}
-                                  options={diagnosticos_previos}
-                                  // menuPortalTarget={document.body}
-                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="diagnosis"
-                                  components={{
-                                    IndicatorSeparator: () => null
-                                  }}
-
-                                  styles={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      },
-                                      borderRadius: '10px',
-                                      fontSize: "14px",
-                                      minHeight: "45px",
-                                    }),
-                                    dropdownIndicator: (base, state) => ({
-                                      ...base,
-                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                      transition: '250ms',
-                                      width: '35px',
-                                      height: '35px',
-                                    }),
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.diagnostico_previo && <span><small>{errors.diagnostico_previo.message}</small></span>}
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>Especialidad </label>
-                            <Controller
-                              control={control}
-                              name="speciality"
-                              {...register('speciality', {
-                                required: {
-                                  value: true,
-                                  message: 'Especialidad es requerida',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
-                                  instanceId="especialidad"
-                                  defaultValue={selectedOption}
-                                  onChange={() => {handleChange()}}
-                                  options={especialidad}
-                                  // menuPortalTarget={document.body}
-                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="especialidad"
-                                  components={{
-                                    IndicatorSeparator: () => null
-                                  }}
-
-                                  styles={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      },
-                                      borderRadius: '10px',
-                                      fontSize: "14px",
-                                      minHeight: "45px",
-                                    }),
-                                    dropdownIndicator: (base, state) => ({
-                                      ...base,
-                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                      transition: '250ms',
-                                      width: '35px',
-                                      height: '35px',
-                                    }),
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.speciality && <span><small>{errors.speciality.message}</small></span>}
-
-                          </div>
-                        </div>
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>Profesional</label>
                             <Controller
                               control={control}
-                              name="doctor"
-                              {...register('doctor', {
+                              name="professional"
+                              {...register('professional', {
                                 required: {
                                   value: true,
                                   message: 'Profesional es requerido',
                                 }
                               })}
                               ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <Select
+                              render={({ field: { onChange, onBlur, value, name, ref } }) => {
+                                // console.log('value', value)
+                                return <Select
                                   instanceId="professional"
                                   defaultValue={selectedOption}
                                   onChange={onChange}
+                                  getOptionLabel={e => e.label}
                                   options={doctor}
                                   // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
@@ -1118,7 +901,7 @@ const AddFirstAppoinments = () => {
                                     }),
                                   }}
                                 />
-                              )}
+                              }}
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
 
@@ -1172,19 +955,20 @@ const AddFirstAppoinments = () => {
                       /> */}
                           </div>
                         </div>
+
+                        <DatePick />
+
+
                         <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms">
                             <label>
                               Hora <span className="login-danger">*</span>
                             </label>
                             <div className="">
-                              <TimePicker
+                              <TextField
                                 className="form-control"
                                 // id="outlined-controlled"
-                                minuteStep={15} secondStep={10} hourStep={1}
-                                // type="time"
-                                format='HH:mm'
-                                showNow= {false}
+                                type="time"
                                 value={startTime}
                                 onChange={(event) => {
                                   setStartTime(event.target.value);
@@ -1202,7 +986,7 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-                        <div className="col-12 col-sm-12">
+                        {/* <div className="col-12 col-sm-12">
                           <div className="form-group local-forms">
                             <label>
                               Antecedentes médicos relevantes <span className="login-danger">*</span>
@@ -1216,7 +1000,7 @@ const AddFirstAppoinments = () => {
                               style={{ resize: 'none' }}
                             />
                           </div>
-                        </div>
+                        </div> */}
                         {/* <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-top-form">
                             <label className="local-top">
@@ -1262,259 +1046,7 @@ const AddFirstAppoinments = () => {
             </div>
           </div>
           <Modal open={open} handleClose={handleClose} onClick={onSubmit} />
-          {/* 
-          <div className="notification-box">
-            <div className="msg-sidebar notifications msg-noti">
-              <div className="topnav-dropdown-header">
-                <span>Messages</span>
-              </div>
-              <div className="drop-scroll msg-list-scroll" id="msg_list">
-                <ul className="list-box">
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Richard Miles </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item new-message">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">John Doe</span>
-                          <span className="message-time">1 Aug</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Tarah Shropshire{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Mike Litorus</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Catherine Manseau{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">D</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Domenic Houston{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">B</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Buster Wigton{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Rolland Webber{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Claire Mapes </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Melita Faucher</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Jeffery Lalor</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">L</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Loren Gatlin</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            Tarah Shropshire
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="topnav-dropdown-footer">
-                <Link href="#">See all messages</Link>
-              </div>
-            </div>
-          </div> */}
+
 
           <div className="row">
             <div className="col-sm-12 col-lg-6">

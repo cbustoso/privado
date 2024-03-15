@@ -5,12 +5,13 @@ import { Today } from "@mui/icons-material"
 import Link from "next/link"
 import { signIn } from "next-auth/react"
 import { redirect } from "next/dist/server/api-utils"
+import { useMediaQuery } from "@mui/material"
 
 const ReserveBtn = ({ text, bgColor, color }) => {
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
-
+  const matches = useMediaQuery('(min-width:600px)');
   const handleSignIn = async () => {
     try {
       // Realiza la autenticación
@@ -42,7 +43,8 @@ const ReserveBtn = ({ text, bgColor, color }) => {
           style={{ margin: '16px 0', backgroundColor: bgColor, color: color }}
           // onClick={handleOpen}
         >
-          <Today /> {text}
+          {matches && <Today /> }
+          {text}
         </button>
       {/* </Link> */}
       {/* <Modal open={open} handleClose={handleClose} /> */}

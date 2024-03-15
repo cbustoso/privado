@@ -176,11 +176,11 @@ const Sidebar = (props) => {
                   <span className="menu-side">
                     <img src={doctorschedule.src} alt="" />
                   </span>{" "}
-                  <span> Horario Doctores </span> <span className="menu-arrow" />
+                  <span> Horario Profesionales </span> <span className="menu-arrow" />
                 </Link>
                 <ul style={{ display: "none" }} className="menu-items5">
                   <li>
-                    <Link className={props?.activeClassName === 'shedule-list' ? 'active' : ''} href="/schedulelist">Lista de Horarios</Link>
+                    <Link className={props?.activeClassName === 'shedule-list' ? 'active' : ''} href="/horarios">Lista de Horarios</Link>
                   </li>
                   {/* <li>
                     <Link className={props?.activeClassName === 'add-shedule' ? 'active' : ''} href="/addschedule">Agregar Horarios</Link>
