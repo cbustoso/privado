@@ -19,7 +19,9 @@ import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment } from "../../../services/AppointmentsServices"
 
 const AddAppoinments = () => {
-  const { register, handleSubmit, watch, control,
+  const VIDEOLLAMADA = false;
+  
+   const { register, handleSubmit, watch, control,
     formState: { errors }
   } = useForm(
   //   {
@@ -226,10 +228,10 @@ const AddAppoinments = () => {
                             }
                           </div>
                         </div>
-                        <div className="col-12 col-md-6 col-xl-4">
+                        {/* <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms">
                             <label>
-                              Rut {/* <span className="login-danger">*</span> */}
+                              Rut <span className="login-danger">*</span>
                             </label>
                             <input
                               className="form-control"
@@ -390,7 +392,6 @@ const AddAppoinments = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={career}
-                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="search-commodity"
                                   components={{
@@ -422,12 +423,6 @@ const AddAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
 
-                            {/* <select className="form-control select">
-                        <option>Select Doctor</option>
-                        <option>Dr.Bernardo James</option>
-                        <option>Dr.Andrea Lalema</option>
-                        <option>Dr.William Stephin</option>
-                      </select> */}
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-3">
@@ -479,11 +474,6 @@ const AddAppoinments = () => {
                             <label>
                               Dirección <span className="login-danger">*</span>
                             </label>
-                            {/* <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                            /> */}
 
                             <input
                               className="form-control" type="text"
@@ -512,8 +502,8 @@ const AddAppoinments = () => {
                               defaultValue={""}
                               {...register('address')} />
                           </div>
-                        </div>
-                      </div>
+                        </div>*/}
+                      </div> 
 
                       {/* Datos de contacto de urgencia */}
                       {/* <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '10px', margin: '10px' }}>
@@ -649,7 +639,7 @@ const AddAppoinments = () => {
                             <h4>Detalles de la Cita</h4>
                           </div>
                         </div>
-                        <div className="row">
+                        { VIDEOLLAMADA && <div className="row">
                           <div className="col-12 col-md-6 col-xl-4">
                             <div className="form-group select-gender">
                               <label className="gen-label">
@@ -682,6 +672,7 @@ const AddAppoinments = () => {
                             </div>
                           </div>
                         </div>
+                        }
                         <div className="row">
                           <div className="col-12 col-md-12 col-xl-12">
                             <div className="form-group select-gender">

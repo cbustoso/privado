@@ -14,19 +14,25 @@ import Contact from "../../../components/Contact"
 
 import { Alert, TextField } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import PlusCircle from "feather-icons-react/build/IconComponents/PlusCircle";
+import { PlusCircle, ChevronLeft, ChevronRight } from "feather-icons-react/build/IconComponents";
 
 import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment, sendEmail } from "../../../services/AppointmentsServices"
 import { regiones, comunas, motivo_consulta } from "../../../utils/selects";
 import { formatRut } from "@/utils/managedata";
-import { fetchScheduleByDate, fetchScheduleByUser } from "@/services/SchedulesServices";
+import { fetchScheduleByDate, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
 import DatePick from "@/components/Datepicker";
 
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs'
+import * as isLeapYear from 'dayjs/plugin/isLeapYear' // import plugin
+import 'dayjs/locale/es-mx'
 
 const AddFirstAppoinments = () => {
+
+  dayjs.extend(isLeapYear) // use plugin
+  dayjs.locale('es-mx') // use locale
+
   const { data: session, loading } = useSession()
 
   const [isClicked, setIsClicked] = useState(false);
@@ -37,6 +43,8 @@ const AddFirstAppoinments = () => {
   const [success, setSuccess] = useState('initial')
   const [error, setError] = useState('')
   const [open, setOpen] = useState(false);
+  const [days, setDays] = useState([]);
+  const [hours, setHours] = useState([])
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
@@ -51,7 +59,7 @@ const AddFirstAppoinments = () => {
           name: patient[0].nombre,
           lastName: patient[0].apellido,
           email: session.user.email,
-          birthday: dayjs(patient[0].fecha_nacimiento).format('DD-MM-YYYY'),
+          birthday: dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD'),
           genero: patient[0].genero,
           mobile: patient[0].telefono
 
@@ -67,8 +75,38 @@ const AddFirstAppoinments = () => {
       )
   })
 
-  const selectedProfessional = watch('doctor')
-  const selectedRegion= watch('region')
+  const handleSelectedProfessional = async (e) => {
+    console.log(e.id);
+    setDays([])
+    try {
+      const byProf = await fetchScheduleByAvailability(e.id)
+      console.log('byProf', byProf)
+      setDays(byProf.bloques.slice(0, 5))
+    } catch (error) {
+      console.log('don error', error)
+    }
+  }
+
+  const handleDays = async (e, fecha, id) => {
+    e.preventDefault()
+    console.log('handle.days', fecha, id)
+    const fechaMod = dayjs(fecha).format('YYYY-MM-DD')
+    console.log('fechamod', fechaMod);
+    try {
+      const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
+      console.log('bloques', bloques);
+      setHours(bloques.slice(0, 5))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleHours = (e) => {
+    e.preventDefault()
+    setHours(dayjs(e.id_bloque).format('DD/MM/YYYY'))
+  }
+
+  const selectedRegion = watch('region')
 
   const handleOpen = (e) => {
     e.preventDefault()
@@ -78,13 +116,14 @@ const AddFirstAppoinments = () => {
 
   const fetchData = async () => {
     const { users } = await fetchDoctors()
-    // console.log(users);
+    console.log(users);
     const docs = users.map((doc, i) => {
       return {
         value: i + 2,
         label: doc.nombre + ' ' + doc.apellido,
         id: doc.id,
         email: doc.email,
+        name: doc.nombre
         // especialidad: doc.
       }
     })
@@ -105,42 +144,6 @@ const AddFirstAppoinments = () => {
     // Handle file loading logic here
   };
 
-  // const onSubmit = handleSubmit(async data => {
-  //   setSuccess('initial')
-  //   const patientName = watch("name")
-  //   const patientLastname = watch("lastName")
-  //   const patients = await fetchUsers()
-
-  //   console.log('data', data);
-
-  //   const patient = patients.users.filter(user =>
-  //     user.nombre === patientName
-  //     & user.apellido === patientLastname
-  //     & user.tipo_usuario === 'alumno'
-  //     & user.email === session.user.email
-  //   )
-
-  //   try {
-  //     const appointment = await createAppointment({
-  //       ...data,
-  //       "patient_id": patient[0].id,
-  //       "fecha": dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD')
-  //     })
-  //     // if (appointment.detalle === 'fail!!!') setSuccess('fail')
-  //     // setSuccess('success')
-  //     console.log('appointment', appointment);
-  //   } catch (err) {
-  //     setSuccess('fail')
-  //     console.log('ERRRR', err.message)
-  //     if (err.message === "Cannot read properties of undefined (reading 'id')") {
-  //       setError(`No se encontró al paciente`);
-  //     }
-  //   } finally {
-  //     setOpen(false)
-  //   }
-  // })
-
-
   const onSubmit = handleSubmit(async data => {
     console.log('data', data);
     setSuccess('initial')
@@ -150,13 +153,9 @@ const AddFirstAppoinments = () => {
 
     console.log('session.user.email', session.user.email);
     const patient = patients.users.filter(user =>
-      // user.nombre === patientName
-      // & user.apellido === patientLastname
-      // & user.tipo_usuario === 'alumno'
-      // & 
       user.email === session.user.email
     )
-      console.log('patient', patient);
+    console.log('patient', patient);
     const body = {
       ...data,
       "patient_id": patient[0].id,
@@ -219,20 +218,7 @@ const AddFirstAppoinments = () => {
     console.log(formattedRut)
   }
 
-  const fetchScheduleByDay = async (id, date) => {
-    // console.log('selectedProfessional', selectedProfessional);
-    try {
-      const resp = await fetchScheduleByDate('6', '2024-03-01')
-      const byProf = await fetchScheduleByUser('6')
-      // const response = await resp.json()
-      // console.log('respuesta de la fecha', resp);
-      // console.log('respuesta del profesional', byProf);
-    } catch (error) {
-      console.log('error de fecha', error)
-    }
-  }
-  selectedProfessional?.id && fetchScheduleByDay('6', '2024-03-01')
-  fetchScheduleByDay('6', '2024-03-01')
+  const professional = register("professional", { required: true });
 
   return (
     <div>
@@ -361,17 +347,19 @@ const AddFirstAppoinments = () => {
                             <Controller
                               control={control}
                               name="birthday"
-                              {...register('birthday', {
+                              rules={{
                                 required: {
                                   value: true,
                                   message: 'Fecha es requerida',
                                 }
-                              })}
+                              }}
                               ref={null}
                               render={({ field: { onChange, onBlur, value } }) => (
                                 <DatePicker
                                   className="form-control datetimepicker"
                                   onChange={onChange}
+                                  // value={value}
+                                  onBlur={onBlur}
                                   suffixIcon={null}
                                   format={'DD-MM-YYYY'}
                                   style={{
@@ -613,11 +601,11 @@ const AddFirstAppoinments = () => {
                             </label>
                             <Controller
                               control={control}
-                              name="region"
-                              {...register('region', {
+                              name="comuna"
+                              {...register('comuna', {
                                 required: {
                                   value: true,
-                                  message: 'Región es requerida',
+                                  message: 'Comuna es requerida',
                                 }
                               })}
                               ref={null}
@@ -626,7 +614,7 @@ const AddFirstAppoinments = () => {
                                   instanceId="select-region"
                                   defaultValue={selectedOption}
                                   onChange={onChange}
-                                  options={comunas[selectedRegion?.name]  }
+                                  options={comunas[selectedRegion?.name]}
                                   // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="select-region"
@@ -858,19 +846,17 @@ const AddFirstAppoinments = () => {
                             <Controller
                               control={control}
                               name="professional"
-                              {...register('professional', {
-                                required: {
-                                  value: true,
-                                  message: 'Profesional es requerido',
-                                }
-                              })}
+                              {...register('professional')}
                               ref={null}
                               render={({ field: { onChange, onBlur, value, name, ref } }) => {
                                 // console.log('value', value)
                                 return <Select
                                   instanceId="professional"
                                   defaultValue={selectedOption}
-                                  onChange={onChange}
+                                  onChange={(e) => {
+                                    professional.onChange(e);
+                                    handleSelectedProfessional(e);
+                                  }}
                                   getOptionLabel={e => e.label}
                                   options={doctor}
                                   // menuPortalTarget={document.body}
@@ -905,122 +891,59 @@ const AddFirstAppoinments = () => {
                             />
                             {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
 
-                            {/* <select className="form-control select">
-                        <option>Select Doctor</option>
-                        <option>Dr.Bernardo James</option>
-                        <option>Dr.Andrea Lalema</option>
-                        <option>Dr.William Stephin</option>
-                      </select> */}
                           </div>
                         </div>
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms cal-icon">
+
+
+                        <div className="row">
+                          <div className="col-12 col-md-12 col-xl-12">
                             <label>
                               Día de la Cita{" "}
                               <span className="login-danger">*</span>
                             </label>
-                            <Controller
-                              control={control}
-                              name="appointment_date"
-                              {...register('appointment_date', {
-                                required: {
-                                  value: true,
-                                  message: 'Días es requerido',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <DatePicker
-                                  className="form-control datetimepicker"
-                                  onChange={onChange}
-                                  suffixIcon={null}
-                                  format={'YYYY-MM-DD'}
-                                  style={{
-                                    control: (baseStyles, state) => ({
-                                      ...baseStyles,
-                                      borderColor: isClicked ? '#2E37A4' : '2px solid rgba(46, 55, 164, 0.1)',
-                                      '&:hover': {
-                                        borderColor: state.isFocused ? 'none' : 'none',
-                                      },
-                                    })
-                                  }}
-                                />
-                              )}
-                            />
-                            {errors.appointment_date && <span><small>{errors.appointment_date.message}</small></span>}
+                            <div className="form-group local-forms">
+                              {days.length > 0 && (
+                                <>
+                                  <button className="btn btn-primary"><ChevronLeft /></button>
 
-                            {/* <input
-                        className="form-control datetimepicker"
-                        type="text"
-                      /> */}
+                                  {days.map((day, i) => (
+                                    <button
+                                      className="btn me-2 btn-cancel"
+                                      key={`${day.id}${i}days`}
+                                      onClick={(e) => handleDays(e, day.fecha, day.usuario_id)}>
+                                      {dayjs(day.fecha).format('ddd DD/MM')}
+                                    </button>
+                                  )
+                                  )}
+                                  <button className="btn btn-primary"><ChevronRight /></button>
+                                </>)
+                              }
+                            </div>
                           </div>
-                        </div>
-
-                        <DatePick />
-
-
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms">
+                          {/* <DatePick /> */}
+                          <div className="col-12 col-md-12 col-xl-12">
                             <label>
                               Hora <span className="login-danger">*</span>
                             </label>
-                            <div className="">
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time', {
-                                  required: {
-                                    value: true,
-                                    message: 'Hora es requerida',
-                                  }
-                                })}
-                              />
-                              {errors.start_time && <span><small>{errors.start_time.message}</small></span>}
-
+                            <div className="form-group local-forms">
+                              {hours.length > 0 && (
+                                <>
+                                  <button className="btn btn-primary"><ChevronLeft /></button>
+                                  {hours.map((hour, i) => (
+                                    <button className="btn me-2 btn-cancel" key={`${hour.id}${i}hours`}>
+                                      {hour.hora_inicio}
+                                    </button>
+                                  )
+                                  )}
+                                  <button className="btn btn-primary"><ChevronRight /></button>
+                                </>)
+                              }
                             </div>
                           </div>
                         </div>
 
-                        {/* <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Antecedentes médicos relevantes <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              {...register('notas')}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-top-form">
-                            <label className="local-top">
-                              Avatar <span className="login-danger">*</span>
-                            </label>
-                            <div className="settings-btn upload-files-avator">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                name="image"
-                                id="file"
-                                onChange={loadFile}
-                                className="hide-input"
-                              />
-                              <label htmlFor="file" className="upload">
-                                Choose File
-                              </label>
-                            </div>
-                          </div>
-                        </div> */}
+
+
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             <button
