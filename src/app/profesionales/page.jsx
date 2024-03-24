@@ -237,7 +237,7 @@ const DoctorList = () => {
                               </div>
                               <div className="add-group">
                                 <Link
-                                  href="/add-doctor"
+                                  href="/profesionales/agregarprofesional"
                                   className="btn btn-primary add-pluss ms-2"
                                 >
                                   <img src={plusicon.src} alt="#" />

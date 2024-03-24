@@ -2,16 +2,14 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-// import Headerudp from "../Headerudp";
 import Sidebar from "../../../components/Sidebar";
 import { DatePicker } from "antd";
 import Select from "react-select";
-// import { Link } from 'react-router-dom';
 import Link from "next/link";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useForm, Controller } from 'react-hook-form';
 import { Alert } from "@mui/material";
-import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
+import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 
 import { addDoctor } from "../../../services/DoctorsServices";
 
@@ -20,6 +18,7 @@ const AddDoctor = () => {
     formState: { errors }
   } = useForm()
 
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [dataDoctor, setDataDoctor] = useState(null)
@@ -28,28 +27,13 @@ const AddDoctor = () => {
   //   warning: false,
   //   success: false
   // })
-  const [options, setOptions] = useState([
-    { value: 1, label: "Select City" },
-    { value: 2, label: "Alaska" },
-    { value: 3, label: "California" },
-  ]);
-  const [option, setOption] = useState([
-    { value: 1, label: "Select Country" },
-    { value: 2, label: "Usa" },
-    { value: 3, label: "Uk" },
-    { value: 4, label: "Italy" },
-  ]);
-  const [statevalue, setStateValue] = useState([
-    { value: 1, label: "Select City" },
-    { value: 2, label: "Alaska" },
-    { value: 3, label: "California" },
-  ]);
+
   const [gender, setGender] = useState([
-    { value: 1, label: "Femenino" },
-    { value: 2, label: "Masculino" },
-    { value: 3, label: "No binario" },
-    { value: 4, label: "Otro" },
-    { value: 5, label: "Prefiero no decir" }
+    { value: 1, label: "Hombre" },
+    { value: 2, label: "Mujer" },
+    { value: 3, label: "Hombre trans" },
+    { value: 4, label: "Mujer trans" },
+    { value: 5, label: "No binarie" }
   ]);
 
   const [department, setDepartment] = useState([
@@ -66,7 +50,7 @@ const AddDoctor = () => {
     // Handle file loading logic here
   };
 
-  const onSubmit = handleSubmit( async data => {
+  const onSubmit = handleSubmit(async data => {
     setSuccess('initial')
     console.log('error', errors)
     if (data) {
@@ -78,11 +62,11 @@ const AddDoctor = () => {
         // if(response.err) setStatusPetition(prevState => ({...prevState, warning: true}))
         // else setStatusPetition(prevState => ({...prevState, success: true}))
         setSuccess('success')
-      } catch(err) {
+      } catch (err) {
         console.log('ERR', err)
         setSuccess('fail')
       }
-      
+
     } else {
       console.log('FAIL')
     }
@@ -92,6 +76,10 @@ const AddDoctor = () => {
     const response = await addDoctor(dataDoctor)
     console.log(response)
   }
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   return (
     <div>
@@ -130,6 +118,7 @@ const AddDoctor = () => {
                             <h4>Detalles del Profesional</h4>
                           </div>
                         </div>
+                        {/* Nombre */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -151,10 +140,14 @@ const AddDoctor = () => {
                               })}
                             />
                             {
-                              errors.name && <span><small>{errors.name.message}</small></span>
+                              errors.name && <span className="login-danger">
+                                <small>{errors.name.message}</small>
+                              </span>
                             }
                           </div>
                         </div>
+
+                        {/* Apellido */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -176,7 +169,9 @@ const AddDoctor = () => {
                               })}
                             />
                             {
-                              errors.lastName && <span><small>{errors.lastName.message}</small></span>
+                              errors.lastName && <span className="login-danger">
+                                <small>{errors.lastName.message}</small>
+                              </span>
                             }
                           </div>
                         </div>
@@ -201,6 +196,68 @@ const AddDoctor = () => {
                             }
                           </div>
                         </div> */}
+
+                        {/* Género */}
+                        <div className="col-12 col-md-6 col-xl-6">
+                          <div className="form-group local-forms">
+                            <label>
+                              Género <span className="login-danger">*</span>
+                            </label>
+                            <Controller
+                              control={control}
+                              name="genero"
+                              {...register('genero', {
+                                required: {
+                                  value: true,
+                                  message: 'Género es requerida',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="genero"
+                                  menuPosition={'fixed'}
+                                  defaultValue={selectedOption}
+                                  onChange={onChange}
+                                  options={gender}
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="genero"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                            {errors.gender && <span className="login-danger">
+                              <small>{errors.gender.message}</small>
+                            </span>}
+
+                          </div>
+                        </div>
+
+                        {/* Correo electrónico */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -213,15 +270,19 @@ const AddDoctor = () => {
                               {...register('email', {
                                 required: {
                                   value: true,
-                                  message: 'Teléfono es requerido'
+                                  message: 'Correo electrónico es requerido'
                                 }
                               })}
                             />
                             {
-                              errors.email && <span><small>{errors.email.message}</small></span>
+                              errors.email && <span className="login-danger">
+                                <small>{errors.email.message}</small>
+                              </span>
                             }
                           </div>
                         </div>
+
+                        {/* Contraseña */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -229,23 +290,39 @@ const AddDoctor = () => {
                             </label>
                             <input
                               className="form-control"
-                              type="password"
+                              type={passwordVisible ? 'password' : ''}
                               placeholder=""
                               name="password"
                               {...register('password', {
                                 required: {
                                   value: true,
-                                  message: 'Password es requerida'
+                                  message: 'Contraseña es requerida'
                                 },
                                 minLength: {
-                                  value: 6,
-                                  message: 'Contraseña debe tener al menos 6 caracteres'
-                                }
+                                  value: 8,
+                                  message: 'Contraseña debe tener al menos 8 caracteres'
+                                },
+                                validate:
+                                  value => {
+                                    const regex = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/;
+                                    return regex.test(value) || 'La contraseña debe contener al menos un caracter especial, un número y una mayúscula';
+                                  }
                               })}
                             />
-                            {errors.password && <span><small>{errors.password.message}</small></span>}
+
+                            <span
+                              className="toggle-password"
+                              onClick={togglePasswordVisibility}
+                            >
+                              {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
+                            </span>
+                            {errors.password && <span className="login-danger">
+                              <small>{errors.password.message}</small>
+                            </span>}
                           </div>
                         </div>
+                        
+                        {/* Confirmar contraseña */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -254,7 +331,7 @@ const AddDoctor = () => {
                             </label>
                             <input
                               className="form-control"
-                              type="password"
+                              type={passwordVisible ? 'password' : ''}
                               placeholder=""
                               {...register('confirmPassword', {
                                 required: {
@@ -264,111 +341,19 @@ const AddDoctor = () => {
                                 validate: value => value === watch('password') || 'Las contraseñas no coinciden'
                               })}
                             />
-                            {errors.confirmPassword
-                              && <span><small>{errors.confirmPassword.message}</small></span>}
+                            <span
+                              className="toggle-password"
+                              onClick={togglePasswordVisibility}
+                            >
+                              {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
+                            </span>
+                            {errors.confirmPassword && <span className="login-danger">
+                              <small>{errors.confirmPassword.message}</small>
+                            </span>}
                           </div>
                         </div>
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms cal-icon">
-                            <label>
-                              Fecha de nacimiento{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <Controller
-                              control={control}
-                              name="dateOfBirth"
-                              {...register('dateOfBirth', {
-                                required: {
-                                  value: true,
-                                  message: 'Fecha es requerida',
-                                }
-                              })}
-                              ref={null}
-                              render={({ field: { onChange, onBlur, value } }) => (
-                                <DatePicker
-                                  className="form-control datetimepicker"
-                                  onChange={onChange}
-                                  suffixIcon={null}
-                                  style={{
-                                    borderColor: isClicked ? '#2E37A4' : '2px solid rgba(46, 55, 164, 0.1)',
-                                  }}
-                                />
-                              )}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group select-gender">
-                            <label className="gen-label">
-                              Género<span className="login-danger">*</span>
-                            </label>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  name="gender"
-                                  value="masculino"
-                                  className="form-check-input"
-                                  {...register('gender', {
-                                    required: {
-                                      value: true,
-                                      message: 'Género es requerido'
-                                    }
-                                  })}
-                                />
-                                Masculino
-                              </label>
-                            </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  name="gender"
-                                  value="femenino"
-                                  className="form-check-input"
-                                  {...register('gender', {
-                                    required: {
-                                      value: true,
-                                      message: 'Género es requerido'
-                                    }
-                                  })}
-                                />
-                                Femenino
-                              </label>
-                            </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  name="gender"
-                                  value="otro"
-                                  className="form-check-input"
-                                  {...register('gender', {
-                                    required: {
-                                      value: true,
-                                      message: 'Género es requerido'
-                                    }
-                                  })}
-                                />
-                                Otro
-                              </label>
-                            </div>
-                            {errors.gender && <span><small>{errors.gender.message}</small></span>}
-                          </div>
-                        </div> */}
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Especialidad {" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                            />
-                          </div>
-                        </div> */}
+
+                        {/* Especialidad */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -386,6 +371,7 @@ const AddDoctor = () => {
                               ref={null}
                               render={({ field: { onChange, onBlur, value } }) => (
                                 <Select
+                                  instanceId="search-commodity"
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={department}
@@ -416,23 +402,56 @@ const AddDoctor = () => {
                                 />
                               )}
                             />
-                            {errors.speciality && <span><small>{errors.speciality.message}</small></span>}
+                            {errors.speciality && <span className="login-danger">
+                              <small>{errors.speciality.message}</small>
+                            </span>}
 
                           </div>
                         </div>
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
+                        
+                        {/* Campus */}
+                        <div className="col-12 col-md-6 col-xl-6">
+                          <div className="form-group select-gender">
+                            <label className="gen-label">
                               Campus <span className="login-danger">*</span>
                             </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                              name="campus"
-                            />
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="centro"
+                                  className="form-check-input"
+                                  {...register('campus', {
+                                    required: {
+                                      value: true,
+                                      message: 'Estado es requerido'
+                                    }
+                                  })}
+                                />
+                                Centro
+                              </label>
+                            </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="huechuraba"
+                                  className="form-check-input"
+                                  {...register('campus', {
+                                    required: {
+                                      value: true,
+                                      message: 'Estado es requerido'
+                                    }
+                                  })}
+                                />
+                                Huechuraba
+                              </label>
+                            </div>
+                            {errors.campus && <span className="login-danger">
+                              <small>{errors.campus.message}</small>
+                            </span>}
                           </div>
-                        </div> */}
+                        </div>
                         {/* <div className="col-12 col-sm-12">
                           <div className="form-group local-forms">
                             <label>
@@ -446,47 +465,7 @@ const AddDoctor = () => {
                             />
                           </div>
                         </div> */}
-                        {/* <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              País <span className="login-danger">*</span>
-                            </label>
-                            <Select
-                              menuPosition={'fixed'}
-                              defaultValue={selectedOption}
-                              onChange={setSelectedOption}
-                              options={option}
-                              // menuPortalTarget={document.body}
-                              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                              id="search-commodity"
-                              components={{
-                                IndicatorSeparator: () => null
-                              }}
-
-                              styles={{
-                                control: (baseStyles, state) => ({
-                                  ...baseStyles,
-                                  borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                  boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                  '&:hover': {
-                                    borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                  },
-                                  borderRadius: '10px',
-                                  fontSize: "14px",
-                                  minHeight: "45px",
-                                }),
-                                dropdownIndicator: (base, state) => ({
-                                  ...base,
-                                  transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                  transition: '250ms',
-                                  width: '35px',
-                                  height: '35px',
-                                }),
-                              }}
-                            />
-
-                          </div>
-                        </div> */}
+                        
                         {/* <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
@@ -585,7 +564,7 @@ const AddDoctor = () => {
                         </div> */}
                         {/* <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-top-form"> */}
-                            {/* <label className="local-top">
+                        {/* <label className="local-top">
                               Avatar <span className="login-danger"></span>
                             </label>
                             <div className="settings-btn upload-files-avator">
@@ -601,7 +580,7 @@ const AddDoctor = () => {
                                 Elegir imagen
                               </label>
                             </div> */}
-                            {/* <div className="settings-btn upload-files-avator">
+                        {/* <div className="settings-btn upload-files-avator">
                               <input
                                 type="file"
                                 accept="image/*"
@@ -614,7 +593,7 @@ const AddDoctor = () => {
                                 Choose File
                               </label>
                             </div> */}
-                          {/* </div>
+                        {/* </div>
                         </div> */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group select-gender">
@@ -653,7 +632,9 @@ const AddDoctor = () => {
                                 Inactivo
                               </label>
                             </div>
-                            {errors.status && <span><small>{errors.status.message}</small></span>}
+                            {errors.status && <span className="login-danger">
+                              <small>{errors.status.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12">
@@ -692,258 +673,6 @@ const AddDoctor = () => {
                     </form>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="notification-box">
-            <div className="msg-sidebar notifications msg-noti">
-              <div className="topnav-dropdown-header">
-                <span>Messages</span>
-              </div>
-              <div className="drop-scroll msg-list-scroll" id="msg_list">
-                <ul className="list-box">
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Richard Miles </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item new-message">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">John Doe</span>
-                          <span className="message-time">1 Aug</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Tarah Shropshire{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Mike Litorus</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Catherine Manseau{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">D</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Domenic Houston{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">B</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Buster Wigton{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">R</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            {" "}
-                            Rolland Webber{" "}
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">C</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author"> Claire Mapes </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">M</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Melita Faucher</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">J</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Jeffery Lalor</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">L</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">Loren Gatlin</span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <div className="list-item">
-                        <div className="list-left">
-                          <span className="avatar">T</span>
-                        </div>
-                        <div className="list-body">
-                          <span className="message-author">
-                            Tarah Shropshire
-                          </span>
-                          <span className="message-time">12:28 AM</span>
-                          <div className="clearfix" />
-                          <span className="message-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="topnav-dropdown-footer">
-                <Link href="#">See all messages</Link>
               </div>
             </div>
           </div>
