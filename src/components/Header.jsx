@@ -6,17 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 // import "../../src/assets/js/app";
 // import { baricon1, imguser, logo, noteicon, noteicon1, searchnormal, settingicon01, user06 } from './imagepath';
-import {
-  logo,
-  baricon,
-  baricon1,
-  searchnormal,
-  imguser,
-  noteicon,
-  user06,
-  settingicon01,
-  noteicon1,
-} from "./imagepath";
+import { logo } from "./imagepath";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -63,7 +53,7 @@ const Header = () => {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -74,9 +64,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            <Link href="/" className="logo">
               <img src={logo.src} width={263} height={70} alt="" />{" "}
-            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -116,12 +104,11 @@ const Header = () => {
 
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -133,19 +120,18 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            <Link href="/" className="logo">
               <img src={logo.src} width={263} height={70} alt="" />{" "}
-            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={ page }
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
-                {page}
+                { page }
               </Button>
+              
             ))}
           </Box>
 
