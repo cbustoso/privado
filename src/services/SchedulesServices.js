@@ -69,6 +69,22 @@ export const fetchScheduleByDate = async (id, date) => {
   return data.json()
 }
 
+export const fetchScheduleByAvailability = async (id) => {
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SHOW_DISPONIBILIDADES;
+  const body = {
+    id_user: id
+  }
+  console.log('body', body);
+  const data = await fetch(SCHEDULES_URL, {
+    method: "POST",
+    headers: {
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*'
+    },
+    body: JSON.stringify(body)
+  })
+  return data.json()
+}
 
 export const createSchedule = async (schedule) => {
   const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`

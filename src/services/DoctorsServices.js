@@ -25,6 +25,26 @@ export const fetchDoctors = async () => {
   }
 }
 
+export const fetchSpeciality = async (usuario_id) => {
+  const SPECIALITY_URL = process.env.NEXT_PUBLIC_SHOW_ESPECIALIDADES
+  try {
+    const data = await fetch(SPECIALITY_URL, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'access-control-allow-origin': '*',
+      },
+      body: JSON.stringify({
+        usuario_id
+      })
+    })
+    console.log('data', data)
+    return data.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const fetchDoctor = async (id) => {
   const USERS_API = process.env.NEXT_PUBLIC_SHOW_PROFESSIONALS_BY_ID
   try {
@@ -48,19 +68,20 @@ export const fetchDoctor = async (id) => {
 export const addDoctor = async (user) => {
   // const USERS_API = process.env.VITE_USERS_API + `/api/professionals`
   const USERS_API = process.env.NEXT_PUBLIC_CREATE_PROFESSIONAL
+  console.log(user);
   const body = {
     "nombre": user.name,
     "apellido": user.lastName,
     "rut":"16332702-3",
     "fechaNacimiento": "14-02-1990",
-    "genero": user.gender === 'masculino' ? 'masculino' : user.gender === 'femenino' ? 'femenino' : 'otro',
+    "genero": user.genero.label,
     "email": user.email,
-    "telefono": user.mobile,
-    // "contrasena": user.password,
-    // "especialidad": user.speciality.value,
-    // "tipo_usuario": 'profesional',
-    // "status": user.status,
-    // "campus": 'Sede Centro',
+    "telefono": 987654321,
+    "contrasena": user.password,
+    "especialidad": user.speciality.value,
+    "tipo_usuario": 'profesional',
+    "status": user.status,
+    "campus": 'Sede Centro',
     "carrera":user.speciality.label,
     "anoIngresoCarrera":"14-02-2024",
     "jornada":"laboral",
@@ -70,6 +91,7 @@ export const addDoctor = async (user) => {
     "status": "activo",
     "especialidad":user.speciality.label,
   }
+
   console.log('body', body);
   try {
     const data = await fetch(USERS_API, {
@@ -111,7 +133,7 @@ export const updateDoctor = async (user, id) => {
 
   try {
     const data = await fetch(USERS_API, {
-      method: "PUT",
+      method: "POST",
       headers: {
         'content-type': 'application/json',
         'access-control-allow-origin': '*',
