@@ -31,6 +31,10 @@ const Addblog = () => {
     formState: { errors }
   } = useForm()
 
+  const onSubmit = handleSubmit(async data => {
+  console.log(data)
+  })
+
   return (
     <>
       <div className="main-wrapper">
@@ -332,7 +336,7 @@ const Addblog = () => {
                               }
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-12">
+                          {/* <div className="col-12 col-md-6 col-xl-12">
                             <div className="form-group local-top-form">
                               <label className="local-top">
                                 Avatar <span className="login-danger">*</span>
@@ -351,12 +355,13 @@ const Addblog = () => {
                                 </label>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-12">
                             <div className="doctor-submit text-end">
                               <button
                                 type="submit"
                                 className="btn btn-primary submit-form me-2"
+                                onSubmit={onSubmit}
                               >
                                 Publicar
                               </button>
@@ -376,7 +381,7 @@ const Addblog = () => {
               </div>
             </div>
 
-            <div id="delete_patient" className="modal fade delete-modal" role="dialog">
+            {/* <div id="delete_patient" className="modal fade delete-modal" role="dialog">
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                   <div className="modal-body text-center">
@@ -394,7 +399,7 @@ const Addblog = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </>
         {/* page-wrapper-end */}
