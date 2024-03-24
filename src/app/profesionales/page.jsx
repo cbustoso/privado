@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor } from '../../services/DoctorsServices';
+import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor, fetchSpeciality } from '../../services/DoctorsServices';
 import { getSpecialities } from '@/services/SchedulesServices';
 import { search } from '../../services/AppointmentsServices'
 
@@ -26,15 +26,21 @@ const DoctorList = () => {
       const { response } = await getSpecialities()
 
       // console.log('DATA', users);
-      const usersAndSPeciality = users.map(user => {
-        const result = response.find(el => el.usuario_id === user.id)
-        return {
+      const usersAndSPeciality = users.map(async user => {
+        // const result = response.find(el => el.usuario_id === user.id)
+        // console.log(user);
+        const result = await fetchSpeciality(user.id)
+
+        const newUser = {
           ...user,
-          especialidad: !result ? 'Psicologia' : result.especialidad
+          especialidad: result.especialidad.length === 0 ? 'Psicologia' : result.especialidad[0].especialidad
         }
+        return newUser
       })
-      setDoctors(usersAndSPeciality)
-      setResults(usersAndSPeciality)
+      const newUsers = await Promise.all(usersAndSPeciality)
+      console.log('newUsers', newUsers);
+      setDoctors(newUsers)
+      setResults(newUsers)
     }
     fetchData()
   }, [])
