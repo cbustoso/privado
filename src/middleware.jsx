@@ -18,4 +18,9 @@ export const config = {matcher: [
   "/pacientes/:path*", 
   "/citas", 
   "/citas/:path*", 
-  "/profesionales"]}
+  "/profesionales",
+  "/profesionales/:path",
+  "/blog",
+  "/blog/agregarblog",
+  "/blog/editar/:path",
+]}
