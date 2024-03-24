@@ -12,22 +12,89 @@ import Sidebar from "../../../components/Sidebar";
 import { TextField, Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-import { fetchDoctors } from "../../../services/DoctorsServices";
+import { fetchDoctors, fetchDoctor } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment } from "../../../services/AppointmentsServices"
+import { createInterviewRecord } from "@/services/RecordServices";
 import Contact from "../../../components/Contact"
-import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
-import { formatRut } from "@/utils/managedata";
+import { useSession } from "next-auth/react";
+import dayjs from "dayjs";
 
-const AddFirstAppoinments = () => {
+import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, diagnosticos_previos } from "../../../utils/selects";
+
+const AddInterviewRecord = ({ params }) => {
+
+  const { data: session } = useSession()
+  console.log('session ficha', session);
+
+  
+  const calcularEdad = (fechaNacimiento) => {
+    var hoy = new Date();
+    var cumpleanos = new Date(fechaNacimiento);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var mes = hoy.getMonth() - cumpleanos.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+    }
+    console.log('EDAD', edad);
+    return edad;
+  }
+
+
   const { register, handleSubmit, watch, control,
     formState: { errors }
-  } = useForm()
+  } = useForm({
+    defaultValues: async () => fetchUsers().then(response => {
+      console.log('response', response.users)
+      const patient = response.users.filter(user => user.id == params.id)
+      console.log('patient', patient)
+      const obj = {
+        nombre_completo: `${patient[0].nombre} ${patient[0].apellido}`,
+        lastName: patient[0].apellido,
+        correo: patient[0].email,
+        fecha_nacimiento: dayjs(patient[0].fecha_nacimiento).format('DD-MM-YYYY'),
+        edad: calcularEdad(dayjs(patient[0].fecha_nacimiento).format('DD-MM-YYYY')),
+        genero: patient[0].genero,
+        telefono: patient[0].telefono
+      }
+      console.log('obj', patient);
+      return obj
+    })
+      .catch(error =>
+        console.log('err', error)
+      )
+  })
+
+  const fetchData = async () => {
+    const { users } = await fetchDoctor('6')
+    console.log('users', users);
+    const docs = users.map((doc, i) => {
+      return {
+        value: i + 2,
+        label: doc.nombre + ' ' + doc.apellido,
+        id: doc.id
+      }
+    })
+    setDoctor(docs)
+  }
+
+  const getPatients = async () => {
+    const { users } = await fetchUsers()
+    const patients = users.filter(patient => patient.tipo_usuario === 'alumno')
+    setPatients(patients)
+  }
+
+  useEffect(() => {
+    fetchData()
+    getPatients()
+  }, [])
 
   const [isClicked, setIsClicked] = useState(false);
   const [startTime, setStartTime] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
   const [doctor, setDoctor] = useState([]);
+  const [patients, setPatients] = useState([])
   const [contacts, setContacts] = useState([])
 
   const [success, setSuccess] = useState('initial')
@@ -42,23 +109,6 @@ const AddFirstAppoinments = () => {
     setOpen(true)
   };
   const handleClose = () => setOpen(false);
-
-  const fetchData = async () => {
-    const { users } = await fetchDoctors()
-    // console.log(users);
-    const { docs } = users.map((doc, i) => {
-      return {
-        value: i + 2,
-        label: doc.nombre + ' ' + doc.apellido,
-        id: doc.id
-      }
-    })
-    setDoctor(docs)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   const onChange = (date, dateString) => {
     console.log(date, dateString);
@@ -102,7 +152,6 @@ const AddFirstAppoinments = () => {
     { value: 4, label: "Otro" },
     { value: 5, label: "Prefiero no decir" }
   ]);
-
   const career = [
     { value: 2, label: "Antropologia" },
     { value: 3, label: "Arquitectura" },
@@ -110,7 +159,6 @@ const AddFirstAppoinments = () => {
     { value: 5, label: "Derecho" },
     { value: 6, label: "Ingenieria" },
   ];
-
   const tipo_apoyo = [
     { value: 2, label: "Emocional" },
     { value: 3, label: "Familiar" },
@@ -121,8 +169,6 @@ const AddFirstAppoinments = () => {
     { value: 8, label: "Pares" },
     { value: 9, label: "Otro" }
   ];
-
-
   const modalidad = [
     { value: 2, label: "Atención psicológica breve" },
     { value: 3, label: "Orientación/Consejería" },
@@ -140,8 +186,6 @@ const AddFirstAppoinments = () => {
     { value: 3, label: "Realizada" },
     { value: 4, label: "Cancelada" }
   ];
-
-
   const area_atencion = [
     { value: 2, label: "Psicológica" },
     { value: 3, label: "Psicopedagógica" },
@@ -166,11 +210,19 @@ const AddFirstAppoinments = () => {
     setContacts(newArray)
   }
 
-  const handleFormat = () => {
-    const formattedRut = formatRut(e.target.value)
-    // setRut(formattedRut)
-    console.log(formattedRut)
-  }
+  const handleFormat = rut => rut.replace(/[^\dkK]/g, '').replace(/^(\d{1,2})(\d{3})(\d{3})([0-9kK]{1})$/, '$1.$2.$3-$4')
+
+  const handleInterview = handleSubmit(async (data, e) => {
+    e.preventDefault()
+    console.log('HOOOLAAAA', data)
+    try {
+      const resp = await createInterviewRecord({ ...data, id_profesional: 9, id_alumno: parseInt(params.id) })
+      console.log('resp', resp)
+
+    } catch (error) {
+      console.log('Error: ', error);
+    }
+  })
 
   return (
     <div>
@@ -220,7 +272,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('name')}
+                              {...register('profesional_evaluador')}
                             />
                           </div>
                         </div>
@@ -232,8 +284,16 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('rut')}
+                              {...register('fecha', {
+                                required: {
+                                  value: true,
+                                  message: 'Fecha es requerida'
+                                }
+                              })}
                             />
+                            {errors.fecha && <span className="login-danger">
+                              <small>{errors.fecha.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-4 col-xl-4">
@@ -245,8 +305,16 @@ const AddFirstAppoinments = () => {
                               className="form-control"
                               // value={rut}
                               type="text"
-                              {...register('edad')}
+                              {...register('numero_ficha', {
+                                required: {
+                                  value: true,
+                                  message: 'Número de ficha es requerido'
+                                }
+                              })}
                             />
+                            {errors.numero_ficha && <span className="login-danger">
+                              <small>{errors.numero_ficha.message}</small>
+                            </span>}
                           </div>
                         </div>
                       </div>
@@ -262,10 +330,23 @@ const AddFirstAppoinments = () => {
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
                             <label>Nombre completo</label>
+                            {/* <select className="select form-control" name="cars" id="cars">
+                              {
+                                patients.map(patient => (
+                                  <option
+                                    value={`${patient.nombre} ${patient.apellido}`}
+                                    key={patient.id}>{patient.nombre} {patient.apellido}
+                                  </option>
+                                ))
+                              }
+                            </select> */}
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('nombr_completo')} />
+                              {...register('nombre_completo')} />
+                            {errors.nombre_completo && <span className="login-danger">
+                              <small>{errors.nombre_completo.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -276,6 +357,9 @@ const AddFirstAppoinments = () => {
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('rut')} />
+                            {errors.rut && <span className="login-danger">
+                              <small>{errors.rut.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -286,6 +370,9 @@ const AddFirstAppoinments = () => {
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('carrera')} />
+                            {errors.carrera && <span className="login-danger">
+                              <small>{errors.carrera.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-6">
@@ -294,7 +381,10 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('ingreso')} />
+                              {...register('ano_ingreso')} />
+                            {errors.ano_ingreso && <span className="login-danger">
+                              <small>{errors.ano_ingreso.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -304,7 +394,10 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('nacimiento')} />
+                              {...register('fecha_nacimiento')} />
+                            {errors.fecha_nacimiento && <span className="login-danger">
+                              <small>{errors.fecha_nacimiento.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-6">
@@ -314,6 +407,9 @@ const AddFirstAppoinments = () => {
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('edad')} />
+                            {errors.edad && <span className="login-danger">
+                              <small>{errors.edad.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -324,6 +420,9 @@ const AddFirstAppoinments = () => {
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('direccion')} />
+                            {errors.direccion && <span className="login-danger">
+                              <small>{errors.direccion.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -333,7 +432,10 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('email')} />
+                              {...register('correo')} />
+                            {errors.correo && <span className="login-danger">
+                              <small>{errors.correo.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-6 col-xl-6">
@@ -343,6 +445,9 @@ const AddFirstAppoinments = () => {
                               className="form-control" type="text"
                               defaultValue={""}
                               {...register('telefono')} />
+                            {errors.telefono && <span className="login-danger">
+                              <small>{errors.telefono.message}</small>
+                            </span>}
                           </div>
                         </div>
                       </div>
@@ -363,8 +468,11 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('nombre_contacto_emergencia1')}
                             />
+                            {errors.nombre_contacto_emergencia1 && <span className="login-danger">
+                              <small>{errors.nombre_contacto_emergencia1.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-4 col-xl-4">
@@ -375,8 +483,11 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_relacion')}
+                              {...register('parentesco_contacto_emergencia1')}
                             />
+                            {errors.parentesco_contacto_emergencia1 && <span className="login-danger">
+                              <small>{errors.parentesco_contacto_emergencia1.message}</small>
+                            </span>}
                           </div>
                         </div>
                         <div className="col-12 col-md-4 col-xl-4">
@@ -388,8 +499,11 @@ const AddFirstAppoinments = () => {
                               className="form-control"
                               // value={rut}
                               type="text"
-                              {...register('contacto_uno_telefono')}
+                              {...register('celular_contacto_emergencia1')}
                             />
+                            {errors.celular_contacto_emergencia1 && <span className="login-danger">
+                              <small>{errors.celular_contacto_emergencia1.message}</small>
+                            </span>}
                           </div>
                         </div>
 
@@ -402,7 +516,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_dos_nombre')}
+                              {...register('nombre_contacto_emergencia2')}
                             />
                           </div>
                         </div>
@@ -414,7 +528,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_dos_relacion')}
+                              {...register('parentesco_contacto_emergencia2')}
                             />
                           </div>
                         </div>
@@ -425,9 +539,8 @@ const AddFirstAppoinments = () => {
                             </label>
                             <input
                               className="form-control"
-                              // value={rut}
                               type="text"
-                              {...register('contacto_dos_telefono')}
+                              {...register('celular_contacto_emergencia2')}
                             />
                           </div>
                         </div>
@@ -441,7 +554,7 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-                        <div className="col-12 col-md-12 col-xl-12">
+                        {/* <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group select-gender">
                             <label>Previsión de salud </label>
                             <div className="form-check-inline">
@@ -449,8 +562,9 @@ const AddFirstAppoinments = () => {
                                 <input
                                   type="radio"
                                   name="prevision"
+                                  value="prevision_salud_isapre"
                                   className="form-check-input"
-                                  {...register('isapre')}
+                                  {...register('prevision')}
                                 />
                                 Isapre
                               </label>
@@ -460,8 +574,9 @@ const AddFirstAppoinments = () => {
                                 <input
                                   type="radio"
                                   name="prevision"
+                                  value="prevision_salud_fonasa"
                                   className="form-check-input"
-                                  {...register('fonasa')}
+                                  {...register('prevision')}
                                 />
                                 Fonasa
                               </label>
@@ -471,14 +586,15 @@ const AddFirstAppoinments = () => {
                                 <input
                                   type="radio"
                                   name="prevision"
+                                  value="prevision_salud_otro"
                                   className="form-check-input"
-                                  {...register('otro')}
+                                  {...register('prevision')}
                                 />
                                 Otro
                               </label>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group select-gender">
@@ -487,9 +603,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="financiamiento"
+                                  name="financiamiento_carrera"
+                                  value="gratuidad"
                                   className="form-check-input"
-                                  {...register('gratuidad')}
+                                  {...register('financiamiento_carrera')}
                                 />
                                 Gratuidad
                               </label>
@@ -498,9 +615,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="financiamiento"
+                                  name="financiamiento_carrera"
+                                  value="beca"
                                   className="form-check-input"
-                                  {...register('beca')}
+                                  {...register('financiamiento_carrera')}
                                 />
                                 Beca
                               </label>
@@ -509,9 +627,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="financiamiento"
+                                  name="financiamiento_carrera"
+                                  value="credito"
                                   className="form-check-input"
-                                  {...register('credito')}
+                                  {...register('financiamiento_carrera')}
                                 />
                                 Crédito
                               </label>
@@ -520,13 +639,19 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="financiamiento"
+                                  name="financiamiento_carrera"
+                                  value="sin beneficio"
                                   className="form-check-input"
-                                  {...register('sin_beneficio')}
+                                  {...register('financiamiento_carrera')}
                                 />
                                 Sin beneficio
                               </label>
                             </div>
+                            {
+                              errors.financiamiento_carrera && <span className="login-danger">
+                                <small>{errors.financiamiento_carrera.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
 
@@ -540,23 +665,13 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('vive_con')}
+                              {...register('vivienda_situacion_actual')}
                             />
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-md-12 col-xl-12">
-                          <div className="form-group local-forms">
-                            <label>¿Dónde y con quién vives? Relación que tienes con ellos. ¿cómo te llevas con ellos?</label>
-
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              style={{ resize: 'none' }}
-                              {...register('tipo_de_relacion')}
-                            />
+                            {
+                              errors.vivienda_situacion_actual && <span className="login-danger">
+                                <small>{errors.vivienda_situacion_actual.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
 
@@ -570,8 +685,13 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('es_cuidador')}
+                              {...register('labores_cuidador')}
                             />
+                            {
+                              errors.labores_cuidador && <span className="login-danger">
+                                <small>{errors.labores_cuidador.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
 
@@ -584,8 +704,13 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('gastos_personales')}
+                              {...register('financiamiento_gastos_personales')}
                             />
+                            {
+                              errors.financiamiento_gastos_personales && <span className="login-danger">
+                                <small>{errors.financiamiento_gastos_personales.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
 
@@ -596,7 +721,12 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('apoyo_economico')} />
+                              {...register('apoyo_economico_tratamiento')} />
+                            {
+                              errors.apoyo_economico_tratamiento && <span className="login-danger">
+                                <small>{errors.apoyo_economico_tratamiento.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
                         <div className="col-12 col-md-12 col-xl-12">
@@ -605,123 +735,15 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control" type="text"
                               defaultValue={""}
-                              {...register('disponibilidad_economica')} />
+                              {...register('pago_tratamiento_semanal')} />
+                            {
+                              errors.pago_tratamiento_semanal && <span className="login-danger">
+                                <small>{errors.pago_tratamiento_semanal.message}</small>
+                              </span>
+                            }
                           </div>
                         </div>
-
                       </div>
-
-                      {/*  <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px 0 0 0', margin: '10px' }}>
-
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms cal-icon">
-                            <label>
-                              Día de la Cita{" "}
-                            </label>
-                            <input
-                              className="form-control" type="text"
-                              defaultValue={""}
-                              {...register('fecha')} />
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Antecedentes médicos relevantes
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Descripción sintomatología <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Expectativas <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              {...register('expectativas')}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Impresión diagnóstica <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Acuerdos <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              {...register('acuerdos')}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Observaciones <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                              {...register('notes')}
-                              style={{ resize: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-
-                      </div> */}
 
                       {/* 4. Antecedentes de salud */}
                       <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px 0 0 0', margin: '10px' }}>
@@ -738,9 +760,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="si"
+                                  name="chequeos_salud_ultimo_ano"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('chequeos_salud_ultimo_ano')}
                                 />
                                 Si
                               </label>
@@ -749,9 +772,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="no"
+                                  name="chequeos_salud_ultimo_ano"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('chequeos_salud_ultimo_ano')}
                                 />
                                 No / No recuerdo
                               </label>
@@ -766,7 +790,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('motivo_chequeos_salud')}
                               />
                             </div>
                           </div>
@@ -779,9 +803,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="si"
+                                  name="enfermedad_salud_fisica"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('enfermedad_salud_fisica')}
                                 />
                                 Si
                               </label>
@@ -790,9 +815,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="no"
+                                  name="enfermedad_salud_fisica"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('enfermedad_salud_fisica')}
                                 />
                                 No / No sé
                               </label>
@@ -807,7 +833,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('diagnostico_salud_fisica')}
                               />
                             </div>
                           </div>
@@ -820,9 +846,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="si"
+                                  name="enfermedad_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('enfermedad_salud_mental')}
                                 />
                                 Si
                               </label>
@@ -831,9 +858,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="no"
+                                  name="enfermedad_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('enfermedad_salud_mental')}
                                 />
                                 No
                               </label>
@@ -848,7 +876,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('diagnostico_salud_mental')}
                               />
                             </div>
                           </div>
@@ -861,9 +889,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="si"
+                                  name="medicacion_permanente"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('medicacion_permanente')}
                                 />
                                 Si
                               </label>
@@ -872,9 +901,10 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  value="no"
+                                  name="medicacion_permanente"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('medicacion_permanente')}
                                 />
                                 No
                               </label>
@@ -889,7 +919,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('medicacion_permanente_nombres')}
                               />
                             </div>
                           </div>
@@ -902,9 +932,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="atenciones_previas_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('atenciones_previas_salud_mental')}
                                 />
                                 Si
                               </label>
@@ -913,9 +943,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="atenciones_previas_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('atenciones_previas_salud_mental')}
                                 />
                                 No
                               </label>
@@ -930,7 +960,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('atenciones_previas_salud_mental')}
                               />
                             </div>
                           </div>
@@ -943,9 +973,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="tratamientos_previos_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('tratamientos_previos_salud_mental')}
                                 />
                                 Si
                               </label>
@@ -954,9 +984,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="tratamientos_previos_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('tratamientos_previos_salud_mental')}
                                 />
                                 No
                               </label>
@@ -971,7 +1001,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('tratamientos_previos_salud_mental')}
                               />
                             </div>
                           </div>
@@ -984,9 +1014,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="tratamiento_actual_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('tratamiento_actual_salud_mental')}
                                 />
                                 Si
                               </label>
@@ -995,9 +1025,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="tratamiento_actual_salud_mental"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('tratamiento_actual_salud_mental')}
                                 />
                                 No
                               </label>
@@ -1012,7 +1042,7 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('tratamiento_actual_salud_mental')}
                               />
                             </div>
                           </div>
@@ -1035,9 +1065,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="alcohol"
+                                  name="consume_alcohol"
                                   className="form-check-input"
-                                  {...register('alcohol_si')}
+                                  {...register('consume_alcohol')}
                                 />
                                 Si
                               </label>
@@ -1046,9 +1076,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="alcohol"
+                                  name="consume_alcohol"
                                   className="form-check-input"
-                                  {...register('alcohol_no')}
+                                  {...register('consume_alcohol')}
                                 />
                                 No
                               </label>
@@ -1074,7 +1104,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('tipo_alcohol_consumido')}
                             />
                           </div>
                         </div>
@@ -1086,7 +1116,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('frecuencia_consumo_alcohol')}
                             />
                           </div>
                         </div>
@@ -1099,9 +1129,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="drogas"
+                                  name="consume_drogas"
                                   className="form-check-input"
-                                  {...register('drogas_si')}
+                                  {...register('consume_drogas')}
                                 />
                                 Si
                               </label>
@@ -1110,9 +1140,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="drogas"
+                                  name="consume_drogas"
                                   className="form-check-input"
-                                  {...register('drogas_no')}
+                                  {...register('consume_drogas')}
                                 />
                                 No
                               </label>
@@ -1121,9 +1151,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="drogas"
+                                  name="consume_drogas"
                                   className="form-check-input"
-                                  {...register('drogas_ocasional')}
+                                  {...register('consume_drogas')}
                                 />
                                 Ocasional
                               </label>
@@ -1138,7 +1168,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('tipo_drogas_consumidas')}
                             />
                           </div>
                         </div>
@@ -1150,7 +1180,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('frecuencia_consumo_drogas')}
                             />
                           </div>
                         </div>
@@ -1169,7 +1199,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('riesgo_suicida')}
+                              {...register('riesgo_suicida_escala')}
                             />
                           </div>
                         </div>
@@ -1269,7 +1299,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_nombre')}
+                              {...register('motivo_consulta')}
                             />
                           </div>
                         </div>
@@ -1281,7 +1311,7 @@ const AddFirstAppoinments = () => {
                             <input
                               className="form-control"
                               type="text"
-                              {...register('contacto_uno_relacion')}
+                              {...register('sintomatologia_motivo_consulta')}
                             />
                           </div>
                         </div>
@@ -1294,7 +1324,7 @@ const AddFirstAppoinments = () => {
                               className="form-control"
                               // value={rut}
                               type="text"
-                              {...register('contacto_uno_telefono')}
+                              {...register('expectativas_departamento')}
                             />
                           </div>
                           <div className="col-12 col-md-12 col-xl-12">
@@ -1303,23 +1333,18 @@ const AddFirstAppoinments = () => {
                               </label>
                               <Controller
                                 control={control}
-                                name="genero"
-                                {...register('genero', {
-                                  required: {
-                                    value: true,
-                                    message: 'Género es requerido',
-                                  }
-                                })}
+                                name="area_atencion_preferencia"
+                                {...register('area_atencion_preferencia')}
                                 ref={null}
                                 render={({ field: { onChange, onBlur, value } }) => (
                                   <Select
-                                    instanceId="genero"
+                                    instanceId="area_atencion_preferencia"
                                     defaultValue={selectedOption}
                                     onChange={onChange}
                                     options={area_atencion}
                                     // menuPortalTarget={document.body}
                                     styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                    id="genero"
+                                    id="area_atencion_preferencia"
                                     components={{
                                       IndicatorSeparator: () => null
                                     }}
@@ -1352,7 +1377,6 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-
                       </div>
 
                       {/* 6. Antecedentes académicos */}
@@ -1363,7 +1387,6 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-
                         <div className="col-12 col-md-12 col-xl-12">
                           <label>¿Es tu primera carrera?</label>
                           <div className="form-group select-gender">
@@ -1371,9 +1394,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="primera_carrera"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('primera_carrera')}
                                 />
                                 Si
                               </label>
@@ -1382,9 +1405,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="primera_carrera"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('primera_carrera')}
                                 />
                                 No
                               </label>
@@ -1399,12 +1422,11 @@ const AddFirstAppoinments = () => {
                                 cols={30}
                                 defaultValue={""}
                                 style={{ resize: 'none' }}
-                                {...register('chequeos_salud_motivo')}
+                                {...register('primera_carrera')}
                               />
                             </div>
                           </div>
                         </div>
-
 
                         <div className="col-12 col-md-12 col-xl-12">
                           <label>¿Te sientes satisfecho/a con tu decisión de carrera actual?</label>
@@ -1413,9 +1435,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="satisfecho_decision_carrera"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('satisfecho_decision_carrera')}
                                 />
                                 Si
                               </label>
@@ -1424,9 +1446,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="satisfecho_decision_carrera"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('satisfecho_decision_carrera')}
                                 />
                                 No
                               </label>
@@ -1435,9 +1457,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="satisfecho_decision_carrera"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('satisfecho_decision_carrera')}
                                 />
                                 Aún no lo sé
                               </label>
@@ -1453,9 +1475,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="desempeno_academico"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('desempeno_academico')}
                                 />
                                 Bueno
                               </label>
@@ -1464,9 +1486,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="desempeno_academico"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('desempeno_academico')}
                                 />
                                 Malo
                               </label>
@@ -1475,9 +1497,9 @@ const AddFirstAppoinments = () => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  name="prevision"
+                                  name="desempeno_academico"
                                   className="form-check-input"
-                                  {...register('chequeos_salud')}
+                                  {...register('desempeno_academico')}
                                 />
                                 Regular
                               </label>
@@ -1497,7 +1519,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('desafio_enfrentado_universidad')}
                             />
                           </div>
                         </div>
@@ -1524,7 +1546,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('redes_apoyo_personas_significativas')}
                             />
                           </div>
                         </div>
@@ -1535,24 +1557,19 @@ const AddFirstAppoinments = () => {
                             </label>
                             <Controller
                               control={control}
-                              name="genero"
-                              {...register('genero', {
-                                required: {
-                                  value: true,
-                                  message: 'Género es requerido',
-                                }
-                              })}
+                              name="tipos_apoyo_actual"
+                              {...register('tipos_apoyo_actual')}
                               ref={null}
                               render={({ field: { onChange, onBlur, value } }) => (
                                 <Select
                                   isMulti
-                                  instanceId="genero"
+                                  instanceId="tipos_apoyo_actual"
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={tipo_apoyo}
                                   // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="genero"
+                                  id="tipos_apoyo_actual"
                                   components={{
                                     IndicatorSeparator: () => null
                                   }}
@@ -1605,7 +1622,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('actividades_gustan_realizar')}
                             />
                           </div>
                         </div>
@@ -1621,7 +1638,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('espacios_autocuidado')}
                             />
                           </div>
                         </div>
@@ -1637,7 +1654,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('tiempo_descanso_horas_sueno')}
                             />
                           </div>
                         </div>
@@ -1653,11 +1670,10 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('personas_significativas')}
+                              {...register('alimentacion_diaria_habitual')}
                             />
                           </div>
                         </div>
-
 
                       </div>
 
@@ -1670,24 +1686,19 @@ const AddFirstAppoinments = () => {
                           <div className="form-group local-forms">
                             <Controller
                               control={control}
-                              name="genero"
-                              {...register('genero', {
-                                required: {
-                                  value: true,
-                                  message: 'Género es requerido',
-                                }
-                              })}
+                              name="modalidad_atencion_evaluacion"
+                              {...register('modalidad_atencion_evaluacion')}
                               ref={null}
                               render={({ field: { onChange, onBlur, value } }) => (
                                 <Select
                                   isMulti
-                                  instanceId="genero"
+                                  instanceId="modalidad_atencion_evaluacion"
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={modalidad}
                                   // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                                  id="genero"
+                                  id="modalidad_atencion_evaluacion"
                                   components={{
                                     IndicatorSeparator: () => null
                                   }}
@@ -1730,7 +1741,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('animo_afectividad')}
+                              {...register('estado_animo_afectividad')}
                             />
                           </div>
                         </div>
@@ -1747,7 +1758,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('tipo_pensamiento')}
+                              {...register('tipo_pensamiento_observado')}
                             />
                           </div>
                         </div>
@@ -1764,7 +1775,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('condiciones_deficit_cognitivo')}
+                              {...register('deteccion_condiciones_deficit_cognitivo')}
                             />
                           </div>
                         </div>
@@ -1781,7 +1792,7 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('consciencia_de_realidad')}
+                              {...register('consciencia_realidad')}
                             />
                           </div>
                         </div>
@@ -1815,11 +1826,10 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('riesgo_nivel_relacional')}
+                              {...register('situaciones_riesgo_relacional')}
                             />
                           </div>
                         </div>
-
 
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
@@ -1832,12 +1842,10 @@ const AddFirstAppoinments = () => {
                               cols={30}
                               defaultValue={""}
                               style={{ resize: 'none' }}
-                              {...register('riesgo_nivel_personal')}
+                              {...register('situaciones_riesgo_personal')}
                             />
                           </div>
                         </div>
-
-
 
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
@@ -1855,8 +1863,6 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-
-
                       </div>
 
                       <div className="col-12">
@@ -1864,7 +1870,7 @@ const AddFirstAppoinments = () => {
                           <button
                             // type="submit"
                             className="btn btn-primary submit-form me-2"
-                            onClick={handleOpen}
+                            onClick={(e) => { handleInterview(e) }}
                           >
                             Enviar
                           </button>
@@ -1891,4 +1897,4 @@ const AddFirstAppoinments = () => {
   );
 };
 
-export default AddFirstAppoinments;
+export default AddInterviewRecord;
