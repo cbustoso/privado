@@ -10405,6 +10405,9 @@ textarea.form-control {
   .join-video.single-user {
     height: auto;
   }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+    display: ruby;
+  }
 }
 @media only screen and (max-width: 767.98px) {
   .table .invoice-link {
@@ -11203,4 +11206,9 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 .lato {
   font-family: lato;
+}
+
+.number-input{
+  width: 30%;
+  display: inline;
 }
