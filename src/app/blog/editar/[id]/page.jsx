@@ -2,13 +2,14 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from 'next/link';
 // import FeatherIcon from "feather-icons-react";
-import TextEditor from '../../TextEditor';
+import TextEditor from '../../../../components/TextEditor';
 
 
-import Header from '../../Header';
-import Sidebar from '../../Sidebar';
+// import Header from '../../Header';
+import Sidebar from '../../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 
@@ -35,7 +36,7 @@ const Editblog = () => {
     <>
 
       <div className="main-wrapper">
-        <Header />
+        {/* <Header /> */}
         <Sidebar id='menu-item11' id1='menu-items11' activeClassName='edit-blog'/>
         {/* page-wrapper-start  */}
         <>
@@ -48,7 +49,7 @@ const Editblog = () => {
                     <div className="col-sm-12">
                       <ul className="breadcrumb">
                         <li className="breadcrumb-item">
-                          <Link to="#">Blog </Link>
+                          <Link href="#">Blog </Link>
                         </li>
                         <li className="breadcrumb-item">
                           <i className="feather-chevron-right">
@@ -282,7 +283,7 @@ const Editblog = () => {
                     <h3>Are you sure want to delete this ?</h3>
                     <div className="m-t-20">
                       {" "}
-                      <Link to="#" className="btn btn-white" data-bs-dismiss="modal">
+                      <Link href="#" className="btn btn-white" data-bs-dismiss="modal">
                         Close
                       </Link>
                       <button type="submit" className="btn btn-danger">
