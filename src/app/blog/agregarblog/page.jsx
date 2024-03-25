@@ -3,13 +3,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import Link from 'next/link';
-
+import dynamic from 'next/dynamic'
+ 
 import TextEditor from '../../../components/TextEditor';
-import Sidebar from '../../../components/Sidebar';
+// import Sidebar from '../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form';
 
+const DynamicSidebar = dynamic(() => import('../../../components/Sidebar'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
 const Addblog = () => {
   const loadFile = (event) => {
     // Handle file loading logic here
@@ -38,7 +43,7 @@ const Addblog = () => {
   return (
     <>
       <div className="main-wrapper">
-        <Sidebar id='menu-item11' id1='menu-items11' activeClassName='add-blog' />
+        <DynamicSidebar id='menu-item11' id1='menu-items11' activeClassName='add-blog' />
         {/* page-wrapper-start  */}
         <>
           <div className="page-wrapper">
