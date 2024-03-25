@@ -1066,6 +1066,7 @@ const AddInterviewRecord = ({ params }) => {
                                 <input
                                   type="radio"
                                   name="consume_alcohol"
+                                  value="si"
                                   className="form-check-input"
                                   {...register('consume_alcohol')}
                                 />
@@ -1077,6 +1078,7 @@ const AddInterviewRecord = ({ params }) => {
                                 <input
                                   type="radio"
                                   name="consume_alcohol"
+                                  value="no"
                                   className="form-check-input"
                                   {...register('consume_alcohol')}
                                 />
@@ -1088,6 +1090,7 @@ const AddInterviewRecord = ({ params }) => {
                                 <input
                                   type="radio"
                                   name="alcohol"
+                                  value="ocasional"
                                   className="form-check-input"
                                   {...register('alcohol_ocasional')}
                                 />
