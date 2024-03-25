@@ -86,26 +86,63 @@ export const fetchScheduleByAvailability = async (id) => {
   return data.json()
 }
 
-export const createSchedule = async (schedule) => {
-  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
+const recurrencia = (obj) => {
+  if (obj.frecuencia === "diaria") {
+    if (obj.diaria.tipo === "recurrente") {
+      return obj.diaria.recurrencia
+    } else {
+      return "1"
+    }
+  } else if (obj.frecuencia === "semanal") {
+    return obj.semanal.recurrencia
+  } else if (obj.frecuencia === "mensual") {
+    if (obj.mensual.tipo === "cardinal") {
+      return obj.mensual["cardinal-frecuencia"]
+    } else {
+      return obj.mensual["ordinal-frecuencia"]
+    }
+  } else {
+    return ""
+  }
+}
 
-  const data = await fetch(SCHEDULES_URL, {
-    method: "POST",
-    cors: "no-cors",
-    headers: {
-      'content-type': 'application/json',
-      'access-control-allow-origin': '*',
-      'ngrok-skip-browser-warning': 'any'
-    },
-    body: JSON.stringify({
-      "usuario_id": schedule.user_id,
-      "dia_semana": schedule.day,
-      "hora_inicio": schedule.start_time,
-      "hora_fin": schedule.end_time
-    })
-  })
+export const createSchedule = (schedule) => {
+  // const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
+  const body = {
+    'tipo': 'profesional',
+    'día': schedule.frecuencia === "semanal" ? schedule.semanal.dia
+      : schedule.frecuencia === "mensual" ? schedule.mensual["ordinal-dia"]
+        : " ",
+    'fechaInicio': schedule.fechaInicio,
+    'fechaFin': schedule.fechaFin,
+    'repeticiones': schedule.repeticiones,
+    'horaIni': schedule.horaIni,
+    'horaFin': schedule.horaFin,
+    'modalidad': schedule.modalidad,
+    'frecuencia': schedule.frecuencia,
+    "recurrencia": recurrencia(schedule),
+    'id_user': schedule.id_user,
+    "orden": schedule?.mensual?.["ordinal-orden"] || " "
+  }
 
-  return data.json()
+  console.log('BODY', body)
+  // const data = await fetch(SCHEDULES_URL, {
+  //   method: "POST",
+  //   cors: "no-cors",
+  //   headers: {
+  //     'content-type': 'application/json',
+  //     'access-control-allow-origin': '*',
+  //     'ngrok-skip-browser-warning': 'any'
+  //   },
+  //   body: JSON.stringify({
+  //     "usuario_id": schedule.user_id,
+  //     "dia_semana": schedule.day,
+  //     "hora_inicio": schedule.start_time,
+  //     "hora_fin": schedule.end_time
+  //   })
+  // })
+
+  // return data.json()
 }
 
 export const updateSchedule = async (schedule, id) => {

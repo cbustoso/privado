@@ -10,7 +10,7 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { useForm, Controller } from 'react-hook-form'
 
 import { fetchDoctor, fetchSpeciality } from '@/services/DoctorsServices';
-import { fetchScheduleByDate, fetchScheduleByUser } from '@/services/SchedulesServices';
+import { fetchScheduleByDate, fetchScheduleByUser, createSchedule } from '@/services/SchedulesServices';
 import Calender from '../../../calender/page';
 import Calendar from 'feather-icons-react/build/IconComponents/Calendar';
 import Days from '@/components/Days';
@@ -48,17 +48,18 @@ const AddSchedule = ({ params }) => {
       const obj = {
         nombre: `${users[0].nombre} ${users[0].apellido}`,
         especialidad: 'Psicologia',
-        id: users[0].id
+        id: users[0].id,
+        horaIni: '00:00:00'
       }
       setProfesional(obj)
       return obj
     }
   })
 
-
-  const handleOnSubmit = async (data) => {
-    console.log(data)
-  }
+  const onSubmit = handleSubmit( data => {
+    console.log('DAta', data)
+    createSchedule({...data, id_user: params.id})
+  })
 
   const tipo_usuario = ['admin', 'profesional']
 
@@ -138,65 +139,102 @@ const AddSchedule = ({ params }) => {
                                   message: 'Especialidad es requerido'
                                 }
                               })} />
-
                           </div>
                         </div>
 
-                        {/* <div className="col-12">
-                          <div className="form-heading">
-                            <h4>Configuración del servicio</h4>
+
+                        {/* MODALIDAD */}
+                        <div className="col-12 col-lg-12" >
+                          <div className="col-12">
+                            <div className="form-heading">
+                              <h4>Modalidad</h4>
+                            </div>
+                          </div>
+                          <div className="form-group select-gender">
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="individual"
+                                  name="modalidad"
+                                  className="form-check-input"
+                                  {...register('modalidad')}
+                                />
+                                Individual
+                              </label>
+                            </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="grupal"
+                                  name="modalidad"
+                                  className="form-check-input"
+                                  {...register('modalidad')}
+                                />
+                                Grupal
+                              </label>
+                            </div>
                           </div>
                         </div>
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Duración del servicio <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="number"
-                              {...register('bloque_servicio', {
-                                required: {
-                                  value: true,
-                                  message: 'Nombre es requerido'
-                                }
-                              })}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Duración post servicio <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="number"
-                              {...register('bloque_post_servicio', {
-                                required: {
-                                  value: true,
-                                  message: 'Nombre es requerido'
-                                }
-                              })}
-                            />
-                          </div>
-                        </div> */}
 
 
+
+                        {/* HORARIOS */}
                         <div className="col-12">
                           <div className="form-heading">
                             <h4>Disponibilidad</h4>
                           </div>
                         </div>
+                        <div className="col-12 col-md-6 col-xl-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Desde <span className="login-danger">*</span>
+                            </label>
+                            <Controller
+                              control={control}
+                              defaultValue='00:00:00'
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <TextField
+                                  className="form-control"
+                                  // id="outlined-controlled"
+                                  type="time"
+                                  onBlur={onBlur}
+                                  onChange={onChange}
+                                  value={value}
+                                />
+                              )}
+                              name="horaIni"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-xl-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Hasta <span className="login-danger">*</span>
+                            </label>
+                            <div className="">
+                              <Controller
+                                control={control}
+                                defaultValue='00:00:00'
+                                render={({ field: { onChange, onBlur, value } }) => (
+                                  <TextField
+                                    className="form-control"
+                                    // id="outlined-controlled"
+                                    type="time"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    value={value}
+                                  />
+                                )}
+                                name="horaFin"
+                              />
+                            </div>
+                          </div>
+                        </div>
 
 
-                        {/* <Days day={'Lunes'} />
-                          <Days day={'Martes'} />
-                          <Days day={'Miércoles'} />
-                          <Days day={'Jueves'} />
-                          <Days day={'Viernes'} /> */}
-
-                        {/* 
+                        {/* <div className="row">
                           <div className="col-6 col-md-6 col-xl-6">
                             <Switch {...label} defaultChecked /> Lunes
                           </div>
@@ -246,222 +284,10 @@ const AddSchedule = ({ params }) => {
                             <div className="form-group local-forms">
                               <small>Total atenciones:</small>
                             </div>
-                          </div> */}
+                          </div>
+                        </div> */}
 
-
-                        {/* <div className="col-6 col-md-6 col-xl-6">
-                            <Switch {...label} defaultChecked /> Martes
-                          </div>
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <button className="btn cancel-form" disabled>+ Agregar</button>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Desde <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Hasta <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <i className="fa fa-trash-alt m-r-5"></i>
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group local-forms" style={{ marginTop: '-30px' }}>
-                              <small>Total atenciones:</small>
-                            </div>
-                          </div> */}
-
-
-                        {/* <div className="col-6 col-md-6 col-xl-6">
-                            <Switch {...label} defaultChecked /> Miércoles
-                          </div>
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <button className="btn cancel-form" disabled>+ Miércoles</button>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Desde <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Hasta <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <i className="fa fa-trash-alt m-r-5"></i>
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group local-forms" style={{ marginTop: '-30px' }}>
-                              <small>Total atenciones:</small>
-                            </div>
-                          </div> */}
-
-
-
-                        {/* 
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <Switch {...label} defaultChecked /> Jueves
-                          </div>
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <button className="btn cancel-form" disabled>+ Agregar</button>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Desde <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Hasta <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <i className="fa fa-trash-alt m-r-5"></i>
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group local-forms" style={{ marginTop: '-30px' }}>
-                              <small>Total atenciones:</small>
-                            </div>
-                          </div> */}
-
-                        {/* 
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <Switch {...label} defaultChecked /> Viernes
-                          </div>
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <button className="btn cancel-form" disabled>+ Agregar</button>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Desde <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Hasta <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <i className="fa fa-trash-alt m-r-5"></i>
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group local-forms" style={{ marginTop: '-30px' }}>
-                              <small>Total atenciones:</small>
-                            </div>
-                          </div> */}
-
-
-
-
-                        <div className="col-12 col-md-6 col-xl-4">
+                        {/* <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms ">
                             <label>
                               Días disponibles <span className="login-danger">*</span>
@@ -473,43 +299,10 @@ const AddSchedule = ({ params }) => {
                               size="large"
                             />
                           </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Desde <span className="login-danger">*</span>
-                            </label>
-                            <TextField
-                              className="form-control"
-                              id="outlined-controlled"
-                              type="time"
-                              value={startTime}
-                              onChange={(event) => {
-                                setStartTime(event.target.value);
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Hasta <span className="login-danger">*</span>
-                            </label>
-                            <div className="">
-                              <TextField
-                                className="form-control"
-                                id="outlined-controlled"
-                                type="time"
-                                value={endTime}
-                                onChange={(event) => {
-                                  setEndTime(event.target.value);
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                        </div> */}
 
 
+                        {/* FRECUENCIAS */}
                         <div className="col-12 col-lg-12" >
                           <div className="col-12">
                             <div className="form-heading">
@@ -570,14 +363,14 @@ const AddSchedule = ({ params }) => {
                                       name="diaria"
                                       value="recurrente"
                                       className="form-check-input"
-                                      {...register('diaria')}
+                                      {...register('diaria.tipo')}
                                     />
                                     Cada <input
                                       type="number"
                                       name="diaria"
                                       className='ant-pick-selector'
                                       style={styleInput}
-                                      {...register('diaria.repetir')}
+                                      {...register('diaria.recurrencia')}
                                     /> días
                                   </label>
                                   {/* </div>
@@ -590,24 +383,23 @@ const AddSchedule = ({ params }) => {
                                       name="diaria"
                                       value="diaria"
                                       className="form-check-input"
-                                      {...register('diaria')}
+                                      {...register('diaria.tipo')}
                                     />
                                     Todos los días laborales de la semana
                                   </label>
                                 </div>
                               </div>
                             </div>
-
                             : frecuencia === 'semanal'
                               ? <div className="col-12 col-lg-10">
                                 <div className="form-group select-gender">
                                   <div className="form-group">
                                     <label className="form-check-label">
-                                      Repetir cada <input
+                                      repeticiones cada <input
                                         type="number"
                                         name="semanal"
                                         style={styleInput}
-                                        {...register('semanal.repetir')}
+                                        {...register('semanal.recurrencia')}
                                       /> semanas el:
                                     </label>
                                   </div>
@@ -677,7 +469,6 @@ const AddSchedule = ({ params }) => {
                                 </div>
 
                               </div>
-
                               : frecuencia === 'mensual'
                                 ? <div className="col-12 col-lg-10">
                                   <div className="form-group select-gender">
@@ -688,7 +479,7 @@ const AddSchedule = ({ params }) => {
                                           value="cardinal"
                                           name="cardinal"
                                           className="form-check-input"
-                                          {...register('mensual')}
+                                          {...register('mensual.tipo')}
                                         />
                                         El día <input
                                           type="number"
@@ -715,7 +506,7 @@ const AddSchedule = ({ params }) => {
                                           value="ordinal"
                                           name="ordinal"
                                           className="form-check-input"
-                                          {...register('mensual')}
+                                          {...register('mensual.tipo')}
                                         />
                                         El <select className="select form-check-label"
                                           {...register('mensual.ordinal-orden')}>
@@ -747,118 +538,99 @@ const AddSchedule = ({ params }) => {
                                     </div>
                                   </div>
                                 </div>
-
                                 : ""
-                          // frecuencia === 'anual'
-                          //   ? <div className="col-12 col-lg-10">
-                          //     <div className="form-group select-gender">
-                          //       <div className="form-check">
-                          //         <label className="form-check-label">
-
-                          //           Repetir cada <input
-                          //             type="number"
-                          //             max={31}
-                          //             min={1}
-                          //             // name="diaria"
-                          //             {...register('anual.frecuencia')}
-                          //           /> años
-
-                          //         </label>
-                          //       </div>
-                          //     </div>
-                          //     <div className="col-12 select-gender">
-                          //       <div className="form-group">
-                          //         <label className="form-check-label ">
-                          //           <input
-                          //             type="radio"
-                          //             value="cardinal"
-                          //             name="cardinal"
-                          //             className="form-check-input"
-                          //             {...register('anual')}
-                          //           />
-                          //           El <input
-                          //             type="number"
-                          //             max={31}
-                          //             min={1}
-                          //             name="cardinal"
-                          //             {...register('anual.numero')}
-                          //           /> de
-                          //           <select
-                          //             className="select form-check-label"
-                          //             name="cardinal"
-                          //             {...register('anual.mes-cardinal')}
-                          //           >
-                          //             <option>marzo</option>
-                          //             <option>abril</option>
-                          //             <option>mayo</option>
-                          //             <option>junio</option>
-                          //             <option>julio</option>
-                          //             <option>agosto</option>
-                          //             <option>septiembre</option>
-                          //             <option>octubre</option>
-                          //             <option>noviembre</option>
-                          //             <option>diciembre</option>
-                          //           </select>
-                          //         </label>
-                          //       </div>
-                          //     </div>
-
-                          //     <div className="col-12 select-gender">
-                          //       <div className="form-group">
-                          //         <label className="form-check-label ">
-                          //           <input
-                          //             type="radio"
-                          //             value="ordinal"
-                          //             name="ordinal"
-                          //             className="form-check-input"
-                          //             {...register('anual')}
-                          //           />
-                          //           El <select className="select form-check-label"
-                          //             {...register('anual.orden')}
-                          //           >
-                          //             <option name="primer">primer</option>
-                          //             <option name="segundo">segundo</option>
-                          //             <option name="tercer">tercer</option>
-                          //             <option name="cuarto">cuarto</option>
-                          //             <option name="ultimo">último</option>
-                          //           </select>
-                          //           <select className="select form-check-label"
-                          //             {...register('anual.dia')}
-                          //           >
-                          //             <option name="lunes">lunes</option>
-                          //             <option name="martes">martes</option>
-                          //             <option name="miercoles">miércoles</option>
-                          //             <option name="jueves">jueves</option>
-                          //             <option name="viernes">viernes</option>
-                          //           </select> de
-                          //           <select className="select form-check-label"
-                          //             {...register('anual.mes')}
-                          //           >
-                          //             <option name="marzo">marzo</option>
-                          //             <option name="abril">abril</option>
-                          //             <option name="mayo">mayo</option>
-                          //             <option name="junio">junio</option>
-                          //             <option name="julio">julio</option>
-                          //             <option name="agosto">agosto</option>
-                          //             <option name="septiembre">septiembre</option>
-                          //             <option name="octubre">octubre</option>
-                          //             <option name="noviembre">noviembre</option>
-                          //             <option name="diciembre">diciembre</option>
-                          //           </select>
-                          //         </label>
-                          //       </div>
-                          //     </div>
-                          //   </div>
-
-                          //   : ""
                         }
+
+
+                        {/* REPETICIONES */}
+                        <div className="col-12 col-md-6 col-xl-12">
+                          <div className="col-12">
+                            <div className="form-heading">
+                              <h4>Rango de repetición</h4>
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              Comienza el{" "}
+                              <span className="login-danger">*</span>
+                              <input
+                                className="form-control datetimepicker"
+                                type="date"
+                                placeholder=""
+                                {...register('fechaInicio', {
+                                  required: {
+                                    value: true,
+                                    message: 'Fecha de nacimiento es requerida'
+                                  }
+                                })}
+                              />
+                              {errors.fechaInicio && <span><small>{errors.fechaInicio.message}</small></span>}
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              <input
+                                type="radio"
+                                value="fechaTermino"
+                                name="fin"
+                                className="form-check-input"
+                                {...register('fin', {
+                                  required: {
+                                    value: true,
+                                    message: 'Fecha de nacimiento es requerida'
+                                  }
+                                })}
+                              />
+                              Finaliza el{" "}
+                              <span className="login-danger">*</span>
+
+                              <input
+                                className="form-control datetimepicker"
+                                type="date"
+                                placeholder=""
+                                {...register('fechaFin')}
+                              />
+                              {/* {errors.fechaFin && <span><small>{errors.fechaFin.message}</small></span>} */}
+                            </div>
+                          </div>
+
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              <input
+                                type="radio"
+                                value="numeroRepeticiones"
+                                name="fin"
+                                className="form-check-input"
+                                {...register('fin', {
+                                  required: {
+                                    value: true,
+                                    message: 'Fecha de término es requerida'
+                                  }
+                                })}
+                              />
+                              Finaliza después de {" "}
+                              <span className="login-danger">*</span>
+
+                              <input
+                                className="form-control datetimepicker"
+                                type="number"
+                                placeholder=""
+                                {...register('repeticiones')}
+                              />
+                              repeticiones
+                              {/* {errors.repeticiones && <span><small>{errors.repeticiones.message}</small></span>} */}
+                            </div>
+                          </div>
+                              {errors.fin && <span><small>{errors.fin.message}</small></span>}
+                        </div>
+
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             {/* <Link href="/addschedule" > */}
                             <button
                               type="button"
                               className="btn btn-primary submit-form me-2"
-                              onClick={handleSubmit(handleOnSubmit)}
+                              onClick={onSubmit}
                             >
                               Agregar horario
                             </button>

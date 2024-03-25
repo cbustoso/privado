@@ -7,7 +7,6 @@ const formatDate = (date) => {
 }
 
 export const fetchDoctors = async () => {
-  // const USERS_API = process.env.VITE_USERS_API + `/api/professionals`
   const USERS_API = process.env.NEXT_PUBLIC_SHOW_PROFESSIONALS
   try {
     const data = await fetch(USERS_API, {
@@ -17,8 +16,6 @@ export const fetchDoctors = async () => {
         'ngrok-skip-browser-warning': 'any'
       }
     })
-    // const response = data.json()
-    // console.log(data.ok, data.status, data.statusText)
     return data.json()
   } catch (err) {
     console.log(err)
@@ -38,7 +35,6 @@ export const fetchSpeciality = async (usuario_id) => {
         usuario_id
       })
     })
-    console.log('data', data)
     return data.json()
   } catch (err) {
     console.log(err)
@@ -72,7 +68,7 @@ export const addDoctor = async (user) => {
   const body = {
     "nombre": user.name,
     "apellido": user.lastName,
-    "rut":"16332702-3",
+    "rut": "16332702-3",
     "fechaNacimiento": "14-02-1990",
     "genero": user.genero.label,
     "email": user.email,
@@ -82,14 +78,14 @@ export const addDoctor = async (user) => {
     "tipo_usuario": 'profesional',
     "status": user.status,
     "campus": 'Sede Centro',
-    "carrera":user.speciality.label,
-    "anoIngresoCarrera":"14-02-2024",
-    "jornada":"laboral",
+    "carrera": user.speciality.label,
+    "anoIngresoCarrera": "14-02-2024",
+    "jornada": "laboral",
     "direccion": "random",
     "region": "santiago",
     "comuna": "santiago",
     "status": "activo",
-    "especialidad":user.speciality.label,
+    "especialidad": user.speciality.label,
   }
 
   console.log('body', body);
