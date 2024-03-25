@@ -45,6 +45,9 @@ const AddFirstAppoinments = () => {
   const [open, setOpen] = useState(false);
   const [days, setDays] = useState([]);
   const [hours, setHours] = useState([])
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
@@ -75,17 +78,59 @@ const AddFirstAppoinments = () => {
       )
   })
 
+  const obtenerDias = (objeto) => {
+    const { fechaInicio, fechaFin, ...resto } = objeto.users[0];
+    const dias = [];
+    let fechaActual = new Date(fechaInicio);
+
+    while (fechaActual <= new Date(fechaFin)) {
+      // Agregar día solo si no es sábado (6) ni domingo (0)
+      if (fechaActual.getDay() !== 5 && fechaActual.getDay() !== 6) {
+        dias.push({ fecha: fechaActual.toISOString().split('T')[0], ...resto });
+      }
+      fechaActual.setDate(fechaActual.getDate() + 1);
+    }
+
+    return dias;
+  }
+
   /* Retorna días disponibles */
   const handleSelectedProfessional = async (e) => {
     console.log(e.id);
     setDays([])
     try {
       const byProf = await fetchScheduleByAvailability(e.id)
-      console.log('byProf', byProf)
-      setDays(byProf.users.slice(0, 5))
+      // console.log('byProf', byProf.users[0].fechaInicio, byProf.users[0].fechaFin)
+      const bloque = obtenerDias(byProf)
+      console.log('bloque', bloque);
+      setDays(bloque.slice(0, 5))
     } catch (error) {
       console.log('don error', error)
     }
+  }
+
+  // Función para agrupar bloques en bloques de una hora como máximo
+  const agruparBloquesPorHora = (bloquesOriginal) => {
+    return bloquesOriginal.reduce((agrupados, bloqueActual) => {
+      const ultimoBloqueAgrupado = agrupados[agrupados.length - 1];
+
+      if (ultimoBloqueAgrupado && bloqueActual.hora_inicio <= ultimoBloqueAgrupado.hora_fin) {
+          // Si el bloque actual comienza dentro del último bloque agrupado, actualizar el último bloque agrupado
+          ultimoBloqueAgrupado.hora_fin = bloqueActual.hora_fin;
+          ultimoBloqueAgrupado.disponible += bloqueActual.disponible;
+      } else {
+          // Si el bloque actual no comienza dentro del último bloque agrupado, agregar un nuevo bloque agrupado
+          agrupados.push({
+              disponible: bloqueActual.disponible,
+              hora_inicio: bloqueActual.hora_inicio,
+              hora_fin: bloqueActual.hora_fin,
+              id_bloque: bloqueActual.id_bloque,
+              usuario_id: bloqueActual.usuario_id
+          });
+      }
+
+      return agrupados;
+  }, []);
   }
 
   const handleDays = async (e, fecha, id) => {
@@ -95,8 +140,10 @@ const AddFirstAppoinments = () => {
     console.log('fechamod', fechaMod);
     try {
       const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
-      console.log('bloques', bloques);
-      setHours(bloques.slice(0, 5))
+      setDate(fechaMod)
+      const newBloques = agruparBloquesPorHora(bloques)
+      console.log('newBloques', newBloques);
+      setHours(newBloques.slice(0, 5))
     } catch (error) {
       console.log(error)
     }
@@ -126,7 +173,7 @@ const AddFirstAppoinments = () => {
         name: doc.nombre
       }
     })
-    
+
     console.log('docs', docs);
     setDoctor(docs)
   }
@@ -155,13 +202,12 @@ const AddFirstAppoinments = () => {
     const patient = patients.users.filter(user =>
       user.email === session.user.email
     )
-    console.log('patient', patient);
     const body = {
       ...data,
       "patient_id": patient[0].id,
-      "fecha": dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD')
+      "fecha": date,
+      "hora": time
     }
-    console.log('body', body);
 
     try {
       const appointment = await createAppointment(body)
@@ -902,18 +948,18 @@ const AddFirstAppoinments = () => {
                             <div className="form-group local-forms">
                               {days.length > 0 && (
                                 <>
-                                  <button className="btn btn-primary"><ChevronLeft /></button>
+                                  <button className="btn btn-primary" disabled><ChevronLeft /></button>
 
                                   {days.map((day, i) => (
                                     <button
                                       className="btn me-2 btn-cancel"
                                       key={`${day.id}${i}days`}
-                                      onClick={(e) => handleDays(e, day.fechaInicio, day.id_user)}>
+                                      onClick={(e) => handleDays(e, day.fecha, day.id_user)}>
                                       {dayjs(day.fecha).format('ddd DD/MM')}
                                     </button>
                                   )
                                   )}
-                                  <button className="btn btn-primary"><ChevronRight /></button>
+                                  <button className="btn btn-primary" disabled><ChevronRight /></button>
                                 </>)
                               }
                             </div>
@@ -926,14 +972,20 @@ const AddFirstAppoinments = () => {
                             <div className="form-group local-forms">
                               {hours.length > 0 && (
                                 <>
-                                  <button className="btn btn-primary"><ChevronLeft /></button>
-                                  {hours.map((hour, i) => (
-                                    <button className="btn me-2 btn-cancel" key={`${hour.id}${i}hours`}>
+                                  <button className="btn btn-primary" disabled><ChevronLeft /></button>
+                                  {hours.map((hour, i) => {
+                                    console.log('hour', hour)
+                                    return (
+                                    <button
+                                      type="button"
+                                      className="btn me-2 btn-cancel"
+                                      key={`${hour.id}${i}hours`}
+                                      onClick={() => { setTime(hour.hora_inicio) }}>
                                       {hour.hora_inicio}
                                     </button>
-                                  )
                                   )}
-                                  <button className="btn btn-primary"><ChevronRight /></button>
+                                  )}
+                                  <button className="btn btn-primary" disabled><ChevronRight /></button>
                                 </>)
                               }
                             </div>
@@ -945,9 +997,9 @@ const AddFirstAppoinments = () => {
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             <button
-                              // type="submit"
+                              type="button"
                               className="btn btn-primary submit-form me-2"
-                              onClick={handleOpen}
+                              onClick={(e) => { onSubmit(e) }}
                             >
                               Enviar
                             </button>

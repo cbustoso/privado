@@ -83,8 +83,7 @@ export const fetchScheduleByAvailability = async (id) => {
     },
     body: JSON.stringify(body)
   })
-   const response = await data.json()
-   return response
+  return data.json()
 }
 
 const recurrencia = (obj) => {

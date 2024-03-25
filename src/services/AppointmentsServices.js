@@ -35,7 +35,7 @@ export const createAppointment = async (appointment) => {
     profesional_id: (appointment.professional.id).toString(),
     alumno_id: (appointment.patient_id).toString(),
     fecha: appointment.fecha,
-    hora: '12:00:00',
+    hora: appointment.hora,
     estado: "pendiente",
     modalidad: appointment.modalidad || 'modalidad',
     campus: appointment.campus || 'campus',
@@ -47,6 +47,7 @@ export const createAppointment = async (appointment) => {
     diagnostico_previo: 'diagnosticos',
   }
 
+  console.log('BODY', body);
   // const bodyEmailPatient = {
   //   "tarjet": appointment.email,
   //   "paciente": true
