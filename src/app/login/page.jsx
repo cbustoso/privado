@@ -74,7 +74,7 @@ const Login = () => {
                   <div className="login-right">
                     <div className="login-right-wrap">
                       <div className="account-logo">
-                        <Link href="/admin-dashboard">
+                        <Link href="#">
                           <img src={logo.src} width={380} alt="logo" />
                         </Link>
                       </div>
