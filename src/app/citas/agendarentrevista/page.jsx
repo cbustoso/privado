@@ -75,13 +75,14 @@ const AddFirstAppoinments = () => {
       )
   })
 
+  /* Retorna días disponibles */
   const handleSelectedProfessional = async (e) => {
     console.log(e.id);
     setDays([])
     try {
       const byProf = await fetchScheduleByAvailability(e.id)
       console.log('byProf', byProf)
-      setDays(byProf.bloques.slice(0, 5))
+      setDays(byProf.users.slice(0, 5))
     } catch (error) {
       console.log('don error', error)
     }
@@ -116,7 +117,6 @@ const AddFirstAppoinments = () => {
 
   const fetchData = async () => {
     const { users } = await fetchDoctors()
-    console.log(users);
     const docs = users.map((doc, i) => {
       return {
         value: i + 2,
@@ -124,11 +124,11 @@ const AddFirstAppoinments = () => {
         id: doc.id,
         email: doc.email,
         name: doc.nombre
-        // especialidad: doc.
       }
     })
+    
+    console.log('docs', docs);
     setDoctor(docs)
-    // console.log('users', docs);
   }
 
   useEffect(() => {
@@ -849,17 +849,15 @@ const AddFirstAppoinments = () => {
                               {...register('professional')}
                               ref={null}
                               render={({ field: { onChange, onBlur, value, name, ref } }) => {
-                                // console.log('value', value)
-                                return <Select
+                                return (<Select
                                   instanceId="professional"
                                   defaultValue={selectedOption}
                                   onChange={(e) => {
-                                    professional.onChange(e);
+                                    onChange(e);
                                     handleSelectedProfessional(e);
                                   }}
                                   getOptionLabel={e => e.label}
                                   options={doctor}
-                                  // menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="professional"
                                   components={{
@@ -886,10 +884,10 @@ const AddFirstAppoinments = () => {
                                       height: '35px',
                                     }),
                                   }}
-                                />
+                                />)
                               }}
                             />
-                            {errors.doctor && <span><small>{errors.doctor.message}</small></span>}
+                            {errors.professional && <span><small>{errors.professional.message}</small></span>}
 
                           </div>
                         </div>
@@ -910,7 +908,7 @@ const AddFirstAppoinments = () => {
                                     <button
                                       className="btn me-2 btn-cancel"
                                       key={`${day.id}${i}days`}
-                                      onClick={(e) => handleDays(e, day.fecha, day.usuario_id)}>
+                                      onClick={(e) => handleDays(e, day.fechaInicio, day.id_user)}>
                                       {dayjs(day.fecha).format('ddd DD/MM')}
                                     </button>
                                   )
