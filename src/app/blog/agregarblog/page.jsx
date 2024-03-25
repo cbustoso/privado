@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import Link from 'next/link';
 import dynamic from 'next/dynamic'
  
-import TextEditor from '../../../components/TextEditor';
+// import TextEditor from '../../../components/TextEditor';
 // import Sidebar from '../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
@@ -15,6 +15,10 @@ const DynamicSidebar = dynamic(() => import('../../../components/Sidebar'), {
   loading: () => <p>Loading...</p>,
 })
  
+const DynamicTextEditor = dynamic(() => import('../../../components/TextEditor'), {
+  loading: () => <p>Loading...</p>,
+})
+
 const Addblog = () => {
   const loadFile = (event) => {
     // Handle file loading logic here
@@ -330,7 +334,7 @@ const Addblog = () => {
                                 })}
                                 ref={null}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                  <TextEditor />
+                                  <DynamicTextEditor />
                                 )}
                               />
                               {
