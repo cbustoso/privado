@@ -605,6 +605,7 @@ const AddDoctor = () => {
                                 <input
                                   type="radio"
                                   value="activo"
+                                  name="status"
                                   className="form-check-input"
                                   {...register('status', {
                                     required: {
@@ -621,6 +622,7 @@ const AddDoctor = () => {
                                 <input
                                   type="radio"
                                   value="inactivo"
+                                  name="status"
                                   className="form-check-input"
                                   {...register('status', {
                                     required: {

@@ -21,12 +21,14 @@ import {
 
 const Blogdetails = ({params}) => {
   const [blog, setBlog] = useState({})
+
   useEffect(()=> {
     const fetchData = async() => {
-      const response = await fetchBlog(params.id);
-      console.log('response', response)
+      const {bloques} = await fetchBlog(params.id);
+      setBlog(bloques[0])
     }
-  })
+    fetchData()
+  }, [])
 
   return (
     <div>
@@ -49,7 +51,7 @@ const Blogdetails = ({params}) => {
                           <FeatherIcon icon="chevron-right" />
                         </i>
                       </li>
-                      <li className="breadcrumb-item active">View Blog</li>
+                      <li className="breadcrumb-item active">Vista Blog</li>
                     </ul>
                   </div>
                 </div>
@@ -60,11 +62,11 @@ const Blogdetails = ({params}) => {
                   <div className="blog-view">
                     <article className="blog blog-single-post">
                       <h3 className="blog-title">
-                        Eye Care Routine To Get Rid Of Under Eye Circles And Puffiness
+                        {blog.titulo}
                       </h3>
                       <div className="blog-info clearfix">
                         <div className="post-right read-blks">
-                          <Link href="#.">Read more in 8 Minutes</Link>
+                          <Link href="#.">Leer más...</Link>
                         </div>
                         <div className="post-left date-blks">
                           <ul>
@@ -101,7 +103,7 @@ const Blogdetails = ({params}) => {
                         <Link href="#.">
                           <img
                             alt="#"
-                            src={blogdetail.src}
+                            src={blog.imagen}
                             className="img-fluid"
                           />
                         </Link>
@@ -167,8 +169,9 @@ const Blogdetails = ({params}) => {
                       </div>
                       <div className="list-add-blogs">
                         <ul className="nav">
+                          
                           <li># Ophthalmology</li>
-                          <li># Beauty</li>
+                          <li># Beauty</li> 
                           <li># Prevention</li>
                         </ul>
                       </div>

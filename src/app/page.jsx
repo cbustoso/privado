@@ -20,7 +20,8 @@ export default function Home() {
     queryKey: ['blogs'],
     queryFn: async () => {
       const res = await fetchBlogs();
-      return res.response;
+      console.log('RES', res);
+      return res;
     }
   })
 

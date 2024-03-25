@@ -10,6 +10,8 @@ import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 
 const TestSlider = ({ slides }) => {
+
+  console.log('SLIDES', slides)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(slides[0].title)
   const [content, setContent] = useState(slides[0].content)
@@ -72,10 +74,11 @@ const TestSlider = ({ slides }) => {
             <div className="col-sm-12 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
               <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '100%', margin: 0 }}>
                 <CardHeader
-                  title={selectedSlide.title}
+                  title={selectedSlide.titulo}
                   subheader={
                     <Typography variant="body2" color="text.secondary" sx={{ color: 'white' }}>
-                      {(selectedSlide.category)}
+                      {/* {(selectedSlide.category)} */}
+                      'Psicología'
                     </Typography>
                   }
                   sx={{ bgcolor: '#FF5253', color: 'white' }}
@@ -83,12 +86,12 @@ const TestSlider = ({ slides }) => {
                 <CardMedia
                   component="img"
                   height="194"
-                  image={selectedSlide.image}
+                  image={selectedSlide.imagen}
                   alt="Paella dish"
                 />
                 <CardContent>
                   <Typography variant="body2" color="text.secondary">
-                    {(selectedSlide.content).slice(0, 60)}
+                    {(selectedSlide.texto).slice(0, 60)}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>

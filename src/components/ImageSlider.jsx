@@ -6,8 +6,8 @@ import { Grid, Box } from "@mui/material";
 
 const ImageSlider = ({ slides, matches }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [title, setTitle] = useState(slides[0].title)
-  const [content, setContent] = useState(slides[0].content)
+  const [title, setTitle] = useState(slides[0].titulo)
+  const [content, setContent] = useState(slides[0].texto)
   const [idBlog, setIdBlog] = useState(slides[0].id)
 
   const sliderStyles = {
@@ -19,7 +19,7 @@ const ImageSlider = ({ slides, matches }) => {
   }
 
   const slideStyles = {
-    backgroundImage: `url(${slides[currentIndex].image})`,
+    backgroundImage: `url(${slides[currentIndex].imagen})`,
     width: '100svw',
     height: 384,
     backgroundPosition: 'center',
@@ -71,8 +71,8 @@ const ImageSlider = ({ slides, matches }) => {
     const isFirstSlide = currentIndex === 0
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].title)
-    setContent(slides[newIndex].content)
+    setTitle(slides[newIndex].titulo)
+    setContent(slides[newIndex].texto)
     setIdBlog(slides[newIndex].id)
   }
 
@@ -80,15 +80,15 @@ const ImageSlider = ({ slides, matches }) => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].title)
-    setContent(slides[newIndex].content)
+    setTitle(slides[newIndex].titulo)
+    setContent(slides[newIndex].texto)
     setIdBlog(slides[newIndex].id)
   }
 
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
-    setTitle(slides[slideIndex].title)
-    setContent(slides[slideIndex].content)
+    setTitle(slides[slideIndex].titulo)
+    setContent(slides[slideIndex].texto)
     setIdBlog(slides[slideIndex].id)
   }
 

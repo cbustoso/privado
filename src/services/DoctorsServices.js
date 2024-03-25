@@ -76,7 +76,7 @@ export const addDoctor = async (user) => {
     "contrasena": user.password,
     "especialidad": user.speciality.value,
     "tipo_usuario": 'profesional',
-    "status": user.status,
+    "status": 'activo',
     "campus": 'Sede Centro',
     "carrera": user.speciality.label,
     "anoIngresoCarrera": "14-02-2024",

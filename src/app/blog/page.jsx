@@ -25,8 +25,8 @@ const BlogView = () => {
 
   const data = async () => {
     try {
-      const { response } = await fetchBlogs()
-      console.log(response);
+      const response = await fetchBlogs()
+      console.log('response', response);
       setBlogs(response)
     } catch (error) {
       console.log('error', error)
@@ -79,12 +79,12 @@ const BlogView = () => {
                         <Link href="/blog">
                           <img
                             className="img-fluid"
-                            src={blog.image}
+                            src={blog.imagen}
                             alt="#"
                           />
                         </Link>
                         <div className="blog-views">
-                          <h5>{blog.category}</h5>
+                          <h5>Psicología</h5>
                         </div>
                         {/* <ul className="nav view-blog-list blog-views">
                           <li>
@@ -111,23 +111,23 @@ const BlogView = () => {
                             </Link> */}
                             <div className="content-blk-blog ms-2">
                               <h4>
-                                <Link href="profile.html">{blog.author_name}</Link>
+                                <Link href="profile.html">{blog.autor}</Link>
                               </h4>
                               <h5>M.B.B.S, Diabetologist</h5>
                             </div>
                           </div>
                           <span>
                             <i className="feather-calendar me-1" />
-                            {blog.publication_date}
+                            {blog.fecha_publicacion}
                           </span>
                         </div>
                         <h3 className="blog-title">
                           <Link href="/blog">
-                            {blog.title}
+                            {blog.titulo}
                           </Link>
                         </h3>
                         <p>
-                          {truncarPalabras(blog.content, 20)}
+                          {truncarPalabras(blog.texto, 20)}
                         </p>
                         <Link href="/blog" className="read-more d-flex">
                           {" "}

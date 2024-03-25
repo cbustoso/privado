@@ -1,5 +1,5 @@
 export const fetchBlogs = async () => {
-  const BLOGS_API = process.env.NEXT_PUBLIC_BLOG_API + `/api/blogs`
+  const BLOGS_API = 'https://us-central1-mkt-003001-00813.cloudfunctions.net/ZRZ-showBlogList'
   try {
     const data = await fetch(BLOGS_API, {
       headers: {
@@ -8,23 +8,30 @@ export const fetchBlogs = async () => {
         'ngrok-skip-browser-warning': 'any'
       }
     })
-    const response = data.json()
-    // console.log(data.ok, data.status, data.statusText)
-    return response
+    const {blogs} = await data.json()
+    console.log(blogs);
+    return blogs
   } catch (err) {
     console.log(err)
   }
 }
 
 export const fetchBlog = async (id) => {
-  const BLOGS_API = process.env.NEXT_PUBLIC_BLOG_API + `/api/blogs/${id}`
+  const BLOGS_API = 'https://us-central1-mkt-003001-00813.cloudfunctions.net/ZRZ-showBlogByID'
+  
+  const body = {
+    id
+  }
   try {
     const data = await fetch(BLOGS_API, {
+      method: "POST",
+      cors: "no-cors",
       headers: {
         'content-type': 'application/json',
         'access-control-allow-origin': '*',
         'ngrok-skip-browser-warning': 'any'
-      }
+      },
+      body: JSON.stringify(body)
     })
     return data.json()
   } catch (err) {

@@ -299,30 +299,30 @@ const Sidebar = (props) => {
                     </li>
                   </ul>
                 </li> */}
-              {/* <li className="submenu">
-                  <Link href="#" id="menu-item11" onClick={(e) => handleClick(e, "menu-item11", "menu-items11")}>
-                    <span className="menu-side">
-                      <img src={blog.src} alt="" />
-                    </span>{" "}
-                    <span> Blog</span> <span className="menu-arrow" />
-                  </Link>
-                  <ul style={{ display: "none" }} className="menu-items11">
-                    <li>
-                      <Link className={props?.activeClassName === 'blog-grid' ? 'active' : ''} href="/blogview">Blog View</Link>
-                    </li>
-                    <li>
-                      <Link className={props?.activeClassName === 'blog-details' ? 'active' : ''} href="/blog/1">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className={props?.activeClassName === 'add-blog' ? 'active' : ''} href="/blog/agregarblog">Add Blog</Link>
-                    </li>
-                    <li>
-                      <Link className={props?.activeClassName === 'edit-blog' ? 'active' : ''} href="/editblog">Edit Blog</Link>
-                    </li>
-                  </ul>
-                </li> */}
+              <li className="submenu">
+                <Link href="#" id="menu-item11" onClick={(e) => handleClick(e, "menu-item11", "menu-items11")}>
+                  <span className="menu-side">
+                    <img src={blog.src} alt="" />
+                  </span>{" "}
+                  <span> Blog</span> <span className="menu-arrow" />
+                </Link>
+                <ul style={{ display: "none" }} className="menu-items11">
+                  {/* <li>
+                    <Link className={props?.activeClassName === 'blog-grid' ? 'active' : ''} href="/blogview">Blogs</Link>
+                  </li> */}
+                  <li>
+                    <Link className={props?.activeClassName === 'blog-details' ? 'active' : ''} href="/blog/1">
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className={props?.activeClassName === 'add-blog' ? 'active' : ''} href="/blog/agregarblog">Agregar Blog</Link>
+                  </li>
+                  {/* <li>
+                    <Link className={props?.activeClassName === 'edit-blog' ? 'active' : ''} href="/editblog">Edit Blog</Link>
+                  </li> */}
+                </ul>
+              </li>
               {/* <li>
                   <Link className={props?.activeClassName === 'assests' ? 'active' : ''} href="/assests">
                     <i className="fa fa-cube" /> <span>Assets</span>
