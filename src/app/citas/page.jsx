@@ -228,7 +228,7 @@ const AppoinmentList = () => {
                                 </form>
                               </div>
                               <div className="add-group">
-                                <Link href="/addappoinments"
+                                <Link href="/citas/agendarcita"
                                   className="btn btn-primary add-pluss ms-2"
                                 >
                                   <img src={plusicon.src} alt="#" />
