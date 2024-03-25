@@ -77,8 +77,7 @@ const TestSlider = ({ slides }) => {
                   title={selectedSlide.titulo}
                   subheader={
                     <Typography variant="body2" color="text.secondary" sx={{ color: 'white' }}>
-                      {/* {(selectedSlide.category)} */}
-                      'Psicología'
+                      Psicología
                     </Typography>
                   }
                   sx={{ bgcolor: '#FF5253', color: 'white' }}
