@@ -62,6 +62,7 @@ const AppoinmentList = () => {
     {
       title: "Estudiante",
       dataIndex: "nombre_alumno",
+      sorter: (a, b) => a['nombre_alumno'].length - b['nombre_alumno'].length,
       fixed: 'left',
       render: (text, record) => (
         <>

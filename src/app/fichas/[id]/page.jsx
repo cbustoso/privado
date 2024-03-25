@@ -50,6 +50,7 @@ const AddInterviewRecord = ({ params }) => {
       const patient = response.users.filter(user => user.id == params.id)
       console.log('patient', patient)
       const obj = {
+        profesional_evaluador: session.user.name,
         nombre_completo: `${patient[0].nombre} ${patient[0].apellido}`,
         lastName: patient[0].apellido,
         correo: patient[0].email,

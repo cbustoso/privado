@@ -108,7 +108,7 @@ const PatientsList = () => {
     {
       title: "Estado",
       dataIndex: "status",
-      sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length
+      sorter: (a, b) => a.status.length - b.status.length
     },
     {
       title: "",

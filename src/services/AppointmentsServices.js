@@ -1,5 +1,7 @@
 import { fetchUser } from './UsersServices'
 import { fetchDoctor } from './DoctorsServices';
+import { fetchSpeciality } from './DoctorsServices';
+
 import dayjs from 'dayjs';
 
 export const sendEmail = async (body) => {
@@ -141,6 +143,7 @@ export const fetchAppointments = async (callback) => {
       // console.log('DATE', date);
       const doctor = await fetchDoctor(date.id_profesional)
       const fetchPatient = await fetchUser(date.id_paciente)
+      const result = await fetchSpeciality(date.id_profesional)
       // const fetch
       return {
         ...date,
@@ -149,6 +152,7 @@ export const fetchAppointments = async (callback) => {
         telefono_alumno: fetchPatient.users[0].telefono,
         mail_alumno: fetchPatient.users[0].email,
         genero_alumno: fetchPatient.users[0].genero,
+        especialidad: result.especialidad.length === 0 ? 'Psicologia' : result.especialidad[0].especialidad,
         key: date.id
       }
     })
