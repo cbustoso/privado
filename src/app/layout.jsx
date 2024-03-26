@@ -31,8 +31,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Salud Mental Estudiantil UDP</title>
-        <Script src="https://kit.fontawesome.com/a790242b27.js"></Script>
-        <Script strategy="afterInteractive" dangerouslySetInnerHTML={{
+        <Script id="fontawesome" src="https://kit.fontawesome.com/a790242b27.js"></Script>
+        <Script id="hotjar" strategy="afterInteractive" dangerouslySetInnerHTML={{
           __html:
               `(function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
