@@ -37,9 +37,9 @@ const AddDoctor = () => {
   ]);
 
   const [department, setDepartment] = useState([
-    { value: "Psicopedagogia", label: "Psicopedagogia", name: "speciality" },
-    { value: "Psicologia", label: "Psicologia", name: "speciality" },
-    { value: "Psiquiatria", label: "Psiquiatria", name: "speciality" },
+    { value: "Psicopedagogia", label: "Psicopedagogía", name: "speciality" },
+    { value: "Psicologia", label: "Psicología", name: "speciality" },
+    { value: "Psiquiatria", label: "Psiquiatría", name: "speciality" },
   ]);
 
   const onChange = (date, dateString) => {
