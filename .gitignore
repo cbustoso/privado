@@ -43,3 +43,4 @@ src/services/Ciudades.js
 src/utils/prueba.json
 prisma/migrations/20240228200756_init/migration.sql
 prisma/schema.prisma
+certificates
