@@ -83,7 +83,7 @@ const Calender = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { bloques: response } = await fetchScheduleByUser(id)
-      
+
       const processed = response.map(item => (
         {
           ...item,
@@ -94,7 +94,7 @@ const Calender = ({ id }) => {
         }
       ))
 
-      const ordered= processed.sort((a, b) => a.start - b.start);
+      const ordered = processed.sort((a, b) => a.start - b.start);
       console.log(ordered);
       const bloquesCombinados = ordered.reduce((resultado, bloque) => {
         const ultimoBloque = resultado[resultado.length - 1];
@@ -106,7 +106,7 @@ const Calender = ({ id }) => {
         // console.log('resultado', resultado);
         return resultado;
       }, [])
-      
+
       // console.log('bloquesCombinados', bloquesCombinados);
       setCalendario(bloquesCombinados)
     }
@@ -202,45 +202,9 @@ const Calender = ({ id }) => {
   return (
     <>
       <div className="main-wrapper">
-        {/* <Header/> */}
-        <Sidebar />
-        {/* Page Wrapper */}
         <div className="page-wrapper">
           <div className="content container-fluid">
-            {/* Page Header */}
-            {/* <div className="page-header">
-              <div className="row align-items-center">
-                <div className="col">
 
-                  <ul className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <Link href="/admindashboard">Dashboard</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <i className="feather-chevron-right">
-                        <FeatherIcon icon="chevron-right" />
-                      </i>
-                    </li>
-                    <li className="breadcrumb-item active">Events</li>
-                  </ul>
-                  <div className="col-auto text-end float-end ms-auto">
-                    <Link href="/addevent" >
-                    <i className="fas fa-plus" />
-                     <div className="col-lg-2 col-sm-12">
-                                <a
-                                    href="#"
-                                    className="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#add_event"
-                                >
-                                Create Event
-                                </a>
-                        </div>
-                  </Link>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="page-header">
               <div className="row align-items-center">
                 <div className="col" />
@@ -275,7 +239,7 @@ const Calender = ({ id }) => {
                           selectMirror={true}
                           dayMaxEvents={true}
                           weekends={false}
-                          initialEvents={calendario} // alternatively, use the `events` setting to fetch from a feed
+                          initialEvents={{}} // alternatively, use the `events` setting to fetch from a feed
                           select={handleDateSelect}
                           eventClick={(clickInfo) => handleEventClick(clickInfo)}
                         />

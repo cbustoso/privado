@@ -110,19 +110,19 @@ export const createSchedule = (schedule) => {
   // const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
   const body = {
     'tipo': 'profesional',
-    'día': schedule.frecuencia === "semanal" ? schedule.semanal.dia
-      : schedule.frecuencia === "mensual" ? schedule.mensual["ordinal-dia"]
+    'dias': schedule.frecuencia === "semanal" ? schedule.semanal.dia
+      : schedule.frecuencia === "mensual" ? [schedule.mensual["ordinal-dia"]]
         : " ",
     'fechaInicio': schedule.fechaInicio,
     'fechaFin': schedule.fechaFin,
-    'repeticiones': schedule.repeticiones,
     'horaIni': schedule.horaIni,
     'horaFin': schedule.horaFin,
     'modalidad': schedule.modalidad,
     'frecuencia': schedule.frecuencia,
     "recurrencia": recurrencia(schedule),
     'id_user': schedule.id_user,
-    "orden": schedule?.mensual?.["ordinal-orden"] || " "
+    "orden": schedule?.mensual?.["ordinal-orden"] || " ",
+    "tipo_cita":schedule.tipo_cita
   }
 
   console.log('BODY', body)

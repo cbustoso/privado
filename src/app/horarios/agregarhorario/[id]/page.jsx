@@ -44,21 +44,24 @@ const AddSchedule = ({ params }) => {
     formState: { errors }
   } = useForm({
     defaultValues: async () => {
-      const { users } = await fetchDoctor(params.id)
+      // const { users } = await fetchDoctor(params.id)
+      const { especialidad: user } = await fetchSpeciality(params.id)
+      console.log('user', user);
       const obj = {
-        nombre: `${users[0].nombre} ${users[0].apellido}`,
-        especialidad: 'Psicologia',
-        id: users[0].id,
-        horaIni: '00:00:00'
+        nombre: `${user[0].nombre} ${user[0].apellido}`,
+        especialidad: user[0].especialidad,
+        id: user[0].id,
+        horaIni: '00:00:00',
+        semanal: { dia: [] }
       }
       setProfesional(obj)
       return obj
     }
   })
 
-  const onSubmit = handleSubmit( data => {
+  const onSubmit = handleSubmit(data => {
     console.log('DAta', data)
-    createSchedule({...data, id_user: params.id})
+    createSchedule({ ...data, id_user: params.id })
   })
 
   const tipo_usuario = ['admin', 'profesional']
@@ -66,7 +69,7 @@ const AddSchedule = ({ params }) => {
   const frecuencia = watch('frecuencia')
 
   return (
-    <div>
+    <>
       <Sidebar id='menu-item5' id1='menu-items5' activeClassName='add-shedule' />
       <>
         <div className="page-wrapper">
@@ -136,11 +139,60 @@ const AddSchedule = ({ params }) => {
                               {...register('especialidad', {
                                 required: {
                                   value: true,
-                                  message: 'Especialidad es requerido'
+                                  message: 'Especialidad es requerida'
                                 }
                               })} />
                           </div>
                         </div>
+
+
+                        {/* TIPO DE CITA */}
+                        <div className="col-12 col-lg-12" >
+                          <div className="col-12">
+                            <div className="form-heading">
+                              <h4>Tipo de cita</h4>
+                            </div>
+                          </div>
+                          <div className="form-group select-gender">
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="individual"
+                                  name="tipo_cita"
+                                  className="form-check-input"
+                                  {...register('tipo_cita')}
+                                />
+                                Individual
+                              </label>
+                            </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="grupal"
+                                  name="tipo_cita"
+                                  className="form-check-input"
+                                  {...register('tipo_cita')}
+                                />
+                                Grupal
+                              </label>
+                            </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="mixta"
+                                  name="tipo_cita"
+                                  className="form-check-input"
+                                  {...register('tipo_cita')}
+                                />
+                                Mixta
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+
 
 
                         {/* MODALIDAD */}
@@ -155,28 +207,41 @@ const AddSchedule = ({ params }) => {
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  value="individual"
+                                  value="videollamada"
                                   name="modalidad"
                                   className="form-check-input"
                                   {...register('modalidad')}
                                 />
-                                Individual
+                                Videollamada
                               </label>
                             </div>
                             <div className="form-check-inline">
                               <label className="form-check-label">
                                 <input
                                   type="radio"
-                                  value="grupal"
+                                  value="presencial"
                                   name="modalidad"
                                   className="form-check-input"
                                   {...register('modalidad')}
                                 />
-                                Grupal
+                                Presencial
+                              </label>
+                            </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="ambas"
+                                  name="modalidad"
+                                  className="form-check-input"
+                                  {...register('modalidad')}
+                                />
+                                Ambas
                               </label>
                             </div>
                           </div>
                         </div>
+
 
 
 
@@ -303,244 +368,244 @@ const AddSchedule = ({ params }) => {
 
 
                         {/* FRECUENCIAS */}
+
                         <div className="col-12 col-lg-12" >
                           <div className="col-12">
                             <div className="form-heading">
                               <h4>Frecuencia</h4>
                             </div>
                           </div>
-                          <div className="form-group select-gender">
-                            {/* <label className="gen-label">
-                                Frecuencia <span className="login-danger">*</span>
-                              </label> */}
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  value="diaria"
-                                  name="frecuencia"
-                                  className="form-check-input"
-                                  {...register('frecuencia')}
-                                />
-                                Diaria
-                              </label>
-                            </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  value="semanal"
-                                  name="frecuencia"
-                                  className="form-check-input"
-                                  {...register('frecuencia')}
-                                />
-                                Semanal
-                              </label>
-                            </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  value="mensual"
-                                  name="frecuencia"
-                                  className="form-check-input"
-                                  {...register('frecuencia')}
-                                />
-                                Mensual
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-
-                        {
-                          frecuencia === 'diaria'
-                            ? <div className="col-12 col-lg-10">
+                          <div className="row">
+                            <div className="col-12 col-lg-2" >
                               <div className="form-group select-gender">
-                                <div className="form-check">
+                                <div className="form-check-inline">
                                   <label className="form-check-label">
                                     <input
                                       type="radio"
-                                      name="diaria"
-                                      value="recurrente"
-                                      className="form-check-input"
-                                      {...register('diaria.tipo')}
-                                    />
-                                    Cada <input
-                                      type="number"
-                                      name="diaria"
-                                      className='ant-pick-selector'
-                                      style={styleInput}
-                                      {...register('diaria.recurrencia')}
-                                    /> días
-                                  </label>
-                                  {/* </div>
-                              </div>
-                              <div className="col-12">
-                                <div className="form-check select-gender"> */}
-                                  <label className="form-check-label">
-                                    <input
-                                      type="radio"
-                                      name="diaria"
                                       value="diaria"
+                                      name="frecuencia"
                                       className="form-check-input"
-                                      {...register('diaria.tipo')}
+                                      {...register('frecuencia')}
                                     />
-                                    Todos los días laborales de la semana
+                                    Diaria
+                                  </label>
+                                </div>
+                                <div className="form-check-inline">
+                                  <label className="form-check-label">
+                                    <input
+                                      type="radio"
+                                      value="semanal"
+                                      name="frecuencia"
+                                      className="form-check-input"
+                                      {...register('frecuencia')}
+                                    />
+                                    Semanal
+                                  </label>
+                                </div>
+                                <div className="form-check-inline">
+                                  <label className="form-check-label">
+                                    <input
+                                      type="radio"
+                                      value="mensual"
+                                      name="frecuencia"
+                                      className="form-check-input"
+                                      {...register('frecuencia')}
+                                    />
+                                    Mensual
                                   </label>
                                 </div>
                               </div>
                             </div>
-                            : frecuencia === 'semanal'
-                              ? <div className="col-12 col-lg-10">
-                                <div className="form-group select-gender">
-                                  <div className="form-group">
-                                    <label className="form-check-label">
-                                      repeticiones cada <input
-                                        type="number"
-                                        name="semanal"
-                                        style={styleInput}
-                                        {...register('semanal.recurrencia')}
-                                      /> semanas el:
-                                    </label>
-                                  </div>
-                                </div>
-                                <div className="form-group select-gender">
-
-                                  <div className="form-check-inline">
-                                    <label className="form-check-label">
-                                      <input
-                                        type="radio"
-                                        value="lunes"
-                                        name="semanal"
-                                        className="form-check-input"
-                                        {...register('semanal.dia')}
-                                      />
-                                      Lunes
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline">
-                                    <label className="form-check-label">
-                                      <input
-                                        type="radio"
-                                        value="martes"
-                                        name="semanal"
-                                        className="form-check-input"
-                                        {...register('semanal.dia')}
-                                      />
-                                      Martes
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline">
-                                    <label className="form-check-label">
-                                      <input
-                                        type="radio"
-                                        value="miércoles"
-                                        name="semanal"
-                                        className="form-check-input"
-                                        {...register('semanal.dia')}
-                                      />
-                                      Miércoles
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline">
-                                    <label className="form-check-label">
-                                      <input
-                                        type="radio"
-                                        value="jueves"
-                                        name="semanal"
-                                        className="form-check-input"
-                                        {...register('semanal.dia')}
-                                      />
-                                      Jueves
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline">
-                                    <label className="form-check-label">
-                                      <input
-                                        type="radio"
-                                        value="viernes"
-                                        name="semanal"
-                                        className="form-check-input"
-                                        {...register('semanal.dia')}
-                                      />
-                                      Viernes
-                                    </label>
-                                  </div>
-                                </div>
-
-                              </div>
-                              : frecuencia === 'mensual'
-                                ? <div className="col-12 col-lg-10">
+                            {
+                              frecuencia === 'diaria'
+                                ? <div className="col-12 col-lg-6" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px' }}>
                                   <div className="form-group select-gender">
                                     <div className="form-check">
                                       <label className="form-check-label">
                                         <input
                                           type="radio"
-                                          value="cardinal"
-                                          name="cardinal"
+                                          name="diaria"
+                                          value="recurrente"
                                           className="form-check-input"
-                                          {...register('mensual.tipo')}
+                                          {...register('diaria.tipo')}
                                         />
-                                        El día <input
+                                        Cada <input
                                           type="number"
-                                          max={31}
-                                          min={1}
-                                          // name="cardinal"
-                                          {...register('mensual.cardinal-numero')}
-                                        /> de cada  <input
-                                          type="number"
-                                          max={31}
-                                          min={1}
-                                          // name="cardinal"
-                                          {...register('mensual.cardinal-frecuencia')}
-                                        /> meses
+                                          name="diaria"
+                                          className='ant-pick-selector'
+                                          style={styleInput}
+                                          {...register('diaria.recurrencia')}
+                                        /> días
                                       </label>
-                                    </div>
-                                  </div>
-
-                                  <div className="col-12 select-gender">
-                                    <div className="form-check">
-                                      <label className="form-check-label ">
+                                      {/* </div>
+                              </div>
+                              <div className="col-12">
+                                <div className="form-check select-gender"> */}
+                                      <label className="form-check-label">
                                         <input
                                           type="radio"
-                                          value="ordinal"
-                                          name="ordinal"
+                                          name="diaria"
+                                          value="diaria"
                                           className="form-check-input"
-                                          {...register('mensual.tipo')}
+                                          {...register('diaria.tipo')}
                                         />
-                                        El <select className="select form-check-label"
-                                          {...register('mensual.ordinal-orden')}>
-                                          <option name="">... elegir</option>
-                                          <option name="primer">primer</option>
-                                          <option name="segundo">segundo</option>
-                                          <option name="tercer">tercer</option>
-                                          <option name="cuarto">cuarto</option>
-                                          <option name="ultimo">último</option>
-                                        </select>
-                                        <select className="select form-check-label"
-                                          {...register('mensual.ordinal-dia')}
-                                        >
-                                          <option name="dia">... día</option>
-                                          <option name="lunes">lunes</option>
-                                          <option name="martes">martes</option>
-                                          <option name="miercoles">miércoles</option>
-                                          <option name="jueves">jueves</option>
-                                          <option name="viernes">viernes</option>
-                                        </select>
-                                        de cada   <input
-                                          type="number"
-                                          max={31}
-                                          min={1}
-                                          // name="mensual"
-                                          {...register('mensual.ordinal-frecuencia')}
-                                        /> meses
+                                        Todos los días laborales de la semana
                                       </label>
                                     </div>
                                   </div>
                                 </div>
-                                : ""
-                        }
+                                : frecuencia === 'semanal'
+                                  ? <div className="col-12 col-lg-6" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px' }}>
+                                    <div className="form-group select-gender">
+                                      <div className="form-group">
+                                        <label className="form-check-label">
+                                          repeticiones cada <input
+                                            type="number"
+                                            name="semanal"
+                                            style={styleInput}
+                                            {...register('semanal.recurrencia')}
+                                          /> semanas el:
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className="form-group select-gender">
 
+                                      <div className="form-check-inline">
+                                        <label className="form-check-label">
+                                          <input
+                                            type="checkbox"
+                                            value="lunes"
+                                            name="semanal"
+                                            className="form-check-input"
+                                            {...register('semanal.dia')}
+                                          />
+                                          Lunes
+                                        </label>
+                                        {/* </div>
+                                  <div className="form-check-inline"> */}
+                                        <label className="form-check-label">
+                                          <input
+                                            type="checkbox"
+                                            value="martes"
+                                            name="semanal"
+                                            className="form-check-input"
+                                            {...register('semanal.dia')}
+                                          />
+                                          Martes
+                                        </label>
+                                        {/* </div>
+                                  <div className="form-check-inline"> */}
+                                        <label className="form-check-label">
+                                          <input
+                                            type="checkbox"
+                                            value="miércoles"
+                                            name="semanal"
+                                            className="form-check-input"
+                                            {...register('semanal.dia')}
+                                          />
+                                          Miércoles
+                                        </label>
+                                        {/* </div>
+                                  <div className="form-check-inline"> */}
+                                        <label className="form-check-label">
+                                          <input
+                                            type="checkbox"
+                                            value="jueves"
+                                            name="semanal"
+                                            className="form-check-input"
+                                            {...register('semanal.dia')}
+                                          />
+                                          Jueves
+                                        </label>
+                                        {/* </div>
+                                  <div className="form-check-inline"> */}
+                                        <label className="form-check-label">
+                                          <input
+                                            type="checkbox"
+                                            value="viernes"
+                                            name="semanal"
+                                            className="form-check-input"
+                                            {...register('semanal.dia')}
+                                          />
+                                          Viernes
+                                        </label>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                  : frecuencia === 'mensual'
+                                    ? <div className="col-12 col-lg-6" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px' }}>
+                                      <div className="form-group select-gender">
+                                        <div className="form-check">
+                                          <label className="form-check-label">
+                                            <input
+                                              type="radio"
+                                              value="cardinal"
+                                              name="cardinal"
+                                              className="form-check-input"
+                                              {...register('mensual.tipo')}
+                                            />
+                                            El día <input
+                                              type="number"
+                                              max={31}
+                                              min={1}
+                                              // name="cardinal"
+                                              {...register('mensual.cardinal-numero')}
+                                            /> de cada  <input
+                                              type="number"
+                                              max={31}
+                                              min={1}
+                                              // name="cardinal"
+                                              {...register('mensual.cardinal-frecuencia')}
+                                            /> meses
+                                          </label>
+                                        </div>
+                                      </div>
+
+                                      <div className="col-12 select-gender">
+                                        <div className="form-check">
+                                          <label className="form-check-label ">
+                                            <input
+                                              type="radio"
+                                              value="ordinal"
+                                              name="ordinal"
+                                              className="form-check-input"
+                                              {...register('mensual.tipo')}
+                                            />
+                                            El <select className="select form-check-label"
+                                              {...register('mensual.ordinal-orden')}>
+                                              <option name="">... elegir</option>
+                                              <option name="primer">primer</option>
+                                              <option name="segundo">segundo</option>
+                                              <option name="tercer">tercer</option>
+                                              <option name="cuarto">cuarto</option>
+                                              <option name="ultimo">último</option>
+                                            </select>
+                                            <select className="select form-check-label"
+                                              {...register('mensual.ordinal-dia')}
+                                            >
+                                              <option name="dia">... día</option>
+                                              <option name="lunes">lunes</option>
+                                              <option name="martes">martes</option>
+                                              <option name="miercoles">miércoles</option>
+                                              <option name="jueves">jueves</option>
+                                              <option name="viernes">viernes</option>
+                                            </select>
+                                            de cada   <input
+                                              type="number"
+                                              max={31}
+                                              min={1}
+                                              // name="mensual"
+                                              {...register('mensual.ordinal-frecuencia')}
+                                            /> meses
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    : ""
+                            }
+                          </div>
+                        </div>
 
                         {/* REPETICIONES */}
                         <div className="col-12 col-md-6 col-xl-12">
@@ -549,81 +614,45 @@ const AddSchedule = ({ params }) => {
                               <h4>Rango de repetición</h4>
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              Comienza el{" "}
-                              <span className="login-danger">*</span>
-                              <input
-                                className="form-control datetimepicker"
-                                type="date"
-                                placeholder=""
-                                {...register('fechaInicio', {
-                                  required: {
-                                    value: true,
-                                    message: 'Fecha de nacimiento es requerida'
-                                  }
-                                })}
-                              />
-                              {errors.fechaInicio && <span><small>{errors.fechaInicio.message}</small></span>}
+                          <div className="row">
+                            <div className="col-12 col-md-6 col-xl-4">
+                              <div className="form-group local-forms">
+                                Comienza el{" "}
+                                <span className="login-danger">*</span>
+                                <input
+                                  className="form-control datetimepicker"
+                                  type="date"
+                                  placeholder=""
+                                  {...register('fechaInicio', {
+                                    required: {
+                                      value: true,
+                                      message: 'Fecha de inicio es requerida'
+                                    }
+                                  })}
+                                />
+                                {errors.fechaInicio && <span><small>{errors.fechaInicio.message}</small></span>}
+                              </div>
+                            </div>
+                            <div className="col-12 col-md-6 col-xl-4">
+                              <div className="form-group local-forms">
+                                Finaliza el{" "}
+                                <span className="login-danger">*</span>
+                                <input
+                                  className="form-control datetimepicker"
+                                  type="date"
+                                  placeholder=""
+                                  {...register('fechaFin', {
+                                    required: {
+                                      value: true,
+                                      message: 'Fecha de finalización es requerida'
+                                    }
+                                  })}
+                                />
+                                {errors.fechaFin && <span><small>{errors.fechaFin.message}</small></span>}
+                              </div>
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <input
-                                type="radio"
-                                value="fechaTermino"
-                                name="fin"
-                                className="form-check-input"
-                                {...register('fin', {
-                                  required: {
-                                    value: true,
-                                    message: 'Fecha de nacimiento es requerida'
-                                  }
-                                })}
-                              />
-                              Finaliza el{" "}
-                              <span className="login-danger">*</span>
-
-                              <input
-                                className="form-control datetimepicker"
-                                type="date"
-                                placeholder=""
-                                {...register('fechaFin')}
-                              />
-                              {/* {errors.fechaFin && <span><small>{errors.fechaFin.message}</small></span>} */}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <input
-                                type="radio"
-                                value="numeroRepeticiones"
-                                name="fin"
-                                className="form-check-input"
-                                {...register('fin', {
-                                  required: {
-                                    value: true,
-                                    message: 'Fecha de término es requerida'
-                                  }
-                                })}
-                              />
-                              Finaliza después de {" "}
-                              <span className="login-danger">*</span>
-
-                              <input
-                                className="form-control datetimepicker"
-                                type="number"
-                                placeholder=""
-                                {...register('repeticiones')}
-                              />
-                              repeticiones
-                              {/* {errors.repeticiones && <span><small>{errors.repeticiones.message}</small></span>} */}
-                            </div>
-                          </div>
-                              {errors.fin && <span><small>{errors.fin.message}</small></span>}
                         </div>
-
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             {/* <Link href="/addschedule" > */}
@@ -657,7 +686,7 @@ const AddSchedule = ({ params }) => {
       </>
 
 
-    </div >
+    </>
   )
 }
 
