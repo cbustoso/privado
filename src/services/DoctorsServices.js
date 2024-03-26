@@ -64,7 +64,6 @@ export const fetchDoctor = async (id) => {
 export const addDoctor = async (user) => {
   // const USERS_API = process.env.VITE_USERS_API + `/api/professionals`
   const USERS_API = process.env.NEXT_PUBLIC_CREATE_PROFESSIONAL
-  console.log(user);
   const body = {
     "nombre": user.name,
     "apellido": user.lastName,
@@ -84,7 +83,7 @@ export const addDoctor = async (user) => {
     "direccion": "random",
     "region": "santiago",
     "comuna": "santiago",
-    "status": "activo",
+    "status": user.status,
     "especialidad": user.speciality.label,
   }
 
