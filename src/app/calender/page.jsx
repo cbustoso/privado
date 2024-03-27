@@ -15,7 +15,7 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { DatePicker } from "antd";
 import esLocale from '@fullcalendar/core/locales/es'
 // import { fetchSchedules } from "../../utils/fetchSchedules";
-import { fetchSchedules, fetchScheduleByUser } from "@/services/SchedulesServices";
+import { fetchSchedules, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
 
 const Calender = ({ id }) => {
   const [menu, setMenu] = useState(false);
@@ -24,7 +24,7 @@ const Calender = ({ id }) => {
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
   };
-
+console.log('ID in calender', id);
   const toggleMobileMenu = () => {
     setMenu(!menu);
   };
@@ -82,17 +82,18 @@ const Calender = ({ id }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { bloques: response } = await fetchScheduleByUser(id)
-
-      const processed = response.map(item => (
+      console.log('id', id);
+      const { users: response }  = await fetchScheduleByAvailability(id)
+      console.log('response de fetchdata', response);
+      const processed = response.map(item => {(
         {
           ...item,
-          start: datesToTimestamp(item.fecha, item.hora_inicio),
-          end: datesToTimestamp(item.fecha, item.hora_fin),
+          start: new Date(`${item.fecha}T${item.hora_inicio}`).getTime(),
+          end:  new Date(`${item.fecha}T${item.hora_fin}`).getTime(),
           className: "bg-purple",
           title: 'Disponible'
         }
-      ))
+      )})
 
       const ordered = processed.sort((a, b) => a.start - b.start);
       console.log(ordered);
@@ -218,7 +219,7 @@ const Calender = ({ id }) => {
                   <div className="card-body">
                     <div id="calendar">
                       {
-                        calendario.length > 0 &&
+                        defaultEvents.length > 0 &&
 
                         <FullCalendar
                           windowResize={true}

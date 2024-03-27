@@ -50,7 +50,7 @@ const AddSchedule = ({ params }) => {
       const obj = {
         nombre: `${user[0].nombre} ${user[0].apellido}`,
         especialidad: user[0].especialidad,
-        id: user[0].id,
+        id: user[0].usuario_id,
         horaIni: '00:00:00',
         semanal: { dia: [] }
       }
