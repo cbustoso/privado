@@ -459,7 +459,7 @@ const AddSchedule = ({ params }) => {
                                     <div className="form-group select-gender">
                                       <div className="form-group">
                                         <label className="form-check-label">
-                                          repeticiones cada <input
+                                          Repeticiones cada <input
                                             type="number"
                                             name="semanal"
                                             style={styleInput}

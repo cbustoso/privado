@@ -106,12 +106,12 @@ const recurrencia = (obj) => {
   }
 }
 
-export const createSchedule = (schedule) => {
-  // const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API + `/api/schedules`
+export const createSchedule = async (schedule) => {
+  const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API
   const body = {
     'tipo': 'profesional',
-    'dias': schedule.frecuencia === "semanal" ? schedule.semanal.dia
-      : schedule.frecuencia === "mensual" ? [schedule.mensual["ordinal-dia"]]
+    'dia': schedule.frecuencia === "semanal" ? schedule.semanal.dia[0]
+      : schedule.frecuencia === "mensual" ? schedule.mensual["ordinal-dia"]
         : " ",
     'fechaInicio': schedule.fechaInicio,
     'fechaFin': schedule.fechaFin,
@@ -122,27 +122,23 @@ export const createSchedule = (schedule) => {
     "recurrencia": recurrencia(schedule),
     'id_user': schedule.id_user,
     "orden": schedule?.mensual?.["ordinal-orden"] || " ",
-    "tipo_cita":schedule.tipo_cita
+    "tipo_cita": schedule.tipo_cita,
+    "repeticiones": "",
   }
 
   console.log('BODY', body)
-  // const data = await fetch(SCHEDULES_URL, {
-  //   method: "POST",
-  //   cors: "no-cors",
-  //   headers: {
-  //     'content-type': 'application/json',
-  //     'access-control-allow-origin': '*',
-  //     'ngrok-skip-browser-warning': 'any'
-  //   },
-  //   body: JSON.stringify({
-  //     "usuario_id": schedule.user_id,
-  //     "dia_semana": schedule.day,
-  //     "hora_inicio": schedule.start_time,
-  //     "hora_fin": schedule.end_time
-  //   })
-  // })
+  const data = await fetch(SCHEDULES_URL, {
+    method: "POST",
+    cors: "no-cors",
+    headers: {
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+      'ngrok-skip-browser-warning': 'any'
+    },
+    body: JSON.stringify(body)
+  })
 
-  // return data.json()
+  return data.json()
 }
 
 export const updateSchedule = async (schedule, id) => {
