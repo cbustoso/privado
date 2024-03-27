@@ -417,7 +417,7 @@ const ScheduleList = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link href="#">Horarios profesionales</Link>
+                      <Link href="#">Horario profesionales</Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">

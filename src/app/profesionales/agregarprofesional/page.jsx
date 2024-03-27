@@ -101,7 +101,7 @@ const AddDoctor = () => {
                         <FeatherIcon icon="chevron-right" />
                       </i>
                     </li>
-                    <li className="breadcrumb-item active">Agregar Profesionales</li>
+                    <li className="breadcrumb-item active">Agregar Profesional</li>
                   </ul>
                 </div>
               </div>
