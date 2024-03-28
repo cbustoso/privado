@@ -35,6 +35,8 @@ const ScheduleList = () => {
   const [doctors, setDoctors] = useState([])
   const [results, setResults] = useState([])
   const [dropdownValue, setDropdownValue] = useState('');
+  const [show, setShow] = useState({ state: false, id: '' })
+  const [idSchedule, setIdSchedule] = useState('')
 
   // const handleDropdownChange = (value) => {
   //   setDropdownValue(value);
@@ -77,92 +79,12 @@ const ScheduleList = () => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  const datasource = [
-    {
-      id: 1,
-      Img: blogimg2,
-      DoctorName: "Dr.Andrea Lalema",
-      Department: "Cardiology",
-      AvailableDays: "Mon - Sun",
-      AvailableTime: "09:00 AM - 06:00 PM",
-      Status: "Active",
-      FIELD7: "",
-    },
-    {
-      id: 2,
 
-      Img: blogimg4,
+  const handleCancel = () => {
+    console.log('ID', id, idSchedule)
+    changeStatusAppointment(id, 'cancelada')
+  }
 
-      DoctorName: "Dr.Smith Bruklin",
-      Department: "Urology",
-      AvailableDays: "Mon,Tue,Sat,Sun",
-      AvailableTime: "09:00 AM - 04:00 PM",
-      Status: "Active",
-      FIELD7: "",
-    },
-    {
-      id: 3,
-      Img: blogimg6,
-
-      DoctorName: "Dr.William Stephin",
-      Department: "Radiology",
-      AvailableDays: "Mon,Fri",
-      AvailableTime: "09:00 AM - 06:00 PM",
-      Status: "Active",
-      FIELD7: "",
-    },
-    {
-      id: 4,
-      Img: blogimg12,
-
-      DoctorName: "Dr.Bernardo James",
-      Department: "Dentist",
-      AvailableDays: "Mon - fri",
-      AvailableTime: "010:00 AM - 05:00 PM",
-      Status: "In Active",
-      FIELD7: "",
-    },
-    {
-      id: 5,
-      Img: blogimg10,
-      DoctorName: "Dr.Cristina Groves",
-      Department: "Gynocolgy",
-      AvailableDays: "Mon - Sun",
-      AvailableTime: "09:00 AM - 06:00 PM",
-      Status: "In Active",
-      FIELD7: " ",
-    },
-    {
-      id: 6,
-      Img: blogimg8,
-      DoctorName: "Mark Hay Smith",
-      Department: "Gynocolgy",
-      AvailableDays: "Sat, Sun",
-      AvailableTime: "09:00 AM - 12:00 PM",
-      Status: "Active",
-      FIELD7: "",
-    },
-    {
-      id: 7,
-      Img: blogimg2,
-      DoctorName: "Dr.Andrea Lalema",
-      Department: "Otolaryngology",
-      AvailableDays: "Mon - Sun",
-      AvailableTime: "09:00 AM - 06:00 PM",
-      Status: "Active",
-      FIELD7: "",
-    },
-    {
-      id: 8,
-      Img: blogimg4,
-      DoctorName: "Dr.Smith Bruklin",
-      Department: "Urology",
-      AvailableDays: "Mon - wed",
-      AvailableTime: "11:00 AM - 09:00 PM",
-      Status: "In Active",
-      FIELD7: " ",
-    },
-  ];
 
   const columns = [
     {
@@ -254,9 +176,9 @@ const ScheduleList = () => {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" href="/editschedule">
+                <Link className="dropdown-item" href={`/horarios/agregarhorario/${record.id}`}>
                   <i className="far fa-edit me-2" />
-                  Edit
+                  Agregar
                 </Link>
                 <Link
                   className="dropdown-item"
@@ -264,7 +186,7 @@ const ScheduleList = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#delete_patient"
                 >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  <i className="fa fa-trash-alt m-r-5"></i> Eliminar
                 </Link>
               </div>
             </div>
@@ -365,26 +287,36 @@ const ScheduleList = () => {
         <>
           <div className="text-end">
             <div className="dropdown dropdown-action">
+              {console.log(record)}
               <Link
                 href="#"
                 className="action-icon dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                onClick={() => { setShow({ ...show, state: !show.state, id: record.id }) }}
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
-              <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" href="/editschedule">
+              <div
+                style={{ right: '30px' }}
+                className=
+                {show.state === true && show.id === record.id
+                  ? "dropdown-menu dropdown-menu-end show"
+                  : "dropdown-menu dropdown-menu-end "
+                }
+              >
+                <Link className="dropdown-item" href={`/horarios/agregarhorario/${record.id}`}>
                   <i className="far fa-edit me-2" />
-                  Edit
+                  Editar
                 </Link>
                 <Link
-                  className="dropdown-item"
                   href="#"
+                  className="dropdown-item"
                   data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  data-bs-target="#delete_appointment"
+                  onClick={() => setIdSchedule(record.id)}>
+                  <i className="fa fa-trash-alt m-r-5"></i>
+                  Eliminar
                 </Link>
               </div>
             </div>
@@ -458,7 +390,7 @@ const ScheduleList = () => {
                               </div>
                               <div className="add-group">
                                 <Link
-                                  href="/addschedule"
+                                  href="#"
                                   className="btn btn-primary add-pluss ms-2"
                                 >
                                   <img src={plusicon.src} alt="#" />

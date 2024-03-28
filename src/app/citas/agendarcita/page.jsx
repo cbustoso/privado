@@ -149,10 +149,18 @@ const AddAppoinments = () => {
                   <div className="card-body">
                     <form>
                       {/* Detalles del paciente */}
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="form-heading">
+                            <h4 >Agendar Cita</h4>
+                          </div>
+                        </div>
+                      </div>
                       <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '10px', margin: '10px' }}>
                         <div className="col-12">
                           <div className="form-heading">
-                            <h4>Detalles del Paciente</h4>
+                            <h4 style={{ margin: 0 }}>Detalles del Paciente</h4>
+                            <h5 style={{ fontSize: '12px', margin: '5px 0 25px' }}>Los campos son editables, pero solo afectarán la información en este portal, no para SAP</h5>
                           </div>
                         </div>
                         <div className="row">

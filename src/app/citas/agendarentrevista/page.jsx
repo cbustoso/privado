@@ -20,7 +20,7 @@ import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment, sendEmail } from "../../../services/AppointmentsServices"
 import { regiones, comunas, motivo_consulta } from "../../../utils/selects";
-import { formatRut } from "@/utils/managedata";
+// import { formatRut } from "@/utils/managedata";
 import { fetchScheduleByDate, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
 import DatePick from "@/components/Datepicker";
 
@@ -28,11 +28,19 @@ import * as dayjs from 'dayjs'
 import * as isLeapYear from 'dayjs/plugin/isLeapYear' // import plugin
 import 'dayjs/locale/es-mx'
 
-const AddFirstAppoinments = () => {
 
+const formatRut = (value) => {
+  const cleanedValue = value.replace(/[^\dkK]/g, '');
+  const [number, verifierDigit] = cleanedValue.split('-');
+  const formattedNumber = number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${formattedNumber}-${verifierDigit || ''}`;
+};
+
+
+const AddFirstAppoinments = () => {
   dayjs.extend(isLeapYear) // use plugin
   dayjs.locale('es-mx') // use locale
-
+  
   const { data: session, loading } = useSession()
 
   const [isClicked, setIsClicked] = useState(false);
@@ -57,7 +65,7 @@ const AddFirstAppoinments = () => {
       if (session?.user) {
         // console.log('session?.user', session?.user)
         const patient = response.users.filter(user => user.email === session?.user.email)
-        console.log('SESSION async', session);
+        // console.log('SESSION async', session);
         const obj = {
           name: patient[0].nombre,
           lastName: patient[0].apellido,
@@ -78,6 +86,14 @@ const AddFirstAppoinments = () => {
       )
   })
 
+  const [rut, setRut] = useState('');
+
+  const handleChangeRut = (e) => {
+    const inputValue = e.target.value;
+    const formattedRut = formatRut(inputValue);
+    setRut(formattedRut);
+  };
+
   const obtenerDias = (objeto) => {
     const { fechaInicio, fechaFin, ...resto } = objeto.users[0];
     const dias = [];
@@ -96,16 +112,16 @@ const AddFirstAppoinments = () => {
 
   /* Retorna días disponibles */
   const handleSelectedProfessional = async (e) => {
-    console.log(e.id);
+    // console.log(e.id);
     setDays([])
     try {
       const byProf = await fetchScheduleByAvailability(e.id)
       // console.log('byProf', byProf.users[0].fechaInicio, byProf.users[0].fechaFin)
       const bloque = obtenerDias(byProf)
-      console.log('bloque', bloque);
+      // console.log('bloque', bloque);
       setDays(bloque.slice(0, 5))
     } catch (error) {
-      console.log('don error', error)
+      console.log('Error: ', error)
     }
   }
 
@@ -115,34 +131,34 @@ const AddFirstAppoinments = () => {
       const ultimoBloqueAgrupado = agrupados[agrupados.length - 1];
 
       if (ultimoBloqueAgrupado && bloqueActual.hora_inicio <= ultimoBloqueAgrupado.hora_fin) {
-          // Si el bloque actual comienza dentro del último bloque agrupado, actualizar el último bloque agrupado
-          ultimoBloqueAgrupado.hora_fin = bloqueActual.hora_fin;
-          ultimoBloqueAgrupado.disponible += bloqueActual.disponible;
+        // Si el bloque actual comienza dentro del último bloque agrupado, actualizar el último bloque agrupado
+        ultimoBloqueAgrupado.hora_fin = bloqueActual.hora_fin;
+        ultimoBloqueAgrupado.disponible += bloqueActual.disponible;
       } else {
-          // Si el bloque actual no comienza dentro del último bloque agrupado, agregar un nuevo bloque agrupado
-          agrupados.push({
-              disponible: bloqueActual.disponible,
-              hora_inicio: bloqueActual.hora_inicio,
-              hora_fin: bloqueActual.hora_fin,
-              id_bloque: bloqueActual.id_bloque,
-              usuario_id: bloqueActual.usuario_id
-          });
+        // Si el bloque actual no comienza dentro del último bloque agrupado, agregar un nuevo bloque agrupado
+        agrupados.push({
+          disponible: bloqueActual.disponible,
+          hora_inicio: bloqueActual.hora_inicio,
+          hora_fin: bloqueActual.hora_fin,
+          id_bloque: bloqueActual.id_bloque,
+          usuario_id: bloqueActual.usuario_id
+        });
       }
 
       return agrupados;
-  }, []);
+    }, []);
   }
 
   const handleDays = async (e, fecha, id) => {
     e.preventDefault()
-    console.log('handle.days', fecha, id)
+    // console.log('handle.days', fecha, id)
     const fechaMod = dayjs(fecha).format('YYYY-MM-DD')
-    console.log('fechamod', fechaMod);
+    // console.log('fechamod', fechaMod);
     try {
       const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
       setDate(fechaMod)
       const newBloques = agruparBloquesPorHora(bloques)
-      console.log('newBloques', newBloques);
+      // console.log('newBloques', newBloques);
       setHours(newBloques.slice(0, 5))
     } catch (error) {
       console.log(error)
@@ -155,6 +171,7 @@ const AddFirstAppoinments = () => {
   }
 
   const selectedRegion = watch('region')
+  const modalidad = watch('modalidad')
 
   const handleOpen = (e) => {
     e.preventDefault()
@@ -258,14 +275,6 @@ const AddFirstAppoinments = () => {
     setContacts(newArray)
   }
 
-  const handleFormat = () => {
-    const formattedRut = formatRut(e.target.value)
-    // setRut(formattedRut)
-    console.log(formattedRut)
-  }
-
-  const professional = register("professional", { required: true });
-
   return (
     <div>
       {/* <Header /> */}
@@ -302,10 +311,17 @@ const AddFirstAppoinments = () => {
                   <div className="card-body">
                     <form>
                       {/* Detalles del paciente */}
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="form-heading">
+                            <h4 >Agendar Entrevista</h4>
+                          </div>
+                        </div>
+                      </div>
                       <div className="row" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '10px', margin: '10px' }}>
                         <div className="col-12">
                           <div className="form-heading">
-                            <h4 style={{ margin: 0 }}>Detalles del Paciente</h4>
+                            <h4 style={{ margin: 0 }}>Detalles Personales</h4>
                             <h5 style={{ fontSize: '12px', margin: '5px 0 25px' }}>Los campos son editables, pero solo afectarán la información en este portal, no para SAP</h5>
                           </div>
                         </div>
@@ -363,9 +379,9 @@ const AddFirstAppoinments = () => {
                               Rut <span className="login-danger">*</span>
                             </label>
                             <input
-                              onChange={handleFormat}
+                              onChange={handleChangeRut}
                               className="form-control"
-                              // value={rut}
+                              // name="rut"
                               type="text"
                               {...register('rut', {
                                 required: {
@@ -810,6 +826,7 @@ const AddFirstAppoinments = () => {
                                     name="campus"
                                     value="centro"
                                     className="form-check-input"
+                                    disabled={modalidad === 'videollamada'}
                                     {...register('campus')}
                                   />
                                   Sede Centro - Manuel Rodríguez 343 sur, 2° piso
@@ -822,6 +839,7 @@ const AddFirstAppoinments = () => {
                                     name="campus"
                                     value="huechuraba"
                                     className="form-check-input"
+                                    disabled={modalidad === 'videollamada'}
                                     {...register('campus')}
                                   />
                                   Sede Huechuraba - Av. Sta. Clara 797, Huechuraba
@@ -938,7 +956,6 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-
                         <div className="row">
                           <div className="col-12 col-md-12 col-xl-12">
                             <label>
@@ -952,7 +969,7 @@ const AddFirstAppoinments = () => {
 
                                   {days.map((day, i) => (
                                     <button
-                                      className="btn me-2 btn-cancel"
+                                      className={`btn me-2 ${date === day.fecha ? "btn-primary" : "btn-cancel"}`}
                                       key={`${day.id}${i}days`}
                                       onClick={(e) => handleDays(e, day.fecha, day.id_user)}>
                                       {dayjs(day.fecha).format('ddd DD/MM')}
@@ -974,16 +991,17 @@ const AddFirstAppoinments = () => {
                                 <>
                                   <button className="btn btn-primary" disabled><ChevronLeft /></button>
                                   {hours.map((hour, i) => {
-                                    console.log('hour', hour)
+                                    // console.log('hour', hour)
                                     return (
-                                    <button
-                                      type="button"
-                                      className="btn me-2 btn-cancel"
-                                      key={`${hour.id}${i}hours`}
-                                      onClick={() => { setTime(hour.hora_inicio) }}>
-                                      {hour.hora_inicio}
-                                    </button>
-                                  )}
+                                      <button
+                                        type="button"
+                                        className={`btn me-2 ${time === hour.hora_inicio ? "btn-primary" : "btn-cancel"}`}
+                                        key={`${hour.id}${i}hours`}
+                                        onClick={() => { setTime(hour.hora_inicio) }}>
+                                        {hour.hora_inicio}
+                                      </button>
+                                    )
+                                  }
                                   )}
                                   <button className="btn btn-primary" disabled><ChevronRight /></button>
                                 </>)
@@ -992,14 +1010,12 @@ const AddFirstAppoinments = () => {
                           </div>
                         </div>
 
-
-
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             <button
                               type="button"
                               className="btn btn-primary submit-form me-2"
-                              onClick={(e) => { onSubmit(e) }}
+                              onClick={handleOpen}
                             >
                               Enviar
                             </button>
@@ -1018,7 +1034,7 @@ const AddFirstAppoinments = () => {
               </div>
             </div>
           </div>
-          <Modal open={open} handleClose={handleClose} onClick={onSubmit} />
+          <Modal open={open} handleClose={handleClose} onClick={onSubmit} errors={errors} />
 
 
           <div className="row">

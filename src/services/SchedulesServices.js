@@ -110,7 +110,7 @@ export const createSchedule = async (schedule) => {
   const SCHEDULES_URL = process.env.NEXT_PUBLIC_SCHEDULES_API
   const body = {
     'tipo': 'profesional',
-    'dia': schedule.frecuencia === "semanal" ? schedule.semanal.dia[0]
+    'dia': schedule.frecuencia === "semanal" ? schedule.semanal.dia
       : schedule.frecuencia === "mensual" ? schedule.mensual["ordinal-dia"]
         : " ",
     'fechaInicio': schedule.fechaInicio,

@@ -95,7 +95,7 @@ const ImageSlider = ({ slides, matches }) => {
   const boxStyleDesktop = {
     border: '1px solid #333',
     width: '85svw',
-    borderRadius: '32px',
+    borderRadius: '20px',
     padding: '24px 16px',
     textWrap: 'pretty',
     margin: '-270px auto 30px',

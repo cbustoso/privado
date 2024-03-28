@@ -11,6 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Alert } from "@mui/material";
 import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 
+import ChildModal from "@/components/ChildModal";
 import { addDoctor } from "../../../services/DoctorsServices";
 
 const AddDoctor = () => {
@@ -175,27 +176,6 @@ const AddDoctor = () => {
                             }
                           </div>
                         </div>
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Teléfono <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                              {...register('mobile', {
-                                required: {
-                                  value: true,
-                                  message: 'Teléfono es requerido'
-                                }
-                              })}
-                            />
-                            {
-                              errors.mobile && <span><small>{errors.mobile.message}</small></span>
-                            }
-                          </div>
-                        </div> */}
 
                         {/* Género */}
                         <div className="col-12 col-md-6 col-xl-6">
@@ -321,7 +301,7 @@ const AddDoctor = () => {
                             </span>}
                           </div>
                         </div>
-                        
+
                         {/* Confirmar contraseña */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
@@ -408,7 +388,7 @@ const AddDoctor = () => {
 
                           </div>
                         </div>
-                        
+
                         {/* Campus */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group select-gender">
@@ -452,149 +432,7 @@ const AddDoctor = () => {
                             </span>}
                           </div>
                         </div>
-                        {/* <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Dirección <span className="login-danger">*</span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                            />
-                          </div>
-                        </div> */}
-                        
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Región {" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <Select
-                              menuPosition={'fixed'}
-                              defaultValue={selectedOption}
-                              onChange={setSelectedOption}
-                              options={regiones}
-                              // menuPortalTarget={document.body}
-                              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                              id="search-commodity"
-                              components={{
-                                IndicatorSeparator: () => null
-                              }}
 
-                              styles={{
-                                control: (baseStyles, state) => ({
-                                  ...baseStyles,
-                                  borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                  boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                  '&:hover': {
-                                    borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                  },
-                                  borderRadius: '10px',
-                                  fontSize: "14px",
-                                  minHeight: "45px",
-                                }),
-                                dropdownIndicator: (base, state) => ({
-                                  ...base,
-                                  transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                  transition: '250ms',
-                                  width: '35px',
-                                  height: '35px',
-                                }),
-                              }}
-                            />
-
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-forms">
-                            <label>
-                              Ciudad <span className="login-danger">*</span>
-                            </label>
-                            <Select
-                              menuPosition={'fixed'}
-                              defaultValue={selectedOption}
-                              onChange={setSelectedOption}
-                              options={options}
-                              // menuPortalTarget={document.body}
-                              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-                              id="search-commodity"
-                              components={{
-                                IndicatorSeparator: () => null
-                              }}
-
-                              styles={{
-                                control: (baseStyles, state) => ({
-                                  ...baseStyles,
-                                  borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                  boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                  '&:hover': {
-                                    borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
-                                  },
-                                  borderRadius: '10px',
-                                  fontSize: "14px",
-                                  minHeight: "45px",
-                                }),
-                                dropdownIndicator: (base, state) => ({
-                                  ...base,
-                                  transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                  transition: '250ms',
-                                  width: '35px',
-                                  height: '35px',
-                                }),
-                              }}
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-12 col-sm-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Biografía{" "}
-                              <span className="login-danger"></span>
-                            </label>
-                            <textarea
-                              className="form-control"
-                              rows={3}
-                              cols={30}
-                              defaultValue={""}
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group local-top-form"> */}
-                        {/* <label className="local-top">
-                              Avatar <span className="login-danger"></span>
-                            </label>
-                            <div className="settings-btn upload-files-avator">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                name="image"
-                                id="file"
-                                onChange={loadFile}
-                                className="hide-input"
-                              />
-                              <label htmlFor="file" className="upload">
-                                Elegir imagen
-                              </label>
-                            </div> */}
-                        {/* <div className="settings-btn upload-files-avator">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                name="image"
-                                id="file"
-                                onchange="loadFile(event)"
-                                className="hide-input"
-                              />
-                              <label htmlFor="file" className="upload">
-                                Choose File
-                              </label>
-                            </div> */}
-                        {/* </div>
-                        </div> */}
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group select-gender">
                             <label className="gen-label">
@@ -641,21 +479,6 @@ const AddDoctor = () => {
                         </div>
                         <div className="col-12">
                           <div className="doctor-submit text-end">
-
-                            {/* 
-                          <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
-                  <i className="fa fa-trash-alt m-r-5"></i> Eliminar </Link> */}
-
-                            {/* {dataDoctor
-                              ? <button
-                                type="submit"
-                                className="btn btn-primary submit-form me-2"
-                                data-bs-target="#delete_patient"
-                                data-bs-toggle="modal"
-                              >
-                                Enviar
-                              </button>
-                              :  */}
                             <button
                               type="submit"
                               className="btn btn-primary submit-form me-2"
@@ -718,43 +541,6 @@ const AddDoctor = () => {
             </div>
           </div>
         </div>
-        {/* <div className="card-box">
-         { statusPetition.warning && <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            Un <Link href="#" className="alert-link">problema</Link> ha ocurrido mientras se enviaba la información.
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true"> </span>
-            </button>
-          </div>}
-          {statusPetition.success && <div className="alert alert-success alert-dismissible fade show" role="alert">
-            El <Link href="#" className="alert-link">usuario</Link> ha sido creado.
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true"> </span>
-            </button>
-          </div>}
-        </div> */}
-        {/* {dataDoctor && <div id="delete_patient" className="modal fade delete-modal" role="dialog">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-body text-center">
-                <img src={imagesend} alt="#" width={50} height={46} />
-                <h3>Are you sure want to delete this ?</h3>
-                <div className="m-t-20">
-                  {" "}
-                  <Link href="#" className="btn btn-white me-2 w-25 " data-bs-dismiss="modal">
-                    Cerrar
-                  </Link>
-                  <button
-                    type="submit"
-                    className="text-white btn btn-primary me-2 submit-form w-25 "
-                    onClick={onConfirm}
-                  >
-                    Confirmar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>} */}
       </>
     </div>
   );

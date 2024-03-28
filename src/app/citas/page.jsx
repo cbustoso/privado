@@ -141,7 +141,7 @@ const AppoinmentList = () => {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div
-                style={{ right: 0 }}
+                style={{ right: '30px'}}
                 className=
                 {show.state === true && show.id === record.id_cita
                   ? "dropdown-menu dropdown-menu-end show"
@@ -274,7 +274,7 @@ const AppoinmentList = () => {
                         dataSource={results}
 
                         rowSelection={rowSelection}
-                        rowKey={(record) => record.id}
+                        rowKey={(record) => record.id_cita}
                       />
                     </div>
                   </div>

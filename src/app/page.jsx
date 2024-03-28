@@ -14,6 +14,7 @@ import ReserveBtn from '../components/ReserveBtn'
 
 import { Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Carrousel from "@/components/skeletons/Carrousel";
 
 export default function Home() {
   const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
@@ -37,11 +38,11 @@ export default function Home() {
       {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
         {blogs.length > 0 && <ImageSlider slides={blogs} matches={matches} />}
-        {isLoading && <strong>Cargando...</strong>}
+        {/* {isLoading && <strong>Cargando...</strong>} */}
 
         {isError && <p>Ha habido un error</p>}
 
-        {!isError && blogs.length === 0 && <p>No hay información</p>}
+        {!isError && blogs.length === 0 && <Carrousel />}
 
         {!matches &&
           <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
