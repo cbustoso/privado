@@ -16,15 +16,16 @@ import { DatePicker } from "antd";
 import esLocale from '@fullcalendar/core/locales/es'
 // import { fetchSchedules } from "../../utils/fetchSchedules";
 import { fetchSchedules, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
+import Carrousel from "@/components/skeletons/Carrousel";
 
 const Calender = ({ id }) => {
   const [menu, setMenu] = useState(false);
-  const [calendario, setCalendario] = useState([])
+  const [calendario, setCalendario] = useState(' ')
 
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
   };
-console.log('ID in calender', id);
+  console.log('ID in calender', id);
   const toggleMobileMenu = () => {
     setMenu(!menu);
   };
@@ -73,30 +74,25 @@ console.log('ID in calender', id);
     return fecha_obj.getTime()
   }
 
-  // useEffect(() => {
-  //   let elements = Array.from(
-  //     document.getElementsByClassName("react-datepicker-wrapper")
-  //   );
-  //   elements.map((element) => element.classList.add("width-100"));
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
-      console.log('id', id);
-      const { users: response }  = await fetchScheduleByAvailability(id)
-      console.log('response de fetchdata', response);
-      const processed = response.map(item => {(
-        {
-          ...item,
-          start: new Date(`${item.fecha}T${item.hora_inicio}`).getTime(),
-          end:  new Date(`${item.fecha}T${item.hora_fin}`).getTime(),
-          className: "bg-purple",
-          title: 'Disponible'
-        }
-      )})
+      // console.log('id', id);
+      const { users: response } = await fetchScheduleByAvailability(id)
+      const processed = response.map(item => {
+        // detalleServicio y duracionServicio
+        return (
+          {
+            ...item,
+            start: new Date(`${item.fechaInicio}T${item.horaIni}`).getTime(),
+            end: new Date(`${item.fechaFin}T${item.horaFin}`).getTime(),
+            className: "bg-purple",
+            title: item.detalleServicio || 'Disponible',
+          }
+        )
+      })
 
       const ordered = processed.sort((a, b) => a.start - b.start);
-      console.log(ordered);
+      // console.log('ordered', ordered)
       const bloquesCombinados = ordered.reduce((resultado, bloque) => {
         const ultimoBloque = resultado[resultado.length - 1];
         if (ultimoBloque && ultimoBloque.end >= bloque.start) {
@@ -104,11 +100,10 @@ console.log('ID in calender', id);
         } else {
           resultado.push(bloque);
         }
-        // console.log('resultado', resultado);
         return resultado;
       }, [])
 
-      // console.log('bloquesCombinados', bloquesCombinados);
+      console.log('bloquesCombinados', bloquesCombinados);
       setCalendario(bloquesCombinados)
     }
     fetchData()
@@ -218,33 +213,59 @@ console.log('ID in calender', id);
                 <div className="card">
                   <div className="card-body">
                     <div id="calendar">
-                      {
-                        defaultEvents.length > 0 &&
 
-                        <FullCalendar
-                          windowResize={true}
-                          locale={esLocale}
-                          plugins={[
-                            dayGridPlugin,
-                            timeGridPlugin,
-                            interactionPlugin,
-                          ]}
-                          headerToolbar={{
-                            left: "prev,next today",
-                            center: "title",
-                            right: "dayGridMonth,timeGridWeek,timeGridDay",
-                          }}
-                          initialView="dayGridMonth"
-                          editable={true}
-                          selectable={true}
-                          selectMirror={true}
-                          dayMaxEvents={true}
-                          weekends={false}
-                          initialEvents={{}} // alternatively, use the `events` setting to fetch from a feed
-                          select={handleDateSelect}
-                          eventClick={(clickInfo) => handleEventClick(clickInfo)}
-                        />
+                      {calendario === ' ' ? <Carrousel />
+                        : calendario.length === 0 ?
+                          <FullCalendar
+                            windowResize={true}
+                            locale={esLocale}
+                            plugins={[
+                              dayGridPlugin,
+                              timeGridPlugin,
+                              interactionPlugin,
+                            ]}
+                            headerToolbar={{
+                              left: "prev,next today",
+                              center: "title",
+                              right: "dayGridMonth,timeGridWeek,timeGridDay",
+                            }}
+                            initialView="dayGridMonth"
+                            editable={true}
+                            selectable={true}
+                            selectMirror={true}
+                            dayMaxEvents={true}
+                            weekends={false}
+                            initialEvents={[]} // alternatively, use the `events` setting to fetch from a feed
+                            select={handleDateSelect}
+                            eventClick={(clickInfo) => handleEventClick(clickInfo)}
+                          />
+                          :
+                          <FullCalendar
+                            windowResize={true}
+                            locale={esLocale}
+                            plugins={[
+                              dayGridPlugin,
+                              timeGridPlugin,
+                              interactionPlugin,
+                            ]}
+                            headerToolbar={{
+                              left: "prev,next today",
+                              center: "title",
+                              right: "dayGridMonth,timeGridWeek,timeGridDay",
+                            }}
+                            initialView="dayGridMonth"
+                            editable={true}
+                            selectable={true}
+                            selectMirror={true}
+                            dayMaxEvents={true}
+                            weekends={false}
+                            initialEvents={calendario?.length > 0 ? calendario : []} // alternatively, use the `events` setting to fetch from a feed
+                            select={handleDateSelect}
+                            eventClick={(clickInfo) => handleEventClick(clickInfo)}
+                          />
+
                       }
+
                     </div>
                   </div>
                 </div>

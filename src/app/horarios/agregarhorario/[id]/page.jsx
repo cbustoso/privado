@@ -4,22 +4,29 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../../../../components/Sidebar';
 import Link from 'next/link';
-import { DatePicker } from 'antd';
-import { TextField, Switch } from '@mui/material';
+import { TextField, Alert } from '@mui/material';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { useForm, Controller } from 'react-hook-form'
 
-import { fetchDoctor, fetchSpeciality } from '@/services/DoctorsServices';
-import { fetchScheduleByDate, fetchScheduleByUser, createSchedule } from '@/services/SchedulesServices';
+import Select from "react-select";
+
+import { fetchSpeciality } from '@/services/DoctorsServices';
+import { createSchedule, getDates, fetchScheduleByDate, validateDates } from '@/services/SchedulesServices';
 import Calender from '../../../calender/page';
-import Calendar from 'feather-icons-react/build/IconComponents/Calendar';
-import Days from '@/components/Days';
 
 const AddSchedule = ({ params }) => {
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [profesional, setProfesional] = useState({})
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('initial')
+  const [startDate, setStartDate] = useState();
+  const [startDay, setStartDay] = useState('');
+
+  const [prueba, setPrueba] = useState(new Date)
+
+
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
   };
@@ -28,13 +35,11 @@ const AddSchedule = ({ params }) => {
     display: 'inline',
     width: '20%'
   }
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
+  // const label = { inputProps: { 'aria-label': 'Switch demo' } };
   useEffect(() => {
     const fetchProfesional = async () => {
-      // const { users } = await fetchDoctor(params.id)
       const { especialidad: user } = await fetchSpeciality(params.id)
-      // const resp = await fe
-      console.log('especialidad', user[0])
+      // console.log('especialidad', user[0])
       setProfesional(user[0])
     }
     fetchProfesional()
@@ -44,7 +49,7 @@ const AddSchedule = ({ params }) => {
     formState: { errors }
   } = useForm({
     defaultValues: async () => {
-      // const { users } = await fetchDoctor(params.id)
+      console.log('PArams en add schedule', params.id);
       const { especialidad: user } = await fetchSpeciality(params.id)
       console.log('user', user);
       const obj = {
@@ -58,15 +63,87 @@ const AddSchedule = ({ params }) => {
       return obj
     }
   })
+  const frecuencia = watch('frecuencia')
 
-  const onSubmit = handleSubmit(data => {
-    console.log('DAta', data)
-    createSchedule({ ...data, id_user: params.id })
+  const onSubmit = handleSubmit(async data => {
+    setSuccess('initial')
+    const semana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes']
+
+    const fechas = []
+    const newData = {
+      ...data,
+      id_user: params.id,
+      duracionServicio: parseInt(data.duracion.label) + parseInt(data.postservicio.label),
+      fechaInicio: startDate,
+      mensual: {
+        ...data.mensual,
+        'cardinal-numero': startDay
+      },
+      dias: data.frecuencia === "semanal" ? data.semanal.dia : semana
+    }
+
+    console.log('newData', newData);
+    const dates = getDates(newData, fechas)
+    let esValido = []
+
+    if (dates.length === 0) {
+      console.log('CHAO NO SE PUEDE')
+      esValido.push(false)
+      return
+    }
+
+    const promesas = []
+    dates.forEach(date => promesas.push(validateDates(date, data.horaIni, data.horaFin, data.id)))
+
+    Promise.all(promesas)
+      .then(async (values) => {
+        console.log('VALUES', values);
+        if (values.includes(true)) {
+          console.log('GGGGGGGGGGG')
+        } else {
+          console.log('AT LAST!!!!')
+          try {
+            const req = await createSchedule(newData)
+            if (req.detalle === 'fail!!!') setSuccess('fail')
+            setSuccess('success')
+          } catch (error) {
+            setSuccess('fail')
+            console.log('ERRRR', err.message)
+          }
+        }
+      })
+      .catch((reason) => {
+        console.log('reason', reason);
+      });
   })
 
-  const tipo_usuario = ['admin', 'profesional']
+  const duracion = [
+    { label: '30', value: 1 },
+    { label: '45', value: 2 },
+    { label: '60', value: 3 },
+    { label: '75', value: 4 },]
 
-  const frecuencia = watch('frecuencia')
+  const postservicio = [
+    { label: '5', value: 5 },
+    { label: '10', value: 6 },
+    { label: '15', value: 7 },
+    { label: '20', value: 8 },]
+
+
+  const handleDay = (e) => {
+    const nuevoNumero = e.target.value;
+    setStartDay(nuevoNumero);
+    const nuevaFecha = new Date();
+    nuevaFecha.setDate(parseInt(nuevoNumero));
+    setStartDate(nuevaFecha.toISOString().split('T')[0]);
+  }
+
+  const handleDate = (e) => {
+    const nuevaFecha = e.target.value;
+    setStartDate(nuevaFecha);
+    const split = nuevaFecha.split('-')
+    setStartDay(split[2]);
+  }
 
   return (
     <>
@@ -109,7 +186,7 @@ const AddSchedule = ({ params }) => {
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>
-                              Nombre  profesional <span className="login-danger">*</span>
+                              Nombre profesional <span className="login-danger">*</span>
                             </label>
                             <input
                               className="form-control"
@@ -145,15 +222,143 @@ const AddSchedule = ({ params }) => {
                           </div>
                         </div>
 
+                        {/* Nombre profesional */}
+                        <div className="col-12">
+                          <div className="form-heading">
+                            <h4>Detalles del servicio</h4>
+                          </div>
+                        </div>
+                        <div className="col-12 col-md-12 col-xl-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Nombre servicio o evento <span className="login-danger">*</span>
+                            </label>
+                            <input
+                              className="form-control"
+                              type="text"
+                              {...register('title')}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-xl-6">
+                          <div className="form-group local-forms">
+                            <label>
+                              Duración servicio <span className="login-danger">*</span>
+                            </label>
+                            <Controller
+                              control={control}
+                              name="duracion"
+                              {...register('duracion', {
+                                required: {
+                                  value: true,
+                                  message: 'Género es requerido',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="duracion"
+                                  defaultValue={selectedOption}
+                                  onChange={onChange}
+                                  options={duracion}
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="duracion"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-xl-6">
+                          <div className="form-group local-forms">
+                            <label>
+                              Tiempo post servicio
+                            </label>
+                            <Controller
+                              control={control}
+                              name="postservicio"
+                              {...register('postservicio', {
+                                required: {
+                                  value: true,
+                                  message: 'Género es requerido',
+                                }
+                              })}
+                              ref={null}
+                              render={({ field: { onChange, onBlur, value } }) => (
+                                <Select
+                                  instanceId="postservicio"
+                                  defaultValue={selectedOption}
+                                  onChange={onChange}
+                                  options={postservicio}
+                                  // menuPortalTarget={document.body}
+                                  styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                                  id="postservicio"
+                                  components={{
+                                    IndicatorSeparator: () => null
+                                  }}
+
+                                  styles={{
+                                    control: (baseStyles, state) => ({
+                                      ...baseStyles,
+                                      borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1);',
+                                      boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
+                                      '&:hover': {
+                                        borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                      },
+                                      borderRadius: '10px',
+                                      fontSize: "14px",
+                                      minHeight: "45px",
+                                    }),
+                                    dropdownIndicator: (base, state) => ({
+                                      ...base,
+                                      transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                                      transition: '250ms',
+                                      width: '35px',
+                                      height: '35px',
+
+                                    }),
+                                  }}
+                                />
+                              )}
+                            />
+                          </div>
+                        </div>
+
+
 
                         {/* TIPO DE CITA */}
                         <div className="col-12 col-lg-12" >
                           <div className="col-12">
                             <div className="form-heading">
-                              <h4>Tipo de cita</h4>
+                              <h4>Tipo de disponibilidad</h4>
                             </div>
                           </div>
-                          <div className="form-group select-gender">
+                          {/* <div className="form-group select-gender">
                             <div className="form-check-inline">
                               <label className="form-check-label">
                                 <input
@@ -190,8 +395,87 @@ const AddSchedule = ({ params }) => {
                                 Mixta
                               </label>
                             </div>
+                          </div> */}
+
+                          <div className="form-group select-gender">
+                              <div className="row">
+                                <div className="col-6 d-flex flex-column">
+
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Entrevista de despeje"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Entrevista de despeje
+                                  </label>
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Acompañamiento psicológico"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Acompañamiento psicológico
+                                  </label>
+                                  {/* </div>
+                                  <div className="form-check-inline"> */}
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Psicoterapia breve"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Psicoterapia breve
+                                  </label>
+                                  {/* </div>
+                                  <div className="form-check-inline"> */}
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Psicopedagógica individual"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Psicopedagógica individual
+                                  </label>
+
+                                </div>
+                                {/* </div>
+                                  <div className="form-check-inline"> */}
+                                <div className="col-6 d-flex flex-column">
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Grupo psicoterapéutico"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Grupo psicoterapéutico
+                                  </label>
+                                  {/* </div>
+                                  <div className="form-check-inline"> */}
+                                  <label className="form-check-label">
+                                    <input
+                                      type="checkbox"
+                                      value="Grupo psicopedagógico"
+                                      name="tipo_cita"
+                                      className="form-check-input"
+                                      {...register('tipo_cita')}
+                                    />
+                                    Grupo psicopedagógico
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
 
 
 
@@ -298,75 +582,6 @@ const AddSchedule = ({ params }) => {
                           </div>
                         </div>
 
-
-                        {/* <div className="row">
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <Switch {...label} defaultChecked /> Lunes
-                          </div>
-                          <div className="col-6 col-md-6 col-xl-6">
-                            <button className="btn cancel-form" disabled>+ Agregar</button>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Desde <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <label>
-                                Hasta <span className="login-danger">*</span>
-                              </label>
-                              <TextField
-                                className="form-control"
-                                // id="outlined-controlled"
-                                type="time"
-                                value={startTime}
-                                onChange={(event) => {
-                                  setStartTime(event.target.value);
-                                }}
-                                {...register('start_time')}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-4">
-                            <div className="form-group local-forms">
-                              <i className="fa fa-trash-alt m-r-5"></i>
-                            </div>
-                          </div>
-                          <div className="col-12 col-md-12 col-xl-12" style={{ marginTop: '-30px' }}  >
-                            <div className="form-group local-forms">
-                              <small>Total atenciones:</small>
-                            </div>
-                          </div>
-                        </div> */}
-
-                        {/* <div className="col-12 col-md-6 col-xl-4">
-                          <div className="form-group local-forms ">
-                            <label>
-                              Días disponibles <span className="login-danger">*</span>
-                            </label>
-                            <DatePicker
-                              multiple
-                              onChange={onChange}
-                              maxTagCount="responsive"
-                              size="large"
-                            />
-                          </div>
-                        </div> */}
-
-
                         {/* FRECUENCIAS */}
 
                         <div className="col-12 col-lg-12" >
@@ -437,10 +652,7 @@ const AddSchedule = ({ params }) => {
                                           {...register('diaria.recurrencia')}
                                         /> días
                                       </label>
-                                      {/* </div>
-                              </div>
-                              <div className="col-12">
-                                <div className="form-check select-gender"> */}
+
                                       <label className="form-check-label">
                                         <input
                                           type="radio"
@@ -459,12 +671,13 @@ const AddSchedule = ({ params }) => {
                                     <div className="form-group select-gender">
                                       <div className="form-group">
                                         <label className="form-check-label">
-                                          Repeticiones cada <input
+                                          {/* Repeticiones cada <input
                                             type="number"
                                             name="semanal"
                                             style={styleInput}
                                             {...register('semanal.recurrencia')}
-                                          /> semanas el:
+                                          /> semanas el: */}
+                                          Repeticiones los días:
                                         </label>
                                       </div>
                                     </div>
@@ -535,7 +748,7 @@ const AddSchedule = ({ params }) => {
                                   </div>
                                   : frecuencia === 'mensual'
                                     ? <div className="col-12 col-lg-6" style={{ border: '1px solid lightgrey', borderRadius: '8px', padding: '20px' }}>
-                                      <div className="form-group select-gender">
+                                      {/*  <div className="form-group select-gender">
                                         <div className="form-check">
                                           <label className="form-check-label">
                                             <input
@@ -549,8 +762,10 @@ const AddSchedule = ({ params }) => {
                                               type="number"
                                               max={31}
                                               min={1}
-                                              // name="cardinal"
-                                              {...register('mensual.cardinal-numero')}
+                                              onChange={handleDay}
+                                              value={startDay}
+                                            // name="cardinal"
+                                            // {...register('mensual.cardinal-numero')}
                                             /> de cada  <input
                                               type="number"
                                               max={31}
@@ -560,7 +775,7 @@ const AddSchedule = ({ params }) => {
                                             /> meses
                                           </label>
                                         </div>
-                                      </div>
+                                      </div> */}
 
                                       <div className="col-12 select-gender">
                                         <div className="form-check">
@@ -623,14 +838,17 @@ const AddSchedule = ({ params }) => {
                                   className="form-control datetimepicker"
                                   type="date"
                                   placeholder=""
-                                  {...register('fechaInicio', {
-                                    required: {
-                                      value: true,
-                                      message: 'Fecha de inicio es requerida'
-                                    }
-                                  })}
+
+                                  onChange={handleDate}
+                                  value={startDate}
+                                // {...register('fechaInicio', {
+                                //   required: {
+                                //     value: true,
+                                //     message: 'Fecha de inicio es requerida'
+                                //   }
+                                // })}
                                 />
-                                {errors.fechaInicio && <span><small>{errors.fechaInicio.message}</small></span>}
+                                {/* {errors.fechaInicio && <span><small>{errors.fechaInicio.message}</small></span>} */}
                               </div>
                             </div>
                             <div className="col-12 col-md-6 col-xl-4">
@@ -682,7 +900,45 @@ const AddSchedule = ({ params }) => {
 
         </div>
         <Calender id={params.id} />
+        <div className="row">
+          <div className="col-sm-12 col-lg-6">
+            {success === 'success'
+              ?
+              <Alert
+                severity="success"
+                onClose={() => { setSuccess('initial') }}
+                sx={{
+                  zIndex: 'tooltip',
+                  position: 'absolute',
+                  bottom: -10,
+                  left: '10%',
+                  width: '80%'
+                }}
+                spacing={2}
+              >
+                La cita se ha creado con éxito.
+              </Alert>
 
+              : success === 'fail'
+                ?
+                <Alert
+                  severity="error"
+                  onClose={() => { setSuccess('initial') }}
+                  sx={{
+                    zIndex: 'tooltip',
+                    position: 'absolute',
+                    bottom: -10,
+                    left: '10%',
+                    width: '80%'
+                  }}
+                  spacing={2}
+                >
+                  Ha ocurrido un problema.{/*  {error} */}
+                </Alert>
+                : ''
+            }
+          </div>
+        </div>
       </>
 
 
