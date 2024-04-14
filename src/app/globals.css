@@ -11213,6 +11213,12 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   display: inline;
 }
 
-div.css-1nmdiq5-menu{
+div.css-1nmdiq5-menu {
   z-index: 2 !important;
+}
+
+/* Calendar */
+
+div.fc-daygrid-event-harness{
+  background-color: #3788d8;
 }
