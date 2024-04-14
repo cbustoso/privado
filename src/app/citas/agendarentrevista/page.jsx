@@ -36,11 +36,27 @@ const formatRut = (value) => {
   return `${formattedNumber}-${verifierDigit || ''}`;
 };
 
+// Función para obtener fechas únicas
+const obtenerFechasUnicas = array => {
+  let fechasUnicas = [];
+  let arrayDeComprobacion = []
+
+  array.forEach(objeto => {
+    // console.log('OBJETO', objeto);
+    let { fechaInicio, id_user } = objeto;
+    if (!arrayDeComprobacion.includes(fechaInicio)) {
+      fechasUnicas.push({ fechaInicio, id_user });
+      arrayDeComprobacion.push(fechaInicio)
+    }
+  });
+
+  return fechasUnicas;
+}
 
 const AddFirstAppoinments = () => {
   dayjs.extend(isLeapYear) // use plugin
   dayjs.locale('es-mx') // use locale
-  
+
   const { data: session, loading } = useSession()
 
   const [isClicked, setIsClicked] = useState(false);
@@ -55,13 +71,13 @@ const AddFirstAppoinments = () => {
   const [hours, setHours] = useState([])
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
-
+  const [allDays, setAllDays] = useState([])
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
   } = useForm({
     defaultValues: async () => fetchUsers().then(response => {
-      console.log('response', response);
+      // console.log('response', response);
       if (session?.user) {
         // console.log('session?.user', session?.user)
         const patient = response.users.filter(user => user.email === session?.user.email)
@@ -85,7 +101,9 @@ const AddFirstAppoinments = () => {
         console.log('err', error)
       )
   })
-
+  const selectedRegion = watch('region')
+  const profesional = watch('professional')
+  const modalidad = watch('modalidad')
   const [rut, setRut] = useState('');
 
   const handleChangeRut = (e) => {
@@ -94,72 +112,99 @@ const AddFirstAppoinments = () => {
     setRut(formattedRut);
   };
 
-  const obtenerDias = (objeto) => {
-    const { fechaInicio, fechaFin, ...resto } = objeto.users[0];
-    const dias = [];
-    let fechaActual = new Date(fechaInicio);
+  const obtenerDias = (objetos) => {
+    let fechaActual = new Date();
 
-    while (fechaActual <= new Date(fechaFin)) {
-      // Agregar día solo si no es sábado (6) ni domingo (0)
-      if (fechaActual.getDay() !== 5 && fechaActual.getDay() !== 6) {
-        dias.push({ fecha: fechaActual.toISOString().split('T')[0], ...resto });
+    const filterWeekDays = objetos.filter(item => {
+      if (fechaActual.toISOString().split('T')[0] < item.fechaInicio) {
+        if (new Date(item.fechaInicio).getDay() !== 5
+          && new Date(item.fechaInicio).getDay() !== 6) {
+          return true;
+        }
       }
-      fechaActual.setDate(fechaActual.getDate() + 1);
-    }
+      return false
+    })
+    const soloDias = obtenerFechasUnicas(filterWeekDays)
+    // const dias = Array.from(filterWeekDays).sort();
 
-    return dias;
+    return soloDias;
   }
 
   /* Retorna días disponibles */
   const handleSelectedProfessional = async (e) => {
-    // console.log(e.id);
     setDays([])
+    setHours([])
+    setDate('')
+    setTime('')
     try {
-      const byProf = await fetchScheduleByAvailability(e.id)
-      // console.log('byProf', byProf.users[0].fechaInicio, byProf.users[0].fechaFin)
+      const { users: byProf } = await fetchScheduleByAvailability(e.id)
+      const { bloques } = await fetchScheduleByUser(e.id)
+
       const bloque = obtenerDias(byProf)
-      // console.log('bloque', bloque);
-      setDays(bloque.slice(0, 5))
+      setAllDays(byProf)
+      setDays(bloque)
     } catch (error) {
       console.log('Error: ', error)
     }
   }
 
-  // Función para agrupar bloques en bloques de una hora como máximo
-  const agruparBloquesPorHora = (bloquesOriginal) => {
-    return bloquesOriginal.reduce((agrupados, bloqueActual) => {
-      const ultimoBloqueAgrupado = agrupados[agrupados.length - 1];
+  function horaAMinutos(hora) {
+    const partesHora = hora.split(":");
+    return parseInt(partesHora[0]) * 60 + parseInt(partesHora[1]);
+  }
 
-      if (ultimoBloqueAgrupado && bloqueActual.hora_inicio <= ultimoBloqueAgrupado.hora_fin) {
-        // Si el bloque actual comienza dentro del último bloque agrupado, actualizar el último bloque agrupado
-        ultimoBloqueAgrupado.hora_fin = bloqueActual.hora_fin;
-        ultimoBloqueAgrupado.disponible += bloqueActual.disponible;
-      } else {
-        // Si el bloque actual no comienza dentro del último bloque agrupado, agregar un nuevo bloque agrupado
-        agrupados.push({
-          disponible: bloqueActual.disponible,
-          hora_inicio: bloqueActual.hora_inicio,
-          hora_fin: bloqueActual.hora_fin,
-          id_bloque: bloqueActual.id_bloque,
-          usuario_id: bloqueActual.usuario_id
-        });
-      }
+  function calcularHoraInicioDeBloques(cita) {
+    const horaIniMinutos = horaAMinutos(cita.horaIni);
+    const duracionBloque = cita.duracionServicio;
 
-      return agrupados;
-    }, []);
+    // Array para almacenar las horas de inicio de cada bloque
+    const horasInicioBloques = [];
+
+    // Calcular la hora de inicio para cada bloque
+    for (let i = 0; i < Math.floor((horaAMinutos(cita.horaFin) - horaIniMinutos) / duracionBloque); i++) {
+      // Convertir minutos a formato HH:MM
+      const horaInicioBloque = minutosAHora(horaIniMinutos + i * duracionBloque);
+      horasInicioBloques.push({ ...cita, horaInicioBloque });
+    }
+
+    return horasInicioBloques;
+  }
+
+  // Función para convertir minutos a formato HH:MM
+  function minutosAHora(minutos) {
+    const horas = Math.floor(minutos / 60);
+    const minutosRestantes = minutos % 60;
+    return `${String(horas).padStart(2, "0")}:${String(minutosRestantes).padStart(2, "0")}:00`;
+  }
+
+  // Función para convertir una hora en formato HH:MM:SS a minutos
+  function horaAMinutos(hora) {
+    const partesHora = hora.split(":");
+    return parseInt(partesHora[0]) * 60 + parseInt(partesHora[1]);
   }
 
   const handleDays = async (e, fecha, id) => {
     e.preventDefault()
     // console.log('handle.days', fecha, id)
     const fechaMod = dayjs(fecha).format('YYYY-MM-DD')
-    // console.log('fechamod', fechaMod);
+    console.log('fechamod', fecha);
     try {
       const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
+      console.log('BLOQUES', bloques)
+      console.log('allDays', allDays)
       setDate(fechaMod)
-      const newBloques = agruparBloquesPorHora(bloques)
-      // console.log('newBloques', newBloques);
-      setHours(newBloques.slice(0, 5))
+      // const newBloques = agruparBloquesPorHora(bloques)
+      const selectedDays = allDays.filter(item => item.fechaInicio === fechaMod)
+
+      let newBloques = []
+      selectedDays.forEach(item => {
+        newBloques.push(calcularHoraInicioDeBloques(item))
+      })
+
+
+      console.log('newBloques', newBloques.flat());
+
+      setHours(newBloques.flat())
     } catch (error) {
       console.log(error)
     }
@@ -170,8 +215,6 @@ const AddFirstAppoinments = () => {
     setHours(dayjs(e.id_bloque).format('DD/MM/YYYY'))
   }
 
-  const selectedRegion = watch('region')
-  const modalidad = watch('modalidad')
 
   const handleOpen = (e) => {
     e.preventDefault()
@@ -274,6 +317,31 @@ const AddFirstAppoinments = () => {
     const newArray = contacts.filter((_, i) => i !== key);
     setContacts(newArray)
   }
+
+
+  // fechas siguiente
+  const [indiceDias, setIndiceDias] = useState(0);
+  const [indiceHoras, setIndiceHoras] = useState(0);
+
+  const mostrarSiguientesDias = (e) => {
+    e.preventDefault()
+    setIndiceDias(prevIndice => prevIndice + 5);
+  };
+
+  const mostrarAnterioresDias = (e) => {
+    e.preventDefault()
+    setIndiceDias(prevIndice => Math.max(0, prevIndice - 5));
+  };
+
+  const mostrarSiguientesHoras = (e) => {
+    e.preventDefault()
+    setIndiceHoras(prevIndice => prevIndice + 5);
+  };
+
+  const mostrarAnterioresHoras = (e) => {
+    e.preventDefault()
+    setIndiceHoras(prevIndice => Math.max(0, prevIndice - 5));
+  };
 
   return (
     <div>
@@ -813,42 +881,43 @@ const AddFirstAppoinments = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="row">
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group select-gender">
-                              <label className="gen-label">
-                                Indique lugar de preferencia <span className="login-danger">*</span>
-                              </label>
-                              <div className="form-check-inline">
-                                <label className="form-check-label">
-                                  <input
-                                    type="radio"
-                                    name="campus"
-                                    value="centro"
-                                    className="form-check-input"
-                                    disabled={modalidad === 'videollamada'}
-                                    {...register('campus')}
-                                  />
-                                  Sede Centro - Manuel Rodríguez 343 sur, 2° piso
+                        {modalidad === 'presencial' &&
+                          <div className="row">
+                            <div className="col-12 col-md-12 col-xl-12">
+                              <div className="form-group select-gender">
+                                <label className="gen-label">
+                                  Indique lugar de preferencia <span className="login-danger">*</span>
                                 </label>
-                              </div>
-                              <div className="form-check-inline">
-                                <label className="form-check-label">
-                                  <input
-                                    type="radio"
-                                    name="campus"
-                                    value="huechuraba"
-                                    className="form-check-input"
-                                    disabled={modalidad === 'videollamada'}
-                                    {...register('campus')}
-                                  />
-                                  Sede Huechuraba - Av. Sta. Clara 797, Huechuraba
-                                </label>
-                              </div>
+                                <div className="form-check-inline">
+                                  <label className="form-check-label">
+                                    <input
+                                      type="radio"
+                                      name="campus"
+                                      value="centro"
+                                      className="form-check-input"
+                                      {...register('campus')}
+                                    />
+                                    Sede Centro - Manuel Rodríguez 343 sur, 2° piso
+                                  </label>
+                                </div>
+                                <div className="form-check-inline">
+                                  <label className="form-check-label">
+                                    <input
+                                      type="radio"
+                                      name="campus"
+                                      value="huechuraba"
+                                      className="form-check-input"
+                                      {...register('campus')}
+                                    />
+                                    Sede Huechuraba - Av. Sta. Clara 797, Huechuraba
+                                  </label>
+                                </div>
 
+                              </div>
                             </div>
                           </div>
-                        </div>
+
+                        }
 
                         <div className="col-12 col-md-12 col-xl-12">
                           <div className="form-group local-forms">
@@ -955,61 +1024,87 @@ const AddFirstAppoinments = () => {
 
                           </div>
                         </div>
+                        {profesional &&
 
-                        <div className="row">
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <label>
-                              Día de la Cita{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <div className="form-group local-forms">
-                              {days.length > 0 && (
-                                <>
-                                  <button className="btn btn-primary" disabled><ChevronLeft /></button>
-
-                                  {days.map((day, i) => (
+                          <div className="row">
+                            <div className="col-12 col-md-12 col-xl-12">
+                              <label>
+                                Día de la Cita{" "}
+                                <span className="login-danger">*</span>
+                              </label>
+                              <div className="form-group local-forms">
+                                {days.length > 0 && (
+                                  <>
                                     <button
-                                      className={`btn me-2 ${date === day.fecha ? "btn-primary" : "btn-cancel"}`}
-                                      key={`${day.id}${i}days`}
-                                      onClick={(e) => handleDays(e, day.fecha, day.id_user)}>
-                                      {dayjs(day.fecha).format('ddd DD/MM')}
+                                      className="btn btn-primary"
+                                      onClick={e => { mostrarAnterioresDias(e) }}
+                                      disabled={indiceDias === 0}>
+                                      <ChevronLeft />
                                     </button>
-                                  )
-                                  )}
-                                  <button className="btn btn-primary" disabled><ChevronRight /></button>
-                                </>)
-                              }
-                            </div>
-                          </div>
-                          {/* <DatePick /> */}
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <label>
-                              Hora <span className="login-danger">*</span>
-                            </label>
-                            <div className="form-group local-forms">
-                              {hours.length > 0 && (
-                                <>
-                                  <button className="btn btn-primary" disabled><ChevronLeft /></button>
-                                  {hours.map((hour, i) => {
-                                    // console.log('hour', hour)
-                                    return (
-                                      <button
-                                        type="button"
-                                        className={`btn me-2 ${time === hour.hora_inicio ? "btn-primary" : "btn-cancel"}`}
-                                        key={`${hour.id}${i}hours`}
-                                        onClick={() => { setTime(hour.hora_inicio) }}>
-                                        {hour.hora_inicio}
-                                      </button>
-                                    )
-                                  }
-                                  )}
-                                  <button className="btn btn-primary" disabled><ChevronRight /></button>
-                                </>)
-                              }
-                            </div>
-                          </div>
-                        </div>
 
+                                    {days.slice(indiceDias, indiceDias + 5).map((day, i) => {
+                                      // console.log('day en el map', date,'holo', day.fechaInicio)
+                                      return (
+                                        <button
+                                          className={`btn me-2 ${date === day.fechaInicio ? "btn-primary" : "btn-cancel"}`}
+                                          key={`${day.id}${i}days`}
+                                          onClick={(e) => handleDays(e, day.fechaInicio, day.id_user)}>
+                                          {dayjs(day.fechaInicio).format('ddd DD MMM')}
+                                        </button>
+                                      )
+                                    }
+                                    )}
+                                    <button
+                                      className="btn btn-primary"
+                                      onClick={e => { mostrarSiguientesDias(e) }}
+                                      disabled={indiceDias + 5 >= days.length}>
+                                      <ChevronRight />
+                                    </button>
+                                  </>)
+                                }
+                              </div>
+                            </div>
+                            {/* <DatePick /> */}
+                            {date !== '' &&
+                              <div className="col-12 col-md-12 col-xl-12">
+                                <label>
+                                  Hora <span className="login-danger">*</span>
+                                </label>
+                                <div className="form-group local-forms">
+                                  {hours.length > 0 && (
+                                    <>
+                                      <button
+                                        className="btn btn-primary"
+                                        onClick={e => { mostrarAnterioresHoras(e) }}
+                                        disabled={indiceHoras === 0}>
+                                        <ChevronLeft />
+                                      </button>
+                                      {hours.slice(indiceHoras, indiceHoras + 5).map((hour, i) => {
+                                        // console.log('hour', hour.horaInicioBloque , time)
+                                        return (
+                                          <button
+                                            type="button"
+                                            className={`btn me-2 ${time === hour.horaInicioBloque ? "btn-primary" : "btn-cancel"}`}
+                                            key={`${hour.id}${i}hours`}
+                                            onClick={() => { setTime(hour.horaInicioBloque) }}>
+                                            {hour.horaInicioBloque}
+                                          </button>
+                                        )
+                                      }
+                                      )}
+                                      <button
+                                        className="btn btn-primary"
+                                        onClick={e => { mostrarSiguientesHoras(e) }}
+                                        disabled={indiceHoras + 5 >= days.length}>
+                                        <ChevronRight />
+                                      </button>
+                                    </>)
+                                  }
+                                </div>
+                              </div>
+                            }
+                          </div>
+                        }
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             <button

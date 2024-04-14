@@ -3,13 +3,14 @@ import { fetchDoctor } from './DoctorsServices';
 import { fetchSpeciality } from './DoctorsServices';
 
 import dayjs from 'dayjs';
+import axios from 'axios';
 
-export const sendEmail = async (body) => {
-  console.log('el body', body);
+export const sendEmail = async () => {
+  // console.log('el body', body);
   const SEND_EMAIL = process.env.NEXT_PUBLIC_SEND_EMAIL;
   const lebody = {
-    "tarjet":"estefania.osses.v@gmail.com",
-    "paciente":true
+    "tarjet": "estefania.osses.v@gmail.com",
+    "paciente": true
   }
   console.log('lebody', lebody);
   try {
@@ -30,6 +31,35 @@ export const sendEmail = async (body) => {
   }
 }
 
+const pruebaSendMail = (mail) => {
+  let data = JSON.stringify({
+    "tarjet": mail,
+    "paciente": true
+  });
+
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://us-central1-mkt-003001-00813.cloudfunctions.net/ZRZ-SendMail',
+    headers: {
+      'Content-Type': 'application/json',
+      "Accept": "application/json, text/plain, */*",
+    },
+    data: data
+  };
+
+  axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
+
+
 export const createAppointment = async (appointment) => {
   const APPOINTMENT_API = process.env.NEXT_PUBLIC_CREATE_APPOINTMENT
 
@@ -42,7 +72,7 @@ export const createAppointment = async (appointment) => {
     modalidad: appointment.modalidad || 'modalidad',
     campus: appointment.campus || 'campus',
     notas: 'notas',
-    motivo: appointment.motivo.label|| 'motivo',
+    motivo: appointment.motivo.label || 'motivo',
     como: 'como se entero',
     derivado_desde: 'derivado',
     tratamiento: 'tratamientos',
@@ -72,10 +102,12 @@ export const createAppointment = async (appointment) => {
     })
     const response = await data.json()
     console.log('response', response.detalle);
-    // if (response.detalle === 'success!!') {
-    //   await sendEmail(bodyEmailPatient)
-    //   await sendEmail(bodyEmailProfessional)
-    // }
+
+    // ENVÍO DE MAIL
+    if (response.detalle === 'success!!') {
+      pruebaSendMail('estefania.osses.v@gmail.com')
+      // await sendEmail(bodyEmailProfessional)
+    }
 
     return response
   } catch (err) {
