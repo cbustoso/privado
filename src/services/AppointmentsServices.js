@@ -34,7 +34,8 @@ export const sendEmail = async () => {
 const pruebaSendMail = (mail) => {
   let data = JSON.stringify({
     "tarjet": mail,
-    "paciente": true
+    "paciente": true,
+    "asunto": 'Holi'
   });
 
   let config = {

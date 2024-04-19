@@ -22,7 +22,9 @@ import { createAppointment, sendEmail } from "../../../services/AppointmentsServ
 import { regiones, comunas, motivo_consulta } from "../../../utils/selects";
 // import { formatRut } from "@/utils/managedata";
 import { fetchScheduleByDate, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
-import DatePick from "@/components/Datepicker";
+import { DatePick } from "@/components/Datepicker";
+import AlertModal from "@/components/Alert";
+import SimpleBackdrop from "@/components/Backdrop";
 
 import * as dayjs from 'dayjs'
 import * as isLeapYear from 'dayjs/plugin/isLeapYear' // import plugin
@@ -201,10 +203,21 @@ const AddFirstAppoinments = () => {
         newBloques.push(calcularHoraInicioDeBloques(item))
       })
 
+      const flatted = newBloques.flat()
+      console.log('flatted', flatted);
 
-      console.log('newBloques', newBloques.flat());
+      const horasDisponibles = flatted.filter(hora => {
+        // Busca la disponibilidad correspondiente en el segundo array
+        console.log(('HORA', hora));
+        const disponibilidadHora = bloques.find(item => {
+          return ((item.hora_inicio).length === 7 ? `0${item.hora_inicio}` : item.hora_inicio) === hora.horaInicioBloque
+        });
+        // Si la disponibilidadHora existe y está disponible, devuelve true (se incluirá en el resultado)
+        return disponibilidadHora && disponibilidadHora.disponible === 1;
+      });
 
-      setHours(newBloques.flat())
+      console.log('horasDisponibles', horasDisponibles);
+      setHours(horasDisponibles)
     } catch (error) {
       console.log(error)
     }
@@ -273,7 +286,7 @@ const AddFirstAppoinments = () => {
       const appointment = await createAppointment(body)
       if (appointment.detalle === 'fail!!!') setSuccess('fail')
       setSuccess('success')
-
+      setOpenBackdrop(true)
     } catch (err) {
       setSuccess('fail')
       console.log('ERRRR', err.message)
@@ -342,6 +355,13 @@ const AddFirstAppoinments = () => {
     e.preventDefault()
     setIndiceHoras(prevIndice => Math.max(0, prevIndice - 5));
   };
+
+
+
+  // modal alert
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+  const handleOpenBackdrop = () => setOpenBackdrop(true);
+  const handleCloseBackdrop = () => setOpenBackdrop(false);
 
   return (
     <div>
@@ -1132,46 +1152,58 @@ const AddFirstAppoinments = () => {
           <Modal open={open} handleClose={handleClose} onClick={onSubmit} errors={errors} />
 
 
-          <div className="row">
-            <div className="col-sm-12 col-lg-6">
-              {success === 'success'
-                ?
-                <Alert
-                  severity="success"
-                  onClose={() => { setSuccess('initial') }}
-                  sx={{
-                    zIndex: 'tooltip',
-                    position: 'absolute',
-                    bottom: -10,
-                    left: '10%',
-                    width: '80%'
-                  }}
-                  spacing={2}
-                >
-                  La cita se ha creado con éxito.
-                </Alert>
 
-                : success === 'fail'
-                  ?
+        </div>
+        <SimpleBackdrop
+          open={openBackdrop}
+          handleClose={handleCloseBackdrop}
+          children=
+          {success === 'success'
+            ?
+            <div >
+              {/* <div className="col-sm-12 col-lg-6"> */}
+              <Alert
+                severity="success"
+                onClose={() => { setSuccess('initial') }}
+                sx={{
+                  zIndex: 'tooltip',
+                  position: 'absolute',
+                  left: '30%',
+                  width: '50%',
+                  padding: '50px'
+                }}
+                spacing={2}
+              >
+                La cita se ha creado con éxito.
+              </Alert>
+              {/* </div> */}
+            </div>
+
+            : success === 'fail'
+              ?
+              <div className="row">
+                <div className="col-sm-12 col-lg-6">
                   <Alert
                     severity="error"
                     onClose={() => { setSuccess('initial') }}
                     sx={{
                       zIndex: 'tooltip',
                       position: 'absolute',
-                      bottom: -10,
-                      left: '10%',
-                      width: '80%'
+                      left: '30%',
+                      width: '50%',
+                      padding: '50px'
                     }}
                     spacing={2}
                   >
                     Ha ocurrido un problema. {error}
                   </Alert>
-                  : ''
-              }
-            </div>
-          </div>
-        </div>
+                </div>
+              </div>
+              : ''
+          }
+
+        />
+
       </>
     </div>
   );

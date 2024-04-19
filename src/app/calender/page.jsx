@@ -92,8 +92,9 @@ const Calender = ({ id }) => {
       })
 
       const ordered = processed.sort((a, b) => a.start - b.start);
-      // console.log('ordered', ordered)
+      // console.log('ORDERED', ordered)
       const bloquesCombinados = ordered.reduce((resultado, bloque) => {
+        console.log('BLOQUE', bloque);
         const ultimoBloque = resultado[resultado.length - 1];
         if (ultimoBloque && ultimoBloque.end >= bloque.start) {
           ultimoBloque.end = Math.max(ultimoBloque.end, bloque.end);
@@ -103,7 +104,7 @@ const Calender = ({ id }) => {
         return resultado;
       }, [])
 
-      console.log('bloquesCombinados', bloquesCombinados);
+      // console.log('bloquesCombinados', bloquesCombinados);
       setCalendario(bloquesCombinados)
     }
     fetchData()

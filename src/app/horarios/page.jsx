@@ -6,30 +6,13 @@ import Sidebar from "../../components/Sidebar";
 import Link from "next/link";
 import { Table } from "antd";
 import { onShowSizeChange, itemRender } from "../../components/Pagination";
-import {
-  blogimg10,
-  blogimg12,
-  blogimg2,
-  blogimg4,
-  blogimg6,
-  blogimg8,
-  imagesend,
-  pdficon,
-  pdficon2,
-  pdficon3,
-  pdficon4,
-  plusicon,
-  refreshicon,
-  searchnormal,
-
-} from "../../components/imagepath";
+import { imagesend, plusicon, refreshicon, searchnormal } from "../../components/imagepath";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-// import { Dropdown, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { fetchScheduleByUser, getSpecialities } from "@/services/SchedulesServices";
 import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor } from '../../services/DoctorsServices';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const ScheduleList = () => {
   const [doctors, setDoctors] = useState([])

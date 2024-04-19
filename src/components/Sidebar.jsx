@@ -173,15 +173,15 @@ const Sidebar = (props) => {
               </li>
               <li className="submenu">
                 <Link href="#" id="menu-item5" onClick={(e) => handleClick(e, "menu-item5", "menu-items5")}>
-                  <span className="menu-side">
+                  {/* <span className="menu-side">
                     <img src={doctorschedule.src} alt="" />
                   </span>{" "}
-                  <span> Horario Profesionales </span> <span className="menu-arrow" />
+                  <span> Horario Profesionales </span> <span className="menu-arrow" /> */}
                 </Link>
                 <ul style={{ display: "none" }} className="menu-items5">
-                  <li>
+                  {/* <li>
                     <Link className={props?.activeClassName === 'shedule-list' ? 'active' : ''} href="/horarios">Lista de Horarios</Link>
-                  </li>
+                  </li> */}
                   {/* <li>
                     <Link className={props?.activeClassName === 'add-shedule' ? 'active' : ''} href="/addschedule">Agregar Horarios</Link>
                   </li> */}

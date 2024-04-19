@@ -427,6 +427,22 @@ const AddDoctor = () => {
                                 Huechuraba
                               </label>
                             </div>
+                            <div className="form-check-inline">
+                              <label className="form-check-label">
+                                <input
+                                  type="radio"
+                                  value="ambas"
+                                  className="form-check-input"
+                                  {...register('campus', {
+                                    required: {
+                                      value: true,
+                                      message: 'Estado es requerido'
+                                    }
+                                  })}
+                                />
+                                Ambas
+                              </label>
+                            </div>
                             {errors.campus && <span className="login-danger">
                               <small>{errors.campus.message}</small>
                             </span>}

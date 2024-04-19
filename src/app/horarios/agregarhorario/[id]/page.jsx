@@ -64,6 +64,7 @@ const AddSchedule = ({ params }) => {
     }
   })
   const frecuencia = watch('frecuencia')
+  const modalidad = watch('modalidad')
 
   const onSubmit = handleSubmit(async data => {
     setSuccess('initial')
@@ -398,84 +399,84 @@ const AddSchedule = ({ params }) => {
                           </div> */}
 
                           <div className="form-group select-gender">
-                              <div className="row">
-                                <div className="col-6 d-flex flex-column">
+                            <div className="row">
+                              <div className="col-6 d-flex flex-column">
 
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Entrevista de despeje"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Entrevista de despeje
-                                  </label>
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Acompañamiento psicológico"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Acompañamiento psicológico
-                                  </label>
-                                  {/* </div>
-                                  <div className="form-check-inline"> */}
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Psicoterapia breve"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Psicoterapia breve
-                                  </label>
-                                  {/* </div>
-                                  <div className="form-check-inline"> */}
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Psicopedagógica individual"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Psicopedagógica individual
-                                  </label>
-
-                                </div>
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Entrevista de despeje"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Entrevista de despeje
+                                </label>
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Acompañamiento psicológico"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Acompañamiento psicológico
+                                </label>
                                 {/* </div>
                                   <div className="form-check-inline"> */}
-                                <div className="col-6 d-flex flex-column">
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Grupo psicoterapéutico"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Grupo psicoterapéutico
-                                  </label>
-                                  {/* </div>
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Psicoterapia breve"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Psicoterapia breve
+                                </label>
+                                {/* </div>
                                   <div className="form-check-inline"> */}
-                                  <label className="form-check-label">
-                                    <input
-                                      type="checkbox"
-                                      value="Grupo psicopedagógico"
-                                      name="tipo_cita"
-                                      className="form-check-input"
-                                      {...register('tipo_cita')}
-                                    />
-                                    Grupo psicopedagógico
-                                  </label>
-                                </div>
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Psicopedagógica individual"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Psicopedagógica individual
+                                </label>
+
+                              </div>
+                              {/* </div>
+                                  <div className="form-check-inline"> */}
+                              <div className="col-6 d-flex flex-column">
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Grupo psicoterapéutico"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Grupo psicoterapéutico
+                                </label>
+                                {/* </div>
+                                  <div className="form-check-inline"> */}
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    value="Grupo psicopedagógico"
+                                    name="tipo_cita"
+                                    className="form-check-input"
+                                    {...register('tipo_cita')}
+                                  />
+                                  Grupo psicopedagógico
+                                </label>
                               </div>
                             </div>
                           </div>
+                        </div>
 
 
 
@@ -526,7 +527,55 @@ const AddSchedule = ({ params }) => {
                           </div>
                         </div>
 
-
+                        {/* MODALIDAD */}
+                        {
+                          modalidad !== 'videollamada' &&
+                          < div className="col-12 col-lg-12" >
+                            <div className="col-12">
+                              <div className="form-heading">
+                                <h4>Campus</h4>
+                              </div>
+                            </div>
+                            <div className="form-group select-gender">
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    value="videollamada"
+                                    name="campus"
+                                    className="form-check-input"
+                                    {...register('campus')}
+                                  />
+                                  Sede Huechuraba
+                                </label>
+                              </div>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    value="presencial"
+                                    name="campus"
+                                    className="form-check-input"
+                                    {...register('campus')}
+                                  />
+                                  Sede Centro
+                                </label>
+                              </div>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    value="ambas"
+                                    name="campus"
+                                    className="form-check-input"
+                                    {...register('campus')}
+                                  />
+                                  Ambas
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        }
 
 
                         {/* HORARIOS */}
@@ -898,7 +947,7 @@ const AddSchedule = ({ params }) => {
             </div>
           </div>
 
-        </div>
+        </div >
         <Calender id={params.id} />
         <div className="row">
           <div className="col-sm-12 col-lg-6">

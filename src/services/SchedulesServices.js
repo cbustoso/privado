@@ -284,10 +284,15 @@ export const createSchedule = async (schedule) => {
   return response
 }
 
+// https://us-central1-mkt-003001-00813.cloudfunctions.net/ZRZ-updateBloque
 // EDIT BLOQUES DISPONIBLES
-export const editBloqueDisponible = async (id) => {
+export const editBloqueDisponible = async (id_bloque, id_user) => {
   const EDIT_BLOQUE_URL = process.env.NEXT_PUBLIC_EDIT_BLOQUE_DISPONIBLE;
-  const body = { id }
+  const body = { 
+    id_bloque: id_bloque,
+    id_user: id_user,
+    comentario: ''
+   }
   try {
     const data = await fetch(EDIT_BLOQUE_URL, {
       method: "POST",
@@ -310,7 +315,7 @@ export const editBloqueDisponible = async (id) => {
 }
 
 // Retorna true si hay choque de horario
-function hayChoqueHorario(inicioMayor, finMayor, bloquesMenores) {
+const hayChoqueHorario = (inicioMayor, finMayor, bloquesMenores) => {
   for (const bloqueMenor of bloquesMenores) {
     const { hora_inicio, hora_fin } = bloqueMenor;
 

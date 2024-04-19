@@ -33,6 +33,17 @@ export default function Home() {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+
+  const  truncarPalabras = (texto, num) => {
+    const aux = texto.split(' ');
+    
+    if (aux.length > num) {
+        return aux.slice(0, num).join(' ') + '...';
+    } else {
+        return texto;
+    }
+  }
+
   return (
     <main >
       {/* <main style={{ backgroundColor: '#fff' }}> */}
