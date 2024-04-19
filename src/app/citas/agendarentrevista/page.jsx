@@ -1157,53 +1157,54 @@ const AddFirstAppoinments = () => {
         <SimpleBackdrop
           open={openBackdrop}
           handleClose={handleCloseBackdrop}
-          children=
-          {success === 'success'
-            ?
-            <div >
-              {/* <div className="col-sm-12 col-lg-6"> */}
-              <Alert
-                severity="success"
-                onClose={() => { setSuccess('initial') }}
-                sx={{
-                  zIndex: 'tooltip',
-                  position: 'absolute',
-                  left: '30%',
-                  width: '50%',
-                  padding: '50px'
-                }}
-                spacing={2}
-              >
-                La cita se ha creado con éxito.
-              </Alert>
-              {/* </div> */}
-            </div>
 
-            : success === 'fail'
-              ?
-              <div className="row">
-                <div className="col-sm-12 col-lg-6">
-                  <Alert
-                    severity="error"
-                    onClose={() => { setSuccess('initial') }}
-                    sx={{
-                      zIndex: 'tooltip',
-                      position: 'absolute',
-                      left: '30%',
-                      width: '50%',
-                      padding: '50px'
-                    }}
-                    spacing={2}
-                  >
-                    Ha ocurrido un problema. {error}
-                  </Alert>
-                </div>
-              </div>
-              : ''
-          }
 
         />
+        {success === 'success'
+          ?
+          <div >
+            {/* <div className="col-sm-12 col-lg-6"> */}
+            <Alert
+              severity="success"
+              onClose={() => { setSuccess('initial') }}
+              sx={{
+                zIndex: 'tooltip',
+                position: 'absolute',
+                left: '30%',
+                width: '50%',
+                padding: '50px',
+                top:'50vh'
+              }}
+              spacing={2}
+            >
+              La cita se ha creado con éxito.
+            </Alert>
+            {/* </div> */}
+          </div>
 
+          : success === 'fail'
+            ?
+            <div className="row">
+              <div className="col-sm-12 col-lg-6">
+                <Alert
+                  severity="error"
+                  onClose={() => { setSuccess('initial') }}
+                  sx={{
+                    zIndex: 'tooltip',
+                    position: 'absolute',
+                    left: '30%',
+                    width: '50%',
+                    padding: '50px',
+                    top:'50vh'
+                  }}
+                  spacing={2}
+                >
+                  Ha ocurrido un problema. {error}
+                </Alert>
+              </div>
+            </div>
+            : ''
+        }
       </>
     </div>
   );
