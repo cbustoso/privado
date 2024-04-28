@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 
+// import Header from "@/components/Header";
 import { fetchBlogs } from '../services/BlogServices';
 import ImageSlider from '../components/ImageSlider';
 import TestSlider from '../components/TestSlider';
@@ -15,16 +16,40 @@ import ReserveBtn from '../components/ReserveBtn'
 import { Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Carrousel from "@/components/skeletons/Carrousel";
+import FooterDae from "@/components/FooterDae";
+import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
+
+const blogs = [
+  {
+    id: '01',
+    titulo: 'Titulo 01',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental01.src
+  }, 
+  {
+    id: '02',
+    titulo: 'Titulo 02',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental02.src
+  }, 
+  {
+    id: '03',
+    titulo: 'Titulo 03',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental03.src
+  }
+]
+console.log(blogs);
 
 export default function Home() {
-  const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
-    queryKey: ['blogs'],
-    queryFn: async () => {
-      const res = await fetchBlogs();
-      console.log('RES', res);
-      return res;
-    }
-  })
+  // const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
+  //   queryKey: ['blogs'],
+  //   queryFn: async () => {
+  //     const res = await fetchBlogs();
+  //     console.log('RES', res);
+  //     return res;
+  //   }
+  // })
 
   const [index, setIndex] = useState(0);
 
@@ -34,26 +59,28 @@ export default function Home() {
     setIndex(selectedIndex);
   };
 
-  const  truncarPalabras = (texto, num) => {
+  const truncarPalabras = (texto, num) => {
     const aux = texto.split(' ');
-    
+
     if (aux.length > num) {
-        return aux.slice(0, num).join(' ') + '...';
+      return aux.slice(0, num).join(' ') + '...';
     } else {
-        return texto;
+      return texto;
     }
   }
 
   return (
-    <main >
-      {/* <main style={{ backgroundColor: '#fff' }}> */}
+    <>
+      {/* <Header /> */}
+      <main >
+        {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
-        {blogs.length > 0 && <ImageSlider slides={blogs} matches={matches} />}
+        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} matches={matches} />}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
-        {isError && <p>Ha habido un error</p>}
+        {/* {isError && <p>Ha habido un error</p>} */}
 
-        {!isError && blogs.length === 0 && <Carrousel />}
+        {/* {!isError && blogs.length === 0 && <Carrousel />} */}
 
         {!matches &&
           <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
@@ -72,9 +99,9 @@ export default function Home() {
           </div>
         </div>
 
-        {blogs.length > 0 && <TestSlider slides={blogs} />}
+        {blogs.length > 0 && <TestSlider slides={blogs.slice(0,5)} />}
 
-        <Events />
+        <Events matches={matches} />
 
         <div className="row" style={{ padding: 0, margin: 0 }}>
           <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
@@ -82,7 +109,10 @@ export default function Home() {
           </div>
         </div>
         <FrequentAskedQuestions />
-        <Footer />
+
+        <FooterDae />
       </main>
+    </>
+
   );
 }
