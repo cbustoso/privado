@@ -36,52 +36,63 @@ const events = [
   }
 ]
 
-const Events = () => {
+const Events = ({matches}) => {
   return (
-    <div className='container center'>
+    <div className='container col-12 col-lg-10 align-self-center'>
       <div className="row" style={{ padding: 0, margin: 0 }}>
-        <div className="col-sm-12 text-center" style={{ padding: 0}}>
-        <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Eventos</h2>
+        <div className="col-sm-12 text-center" style={{ padding: 0 }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Eventos</h2>
         </div>
       </div>
-      {
-        events.map((event, i) => (
-          <Card key={i} sx={{ maxWidth: '90svw', margin: 'auto', boxShadow: 0 }}>
-            <CardMedia
-              component="img"
-              alt={event.title}
-              height="200"
-              image={event.image}
-            />
-            <Typography
-              variant="body2"
+
+      <div className={`container col-12 ${matches ? 'd-flex' : ''} justify-content-center`}>
+        {
+          events.map((event, i) => (
+            <Card
+              className='col-sm-12 col-lg-4'
+              key={i}
               sx={{
-                bgcolor: '#FF5253',
-                borderRadius: '0 50px 50px 0',
-                color: '#fff',
-                padding: '12px',
-                width: '50svw',
-                marginTop: "-55px",
-                position: 'relative',
+                // maxWidth: '25svw',
+                boxShadow: 0,
+                display: 'inline-block',
+                margin: '0 10px'
               }}>
-              {`${event.location} ${event.campus}`}
-            </Typography>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0 }}>
-                {`Conferencia ${event.title}`}
+              <CardMedia
+                component="img"
+                alt={event.title}
+                height="200"
+                image={event.image}
+              />
+              <Typography
+                variant="body2"
+                sx={{
+                  bgcolor: '#FF5253',
+                  borderRadius: '0 50px 50px 0',
+                  color: '#fff',
+                  padding: '12px',
+                  width: '50svw',
+                  marginTop: "-55px",
+                  position: 'relative',
+                }}>
+                {`${event.location} ${event.campus}`}
               </Typography>
-            </CardContent>
-            <CardActions sx={{ borderBottom: '1px solid #A6A6A6', marginBottom: '10px' }}>
-              <Typography size="medium" sx={{ padding: '0 5px', color: '#000', borderRight: '1px solid #A6A6A6' }}>
-                <LocationOnOutlined sx={{ marginRight: '5px' }} /> {event.address}
-              </Typography>
-              <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
-                <AccessTimeOutlined sx={{ marginRight: '5px' }} /> {event.time}
-              </Typography>
-            </CardActions>
-          </Card>
-        ))
-      }
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0 }}>
+                  {`Conferencia ${event.title}`}
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ borderBottom: '1px solid #A6A6A6', marginBottom: '10px' }}>
+                <Typography size="medium" sx={{ padding: '0 5px', color: '#000', borderRight: '1px solid #A6A6A6' }}>
+                  <LocationOnOutlined sx={{ marginRight: '5px' }} /> {event.address}
+                </Typography>
+                <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
+                  <AccessTimeOutlined sx={{ marginRight: '5px' }} /> {event.time}
+                </Typography>
+              </CardActions>
+            </Card>
+          ))
+        }
+      </div>
     </div>
   );
 }

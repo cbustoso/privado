@@ -30,7 +30,7 @@ const FrequentAskedQuestions = () => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <Box sx={{width: '90svw', margin:'auto'}}>
+    <Box sx={{width: '90svw', margin:'auto'}}  className='container col-12 col-lg-10 '>
       {
         questions.map((question, i) => (
           <Accordion

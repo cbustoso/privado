@@ -15,13 +15,13 @@ const ImageSlider = ({ slides, matches }) => {
     position: 'relative',
     margin: 0,
     padding: 0,
-    backgroundColor: "#fff"
+    // backgroundColor: "#fff"
   }
 
   const slideStyles = {
     backgroundImage: `url(${slides[currentIndex].imagen})`,
     width: '100svw',
-    height: 384,
+    height: 400,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
@@ -63,16 +63,25 @@ const ImageSlider = ({ slides, matches }) => {
     // color: '#fff'
   }
 
-  // setTimeout(() => {
-  //   goToPrevious()
-  // }, 3000)
+
+  const truncarPalabras = (texto, num) => {
+    const aux = texto.split('');
+    if (aux.length > num) {
+      const sliced = aux.slice(0, num)
+      const indexLastBlankSpace = sliced.lastIndexOf(' ')
+      console.log('hola', aux.slice(0, indexLastBlankSpace).join('') + '...')
+      return (aux.slice(0, indexLastBlankSpace).join('') + '...')
+    } else {
+      return texto;
+    }
+  }
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].titulo)
-    setContent(slides[newIndex].texto)
+    setTitle(truncarPalabras(slides[newIndex].titulo, 20))
+    setContent(truncarPalabras(slides[newIndex].texto, 40))
     setIdBlog(slides[newIndex].id)
   }
 
@@ -80,36 +89,43 @@ const ImageSlider = ({ slides, matches }) => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-    setTitle(slides[newIndex].titulo)
-    setContent(slides[newIndex].texto)
+    setTitle(truncarPalabras(slides[newIndex].titulo, 20))
+    setContent(truncarPalabras(slides[newIndex].texto, 40))
     setIdBlog(slides[newIndex].id)
   }
 
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
-    setTitle(slides[slideIndex].titulo)
-    setContent(slides[slideIndex].texto)
+    setTitle(truncarPalabras(slides[slideIndex].titulo, 20))
+    setContent(truncarPalabras(slides[slideIndex].texto, 40))
     setIdBlog(slides[slideIndex].id)
   }
 
   const boxStyleDesktop = {
     border: '1px solid #333',
-    width: '85svw',
-    borderRadius: '20px',
-    padding: '24px 16px',
+    // width: '85svw',
+    // borderRadius: '20px',
+    padding: '200px',
     textWrap: 'pretty',
-    margin: '-270px auto 30px',
-    backgroundColor: '#ffffff',
-    opacity: 0.75
+    margin: '-400px auto 30px',
+    backgroundColor: '#00000089',
+    height: 400,
+    display: 'flex',
+    alignItems: 'center'
   }
-  
+
   const boxStyleMobile = {
-    border: '1px solid #333',
-    width: '90svw',
-    borderRadius: '32px',
+    // border: '1px solid #333',
+    // width: '90svw',
+    // borderRadius: '32px',
     padding: '24px 16px',
     textWrap: 'pretty',
-    margin: '36px auto'
+    margin: '-400px auto 30px',
+    backgroundColor: '#00000089',
+    padding: '24px ',
+    height: 400,
+    display: 'flex',
+    alignItems: 'center'
   }
 
   return (
@@ -127,11 +143,13 @@ const ImageSlider = ({ slides, matches }) => {
           </div>
         ))}
       </div>
-      <Box sx={ matches ? boxStyleDesktop : boxStyleMobile}>
+      <Box sx={matches ? boxStyleDesktop : boxStyleMobile}>
         <div className="row" >
           <div className="col-sm-12 sailec">
-            <h2 style={{fontSize: '30px', fontWeight:700, lineHeight:'40px'}}>{title}</h2>
-            <p style={{fontSize: '20px', fontWeight:400, lineHeight:'32px'}}>{content.slice(0, 205)}</p>
+            <div style={{ minHeight: '2rem'}}>
+              <h2 style={{ color: 'white', fontSize: '30px', fontWeight: 700, lineHeight: '40px' }}>{title}</h2>
+              <p style={{ color: 'white',fontSize: '20px', fontWeight: 400, lineHeight: '32px' }}>{content.slice(0, 205)}</p>
+            </div>
             <Grid
               container
               direction="row"
@@ -158,7 +176,7 @@ const ImageSlider = ({ slides, matches }) => {
             style={dotStyles}
             onClick={() => goToSlide(slideIndex)}
           >
-            <CircleRounded sx={{ fontSize: '16px', margin:'40px 0 0 0', color: slideIndex === currentIndex ? '#B82925' : '#FF5253' }} />
+            <CircleRounded sx={{ fontSize: '16px',  color: slideIndex === currentIndex ? '#B82925' : '#FF5253' }} />
           </div>
         ))}
       </div>

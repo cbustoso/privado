@@ -44,9 +44,6 @@ const TestSlider = ({ slides }) => {
     // color: '#fff'
   }
 
-  // setTimeout(() => {
-  //   goToPrevious()
-  // }, 3000)
 
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
@@ -58,13 +55,13 @@ const TestSlider = ({ slides }) => {
   }
 
   return (
-    <div>
+    <div className='container col-12 col-lg-10 align-self-center'>
 
       {/* <TestCard test={slides} /> */}
       <div style={sliderStyles}>
         <Box sx={{
           // height: '45svh',
-          width: '90svw',
+          // width: '90svw',
           borderRadius: '32px',
           // padding: '24px 16px',
           textWrap: 'pretty',

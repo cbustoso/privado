@@ -4,9 +4,7 @@ import React from "react";
 import ReserveBtn from "./ReserveBtn";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-// import "../../src/assets/js/app";
-// import { baricon1, imguser, logo, noteicon, noteicon1, searchnormal, settingicon01, user06 } from './imagepath';
-import { logo } from "./imagepath";
+import { logo, logoudp } from "./imagepath";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,18 +14,39 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['TÓPICOS', 'TEST AUTODIAGNÓSTICO', 'EVENTOS', 'PREGUNTAS FRECUENTES'];
+const pages = [
+  { title: 'DSME', url: '/home' },
+  { title: '¿Cómo pedir ayuda?', url: '/home/donde-pedir-ayuda' },
+  {
+    title: 'Recomendaciones', url: '/home/recomendaciones', submenu: [
+      { title: 'Recomendaciones', url: '/home/recomendaciones' },
+      { title: 'Programa ACÉRCATE', url: '/home/acercate' },
+      { title: 'Programa DECIDE', url: '/home/decide' },
+    ]
+  },
+  { title: 'Noticias', url: '/home/noticias' },
+  { title: 'Material descargable', url: '/home/material-descargable' }
+];
+
+const pagesAlt = [
+  { title: 'DSME', url: '/home' },
+  { title: '¿Cómo pedir ayuda?', url: '/home/donde-pedir-ayuda' },
+  { title: 'Recomendaciones', url: '/home/recomendaciones' },
+  { title: 'Programa ACÉRCATE', url: '/home/acercate' },
+  { title: 'Programa DECIDE', url: '/home/decide' },
+  { title: 'Noticias', url: '/home/noticias' },
+  { title: 'Material descargable', url: '/home/material-descargable' },
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,6 +63,14 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   return (
     <AppBar position="static" style={{ background: 'white', color: 'black' }}>
       <Container maxWidth="xxl" style={{ background: 'white', color: 'black' }}>
@@ -56,18 +83,23 @@ const Header = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: 'none', lg: 'flex' },
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-              <img src={logo.src} width={263} height={70} alt="" />{" "}
+            <img
+              src={logo.src}
+              width={263}
+              height={70}
+              alt="Logo"
+            />{" "}
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            {/*  MENU MOBILE */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -93,12 +125,16 @@ const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' }
+                display: { xs: 'block', lg: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pagesAlt.map((page) => (
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <a href={page.url}  style={{color: 'black'}}>
+                      {page.title}
+                    </a>
+                  </Typography>
                 </MenuItem>
               ))}
 
@@ -111,7 +147,7 @@ const Header = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: 'flex', lg: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -120,19 +156,66 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-              <img src={logo.src} width={263} height={70} alt="" />{" "}
+            <img src={logoudp.src} height={70} alt="" />{" "}
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {pages.map((page) => (
-              <Button
-                key={ page }
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                { page }
-              </Button>
-              
-            ))}
+
+          {/* MENU DASHBOARD */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }, justifyContent: 'flex-end' }}>
+            {pages.map((page) => {
+              if (page.title === 'Recomendaciones') {
+                return (
+                  <div key={page.title}>
+                    <Button
+                      id="demo-positioned-button"
+                      aria-controls={open ? 'demo-positioned-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleClick}
+                      sx={{ my: 2, color: 'black' }}
+                    >
+                      {page.title}
+                    </Button>
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                    >
+                      {page.submenu.map(subpage => (
+                        <MenuItem onClick={handleClose} key={subpage.title}>
+                          <a style={{color: 'black'}} href={subpage.url}>
+                            {subpage.title}
+                          </a>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </div>
+                )
+              } else {
+                return (
+                  <Button
+                    className="roboto"
+                    key={page.title}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'black', display: 'block' }}
+                  >
+                    <a style={{color: 'black'}} href={page.url}>
+                      {page.title}
+                    </a>
+                  </Button>
+                )
+              }
+            }
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -142,7 +225,7 @@ const Header = () => {
 
             {/* </IconButton> */}
             {/* </Tooltip> */}
-            {/* <Menu
+            <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -163,7 +246,7 @@ const Header = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
