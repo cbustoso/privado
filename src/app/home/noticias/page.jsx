@@ -56,7 +56,7 @@ export default function Noticias() {
           <div className="card">
             <div className="card-body flex-lg-row flex-column d-flex justify-content-center align-items-center" style={{ margin: '20px' }}>
               <div className="col-12 col-lg-6" style={{ fontSize: '50px', textWrap: 'pretty' }}>
-                El DSME tiene una Playlist en Spotify para ti: "Respiro Musical"
+                <p>El DSME tiene una Playlist en Spotify para ti: "Respiro Musical".</p>
               </div>
               <div className="col-12 col-lg-6">
 
@@ -67,12 +67,12 @@ export default function Noticias() {
                 >
                   <Button variant="contained" sx={{ backgroundColor: '#61AACE' }}>
                     <a href="https://open.spotify.com/playlist/6hs32eFJp6S9Ht1rNU5zKy?si=df639df3920b4084">
-                      Haz click aquí para escuchar la Playlist: "Respiro Musical" 🎵
+                      Haz click aquí para escuchar la Playlist: "Respiro Musical" 🎵.
                     </a>
                   </Button>
                   <Button variant="contained" sx={{ backgroundColor: '#61CE70' }}>
                     <a href="https://forms.gle/SXugHQstcyLceLT66">
-                      Haz click aquí para agregar canciones a la Playlist: "Respiro musical" 🎵
+                      Haz click aquí para agregar canciones a la Playlist: "Respiro musical" 🎵.
                     </a>
                   </Button>
                 </Stack>
