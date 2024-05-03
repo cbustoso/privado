@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 
 const TestSlider = ({ slides }) => {
 
-  console.log('SLIDES', slides)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(slides[0].title)
   const [content, setContent] = useState(slides[0].content)

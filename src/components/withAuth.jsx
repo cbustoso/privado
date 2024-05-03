@@ -1,5 +1,5 @@
 "use client"
-import { sessionStatus } from "../utils/session";
+import { sessionStatus } from "../utils/auth";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 

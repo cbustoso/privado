@@ -63,13 +63,11 @@ const ImageSlider = ({ slides, matches }) => {
     // color: '#fff'
   }
 
-
   const truncarPalabras = (texto, num) => {
     const aux = texto.split('');
     if (aux.length > num) {
       const sliced = aux.slice(0, num)
       const indexLastBlankSpace = sliced.lastIndexOf(' ')
-      console.log('hola', aux.slice(0, indexLastBlankSpace).join('') + '...')
       return (aux.slice(0, indexLastBlankSpace).join('') + '...')
     } else {
       return texto;
@@ -153,8 +151,8 @@ const ImageSlider = ({ slides, matches }) => {
             <Grid
               container
               direction="row"
-              justifyContent="flex-end"
-              alignItems="baseline"
+              // justifyContent="flex-end"
+              // alignItems="baseline"
             >
               <Link href={`/blog/${idBlog}`}>
                 <button

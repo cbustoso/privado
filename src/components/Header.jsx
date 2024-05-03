@@ -72,7 +72,7 @@ const Header = () => {
 
 
   return (
-    <AppBar position="static" style={{ background: 'white', color: 'black' }}>
+    <AppBar position="sticky" style={{ background: 'white', color: 'black' }}>
       <Container maxWidth="xxl" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
