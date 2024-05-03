@@ -11155,7 +11155,12 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 div.css-1nmdiq5-menu{
   z-index: 3 !important;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
+}
+
+input#react-select-genero-input{
+  z-index: 3 !important;
+
 }
 
 .react-select__option {

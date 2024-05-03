@@ -13,7 +13,22 @@ import {
 } from '../../components/imagepath';
 import Link from "next/link";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const PatientsList = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [users, setUsers] = useState([])
   const [results, setResults] = useState([])
@@ -72,22 +87,6 @@ const PatientsList = () => {
         </>
       )
     },
-    //
-    // {
-    //   title: "Department",
-    //   dataIndex: "Department",
-    //   sorter: (a, b) => a.Department.length - b.Department.length
-    // },
-    // {
-    //   title: "Specialization",
-    //   dataIndex: "Specialization",
-    //   sorter: (a, b) => a.Specialization.length - b.Specialization.length
-    // },
-    // {
-    //     title:"Degree",
-    //     dataIndex: "Degree",
-    //         sorter: (a, b) => a.Degree.length - b.Degree.length
-    // },
     {
       title: "Teléfono",
       dataIndex: "mobile",

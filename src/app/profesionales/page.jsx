@@ -1,20 +1,35 @@
 "use client"
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { Table } from "antd";
-import { onShowSizeChange, itemRender } from '../../components/Pagination'
-import Sidebar from '../../components/Sidebar';
-import {
-  blogimg10, imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal, blogimg12,
-  blogimg2, blogimg4, blogimg6, blogimg8
-} from '../../components/imagepath';
 import { useState, useEffect } from 'react';
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+
+import { Table } from "antd";
+import { onShowSizeChange, itemRender } from '@/components/Pagination'
+import Sidebar from '@/components/Sidebar';
+
+import {
+  imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
+} from '@/components/imagepath';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor, fetchSpeciality } from '../../services/DoctorsServices';
-import { search } from '../../services/AppointmentsServices'
+
+import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor, fetchSpeciality } from '@/services/DoctorsServices';
+import { search } from '@/services/AppointmentsServices'
 
 const DoctorList = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const [doctors, setDoctors] = useState([])
   const [results, setResults] = useState([])
   const [show, setShow] = useState({ state: false, id: '' })

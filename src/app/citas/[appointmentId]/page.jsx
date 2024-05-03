@@ -17,8 +17,22 @@ import { fetchAppointment, updateAppointment } from "../../../services/Appointme
 import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const EditAppoinments = ({ params }) => {
-  // const { id } = useParams();
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+    || !session?.user?.rol === "alumno"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -106,7 +120,7 @@ const EditAppoinments = ({ params }) => {
       })
   })
 
-  const { field } = useController({name: 'especialidad', control})
+  const { field } = useController({ name: 'especialidad', control })
 
   const onChange = (date, dateString) => {
     // console.log(date, dateString);

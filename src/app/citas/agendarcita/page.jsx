@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useForm, Controller } from 'react-hook-form';
 
 import Sidebar from "../../../components/Sidebar";
-import Modal from "../../../components/Modal";
 
 import { TextField, Alert } from "@mui/material";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
@@ -18,8 +17,23 @@ import { fetchDoctors } from "../../../services/DoctorsServices";
 import { fetchUsers } from "../../../services/UsersServices";
 import { createAppointment } from "../../../services/AppointmentsServices"
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const AddAppoinments = () => {
   const VIDEOLLAMADA = false;
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
@@ -130,7 +144,7 @@ const AddAppoinments = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link href="#">Agenda </Link>
+                      <Link href="#">Citas </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -198,40 +212,8 @@ const AddAppoinments = () => {
                           </div>
                         </div>
                         }
-                        <div className="row">
-                          <div className="col-12 col-md-12 col-xl-12">
-                            <div className="form-group select-gender">
-                              <label className="gen-label">
-                                Indique lugar de preferencia <span className="login-danger">*</span>
-                              </label>
-                              <div className="form-check-inline">
-                                <label className="form-check-label">
-                                  <input
-                                    type="radio"
-                                    name="gender"
-                                    value="male"
-                                    className="form-check-input"
-                                    {...register('gender')}
-                                  />
-                                  Sede Centro - Manuel Rodríguez 343 sur, 2° piso
-                                </label>
-                              </div>
-                              <div className="form-check-inline">
-                                <label className="form-check-label">
-                                  <input
-                                    type="radio"
-                                    name="gender"
-                                    value="female"
-                                    className="form-check-input"
-                                    {...register('gender')}
-                                  />
-                                  Sede Huechuraba - Av. Sta. Clara 797, Huechuraba
-                                </label>
-                              </div>
 
-                            </div>
-                          </div>
-                        </div>
+                        {/* PROFESIONAL */}
 
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
@@ -285,12 +267,51 @@ const AddAppoinments = () => {
                           </div>
                         </div>
 
+                        {/* ESPECIALIDAD */}
+
                         <div className="col-12 col-md-6 col-xl-6">
                           <div className="form-group local-forms">
                             <label>Especialidad </label>
                             <input className="form-control" type="text" {...register('speciality')} />
                           </div>
                         </div>
+
+                        {/* lUGAR DE ATENCIÓN */}
+                        <div className="row">
+                          <div className="col-12 col-md-12 col-xl-12">
+                            <div className="form-group select-gender">
+                              <label className="gen-label">
+                                Indique lugar de preferencia <span className="login-danger">*</span>
+                              </label>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                    className="form-check-input"
+                                    {...register('gender')}
+                                  />
+                                  Sede Centro - Manuel Rodríguez 343 sur, 2° piso
+                                </label>
+                              </div>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                    className="form-check-input"
+                                    {...register('gender')}
+                                  />
+                                  Sede Huechuraba - Av. Sta. Clara 797, Huechuraba
+                                </label>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
 
                         <div className="col-12 col-md-6 col-xl-4">
                           <div className="form-group local-forms cal-icon">

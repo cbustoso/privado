@@ -14,7 +14,20 @@ import { fetchScheduleByUser, getSpecialities } from "@/services/SchedulesServic
 import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor } from '../../services/DoctorsServices';
 import { useForm } from 'react-hook-form';
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const ScheduleList = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  if (!session && !session?.user?.rol === "admin"
+    // || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const [doctors, setDoctors] = useState([])
   const [results, setResults] = useState([])
   const [dropdownValue, setDropdownValue] = useState('');

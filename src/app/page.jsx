@@ -21,19 +21,19 @@ import { saludMental01, saludMental02, saludMental03 } from '@/components/imagep
 
 const blogs = [
   {
-    id: '01',
+    id: '1',
     titulo: 'Titulo 01',
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental01.src
   }, 
   {
-    id: '02',
+    id: '2',
     titulo: 'Titulo 02',
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental02.src
   }, 
   {
-    id: '03',
+    id: '3',
     titulo: 'Titulo 03',
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental03.src

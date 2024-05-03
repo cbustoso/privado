@@ -1,33 +1,45 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-// import Header from '../../Header'
+import Link from 'next/link';
+
 import Sidebar from '../../components/Sidebar'
 import FeatherIcon from "feather-icons-react";
 import {
   blogimg1, blogimg10, blogimg11, blogimg12, blogimg2, blogimg3, blogimg4, blogimg5,
   blogimg6, blogimg7, blogimg8, blogimg9,
 } from '../../components/imagepath'
-// import { Link } from 'react-router-dom';
-import Link from 'next/link';
+
 import { fetchBlogs } from '@/services/BlogServices';
 
-const  truncarPalabras = (texto, num) => {
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
+const truncarPalabras = (texto, num) => {
   const aux = texto.split(' ');
-  
+
   if (aux.length > num) {
-      return aux.slice(0, num).join(' ') + '...';
+    return aux.slice(0, num).join(' ') + '...';
   } else {
-      return texto;
+    return texto;
   }
 }
 
 const BlogView = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/login');
+    return null;
+  }
 
   const data = async () => {
     try {
       const response = await fetchBlogs()
-      console.log('response', response);
-      setBlogs(response)
+      console.log('response', response.slice(0, 5));
+      setBlogs(response.slice(0, 5))
     } catch (error) {
       console.log('error', error)
     }

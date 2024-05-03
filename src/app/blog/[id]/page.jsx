@@ -11,23 +11,41 @@ import Select from "react-select";
 import { fetchBlog } from '@/services/BlogServices';
 
 import {
-  logo, baricon, baricon1, searchnormal, noteicon, imguser, noteicon1, user06, settingicon01, menuicon08, menuicon04,
-  menuicon06, menuicon09, menuicon10, menuicon11, menuicon12, menuicon14, menuicon15, menuicon16, logout, social06,
-  social01, social02, social03, social04, profiles03, iconsocial, iconsocial02, iconsocial03, iconsocial04, profileavatar04,
-  profileavatar05, profileavatar03, blog7, blog08, blog09, blog10, blog11, blog12, blog13, tag, tag1, tag2, tag3, tag4, dashboard, doctor, sidemenu, blog,
-  doctorschedule, blogdetail, patients
+  saludMental01, saludMental02, saludMental03
 }
   from '../../../components/imagepath';
 
-const Blogdetails = ({params}) => {
+const blogs = [
+  {
+    id: '1',
+    titulo: 'Titulo 01',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental01.src
+  },
+  {
+    id: '2',
+    titulo: 'Titulo 02',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental02.src
+  },
+  {
+    id: '3',
+    titulo: 'Titulo 03',
+    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
+    imagen: saludMental03.src
+  }
+]
+
+const Blogdetails = ({ params }) => {
   const [blog, setBlog] = useState({})
 
-  useEffect(()=> {
-    const fetchData = async() => {
-      const {bloques} = await fetchBlog(params.id);
-      setBlog(bloques[0])
-    }
-    fetchData()
+  useEffect(() => {
+    // const fetchData = async() => {
+    //   const {bloques} = await fetchBlog(params.id);
+    //   setBlog(bloques[0])
+    // }
+    // fetchData()
+    setBlog(blogs[params.id])
   }, [])
 
   return (
@@ -35,13 +53,13 @@ const Blogdetails = ({params}) => {
       <>
         <div className="main-wrapper">
           {/* <Header/> */}
-          <Sidebar id='menu-item11' id1='menu-items11' activeClassName='blog-details' />
-          <div className="page-wrapper">
+          {/* <Sidebar id='menu-item11' id1='menu-items11' activeClassName='blog-details' /> */}
+          <div className="page-wrapper" style={{ marginLeft: 'unset' }}>
             <div className="content">
               {/* Page Header */}
-              <div className="page-header">
+              {/* <div className="page-header">
                 <div className="row">
-                  <div className="col-sm-12">
+                  <div className="col-12 col-lg-10">
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
                         <Link href="#">Blog </Link>
@@ -55,19 +73,18 @@ const Blogdetails = ({params}) => {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* /Page Header */}
-              <div className="row">
-                <div className="col-md-8">
+              <div className="row d-flex justify-content-center">
+
+                {/* CONTENIDO DEL BLOG */}
+                <div className="col-12 col-lg-10 col-xl-6">
                   <div className="blog-view">
                     <article className="blog blog-single-post">
                       <h3 className="blog-title">
                         {blog.titulo}
                       </h3>
                       <div className="blog-info clearfix">
-                        <div className="post-right read-blks">
-                          <Link href="#.">Leer más...</Link>
-                        </div>
                         <div className="post-left date-blks">
                           <ul>
                             <li>
@@ -80,22 +97,22 @@ const Blogdetails = ({params}) => {
                               </Link>
                             </li>
                             {/*  <li>
-                        <Link href="#">
-                        <i className="feather-message" >
-                        <FeatherIcon icon="message-square" />
-                        {" "}
-                        </i>
-                          <span>58</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                        <i className="feather-eye" >
-                         <FeatherIcon icon = "eye" />
-                        </i>
-                        <span>2.8k</span>
-                        </Link>
-                      </li> */}
+                              <Link href="#">
+                                <i className="feather-message" >
+                                  <FeatherIcon icon="message-square" />
+                                  {" "}
+                                </i>
+                                <span>58</span>
+                              </Link>
+                            </li>
+                            <li>
+                              <Link href="#">
+                                <i className="feather-eye" >
+                                  <FeatherIcon icon="eye" />
+                                </i>
+                                <span>2.8k</span>
+                              </Link>
+                            </li> */}
                           </ul>
                         </div>
                       </div>
@@ -137,13 +154,7 @@ const Blogdetails = ({params}) => {
                           illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                         </p>
                       </div>
-                      <div className="blog-share ">
-                        <div className="share-blogs d-flex align-items-center">
-                          <Link href="#">
-                            <img alt="#" src={social06.src} />
-                          </Link>
-                          <span className="ms-2">2.8k</span>
-                        </div>
+                      {/* <div className="blog-share ">
                         <ul className="social-share nav">
                           <li>
                             <Link href="#">
@@ -166,12 +177,12 @@ const Blogdetails = ({params}) => {
                             </Link>
                           </li>
                         </ul>
-                      </div>
+                      </div> */}
                       <div className="list-add-blogs">
                         <ul className="nav">
-                          
+
                           <li># Ophthalmology</li>
-                          <li># Beauty</li> 
+                          <li># Beauty</li>
                           <li># Prevention</li>
                         </ul>
                       </div>
@@ -327,322 +338,323 @@ const Blogdetails = ({params}) => {
               </div> */}
                   </div>
                 </div>
-                {/* <Link className="col-md-4" href="#">
-            <div className="widget post-widget">
-              <div className="relat-head">
-                <h5>Related Posts</h5>
-                <Link href="#">Show All</Link>
-              </div>
-              <ul className="latest-posts">
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog7.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Health</h5>
-                      <span className="ms-2">05 Sep 2022</span>
+
+                {/*  <Link className="col-md-4" href="#">
+                  <div className="widget post-widget">
+                    <div className="relat-head">
+                      <h5>Related Posts</h5>
+                      <Link href="#">Show All</Link>
                     </div>
-                    <h4>
-                      <Link href="#">
-                        Hydration or Moisturization – What to do this Winter?
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 10 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
+                    <ul className="latest-posts">
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog7.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Health</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Hydration or Moisturization – What to do this Winter?
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 10 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog08.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Ophthalmology</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Keep proper monitor distance and room lighting.
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 5 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog09.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Safety</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Keep Hand Sanitizers Away from Young Children
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 4 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog10.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Ophthalmology</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Hair Loss – Causes, Treatment and Preventions
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 10 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-                </li>
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog08.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Ophthalmology</h5>
-                      <span className="ms-2">05 Sep 2022</span>
+                  <div className="widget tags-widget">
+                    <div className="relat-head">
+                      <h5>Tags</h5>
                     </div>
-                    <h4>
-                      <Link href="#">
-                        Keep proper monitor distance and room lighting.
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 5 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
+                    <ul className="tags">
+                      <li>
+                        <Link href="#." className="tag">
+                          # Endodontics (10)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Endodontics (15)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Neurology (70)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Insurance (16)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Dental (60)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Neurology (70)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Diabetes (10)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Dermotology (15)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#." className="tag">
+                          # Stress (25)
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
-                </li>
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog09.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Safety</h5>
-                      <span className="ms-2">05 Sep 2022</span>
+                  <div className="widget post-widget">
+                    <div className="relat-head">
+                      <h5>Most Reads</h5>
+                      <Link href="#">Show All</Link>
                     </div>
-                    <h4>
-                      <Link href="#">
-                        Keep Hand Sanitizers Away from Young Children
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 4 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
+                    <ul className="latest-posts">
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog11.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Health</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Hydration or Moisturization – What to do this Winter?
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 10 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog12.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Ophthalmology</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Hair Loss – Causes, Treatment and Preventions
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 5 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="post-thumb">
+                          <Link href="#">
+                            <img
+                              className="img-fluid"
+                              src={blog13.src}
+                              alt="#"
+                            />
+                          </Link>
+                        </div>
+                        <div className="post-info">
+                          <div className="date-posts">
+                            <h5>Safety</h5>
+                            <span className="ms-2">05 Sep 2022</span>
+                          </div>
+                          <h4>
+                            <Link href="#">
+                              Simple Changes That Lowered My Mom Blood Pressure
+                            </Link>
+                          </h4>
+                          <p>
+                            {" "}
+                            Read more in 4 Minutes
+                            <i className="fa fa-long-arrow-right ms-2" />
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-                </li>
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog10.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Ophthalmology</h5>
-                      <span className="ms-2">05 Sep 2022</span>
+                  <div className="widget category-widget">
+                    <div className="relat-head mb-0">
+                      <h5> Categories</h5>
                     </div>
-                    <h4>
-                      <Link href="#">
-                        Hair Loss – Causes, Treatment and Preventions
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 10 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
+                    <ul className="categories">
+                      <li>
+                        <Link href="#.">
+                          <img
+                            src={tag.src}
+                            className="me-1"
+                            alt="#"
+                          />
+                          Hydration or Moisturization (10)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#.">
+                          <img
+                            src={tag1.src}
+                            className="me-1"
+                            alt="#"
+                          />
+                          Ophthalmology (50)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#.">
+                          <img
+                            src={tag2.src}
+                            className="me-1"
+                            alt="#"
+                          />
+                          Blood Pressure (24)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#.">
+                          <img
+                            src={tag3.src}
+                            className="me-1"
+                            alt="#"
+                          />
+                          Corona Virus (32)
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#.">
+                          <img
+                            src={tag4.src}
+                            className="me-1"
+                            alt="#"
+                          />
+                          Dental (15)
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
-                </li>
-              </ul>
-            </div>
-            <div className="widget tags-widget">
-              <div className="relat-head">
-                <h5>Tags</h5>
-              </div>
-              <ul className="tags">
-                <li>
-                  <Link href="#." className="tag">
-                    # Endodontics (10)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Endodontics (15)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Neurology (70)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Insurance (16)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Dental (60)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Neurology (70)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Diabetes (10)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Dermotology (15)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#." className="tag">
-                    # Stress (25)
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="widget post-widget">
-              <div className="relat-head">
-                <h5>Most Reads</h5>
-                <Link href="#">Show All</Link>
-              </div>
-              <ul className="latest-posts">
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog11.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Health</h5>
-                      <span className="ms-2">05 Sep 2022</span>
-                    </div>
-                    <h4>
-                      <Link href="#">
-                        Hydration or Moisturization – What to do this Winter?
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 10 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog12.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Ophthalmology</h5>
-                      <span className="ms-2">05 Sep 2022</span>
-                    </div>
-                    <h4>
-                      <Link href="#">
-                        Hair Loss – Causes, Treatment and Preventions
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 5 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="post-thumb">
-                    <Link href="#">
-                      <img
-                        className="img-fluid"
-                        src={blog13.src}
-                       alt="#"
-                      />
-                    </Link>
-                  </div>
-                  <div className="post-info">
-                    <div className="date-posts">
-                      <h5>Safety</h5>
-                      <span className="ms-2">05 Sep 2022</span>
-                    </div>
-                    <h4>
-                      <Link href="#">
-                        Simple Changes That Lowered My Mom Blood Pressure
-                      </Link>
-                    </h4>
-                    <p>
-                      {" "}
-                      Read more in 4 Minutes
-                      <i className="fa fa-long-arrow-right ms-2" />
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="widget category-widget">
-              <div className="relat-head mb-0">
-                <h5> Categories</h5>
-              </div>
-              <ul className="categories">
-                <li>
-                  <Link href="#.">
-                    <img
-                      src={tag.src}
-                      className="me-1"
-                     alt="#"
-                    />
-                    Hydration or Moisturization (10)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#.">
-                    <img
-                      src={tag1.src}
-                      className="me-1"
-                     alt="#"
-                    />
-                    Ophthalmology (50)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#.">
-                    <img
-                      src={tag2.src}
-                      className="me-1"
-                     alt="#"
-                    />
-                    Blood Pressure (24)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#.">
-                    <img
-                      src={tag3.src}
-                      className="me-1"
-                     alt="#"
-                    />
-                    Corona Virus (32)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#.">
-                    <img
-                      src={tag4.src}
-                      className="me-1"
-                     alt="#"
-                    />
-                    Dental (15)
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </Link> */}
+                </Link> */}
                 {/* <div className="col-md-12">
             <div className="widget new-comment clearfix">
               <h3>Leave a Comment</h3>

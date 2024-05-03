@@ -1,23 +1,51 @@
 'use client'
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import { DatePicker } from "antd";
-import Select from "react-select";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import FeatherIcon from "feather-icons-react/build/FeatherIcon";
+
+import bcrypt from "bcryptjs";
 import { useForm, Controller } from 'react-hook-form';
+
+import Select from "react-select";
 import { Alert } from "@mui/material";
+import Sidebar from "@/components/Sidebar";
+
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 
 import ChildModal from "@/components/ChildModal";
 import { addDoctor } from "../../../services/DoctorsServices";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const AddDoctor = () => {
-  const { register, handleSubmit, watch, control,
-    formState: { errors }
-  } = useForm()
+  const ELEGIR_STATUS = false;
+  const { data: session } = useSession()
+  const router = useRouter();
+
+  if (!session && session.user.rol !== 'admin' || session.user.rol !== 'profesional' ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
+  const { register, handleSubmit, watch, control, reset, setValue, getValues,
+    formState: { errors, isSubmitSuccessful }
+  } = useForm({
+    defaultValues: {
+      name: "",
+      lastName: "",
+      email: "",
+      genero: 0,
+      password: "",
+      confirmPassword: "",
+      campus: null,
+      speciality: { value: " ", label: " ", name: " " },
+      status: !ELEGIR_STATUS ? "activo" : ""
+    }
+  })
 
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
@@ -29,7 +57,9 @@ const AddDoctor = () => {
   //   success: false
   // })
 
+
   const [gender, setGender] = useState([
+    { value: 0, label: " " },
     { value: 1, label: "Hombre" },
     { value: 2, label: "Mujer" },
     { value: 3, label: "Hombre trans" },
@@ -38,6 +68,7 @@ const AddDoctor = () => {
   ]);
 
   const [department, setDepartment] = useState([
+    { value: " ", label: " ", name: " " },
     { value: "Psicopedagogia", label: "Psicopedagogía", name: "speciality" },
     { value: "Psicologia", label: "Psicología", name: "speciality" },
     { value: "Psiquiatria", label: "Psiquiatría", name: "speciality" },
@@ -47,30 +78,32 @@ const AddDoctor = () => {
     // console.log(date, dateString);
     setIsClicked(true);
   };
-  const loadFile = (event) => {
-    // Handle file loading logic here
-  };
+
+  console.log('getValues ', getValues('genero'));
 
   const onSubmit = handleSubmit(async data => {
     setSuccess('initial')
-    console.log('error', errors)
-    if (data) {
-      console.log('data', data)
-      // setDataDoctor(data)
-      try {
-        const response = await addDoctor(data)
-        console.log(response)
-        // if(response.err) setStatusPetition(prevState => ({...prevState, warning: true}))
-        // else setStatusPetition(prevState => ({...prevState, success: true}))
-        setSuccess('success')
-      } catch (err) {
-        console.log('ERR', err)
-        setSuccess('fail')
-      }
 
-    } else {
-      console.log('FAIL')
-    }
+    const saltRound = 10;
+    const hashedPassword = await bcrypt.hash(data.password, saltRound)
+    const dataWithHashPass = { ...data, password: hashedPassword }
+    console.log('data', dataWithHashPass)
+
+    /*  if (data) {
+       try {
+         const response = await addDoctor(dataWithHashPass)
+         console.log(response)
+         // if(response.err) setStatusPetition(prevState => ({...prevState, warning: true}))
+         // else setStatusPetition(prevState => ({...prevState, success: true}))
+         setSuccess('success')
+       } catch (err) {
+         console.log('ERR', err)
+         setSuccess('fail')
+       }
+ 
+     } else {
+       console.log('FAIL')
+     } */
   })
 
   const onConfirm = async () => {
@@ -81,6 +114,19 @@ const AddDoctor = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const handleCancel = () => {
+    reset({ name: 'Holo' })
+  }
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset()
+      // setValue('genero.value', 0)
+      // console.log('HOLO', setValue('genero', {value: 0, label: " "}))
+
+    }
+  }, [isSubmitSuccessful, reset])
 
   return (
     <div>
@@ -200,7 +246,7 @@ const AddDoctor = () => {
                                   defaultValue={selectedOption}
                                   onChange={onChange}
                                   options={gender}
-                                  // menuPortalTarget={document.body}
+                                  menuPortalTarget={document.body}
                                   styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                   id="genero"
                                   components={{
@@ -449,50 +495,54 @@ const AddDoctor = () => {
                           </div>
                         </div>
 
-                        <div className="col-12 col-md-6 col-xl-6">
-                          <div className="form-group select-gender">
-                            <label className="gen-label">
-                              Estado <span className="login-danger">*</span>
-                            </label>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  value="activo"
-                                  name="status"
-                                  className="form-check-input"
-                                  {...register('status', {
-                                    required: {
-                                      value: true,
-                                      message: 'Estado es requerido'
-                                    }
-                                  })}
-                                />
-                                Activo
+                        {
+                          ELEGIR_STATUS &&
+                          <div className="col-12 col-md-6 col-xl-6">
+                            <div className="form-group select-gender">
+                              <label className="gen-label">
+                                Estado <span className="login-danger">*</span>
                               </label>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    value="activo"
+                                    name="status"
+                                    checked
+                                    className="form-check-input"
+                                    {...register('status', {
+                                      required: {
+                                        value: true,
+                                        message: 'Estado es requerido'
+                                      }
+                                    })}
+                                  />
+                                  Activo
+                                </label>
+                              </div>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    value="inactivo"
+                                    name="status"
+                                    className="form-check-input"
+                                    {...register('status', {
+                                      required: {
+                                        value: true,
+                                        message: 'Estado es requerido'
+                                      }
+                                    })}
+                                  />
+                                  Inactivo
+                                </label>
+                              </div>
+                              {errors.status && <span className="login-danger">
+                                <small>{errors.status.message}</small>
+                              </span>}
                             </div>
-                            <div className="form-check-inline">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  value="inactivo"
-                                  name="status"
-                                  className="form-check-input"
-                                  {...register('status', {
-                                    required: {
-                                      value: true,
-                                      message: 'Estado es requerido'
-                                    }
-                                  })}
-                                />
-                                Inactivo
-                              </label>
-                            </div>
-                            {errors.status && <span className="login-danger">
-                              <small>{errors.status.message}</small>
-                            </span>}
-                          </div>
-                        </div>
+                          </div>}
+
                         <div className="col-12">
                           <div className="doctor-submit text-end">
                             <button
@@ -503,8 +553,9 @@ const AddDoctor = () => {
                             </button>
                             {/* } */}
                             <button
-                              type="submit"
+                              type="reset"
                               className="btn btn-primary cancel-form"
+                            // onClick={handleCancel}
                             >
                               Cancelar
                             </button>

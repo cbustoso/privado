@@ -5,7 +5,22 @@ import FeatherIcon from "feather-icons-react";
 // import { Link } from 'react-router-dom';
 import Link from 'next/link';
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const DoctorProfile = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   return (
     <div>
 

@@ -10,6 +10,11 @@ import dynamic from 'next/dynamic'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form';
+import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
+import useMediaQuery from '@mui/mater ial/useMediaQuery';
+
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 const DynamicSidebar = dynamic(() => import('../../../components/Sidebar'), {
   loading: () => <p>Loading...</p>,
@@ -20,6 +25,16 @@ const DynamicTextEditor = dynamic(() => import('../../../components/TextEditor')
 })
 
 const Addblog = () => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin") {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+  
   const loadFile = (event) => {
     // Handle file loading logic here
   };

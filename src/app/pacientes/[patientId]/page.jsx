@@ -1,10 +1,9 @@
 "use client"
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Sidebar from "../../../components/Sidebar";
 import { favicon, imagesend } from "../../../components/imagepath";
-import { DatePicker } from "antd";
 import FeatherIcon from "feather-icons-react";
 import Link from "next/link";
 import Select from "react-select";
@@ -12,7 +11,22 @@ import { fetchUser, updateUser } from "../../../services/UsersServices";
 import { useForm } from 'react-hook-form'
 import { Skeleton } from "@mui/material";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const EditPatients = ({ params }) => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm({

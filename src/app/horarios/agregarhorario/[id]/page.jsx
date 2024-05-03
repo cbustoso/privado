@@ -14,7 +14,25 @@ import { fetchSpeciality } from '@/services/DoctorsServices';
 import { createSchedule, getDates, fetchScheduleByDate, validateDates } from '@/services/SchedulesServices';
 import Calender from '../../../calender/page';
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 const AddSchedule = ({ params }) => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+console.log(session)
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+
+    // TODO agregar condición de ID de usuario
+  
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -49,7 +67,7 @@ const AddSchedule = ({ params }) => {
     formState: { errors }
   } = useForm({
     defaultValues: async () => {
-      console.log('PArams en add schedule', params.id);
+      console.log('Params en add schedule', params.id);
       const { especialidad: user } = await fetchSpeciality(params.id)
       console.log('user', user);
       const obj = {
@@ -287,7 +305,7 @@ const AddSchedule = ({ params }) => {
                                       transition: '250ms',
                                       width: '35px',
                                       height: '35px',
-
+                                      zIndex: 3000,
                                     }),
                                   }}
                                 />
@@ -948,7 +966,11 @@ const AddSchedule = ({ params }) => {
           </div>
 
         </div >
+        <div className="page-wrapper">
+                        <div className="content">
         <Calender id={params.id} />
+        </div>
+        </div>
         <div className="row">
           <div className="col-sm-12 col-lg-6">
             {success === 'success'

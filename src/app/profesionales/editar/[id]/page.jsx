@@ -11,8 +11,22 @@ import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form'
 import { fetchDoctor } from "../../../../services/DoctorsServices";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 const EditDoctor = ({params}) => {
+  const { data: session } = useSession()
+  const router = useRouter();
+  // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
 
   const [initial, setInitial] = useState({})
   const [selectedOption, setSelectedOption] = useState(null);

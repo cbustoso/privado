@@ -1,26 +1,36 @@
 'use client'
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
+import Link from 'next/link';
 import { Table } from 'antd';
 import Sidebar from '../../components/Sidebar';
-import {
-  imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
-} from '../../components/imagepath';
 import { onShowSizeChange, itemRender } from '../../components/Pagination'
-import Link from 'next/link';
-import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-
-import { fetchAppointments, changeStatusAppointment, search } from '../../services/AppointmentsServices'
 
 import { useAuthorization } from '../../../hooks/useAuthorization';
 import { useSession } from "next-auth/react";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/navigation';
 
+import { fetchAppointments, changeStatusAppointment, search } from '../../services/AppointmentsServices'
+
+import {
+  imagesend, pdficon, pdficon3, pdficon4, plusicon, refreshicon, searchnormal
+} from '../../components/imagepath';
+import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const AppoinmentList = () => {
   const { data: session } = useSession()
-// console.log('session', session);
+  const router = useRouter();
   // useAuthorization(['alumno'])
+
+  if (!session && !session?.user?.rol === "admin"
+  || !session?.user?.rol === "profesional"
+  || !session?.user?.rol === "alumno") {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    console.log('KHE?!?!');
+    router.push('/');
+    return null;
+  }
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [appointments, setAppointments] = useState([])
@@ -141,7 +151,7 @@ const AppoinmentList = () => {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div
-                style={{ right: '30px'}}
+                style={{ right: '30px' }}
                 className=
                 {show.state === true && show.id === record.id_cita
                   ? "dropdown-menu dropdown-menu-end show"
@@ -187,7 +197,7 @@ const AppoinmentList = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link href="#">Agenda </Link>
+                      <Link href="#">Citas </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
@@ -282,7 +292,7 @@ const AppoinmentList = () => {
               </div>
             </div>
           </div>
-          
+
         </div>
         <div id="delete_patient" className="modal fade delete-modal" role="dialog">
           <div className="modal-dialog modal-dialog-centered">
