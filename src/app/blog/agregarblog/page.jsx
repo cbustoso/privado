@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 import { useForm, Controller } from 'react-hook-form';
-import useMediaQuery from '@mui/mater ial/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
