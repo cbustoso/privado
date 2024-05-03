@@ -18,7 +18,6 @@ import { fetchUsers } from "@/services/UsersServices";
 import { createAppointment } from "@/services/AppointmentsServices"
 import { createInterviewRecord } from "@/services/RecordServices";
 import Contact from "@/components/Contact"
-import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
