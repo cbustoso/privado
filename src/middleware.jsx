@@ -1,6 +1,4 @@
-import axios from "axios";
-import { sessionStatus } from "./utils/auth";
-import { NextRequest, NextResponse } from "next/server";
+// import { NextRequest, NextResponse } from "next/server";
 
 /* const protectedRoutes = [
   "/dashboard", 
@@ -25,11 +23,9 @@ export default function middleware(req) {
     return NextResponse.redirect(absoluteURL.toString())
   } 
 }
-
-axios('http://localhost:3000/api/auth/session')
-  .then(res => console.log('MIDDLE RES', res))
-  .catch(err => console.log('MIDDLE ERR', err))
  */
+
+
 // ESTO ES LO QUE IBA
 export { default } from "next-auth/middleware"
 
