@@ -32,6 +32,21 @@ const AddInterviewRecord = ({ params }) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
+  const [isClicked, setIsClicked] = useState(false);
+  const [startTime, setStartTime] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [doctor, setDoctor] = useState([]);
+  const [patients, setPatients] = useState([])
+  const [contacts, setContacts] = useState([])
+
+  const [success, setSuccess] = useState('initial')
+  const [error, setError] = useState('')
+  // const [allRegions, setAllRegions] = useState(regiones)
+  // const [selectedCities, setSelectedCities] = useState([])
+  // const [rut, setRut] = useState('')
+
+  const [open, setOpen] = useState(false);
+  
   const calcularEdad = (fechaNacimiento) => {
     var hoy = new Date();
     var cumpleanos = new Date(fechaNacimiento);
@@ -44,7 +59,6 @@ const AddInterviewRecord = ({ params }) => {
     console.log('EDAD', edad);
     return edad;
   }
-
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
@@ -105,20 +119,6 @@ const AddInterviewRecord = ({ params }) => {
     getPatients()
   }, [])
 
-  const [isClicked, setIsClicked] = useState(false);
-  const [startTime, setStartTime] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [doctor, setDoctor] = useState([]);
-  const [patients, setPatients] = useState([])
-  const [contacts, setContacts] = useState([])
-
-  const [success, setSuccess] = useState('initial')
-  const [error, setError] = useState('')
-  // const [allRegions, setAllRegions] = useState(regiones)
-  // const [selectedCities, setSelectedCities] = useState([])
-  // const [rut, setRut] = useState('')
-
-  const [open, setOpen] = useState(false);
   const handleOpen = (e) => {
     e.preventDefault()
     setOpen(true)

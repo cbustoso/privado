@@ -111,16 +111,16 @@ const EditAppoinments = ({ params }) => {
       })
   })
 
+  const { field } = useController({ name: 'especialidad', control })
+
   if (!session && !session?.user?.rol === "admin"
     || !session?.user?.rol === "profesional"
     || !session?.user?.rol === "alumno"
   ) {
     // Redirige al usuario a la página de inicio de sesión si no está autenticado
     router.push('/');
-    return null;
+    // return null;
   }
-
-  const { field } = useController({ name: 'especialidad', control })
 
   const onChange = (date, dateString) => {
     // console.log(date, dateString);

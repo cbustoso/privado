@@ -58,6 +58,7 @@ const ScheduleList = () => {
     fetchData()
   }, [])
 
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   
   if (!session && !session?.user?.rol === "admin"
     // || !session?.user?.rol === "profesional"
@@ -66,8 +67,6 @@ const ScheduleList = () => {
     router.push('/');
     return null;
   }
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);

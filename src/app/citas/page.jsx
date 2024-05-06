@@ -29,6 +29,11 @@ const AppoinmentList = () => {
   const [show, setShow] = useState({ state: false, id: '' })
   const matches = useMediaQuery('(min-width:600px)');
 
+  useEffect(() => {
+    fetchAppointments(setAppointments)
+    fetchAppointments(setResults)
+  }, [])
+
   if (!session && !session?.user?.rol === "admin"
   || !session?.user?.rol === "profesional"
   || !session?.user?.rol === "alumno") {
@@ -37,11 +42,6 @@ const AppoinmentList = () => {
     router.push('/');
     return null;
   }
-
-  useEffect(() => {
-    fetchAppointments(setAppointments)
-    fetchAppointments(setResults)
-  }, [])
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);

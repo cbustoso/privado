@@ -68,6 +68,15 @@ const AddDoctor = () => {
     { value: "Psiquiatria", label: "Psiquiatría", name: "speciality" },
   ]);
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset()
+      // setValue('genero.value', 0)
+      // console.log('HOLO', setValue('genero', {value: 0, label: " "}))
+
+    }
+  }, [isSubmitSuccessful, reset])
+
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
     setIsClicked(true);
@@ -117,15 +126,6 @@ const AddDoctor = () => {
   const handleCancel = () => {
     reset({ name: 'Holo' })
   }
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset()
-      // setValue('genero.value', 0)
-      // console.log('HOLO', setValue('genero', {value: 0, label: " "}))
-
-    }
-  }, [isSubmitSuccessful, reset])
 
   return (
     <div>

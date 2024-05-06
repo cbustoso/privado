@@ -14,16 +14,10 @@ import { useRouter } from 'next/navigation';
 const Sidebar = (props) => {
   const { data: session, status } = useSession()
   const router = useRouter();
-
-  if (!session && !session?.user?.rol) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const [sidebar, setSidebar] = useState("");
 
   console.log('STATUS', status)
+
   const handleClick = (e, item, item1, item3) => {
     const div = document.querySelector(`#${item}`);
     const ulDiv = document.querySelector(`.${item1}`);
@@ -38,6 +32,11 @@ const Sidebar = (props) => {
     }
   }, [])
 
+  if (!session && !session?.user?.rol) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const expandMenu = () => {
     document.body.classList.remove("expand-menu");

@@ -108,6 +108,11 @@ const AddFirstAppoinments = () => {
       )
   })
 
+  useEffect(() => {
+    fetchData()
+    fetchDoctors()
+  }, [])
+
   if (!session && !session?.user?.rol === "admin"
     || !session?.user?.rol === "profesional"
     || !session?.user?.rol === "alumno") {
@@ -263,11 +268,6 @@ const AddFirstAppoinments = () => {
     console.log('docs', docs);
     setDoctor(docs)
   }
-
-  useEffect(() => {
-    fetchData()
-    fetchDoctors()
-  }, [])
 
   const onChange = (date, dateString) => {
     console.log(date, dateString);
