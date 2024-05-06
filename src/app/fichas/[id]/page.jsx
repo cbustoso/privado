@@ -46,7 +46,12 @@ const AddInterviewRecord = ({ params }) => {
   // const [rut, setRut] = useState('')
 
   const [open, setOpen] = useState(false);
-  
+
+  useEffect(() => {
+    fetchData()
+    getPatients()
+  }, [])
+
   const calcularEdad = (fechaNacimiento) => {
     var hoy = new Date();
     var cumpleanos = new Date(fechaNacimiento);
@@ -114,11 +119,6 @@ const AddInterviewRecord = ({ params }) => {
     setPatients(patients)
   }
 
-  useEffect(() => {
-    fetchData()
-    getPatients()
-  }, [])
-
   const handleOpen = (e) => {
     e.preventDefault()
     setOpen(true)
@@ -160,13 +160,13 @@ const AddInterviewRecord = ({ params }) => {
       setOpen(false)
     }
   })
-  const [gender, setGender] = useState([
+  const gender = [
     { value: 1, label: "Femenino" },
     { value: 2, label: "Masculino" },
     { value: 3, label: "No binario" },
     { value: 4, label: "Otro" },
     { value: 5, label: "Prefiero no decir" }
-  ]);
+  ];
   const career = [
     { value: 2, label: "Antropologia" },
     { value: 3, label: "Arquitectura" },

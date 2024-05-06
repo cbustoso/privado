@@ -74,6 +74,12 @@ const AddFirstAppoinments = () => {
   const [time, setTime] = useState('')
   const [allDays, setAllDays] = useState([])
   const [checked, setChecked] = useState(true);
+  const [rut, setRut] = useState('');
+  // fechas siguiente
+  const [indiceDias, setIndiceDias] = useState(0);
+  const [indiceHoras, setIndiceHoras] = useState(0);
+  // modal alert
+  const [openBackdrop, setOpenBackdrop] = useState(false);
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -124,7 +130,6 @@ const AddFirstAppoinments = () => {
   const selectedRegion = watch('region')
   const profesional = watch('professional')
   const modalidad = watch('modalidad')
-  const [rut, setRut] = useState('');
 
   const handleChangeRut = (e) => {
     const inputValue = e.target.value;
@@ -348,10 +353,6 @@ const AddFirstAppoinments = () => {
   }
 
 
-  // fechas siguiente
-  const [indiceDias, setIndiceDias] = useState(0);
-  const [indiceHoras, setIndiceHoras] = useState(0);
-
   const mostrarSiguientesDias = (e) => {
     e.preventDefault()
     setIndiceDias(prevIndice => prevIndice + 5);
@@ -372,8 +373,6 @@ const AddFirstAppoinments = () => {
     setIndiceHoras(prevIndice => Math.max(0, prevIndice - 5));
   };
 
-  // modal alert
-  const [openBackdrop, setOpenBackdrop] = useState(false);
   const handleOpenBackdrop = () => setOpenBackdrop(true);
   const handleCloseBackdrop = () => setOpenBackdrop(false);
 
