@@ -57,15 +57,6 @@ const AddFirstAppoinments = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-    || !session?.user?.rol === "alumno") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   dayjs.extend(isLeapYear) // use plugin
   dayjs.locale('es-mx') // use locale
 
@@ -82,9 +73,7 @@ const AddFirstAppoinments = () => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [allDays, setAllDays] = useState([])
-
   const [checked, setChecked] = useState(true);
-
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -118,6 +107,15 @@ const AddFirstAppoinments = () => {
         console.log('err', error)
       )
   })
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+    || !session?.user?.rol === "alumno") {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const selectedRegion = watch('region')
   const profesional = watch('professional')
   const modalidad = watch('modalidad')

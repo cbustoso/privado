@@ -31,7 +31,7 @@ const AddAppoinments = () => {
   ) {
     // Redirige al usuario a la página de inicio de sesión si no está autenticado
     router.push('/');
-    return null;
+    // return null;
   }
 
 

@@ -25,12 +25,6 @@ const AddDoctor = () => {
   const { data: session } = useSession()
   const router = useRouter();
 
-  if (!session && session.user.rol !== 'admin' || session.user.rol !== 'profesional' ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const { register, handleSubmit, watch, control, reset, setValue, getValues,
     formState: { errors, isSubmitSuccessful }
   } = useForm({
@@ -79,7 +73,12 @@ const AddDoctor = () => {
     setIsClicked(true);
   };
 
-  console.log('getValues ', getValues('genero'));
+  if (!session && session.user.rol !== 'admin' || session.user.rol !== 'profesional' ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
 
   const onSubmit = handleSubmit(async data => {
     setSuccess('initial')

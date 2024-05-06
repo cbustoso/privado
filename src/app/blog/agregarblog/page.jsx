@@ -27,32 +27,33 @@ const Addblog = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
+  
+  const loadFile = (event) => {
+    // Handle file loading logic here
+  };
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const blog = [
+    { value: 1, label: "Psicología" },
+    { value: 2, label: "Psicopedagogía" },
+    { value: 3, label: "Psiquiatría" }
+  ];
+  const category = [
+    { value: 1, label: "Estrés" },
+    { value: 2, label: "Concentración" },
+    { value: 3, label: "Estudios" },
+  ];
+
+  const { register, handleSubmit, watch, control,
+    formState: { errors }
+  } = useForm()
 
   if (!session && !session?.user?.rol === "admin") {
     // Redirige al usuario a la página de inicio de sesión si no está autenticado
     router.push('/');
     return null;
   }
-  
-  const loadFile = (event) => {
-    // Handle file loading logic here
-  };
-  const [selectedOption, setSelectedOption] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [blog, setBlog] = useState([
-    { value: 1, label: "Psicología" },
-    { value: 2, label: "Psicopedagogía" },
-    { value: 3, label: "Psiquiatría" }
-  ]);
-  const [category, setCategory] = useState([
-    { value: 1, label: "Estrés" },
-    { value: 2, label: "Concentración" },
-    { value: 3, label: "Estudios" },
-  ]);
-
-  const { register, handleSubmit, watch, control,
-    formState: { errors }
-  } = useForm()
 
   const onSubmit = handleSubmit(async data => {
   console.log(data)

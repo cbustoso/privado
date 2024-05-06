@@ -19,14 +19,6 @@ const EditPatients = ({ params }) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm({
@@ -88,6 +80,14 @@ const EditPatients = ({ params }) => {
     { value: 4, label: "Dentist" },
   ]);
   const loadFile = (event) => { };
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const onSubmit = handleSubmit(data => {
     // console.log('enviadoo data', data)

@@ -28,13 +28,6 @@ const BlogView = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-
-  if (!session && !session?.user?.rol) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/login');
-    return null;
-  }
-
   const data = async () => {
     try {
       const response = await fetchBlogs()
@@ -49,6 +42,12 @@ const BlogView = () => {
   useEffect(() => {
     data()
   }, [])
+
+  if (!session && !session?.user?.rol) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/login');
+    return null;
+  }
 
   return (
     <div>

@@ -4,7 +4,6 @@
 import React, { useState } from 'react'
 // import { Link } from "react-router-dom";
 import Link from 'next/link';
-// import FeatherIcon from "feather-icons-react";
 import TextEditor from '../../../../components/TextEditor';
 
 
@@ -13,7 +12,6 @@ import Sidebar from '../../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 
-import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import useMediaQuery from '@mui/mater ial/useMediaQuery';
 
 import { useSession } from "next-auth/react";
@@ -23,12 +21,6 @@ const Editblog = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-
-  if (!session && !session?.user?.rol === "admin") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
 
   const loadFile = (event) => {
     // Handle file loading logic here
@@ -47,6 +39,12 @@ const Editblog = () => {
     { value: 3, label: "Corona Virus" },
 
   ]);
+
+  if (!session && !session?.user?.rol === "admin") {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   return (
     <>

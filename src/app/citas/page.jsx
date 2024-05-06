@@ -22,6 +22,12 @@ const AppoinmentList = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [appointments, setAppointments] = useState([])
+  const [results, setResults] = useState([])
+  const [idAppointment, setIdAppointment] = useState('')
+  const [show, setShow] = useState({ state: false, id: '' })
+  const matches = useMediaQuery('(min-width:600px)');
 
   if (!session && !session?.user?.rol === "admin"
   || !session?.user?.rol === "profesional"
@@ -31,13 +37,6 @@ const AppoinmentList = () => {
     router.push('/');
     return null;
   }
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [appointments, setAppointments] = useState([])
-  const [results, setResults] = useState([])
-  const [idAppointment, setIdAppointment] = useState('')
-  const [show, setShow] = useState({ state: false, id: '' })
-  const matches = useMediaQuery('(min-width:600px)');
 
   useEffect(() => {
     fetchAppointments(setAppointments)

@@ -23,7 +23,6 @@ const DoctorProfile = () => {
 
   return (
     <div>
-
       <>
         <Sidebar id='menu-item1' id1='menu-items1' activeClassName='doctor-profile' />
         <div className="page-wrapper">

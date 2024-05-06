@@ -22,17 +22,6 @@ const AddSchedule = ({ params }) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 console.log(session)
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-
-    // TODO agregar condición de ID de usuario
-  
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -81,6 +70,18 @@ console.log(session)
       return obj
     }
   })
+  
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+
+    // TODO agregar condición de ID de usuario
+  
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
   const frecuencia = watch('frecuencia')
   const modalidad = watch('modalidad')
 

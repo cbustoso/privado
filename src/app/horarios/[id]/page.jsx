@@ -22,18 +22,6 @@ const ScheduleByProfessional = ({ params }) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-
-    // TODO agregar condición de horario
-
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
-
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [profesional, setProfesional] = useState({})
@@ -82,6 +70,16 @@ const ScheduleByProfessional = ({ params }) => {
     }
   })
 
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+
+    // TODO agregar condición de horario
+
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const handleDay = (e) => {
     const nuevoNumero = e.target.value;

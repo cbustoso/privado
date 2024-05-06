@@ -19,15 +19,6 @@ const EditDoctor = ({params}) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
-
   const [initial, setInitial] = useState({})
   const [selectedOption, setSelectedOption] = useState(null);
   const [options, setOptions] = useState([
@@ -90,6 +81,14 @@ const EditDoctor = ({params}) => {
       return obj
     })
   })
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const onSubmit = handleSubmit(data => {
     console.log('DATA', data)

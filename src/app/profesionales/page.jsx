@@ -22,14 +22,6 @@ const DoctorList = () => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const [doctors, setDoctors] = useState([])
   const [results, setResults] = useState([])
   const [show, setShow] = useState({ state: false, id: '' })
@@ -54,6 +46,14 @@ const DoctorList = () => {
   }, [])
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
 
   const onSelectChange = (newSelectedRowKeys) => {
     // console.log("selectedRowKeys changed: ", selectedRowKeys);

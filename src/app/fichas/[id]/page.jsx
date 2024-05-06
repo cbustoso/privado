@@ -32,16 +32,6 @@ const AddInterviewRecord = ({ params }) => {
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
-
-
   const calcularEdad = (fechaNacimiento) => {
     var hoy = new Date();
     var cumpleanos = new Date(fechaNacimiento);
@@ -80,6 +70,16 @@ const AddInterviewRecord = ({ params }) => {
         console.log('err', error)
       )
   })
+
+
+  if (!session && !session?.user?.rol === "admin"
+    || !session?.user?.rol === "profesional"
+  ) {
+    // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    router.push('/');
+    return null;
+  }
+
 
   const fetchData = async () => {
     const { users } = await fetchDoctor('6')
