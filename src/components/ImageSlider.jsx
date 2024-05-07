@@ -9,19 +9,19 @@ const ImageSlider = ({ slides, matches }) => {
   const [title, setTitle] = useState(slides[0].titulo)
   const [content, setContent] = useState(slides[0].texto)
   const [idBlog, setIdBlog] = useState(slides[0].id)
+  const imgHeightMobile = '72vh'
+  const imgHeightDesktop = 400
 
   const sliderStyles = {
-    // height: '85svh',
     position: 'relative',
     margin: 0,
     padding: 0,
-    // backgroundColor: "#fff"
   }
 
   const slideStyles = {
     backgroundImage: `url(${slides[currentIndex].imagen})`,
     width: '100svw',
-    height: 400,
+    height: matches ? 400 : imgHeightMobile,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
@@ -58,7 +58,7 @@ const ImageSlider = ({ slides, matches }) => {
   }
 
   const dotStyles = {
-    margin: '0 8px',
+    margin: '-30px 8px',
     cursor: 'pointer',
     // color: '#fff'
   }
@@ -118,13 +118,17 @@ const ImageSlider = ({ slides, matches }) => {
     // borderRadius: '32px',
     padding: '24px 16px',
     textWrap: 'pretty',
-    margin: '-400px auto 30px',
+    margin: `-${imgHeightMobile} auto 0px`,
     backgroundColor: '#00000089',
     padding: '24px ',
-    height: 400,
+    height: imgHeightMobile,
     display: 'flex',
     alignItems: 'center'
   }
+
+  setTimeout(() => {
+    goToNext()
+  }, 2500);
 
   return (
     <div style={sliderStyles}>

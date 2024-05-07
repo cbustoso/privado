@@ -43,7 +43,6 @@ const TestSlider = ({ slides }) => {
     // color: '#fff'
   }
 
-
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
     setTitle(slides[slideIndex].title)

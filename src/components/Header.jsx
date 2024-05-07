@@ -72,8 +72,8 @@ const Header = () => {
 
 
   return (
-    <AppBar position="sticky" style={{ background: 'white', color: 'black' }}>
-      <Container maxWidth="xxl" style={{ background: 'white', color: 'black' }}>
+    <AppBar position="sticky" style={{ background: 'white', color: 'black', margin: 0 }}>
+      <Container maxWidth="xl" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
@@ -98,7 +98,7 @@ const Header = () => {
             />{" "}
           </Typography>
 
-            {/*  MENU MOBILE */}
+          {/*  MENU MOBILE */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>
             <IconButton
               size="large"
@@ -131,7 +131,7 @@ const Header = () => {
               {pagesAlt.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <a href={page.url}  style={{color: 'black'}}>
+                    <a href={page.url} style={{ color: 'black' }}>
                       {page.title}
                     </a>
                   </Typography>
@@ -166,6 +166,7 @@ const Header = () => {
                 return (
                   <div key={page.title}>
                     <Button
+                      className="roboto"
                       id="demo-positioned-button"
                       aria-controls={open ? 'demo-positioned-menu' : undefined}
                       aria-haspopup="true"
@@ -192,7 +193,7 @@ const Header = () => {
                     >
                       {page.submenu.map(subpage => (
                         <MenuItem onClick={handleClose} key={subpage.title}>
-                          <a style={{color: 'black'}} href={subpage.url}>
+                          <a style={{ color: 'black' }} href={subpage.url}>
                             {subpage.title}
                           </a>
                         </MenuItem>
@@ -208,7 +209,7 @@ const Header = () => {
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'black', display: 'block' }}
                   >
-                    <a style={{color: 'black'}} href={page.url}>
+                    <a style={{ color: 'black' }} href={page.url}>
                       {page.title}
                     </a>
                   </Button>

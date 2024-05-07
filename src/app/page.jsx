@@ -39,7 +39,7 @@ const blogs = [
     imagen: saludMental03.src
   }
 ]
-console.log(blogs);
+// console.log(blogs);
 
 export default function Home() {
   // const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
@@ -83,9 +83,9 @@ export default function Home() {
         {/* {!isError && blogs.length === 0 && <Carrousel />} */}
 
         {!matches &&
-          <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
-            <div className="media-body sailec" style={{ margin: '0 20px', paddingTop: '10px', fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
-              <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
+          <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'roboto', lineHeight: '30px', }}>
+            <div className="media-body roboto" style={{ margin: '0 20px', paddingTop: '10px', fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
+              <p className="media-body roboto" style={{ textWrap: 'pretty' }}>
                 Tenemos un espacio pensado para ti, estamos para apoyarte. ¡Compartamos!
               </p>
               <ReserveBtn text={'Reservar aquí'} bgColor={'#FABB00'} color={'#000'} />
@@ -110,7 +110,7 @@ export default function Home() {
         </div>
         <FrequentAskedQuestions />
 
-        <FooterDae />
+        <FooterDae matches={matches} />
       </main>
     </>
 

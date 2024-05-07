@@ -11,7 +11,7 @@ import Mail from 'feather-icons-react/build/IconComponents/Mail';
 import { FaFacebookF } from "react-icons/fa";
 
 
-const FooterDae = () => {
+const FooterDae = ({matches}) => {
 
   return (
     <>
@@ -19,7 +19,15 @@ const FooterDae = () => {
         <div className="content"></div>
         <div className="row" style={{ backgroundColor: '#2D2D2D', color: 'white', display: 'flex', justifyContent: 'center' }}>
           <div className="col-12 col-lg-10">
-            <div className="row" style={{ margin: '40px auto', padding: '20px 0', borderBottom: '1px solid white', display: 'flex', justifyContent: 'center' }}>
+            <div className="row my-4"
+              style={{
+                margin: '84px auto',
+                padding: '20px 0',
+                borderBottom: '1px solid white',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: matches ? '0' : '20px'
+              }}>
               <div className="col-10 col-lg-4">
                 <Image
                   src={white_logo}
@@ -27,14 +35,14 @@ const FooterDae = () => {
                   style={{
                     width: '100%',
                     height: 'auto',
-                    maxWidth: '285px'
+                    maxWidth: '285px',
                   }}
                   width={500}
                   height={300}
                   alt=""
                 />
               </div>
-              <div className="col-10 col-lg-4 m4">
+              <div className="col-10 col-lg-4">
                 <Image
                   src={white_acreditacion}
                   sizes="100vw"
@@ -48,8 +56,8 @@ const FooterDae = () => {
                   alt=""
                 />
               </div>
-              <div className="col-12 col-sm-10 col-lg-4 d-flex flex-column align-items-left">
-                <div style={{ display: 'inline-flex' }}>
+              <div className="col-10 col-lg-4 d-flex flex-column align-items-left">
+                <div className='mt-4' style={{ display: 'inline-flex' }}>
                   <a href="" style={{
                     width: '30px',
                     height: '30px',
@@ -101,25 +109,23 @@ const FooterDae = () => {
                     <YouTube />
                   </a>
                 </div>
-                <span>
-                </span>
                 <p>2024 @ UNIVERSIDAD DIEGO PORTALES</p>
               </div>
             </div>
             <Divider style={{ width: '100%' }} flexItem />
-            <div className="row justify-content-center">
-              <div className="col-12 col-sm-10 col-lg-4 m4">
+            <div className="row justify-content-center mb-4">
+              <div className="col-10 col-lg-4 mt-0">
                 <h4>Bienestar Estudiantil</h4>
                 <p><Map /> Manuel Rodríguez Sur 343</p>
                 <p><Phone /> +56 2 2676 8314</p>
                 <p><Mail /> bienestarestudiantil@udp.cl</p>
               </div>
-              <div className="col-12 col-sm-10 col-lg-4 m4">
+              <div className="col-10 col-lg-4 mt-4">
                 <h4>Salud Mental</h4>
                 <p><Map /> Manuel Rodríguez Sur 343</p>
                 <p><Mail /> saludmentalestudiantil@mail.udp.cl</p>
               </div>
-              <div className="col-12 col-sm-10 col-lg-4">
+              <div className="col-10 col-lg-4 mt-4">
                 <h4>Vida Universitaria</h4>
                 <p><Map /> Manuel Rodríguez Sur 361</p>
                 <p><Phone /> +56 2 2676 2002</p>
