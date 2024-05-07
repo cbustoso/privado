@@ -15,8 +15,10 @@ import Link from "next/link";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const PatientsList = () => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -37,14 +39,6 @@ const PatientsList = () => {
     }
     fetchData()
   }, [])
-
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -152,7 +146,7 @@ const PatientsList = () => {
   ]
 
   return (
-    <>
+    <ProtectedPage level={ROL}>
       {/* <Headerudp /> */}
       <Sidebar id='menu-item2' id1='menu-items2' activeClassName='patient-list' />
       <div className="page-wrapper">
@@ -279,7 +273,7 @@ const PatientsList = () => {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedPage>
 
   )
 }

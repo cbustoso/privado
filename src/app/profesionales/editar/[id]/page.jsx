@@ -13,8 +13,10 @@ import { fetchDoctor } from "../../../../services/DoctorsServices";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const EditDoctor = ({params}) => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -82,14 +84,6 @@ const EditDoctor = ({params}) => {
     })
   })
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const onSubmit = handleSubmit(data => {
     console.log('DATA', data)
     // return updateDoctor(data, id)
@@ -97,7 +91,7 @@ const EditDoctor = ({params}) => {
 
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       {/* <Headerudp /> */}
       <Sidebar
         id="menu-item1"
@@ -950,7 +944,7 @@ const EditDoctor = ({params}) => {
           </div>
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

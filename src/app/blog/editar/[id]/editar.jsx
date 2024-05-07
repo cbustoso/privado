@@ -16,8 +16,10 @@ import useMediaQuery from '@mui/mater ial/useMediaQuery';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const Editblog = () => {
+  const ROL = ["admin"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -40,14 +42,8 @@ const Editblog = () => {
 
   ]);
 
-  if (!session && !session?.user?.rol === "admin") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   return (
-    <>
+    <ProtectedPage level={ROL}>
 
       <div className="main-wrapper">
         {/* <Header /> */}
@@ -317,7 +313,7 @@ const Editblog = () => {
 
       </div>
       <div className="sidebar-overlay" data-reff="" />
-    </>
+    </ProtectedPage>
 
   )
 }

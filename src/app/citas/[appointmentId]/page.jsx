@@ -19,8 +19,10 @@ import { fetchUsers } from "../../../services/UsersServices";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const EditAppoinments = ({ params }) => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -113,15 +115,6 @@ const EditAppoinments = ({ params }) => {
 
   const { field } = useController({ name: 'especialidad', control })
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-    || !session?.user?.rol === "alumno"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    // return null;
-  }
-
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
   };
@@ -145,7 +138,7 @@ const EditAppoinments = ({ params }) => {
   })
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       {/* <Headerudp /> */}
       <Sidebar
         id="menu-item4"
@@ -886,7 +879,7 @@ const EditAppoinments = ({ params }) => {
           </div>
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

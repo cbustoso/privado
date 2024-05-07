@@ -19,9 +19,11 @@ import { addDoctor } from "../../../services/DoctorsServices";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const AddDoctor = () => {
   const ELEGIR_STATUS = false;
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
 
@@ -50,7 +52,6 @@ const AddDoctor = () => {
   //   warning: false,
   //   success: false
   // })
-
 
   const [gender, setGender] = useState([
     { value: 0, label: " " },
@@ -81,13 +82,6 @@ const AddDoctor = () => {
     // console.log(date, dateString);
     setIsClicked(true);
   };
-
-  if (!session && session.user.rol !== 'admin' || session.user.rol !== 'profesional' ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
 
   const onSubmit = handleSubmit(async data => {
     setSuccess('initial')
@@ -128,7 +122,7 @@ const AddDoctor = () => {
   }
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       {/* <Headerudp /> */}
       <Sidebar id="menu-item1" id1="menu-items1" activeClassName="add-doctor" />
       <>
@@ -608,7 +602,7 @@ const AddDoctor = () => {
           </div>
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

@@ -16,12 +16,14 @@ import Calender from '../../../calender/page';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const AddSchedule = ({ params }) => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-console.log(session)
+  console.log(session)
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -70,17 +72,6 @@ console.log(session)
       return obj
     }
   })
-  
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-
-    // TODO agregar condición de ID de usuario
-  
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
 
   const frecuencia = watch('frecuencia')
   const modalidad = watch('modalidad')
@@ -166,7 +157,7 @@ console.log(session)
   }
 
   return (
-    <>
+    <ProtectedPage level={ROL}>
       <Sidebar id='menu-item5' id1='menu-items5' activeClassName='add-shedule' />
       <>
         <div className="page-wrapper">
@@ -968,9 +959,9 @@ console.log(session)
 
         </div >
         <div className="page-wrapper">
-                        <div className="content">
-        <Calender id={params.id} />
-        </div>
+          <div className="content">
+            <Calender id={params.id} />
+          </div>
         </div>
         <div className="row">
           <div className="col-sm-12 col-lg-6">
@@ -1014,7 +1005,7 @@ console.log(session)
       </>
 
 
-    </>
+    </ProtectedPage>
   )
 }
 

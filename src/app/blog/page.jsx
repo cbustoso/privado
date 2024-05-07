@@ -13,6 +13,7 @@ import { fetchBlogs } from '@/services/BlogServices';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const truncarPalabras = (texto, num) => {
   const aux = texto.split(' ');
@@ -25,6 +26,7 @@ const truncarPalabras = (texto, num) => {
 }
 
 const BlogView = () => {
+  const ROL = ["admin"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -43,14 +45,8 @@ const BlogView = () => {
     data()
   }, [])
 
-  if (!session && !session?.user?.rol) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/login');
-    return null;
-  }
-
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       <div className="main-wrapper">
         {/* Header */}
         {/* <Header /> */}
@@ -789,7 +785,7 @@ const BlogView = () => {
         </div>
       </div>
       {/* /Main Wrapper */}
-    </div>
+    </ProtectedPage>
   )
 }
 

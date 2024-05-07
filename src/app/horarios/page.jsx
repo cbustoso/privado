@@ -16,8 +16,10 @@ import { useForm } from 'react-hook-form';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const ScheduleList = () => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
 
@@ -334,7 +336,7 @@ const ScheduleList = () => {
 
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       <>
         {/* <Headerudp /> */}
         <Sidebar id='menu-item5' id1='menu-items5' activeClassName='shedule-list' />
@@ -482,7 +484,7 @@ const ScheduleList = () => {
           </div>
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

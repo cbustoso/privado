@@ -17,8 +17,10 @@ import {
 } from '../../components/imagepath';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const AppoinmentList = () => {
+  const ROL = ["alumno"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -33,15 +35,6 @@ const AppoinmentList = () => {
     fetchAppointments(setAppointments)
     fetchAppointments(setResults)
   }, [])
-
-  if (!session && !session?.user?.rol === "admin"
-  || !session?.user?.rol === "profesional"
-  || !session?.user?.rol === "alumno") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    console.log('KHE?!?!');
-    router.push('/');
-    return null;
-  }
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -184,7 +177,7 @@ const AppoinmentList = () => {
   ]
 
   return (
-    <>
+    <ProtectedPage level={ROL}>
       {/* <Headerudp /> */}
       <Sidebar id='menu-item4' id1='menu-items4' activeClassName='appoinment-list' />
       <>
@@ -338,7 +331,7 @@ const AppoinmentList = () => {
       </>
       <>
       </>
-    </>
+    </ProtectedPage>
   )
 }
 

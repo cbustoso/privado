@@ -14,6 +14,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const DynamicSidebar = dynamic(() => import('../../../components/Sidebar'), {
   loading: () => <p>Loading...</p>,
@@ -24,6 +25,7 @@ const DynamicTextEditor = dynamic(() => import('../../../components/TextEditor')
 })
 
 const Addblog = () => {
+  const ROL = ["admin"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -49,18 +51,12 @@ const Addblog = () => {
     formState: { errors }
   } = useForm()
 
-  if (!session && !session?.user?.rol === "admin") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const onSubmit = handleSubmit(async data => {
   console.log(data)
   })
 
   return (
-    <>
+    <ProtectedPage level={ROL}>
       <div className="main-wrapper">
         <DynamicSidebar id='menu-item11' id1='menu-items11' activeClassName='add-blog' />
         {/* page-wrapper-start  */}
@@ -429,7 +425,7 @@ const Addblog = () => {
         {/* page-wrapper-end */}
       </div>
       <div className="sidebar-overlay" data-reff="" />
-    </>
+    </ProtectedPage>
   )
 }
 

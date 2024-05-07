@@ -26,8 +26,10 @@ import { regiones, comunas, motivo_consulta, existencia_servicio, quien_derivo, 
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const AddInterviewRecord = ({ params }) => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -89,16 +91,6 @@ const AddInterviewRecord = ({ params }) => {
         console.log('err', error)
       )
   })
-
-
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
 
   const fetchData = async () => {
     const { users } = await fetchDoctor('6')
@@ -240,9 +232,7 @@ const AddInterviewRecord = ({ params }) => {
   })
 
   return (
-    <div>
-      {/* <Header /> */}
-      {/* <Headerudp /> */}
+    <ProtectedPage level={ROL}>
       <Sidebar
         id="menu-item4"
         id1="menu-items4"
@@ -1983,7 +1973,7 @@ const AddInterviewRecord = ({ params }) => {
 
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

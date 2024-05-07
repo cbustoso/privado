@@ -7,22 +7,16 @@ import Link from 'next/link';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const DoctorProfile = () => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       <>
         <Sidebar id='menu-item1' id1='menu-items1' activeClassName='doctor-profile' />
         <div className="page-wrapper">
@@ -713,7 +707,7 @@ const DoctorProfile = () => {
 
 
 
-    </div>
+    </ProtectedPage>
   )
 }
 

@@ -16,8 +16,10 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 
 import { fetchDoctors, fetchDoctor, addDoctor, updateDoctor, fetchSpeciality } from '@/services/DoctorsServices';
 import { search } from '@/services/AppointmentsServices'
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const DoctorList = () => {
+  const ROL = ["admin", "profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -47,14 +49,6 @@ const DoctorList = () => {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const onSelectChange = (newSelectedRowKeys) => {
     // console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
@@ -67,7 +61,6 @@ const DoctorList = () => {
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
   };
-
 
   const handleSearch = (e) => {
     const bleh = search(doctors, e)
@@ -197,7 +190,7 @@ const DoctorList = () => {
 
 
   return (
-    <>
+    <ProtectedPage level={'profesional'}>
       {/* <Headerudp /> */}
       <Sidebar id='menu-item1' id1='menu-items1' activeClassName='doctor-list' />
       <>
@@ -589,7 +582,7 @@ const DoctorList = () => {
 
       </>
 
-    </>
+    </ProtectedPage>
 
   )
 }

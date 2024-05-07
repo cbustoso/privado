@@ -29,6 +29,7 @@ import { createAppointment, sendEmail } from "@/services/AppointmentsServices"
 import { regiones, comunas, motivo_consulta } from "@/utils/selects";
 // import { formatRut } from "@/utils/managedata";
 import { fetchScheduleByDate, fetchScheduleByUser, fetchScheduleByAvailability } from "@/services/SchedulesServices";
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const formatRut = (value) => {
   const cleanedValue = value.replace(/[^\dkK]/g, '');
@@ -54,6 +55,7 @@ const obtenerFechasUnicas = array => {
 }
 
 const AddFirstAppoinments = () => {
+  const ROL = ["alumno"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -118,14 +120,6 @@ const AddFirstAppoinments = () => {
     fetchData()
     fetchDoctors()
   }, [])
-
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-    || !session?.user?.rol === "alumno") {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
 
   const selectedRegion = watch('region')
   const profesional = watch('professional')
@@ -377,7 +371,7 @@ const AddFirstAppoinments = () => {
   const handleCloseBackdrop = () => setOpenBackdrop(false);
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       {/* <Header /> */}
       <Sidebar
         id="menu-item4"
@@ -1267,7 +1261,7 @@ const AddFirstAppoinments = () => {
             : ''
         }
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

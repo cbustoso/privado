@@ -19,21 +19,14 @@ import { createAppointment } from "../../../services/AppointmentsServices"
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from "@/components/ProtectedRoutes";
 
 const AddAppoinments = () => {
   const VIDEOLLAMADA = false;
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    // return null;
-  }
-
 
   const { register, handleSubmit, watch, control,
     formState: { errors }
@@ -127,7 +120,7 @@ const AddAppoinments = () => {
   ]);
 
   return (
-    <div>
+    <ProtectedPage level={ROL}>
       {/* <Header /> */}
       {/* <Headerudp /> */}
       <Sidebar
@@ -795,7 +788,7 @@ const AddAppoinments = () => {
           </div>
         </div>
       </>
-    </div>
+    </ProtectedPage>
   );
 };
 

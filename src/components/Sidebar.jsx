@@ -9,9 +9,10 @@ import { useSession } from 'next-auth/react';
 import SidebarSkeleton from './skeletons/Sidebar-skeleton';
 // import Scrollbars from "react-custom-scrollbars-2";
 import { useRouter } from 'next/navigation';
-
+import ProtectedPage from './ProtectedRoutes';
 
 const Sidebar = (props) => {
+  const ROL = ["alumno"]
   const { data: session, status } = useSession()
   const router = useRouter();
   const [sidebar, setSidebar] = useState("");
@@ -32,12 +33,6 @@ const Sidebar = (props) => {
     }
   }, [])
 
-  if (!session && !session?.user?.rol) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const expandMenu = () => {
     document.body.classList.remove("expand-menu");
   };
@@ -45,7 +40,7 @@ const Sidebar = (props) => {
     document.body.classList.add("expand-menu");
   };
   return (
-    <>
+    <ProtectedPage level={ROL}>
 
       <div className="sidebar" id="sidebar">
         {/* <Scrollbars
@@ -314,7 +309,7 @@ const Sidebar = (props) => {
 
         {/* </Scrollbars> */}
       </div>
-    </>
+    </ProtectedPage>
   )
 }
 export default Sidebar

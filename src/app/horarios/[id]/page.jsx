@@ -16,8 +16,10 @@ import Calender from '../../calender/page';
 
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import ProtectedPage from '@/components/ProtectedRoutes';
 
 const ScheduleByProfessional = ({ params }) => {
+  const ROL = ["profesional"]
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
@@ -29,9 +31,6 @@ const ScheduleByProfessional = ({ params }) => {
   const [success, setSuccess] = useState('initial')
   const [startDate, setStartDate] = useState();
   const [startDay, setStartDay] = useState('');
-
-  const [prueba, setPrueba] = useState(new Date)
-
 
   const onChange = (date, dateString) => {
     // console.log(date, dateString);
@@ -70,17 +69,6 @@ const ScheduleByProfessional = ({ params }) => {
     }
   })
 
-  if (!session && !session?.user?.rol === "admin"
-    || !session?.user?.rol === "profesional"
-
-    // TODO agregar condición de horario
-
-  ) {
-    // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    router.push('/');
-    return null;
-  }
-
   const handleDay = (e) => {
     const nuevoNumero = e.target.value;
     setStartDay(nuevoNumero);
@@ -95,8 +83,6 @@ const ScheduleByProfessional = ({ params }) => {
     const split = nuevaFecha.split('-')
     setStartDay(split[2]);
   }
-
-
 
   // Función para combinar los resultados
   function combinarResultados(resultados) {
@@ -137,7 +123,7 @@ const ScheduleByProfessional = ({ params }) => {
 
 
   return (
-    <>
+    <ProtectedPage level={ROL}>
       <Sidebar id='menu-item5' id1='menu-items5' activeClassName='professional-shedule' />
       <>
         <div className="page-wrapper">
@@ -220,7 +206,7 @@ const ScheduleByProfessional = ({ params }) => {
           </div>
         </div >
       </>
-    </>
+    </ProtectedPage>
   )
 }
 
