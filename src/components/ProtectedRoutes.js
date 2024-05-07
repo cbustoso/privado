@@ -1,5 +1,6 @@
 // components/ProtectedPage.js
 // import { useUser } from '@/context/auth-context';
+'use client'
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
