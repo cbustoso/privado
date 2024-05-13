@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { LocationOnOutlined, AccessTimeOutlined } from '@mui/icons-material';
-
+import { blogs } from '@/utils/blogs';
 const events = [
   {
     title: "Salud Mental",
@@ -59,9 +59,9 @@ const Events = ({matches}) => {
               }}>
               <CardMedia
                 component="img"
-                alt={event.title}
+                alt={blogs[i].titulo}
                 height="200"
-                image={event.image}
+                image={blogs[i].imagen}
               />
               <Typography
                 variant="body2"
@@ -77,8 +77,8 @@ const Events = ({matches}) => {
                 {`${event.location} ${event.campus}`}
               </Typography>
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0 }}>
-                  {`Conferencia ${event.title}`}
+                <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0, height: '4em' }}>
+                  {`Conferencia ${(blogs[i].titulo).split(':')[0]}`}
                 </Typography>
               </CardContent>
               <CardActions sx={{ borderBottom: '1px solid #A6A6A6', marginBottom: '10px' }}>
