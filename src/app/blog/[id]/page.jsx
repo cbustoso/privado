@@ -9,12 +9,14 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
 /* eslint-disable no-unused-vars */
 import { fetchBlog } from '@/services/BlogServices';
-
+import FooterDae from '@/components/FooterDae';
 import { blogs } from '@/utils/blogs';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 const Blogdetails = ({ params }) => {
   const [blog, setBlog] = useState({})
+  const matches = useMediaQuery('(min-width:600px)');
 
   useEffect(() => {
     // const fetchData = async() => {
@@ -679,6 +681,7 @@ const Blogdetails = ({ params }) => {
         </div>
         <div className="sidebar-overlay" data-reff="" />
       </>
+      <FooterDae matches={matches} />
 
     </div>
   )
