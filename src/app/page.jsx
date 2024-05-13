@@ -55,6 +55,7 @@ export default function Home() {
 
   const matches = useMediaQuery('(min-width:600px)');
 
+  console.log('MATCHES APP PAGE', matches);
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
@@ -75,7 +76,7 @@ export default function Home() {
       <main >
         {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
-        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} matches={matches} />}
+        {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} />} */}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
         {/* {isError && <p>Ha habido un error</p>} */}
