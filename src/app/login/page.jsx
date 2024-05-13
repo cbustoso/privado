@@ -68,7 +68,7 @@ const Login = () => {
             </div>
             {/* /Login logo */}
             {/* Login Content */}
-            <div className="col-lg-6 login-wrap-bg">
+            <div className="col-12 col-lg-6 login-wrap-bg">
               <div className="login-wrapper">
                 <div className="loginbox">
                   <div className="login-right">
