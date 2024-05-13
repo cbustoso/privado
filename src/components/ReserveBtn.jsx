@@ -15,7 +15,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   const handleSignIn = async () => {
     try {
       // Realiza la autenticación
-      await signIn('google', { callbackUrl: '/citas' }) // Puedes pasar el nombre del proveedor que estés utilizando
+      await signIn('google', { callbackUrl: '/citas' }) // Se puede pasar el nombre del proveedor que se esté utilizando
       // Si la autenticación es exitosa, se redirigirá automáticamente a la página de destino configurada en NextAuth
       
     } catch (error) {
@@ -39,8 +39,12 @@ const ReserveBtn = ({ text, bgColor, color }) => {
       {/* <Link href="#" > */}
         <button
         onClick={() => handleSignIn()}
-          className='btn btn-rounded seilac'
-          style={{ margin: '16px 0', backgroundColor: bgColor, color: color }}
+          className='btn btn-rounded'
+          style={{ 
+            margin: '16px 0', 
+            backgroundColor: bgColor, 
+            color: color,
+           }}
           // onClick={handleOpen}
         >
           {matches && <Today /> }

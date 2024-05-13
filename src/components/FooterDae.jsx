@@ -1,32 +1,43 @@
 
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
+import Link from 'next/link';
 import { white_logo, white_acreditacion } from './imagepath';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Twitter, Instagram, YouTube, Facebook } from '@mui/icons-material';
 import Map from 'feather-icons-react/build/IconComponents/Map';
 import Phone from 'feather-icons-react/build/IconComponents/Phone';
 import Mail from 'feather-icons-react/build/IconComponents/Mail';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { FaFacebookF } from "react-icons/fa";
 
 
-const FooterDae = ({matches}) => {
+const FooterDae = () => {
+  const matches = useMediaQuery('(min-width:600px)');
 
+  console.log('MATCHES', matches);
   return (
     <>
       <div className="page-wrapper" style={{ marginLeft: 0 }}>
         <div className="content"></div>
-        <div className="row" style={{ backgroundColor: '#2D2D2D', color: 'white', display: 'flex', justifyContent: 'center' }}>
+        <div
+          className="row"
+          style={{
+            backgroundColor: '#2D2D2D',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
           <div className="col-12 col-lg-10">
             <div className="row my-4"
               style={{
-                margin: '84px auto',
+                // margin: '84px auto',
                 padding: '20px 0',
                 borderBottom: '1px solid white',
                 display: 'flex',
                 justifyContent: 'center',
-                gap: matches ? '0' : '20px'
+                gap: matches ? '0px' : '20px'
               }}>
               <div className="col-10 col-lg-4">
                 <Image
@@ -112,26 +123,43 @@ const FooterDae = ({matches}) => {
                 <p>2024 @ UNIVERSIDAD DIEGO PORTALES</p>
               </div>
             </div>
-            <Divider style={{ width: '100%' }} flexItem />
-            <div className="row justify-content-center mb-4">
+            {/* <Divider style={{ width: '100%' }} flexItem /> */}
+            <div
+              className="row justify-content-center mb-4"
+              style={{
+                // margin: '84px auto',
+                padding: '20px 0',
+                borderBottom: '1px solid white',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: matches ? '0px' : '20px'
+              }}
+            >
               <div className="col-10 col-lg-4 mt-0">
                 <h4>Bienestar Estudiantil</h4>
                 <p><Map /> Manuel Rodríguez Sur 343</p>
                 <p><Phone /> +56 2 2676 8314</p>
                 <p><Mail /> bienestarestudiantil@udp.cl</p>
               </div>
-              <div className="col-10 col-lg-4 mt-4">
+              <div className={`col-10 col-lg-4 ${matches ? '' : 'mt-4'}`}>
                 <h4>Salud Mental</h4>
                 <p><Map /> Manuel Rodríguez Sur 343</p>
                 <p><Mail /> saludmentalestudiantil@mail.udp.cl</p>
               </div>
-              <div className="col-10 col-lg-4 mt-4">
+              <div className={`col-10 col-lg-4 ${matches ? '' : 'mt-4'}`}>
                 <h4>Vida Universitaria</h4>
                 <p><Map /> Manuel Rodríguez Sur 361</p>
                 <p><Phone /> +56 2 2676 2002</p>
                 <p><Mail /> vidauniversitaria@mail.udp.cl</p>
               </div>
 
+            </div>
+            <div className='d-flex justify-content-end my-2'>
+              <Link href='/login'>
+                <button className='btn btn-secondary '>
+                  Acceso profesionales
+                </button>
+              </Link>
             </div>
           </div>
         </div>

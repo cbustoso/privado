@@ -1,14 +1,17 @@
+'use client'
 import { useState } from "react";
 import Link from "next/link";
 import { CircleRounded } from "@mui/icons-material";
 import { ChevronLeftRounded, ChevronRightOutlined } from "@mui/icons-material";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, useMediaQuery } from "@mui/material";
 
-const ImageSlider = ({ slides, matches }) => {
+const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(slides[0].titulo)
-  const [content, setContent] = useState(slides[0].texto)
+  const [content, setContent] = useState(slides[0].bajada)
   const [idBlog, setIdBlog] = useState(slides[0].id)
+  const matches = useMediaQuery('(min-width:600px)');
+
   const imgHeightMobile = '72vh'
   const imgHeightDesktop = 400
 
@@ -58,17 +61,18 @@ const ImageSlider = ({ slides, matches }) => {
   }
 
   const dotStyles = {
-    margin: '-30px 8px',
+    margin: '-60px 8px',
     cursor: 'pointer',
     // color: '#fff'
   }
 
   const truncarPalabras = (texto, num) => {
-    const aux = texto.split('');
+    // const textoParrafo = texto.match(/<p>(.*?)<\/p>/);
+    const aux = texto[0].split('');
     if (aux.length > num) {
       const sliced = aux.slice(0, num)
       const indexLastBlankSpace = sliced.lastIndexOf(' ')
-      return (aux.slice(0, indexLastBlankSpace).join('') + '...')
+      return (aux.slice(3, indexLastBlankSpace).join('') + '...')
     } else {
       return texto;
     }
@@ -78,8 +82,8 @@ const ImageSlider = ({ slides, matches }) => {
     const isFirstSlide = currentIndex === 0
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
-    setTitle(truncarPalabras(slides[newIndex].titulo, 20))
-    setContent(truncarPalabras(slides[newIndex].texto, 40))
+    setTitle(slides[newIndex].titulo)
+    setContent(truncarPalabras(slides[newIndex].bajada, 205))
     setIdBlog(slides[newIndex].id)
   }
 
@@ -87,15 +91,15 @@ const ImageSlider = ({ slides, matches }) => {
     const isLastSlide = currentIndex === slides.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-    setTitle(truncarPalabras(slides[newIndex].titulo, 20))
-    setContent(truncarPalabras(slides[newIndex].texto, 40))
+    setTitle(slides[newIndex].titulo)
+    setContent(truncarPalabras(slides[newIndex].bajada, 205))
     setIdBlog(slides[newIndex].id)
   }
 
   const goToSlide = slideIndex => {
     setCurrentIndex(slideIndex)
-    setTitle(truncarPalabras(slides[slideIndex].titulo, 20))
-    setContent(truncarPalabras(slides[slideIndex].texto, 40))
+    setTitle(slides[slideIndex].titulo)
+    setContent(truncarPalabras(slides[slideIndex].bajada, 205))
     setIdBlog(slides[slideIndex].id)
   }
 
@@ -105,7 +109,7 @@ const ImageSlider = ({ slides, matches }) => {
     // borderRadius: '20px',
     padding: '200px',
     textWrap: 'pretty',
-    margin: '-400px auto 30px',
+    margin: '-400px auto 0px',
     backgroundColor: '#00000089',
     height: 400,
     display: 'flex',
@@ -128,7 +132,7 @@ const ImageSlider = ({ slides, matches }) => {
 
   setTimeout(() => {
     goToNext()
-  }, 2500);
+  }, 5500);
 
   return (
     <div style={sliderStyles}>
@@ -159,6 +163,7 @@ const ImageSlider = ({ slides, matches }) => {
               // alignItems="baseline"
             >
               <Link href={`/blog/${idBlog}`}>
+                {console.log('IDBLOG', idBlog)}
                 <button
                   className="btn submit-form me-2"
                   style={{

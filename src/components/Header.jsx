@@ -47,6 +47,7 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { data: session } = useSession()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -222,7 +223,19 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             {/* <Tooltip title="Open"> */}
             {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
-            <ReserveBtn text={'Reservar'} bgColor={'#FF5253'} color={'#fff'} />
+            {
+              !session
+                ? <ReserveBtn text={'Reservar'} bgColor={'#FF5253'} color={'#fff'} />
+                : <button className="btn">
+                  <img
+                    className="avatar-img rounded-circle"
+                    src={session.user.picture}
+                    alt="profile image"
+                    height={40}
+                  />
+                  {/* {session.user.name} */}
+                </button>
+            }
 
             {/* </IconButton> */}
             {/* </Tooltip> */}
