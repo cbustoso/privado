@@ -79,7 +79,10 @@ const TestContainer = ({ slides }) => {
                   boxShadow: 0,
                   display: 'inline-block',
                   padding: '0 10px',
-                  height: matches ? "100%" : "fit-content"
+                  height: matches ? "100%" : "fit-content",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
                 }}>
                 <Typography
                   variant="body2"
@@ -98,7 +101,8 @@ const TestContainer = ({ slides }) => {
                           backgroundColor: '#FF5253',
                           color: 'white',
                           border: '1px solid #A6A6A6',
-                          borderRadius: '100px'
+                          borderRadius: '100px', 
+                          margin: '10px 0',
                         }}> Realizar Test </button>
                     </Link>
                   </Typography>
@@ -112,7 +116,11 @@ const TestContainer = ({ slides }) => {
                   boxShadow: 0,
                   display: 'inline-block',
                   padding: '0 10px',
-                  height: matches ? "100%" : "fit-content"
+                  height: matches ? "100%" : "fit-content",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  paddingBottom: '10px',
                 }}>
                 <Typography
                   variant="body2"

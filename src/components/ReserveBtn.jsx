@@ -4,7 +4,8 @@ import { Today } from "@mui/icons-material"
 // import Modal from "./Modal";
 import Link from "next/link"
 import { signIn } from "next-auth/react"
-import { redirect } from "next/dist/server/api-utils"
+// import { redirect } from "next/dist/server/api-utils"
+import { redirect } from "next/navigation"
 import { useMediaQuery } from "@mui/material"
 
 const ReserveBtn = ({ text, bgColor, color }) => {
@@ -17,7 +18,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
       // Realiza la autenticación
       await signIn('google', { callbackUrl: '/citas' }) // Se puede pasar el nombre del proveedor que se esté utilizando
       // Si la autenticación es exitosa, se redirigirá automáticamente a la página de destino configurada en NextAuth
-      
+
     } catch (error) {
       // Maneja el error de autenticación
       redirect('/login')
@@ -37,19 +38,19 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   return (
     <>
       {/* <Link href="#" > */}
-        <button
+      <button
         onClick={() => handleSignIn()}
-          className='btn btn-rounded'
-          style={{ 
-            margin: '16px 0', 
-            backgroundColor: bgColor, 
-            color: color,
-           }}
-          // onClick={handleOpen}
-        >
-          {matches && <Today /> }
-          {text}
-        </button>
+        className='btn btn-rounded'
+        style={{
+          margin: '16px 0',
+          backgroundColor: bgColor,
+          color: color,
+        }}
+      // onClick={handleOpen}
+      >
+        {matches && <Today />}
+        {text}
+      </button>
       {/* </Link> */}
       {/* <Modal open={open} handleClose={handleClose} /> */}
     </>
