@@ -36,6 +36,21 @@ const material_descargable = [
     descripcion: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
     archivo: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/11/230905_UDP_ManualAutocuidado-1.pdf'
   },
+  {
+    titulo: 'Prevensión del suicidio en Universitarios: ¿Qué debes saber?',
+    descripcion: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+    archivo: 'https://drive.google.com/file/d/1bSTiIa0hfuxDUBkEdpIESlyevdihrzQW/view'
+  },
+  {
+    titulo: 'Depresión en Universitarios: ¿Qué es?, sintomatología y factores protectores',
+    descripcion: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+    archivo: 'https://drive.google.com/file/d/1ipMa0gTHavUkJ3MtsqPrQf3GfrFYxLdj/view'
+  },
+  {
+    titulo: 'Ataques de pánico: ¿Qué hacer?',
+    descripcion: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+    archivo: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B/view'
+  },
 ]
 
 export default function MaterialDescargable() {
@@ -50,16 +65,20 @@ export default function MaterialDescargable() {
 
             </div>
 
-            <div className="card-body flex-md-column flex-lg-row d-flex align-self-center" style={{fontSize: '20px', textAlign: 'center'}}>
+            <div className="card-body flex-md-column flex-lg-row d-flex align-self-center" style={{ fontSize: '20px', textAlign: 'center' }}>
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>
             </div>
 
-            <div className="row card-body flex-md-column flex-lg-row d-flex justify-content-center align-items-center"  style={{rowGap:'20px'}}>
+            <div className="row card-body flex-md-column flex-lg-row d-flex justify-content-center align-items-center" style={{ rowGap: '20px' }}>
               {material_descargable.map(item => (
                 <div className="col-12 col-lg-6" key={item.titulo}>
-                  <FlipCard titulo={item.titulo} descripcion={item.descripcion} archivo={item.archivo} />
+                  <FlipCard
+                    titulo={item.titulo}
+                    descripcion={item.descripcion}
+                    archivo={item.archivo}
+                  />
                 </div>
               ))}
             </div>

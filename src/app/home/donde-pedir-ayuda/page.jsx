@@ -3,6 +3,7 @@ import BasicCard from "@/components/BasicCard";
 import Box from '@mui/material/Box';
 import Image from "next/image";
 import { redes_externas, como_pedir_ayuda } from "@/components/imagepath";
+import Link from "next/link";
 
 export default function PedirAyuda() {
 
@@ -62,11 +63,13 @@ export default function PedirAyuda() {
               <p style={{ fontSize: '20px' }}>
                 A continuación te dejamos algunos test que pueden servirte para despejar información respecto a tus sospechas. Ambos test pueden ser evaluados por un profesional y/o por ti mismo. Lo anterior, no implica que puedas realizar un diagnóstico, pero sí puede entregarte claridad respecto a las acciones a realizar.
               </p>
-
               <div>
-
-                <button className="btn btn-danger m-2">Test de ansiedad de Beck</button>
-                <button className="btn btn-danger m-2">Test de síntomas de depresión</button>
+                <Link href={'https://cetep.cl/test_salud_mental/test-de-ansiedad-de-beck/'}>
+                  <button className="btn btn-danger m-2">Test de ansiedad de Beck</button>
+                </Link>
+                <Link href={'https://web.cetep.cl/test_salud_mental/test-de-sintomas-de-depresion/'}>
+                  <button className="btn btn-danger m-2">Test de síntomas de depresión</button>
+                </Link>
 
               </div>
             </div>
@@ -76,9 +79,12 @@ export default function PedirAyuda() {
                 En la Universidad Diego Portales contamos con diversos canales para que puedas pedir ayuda en caso de que lo necesites. Aquí te dejamos algunos de los medios por los cuáles te puedes poner en contacto con el Departamento de Salud Mental (DSM) de nuestra Universidad.
               </p>
               <div>
-
+                <Link href={'https://dae.udp.cl/salud-mental-estudiantil/'}>
                 <button className="btn btn-secondary m-2">DAE - Salud mental</button>
+                </Link>
+                <Link href={'saludmentalestudiantil@mail.udp.cl'}>
                 <button className="btn btn-secondary m-2">Correo Departamento Salud Mental</button>
+                </Link>
 
               </div>
             </div>

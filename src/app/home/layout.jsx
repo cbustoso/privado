@@ -48,12 +48,12 @@ export default function DashLayout({ children }) {
                 </div>
               </div>
 
-              <div className="row">
+              {/* <div className="row">
                 <div className="d-flex justify-content-center" style={{ textAlign: 'center' }}>
 
                   <Carrousel slides={blogs.slice(0, 5)} matches={matches} parentWidth={950} />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row d-flex justify-content-center">
