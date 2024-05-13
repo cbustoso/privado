@@ -18,6 +18,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Carrousel from "@/components/skeletons/Carrousel";
 import FooterDae from "@/components/FooterDae";
 import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
+import TestContainer from "@/components/TestsContainer";
 
 const blogs = [
   {
@@ -25,13 +26,13 @@ const blogs = [
     titulo: 'Titulo 01',
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental01.src
-  }, 
+  },
   {
     id: '2',
     titulo: 'Titulo 02',
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental02.src
-  }, 
+  },
   {
     id: '3',
     titulo: 'Titulo 03',
@@ -94,13 +95,8 @@ export default function Home() {
           </Box>
         }
 
-        <div className="row" style={{ padding: 0, margin: 0 }}>
-          <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Test autodiagnóstico</h2>
-          </div>
-        </div>
-
-        {blogs.length > 0 && <TestSlider slides={blogs.slice(0,5)} />}
+        {blogs.length > 0 && <TestContainer slides={blogs.slice(0, 5)} />}
+        {/* {blogs.length > 0 && <TestSlider slides={blogs.slice(0, 5)} />} */}
 
         <Events matches={matches} />
 
