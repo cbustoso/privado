@@ -65,6 +65,7 @@ const PatientsList = () => {
       title: "Nombre",
       dataIndex: "nombre",
       sorter: (a, b) => a.nombre.length - b.nombre.length,
+      fixed: 'left',
       render: (text, record) => (
         <>
           <h2 className="profile-image">
@@ -106,6 +107,7 @@ const PatientsList = () => {
     {
       title: "",
       dataIndex: "FIELD8",
+      fixed: 'right',
       render: (text, record) => (
         <>
           <div className="text-end">

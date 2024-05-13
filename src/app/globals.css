@@ -11,12 +11,13 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   color: #333448;
-  background: linear-gradient(
+  /* background: linear-gradient(
       0deg,
       rgba(51, 53, 72, 0.05),
       rgba(51, 53, 72, 0.05)
     ),
-    #ffffff;
+    #ffffff; */
+    background: white;
   overflow-x: hidden;
   height: 100%;
   padding: 0 !important;
