@@ -5,10 +5,11 @@ import "../assets/css/bootstrap.css"
 import Header from "@/components/Header";
 import Script from 'next/script'
 import TanstackProvider from "@/providers/TanstackProvider";
+import ImageSlider from "@/components/ImageSlider";
 import AuthProvider from "@/providers/AuthProvider";
 import { getServerSession } from "next-auth";
 const inter = Inter({ subsets: ["latin"] });
-
+import { blogs } from "@/utils/blogs";
 import Hotjar from '@hotjar/browser';
 
 const siteId = 3920275;
@@ -55,6 +56,8 @@ export default async function RootLayout({ children }) {
         <AuthProvider session={session}>
           <TanstackProvider>
             <Header />
+            {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />}
+
             {children}
           </TanstackProvider>
         </AuthProvider>
