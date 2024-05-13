@@ -19,8 +19,8 @@ import Carrousel from "@/components/skeletons/Carrousel";
 import FooterDae from "@/components/FooterDae";
 import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
 import TestContainer from "@/components/TestsContainer";
-
-const blogs = [
+import { blogs } from "@/utils/blogs";
+/* const blogs = [
   {
     id: '1',
     titulo: 'Titulo 01',
@@ -39,7 +39,7 @@ const blogs = [
     texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
     imagen: saludMental03.src
   }
-]
+] */
 // console.log(blogs);
 
 export default function Home() {
@@ -77,7 +77,7 @@ export default function Home() {
       <main >
         {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
-        {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} />} */}
+        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} />}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
         {/* {isError && <p>Ha habido un error</p>} */}

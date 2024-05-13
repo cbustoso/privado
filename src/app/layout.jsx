@@ -56,7 +56,7 @@ export default async function RootLayout({ children }) {
         <AuthProvider session={session}>
           <TanstackProvider>
             <Header />
-            {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />}
+            {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
 
             {children}
           </TanstackProvider>
