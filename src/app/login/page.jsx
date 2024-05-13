@@ -29,7 +29,7 @@ const Login = () => {
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('DATA', data);
     try {
-      const res = await login(data)
+      const res = await  signIn('credentials', { callbackUrl: '/citas' })
       console.log(res);
       if (res.validacion === false) {
         setIsInvalid(true)
@@ -161,17 +161,7 @@ const Login = () => {
                           {/* ¿No tienes una cuenta? <Link href="/signup">Regístrate</Link> */}
                         </p>
                         {/* Social Login */}
-                        <div className="social-login">
-                          {/* <div id='signInDiv'></div> */}
-                          {/* <button
-                            onClick={() => signIn()}
-                            className='btn btn-rounded seilac'
-                            style={{ margin: '16px 0' }}
-                          // onClick={handleOpen}
-                          >
-                            Login
-                          </button> */}
-                        </div>
+                        
                         {/* /Social Login */}
                       </div>
                     </div>
