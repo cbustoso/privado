@@ -37,7 +37,7 @@ export default function Noticias() {
 
   return (
     <>
-      <div className="row flex-column d-flex align-items-center roboto">
+     {/*  <div className="row flex-column d-flex align-items-center roboto">
         <div className="col-12 col-lg-10">
           <div className="card">
             <div className="card-body flex-row d-flex justify-content-center">
@@ -50,7 +50,7 @@ export default function Noticias() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="row flex-column d-flex align-items-center roboto">
         <div className="col-12 col-lg-10">
           <div className="card">
