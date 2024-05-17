@@ -18,7 +18,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Carrousel from "@/components/skeletons/Carrousel";
 import FooterDae from "@/components/FooterDae";
 import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
-import TestContainer from "@/components/TestsContainer";
+import TestContainer from "@/components/ReservaHora";
 import { blogs } from "@/utils/blogs";
 /* const blogs = [
   {
@@ -77,26 +77,15 @@ export default function Home() {
       <main >
         {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
-        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,5)} />}
+        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,4)} />}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
         {/* {isError && <p>Ha habido un error</p>} */}
 
         {/* {!isError && blogs.length === 0 && <Carrousel />} */}
 
-        {!matches &&
-          <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'roboto', lineHeight: '30px', }}>
-            <div className="media-body roboto" style={{ margin: '0 20px', paddingTop: '10px', fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
-              <p className="media-body roboto" style={{ textWrap: 'pretty' }}>
-                Tenemos un espacio pensado para ti, estamos para apoyarte. ¡Compartamos!
-              </p>
-              <ReserveBtn text={'Reservar aquí'} bgColor={'#FABB00'} color={'#000'} />
-            </div>
-          </Box>
-        }
-
         {blogs.length > 0 && <TestContainer slides={blogs.slice(0, 5)} />}
-        {/* {blogs.length > 0 && <TestSlider slides={blogs.slice(0, 5)} />} */}
+        {blogs.length > 0 && <TestSlider slides={blogs.slice(0, 4)} />}
 
         <Events matches={matches} />
 

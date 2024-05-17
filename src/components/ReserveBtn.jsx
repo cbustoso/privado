@@ -42,13 +42,16 @@ const ReserveBtn = ({ text, bgColor, color }) => {
         onClick={() => handleSignIn()}
         className='btn btn-rounded'
         style={{
+          width: '189px',
+          height: '56px',
+          padding: '8px 24px',
           margin: '16px 0',
           backgroundColor: bgColor,
           color: color,
         }}
       // onClick={handleOpen}
       >
-        {matches && <Today />}
+        {matches && <Today style={{marginRight: '8px'}}/>}
         {text}
       </button>
       {/* </Link> */}

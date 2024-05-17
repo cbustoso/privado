@@ -11198,3 +11198,11 @@ div.fc-daygrid-event-harness{
 .roboto {
   font-family: var(--font-roboto);
 }
+
+button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-selected {
+  color: #ffffff;
+}
+
+#menu-appbar {
+  width: 430px !important;
+}

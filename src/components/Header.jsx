@@ -18,29 +18,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const pages = [
-  { title: 'DSME', url: '/home' },
-  { title: '¿Cómo pedir ayuda?', url: '/home/donde-pedir-ayuda' },
-  {
-    title: 'Recomendaciones', url: '/home/recomendaciones', submenu: [
-      { title: 'Recomendaciones', url: '/home/recomendaciones' },
-      { title: 'Programa ACÉRCATE', url: '/home/acercate' },
-      { title: 'Programa DECIDE', url: '/home/decide' },
-    ]
-  },
-  { title: 'Noticias', url: '/home/noticias' },
-  { title: 'Material descargable', url: '/home/material-descargable' }
+  { title: 'TÓPICOS', url: '/home' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '/home/donde-pedir-ayuda' },
+  { title: 'EVENTOS', url: '/home/noticias' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/home/material-descargable' }
 ];
-
-const pagesAlt = [
-  { title: 'DSME', url: '/home' },
-  { title: '¿Cómo pedir ayuda?', url: '/home/donde-pedir-ayuda' },
-  { title: 'Recomendaciones', url: '/home/recomendaciones' },
-  { title: 'Programa ACÉRCATE', url: '/home/acercate' },
-  { title: 'Programa DECIDE', url: '/home/decide' },
-  { title: 'Noticias', url: '/home/noticias' },
-  { title: 'Material descargable', url: '/home/material-descargable' },
-];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -74,7 +56,7 @@ const Header = () => {
 
   return (
     <AppBar position="sticky" style={{ background: 'white', color: 'black', margin: 0 }}>
-      <Container maxWidth="xl" style={{ background: 'white', color: 'black' }}>
+      <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
@@ -129,7 +111,7 @@ const Header = () => {
                 display: { xs: 'block', lg: 'none' },
               }}
             >
-              {pagesAlt.map((page) => (
+              {pages.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <a href={page.url} style={{ color: 'black' }}>
@@ -225,7 +207,7 @@ const Header = () => {
             {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
             {
               !session
-                ? <ReserveBtn text={'Reservar'} bgColor={'#FF5253'} color={'#fff'} />
+                ? <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                 : <button className="btn">
                   <img
                     className="avatar-img rounded-circle"
@@ -239,28 +221,7 @@ const Header = () => {
 
             {/* </IconButton> */}
             {/* </Tooltip> */}
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          
           </Box>
         </Toolbar>
       </Container>

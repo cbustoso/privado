@@ -30,24 +30,28 @@ const FrequentAskedQuestions = () => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <Box sx={{width: '90svw', margin:'auto'}}  className='container col-12 col-lg-10 '>
+    <Box sx={{ width: '90svw', margin: 'auto auto 40px' }} className='container col-12 col-lg-10 '>
       {
         questions.map((question, i) => (
           <Accordion
             key={i}
             expanded={expanded === question.id}
             onChange={handleChange(question.id)}
-            sx={expanded === question.id ? { bgcolor: '#FF5253', color: '#fff', borderRadius: '10px' } : {boxShadow: 'none'}}
+            sx={
+              expanded === question.id
+                ? { bgcolor: '#3886FF', color: '#fff', margin: '5px' }
+                : { boxShadow: 'none', border: '1px solid black', margin: '5px 0' }
+            }
           >
             <AccordionSummary
               expandIcon={expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
                 : <AddCircleOutlineOutlined />
               }
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+              aria-controls={`panel${i}bh-content`}
+              id={`panel${i}bh-header`}
             >
-              <Typography>{question.title}</Typography>
+              <Typography sx={{ fontWeight: 700}}>{question.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
