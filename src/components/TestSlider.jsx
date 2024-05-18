@@ -34,8 +34,7 @@ const TestSlider = ({ slides }) => {
 
   const dotsContainerStyles = {
     display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#F1F1F1'
+    justifyContent: 'center'
   }
 
   const dotStyles = {
@@ -103,7 +102,7 @@ const TestSlider = ({ slides }) => {
     resetTimeout();
     timeoutRef.current = setTimeout(
       () => setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides),
-      3000 // Cambiar el slide cada 3 segundos
+      5500 // Cambiar el slide cada 3 segundos
     );
 
     return () => {
@@ -113,7 +112,7 @@ const TestSlider = ({ slides }) => {
 
 
   return (
-    <div className='container col-12 align-self-center' style={{ padding: '0px', margin: '0px', maxWidth: '100vw' }}>
+    <div className='container col-12 align-self-center' style={{ padding: '0px', margin: '0px', maxWidth: '100vw' }} id="test_autodiagnostico">
       {
         matches
           ? <div style={sliderStyles}>
@@ -139,7 +138,7 @@ const TestSlider = ({ slides }) => {
                               <Typography variant="body2" color="text.secondary">{(slide.texto).slice(5, 60)}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
-                              <Grid container direction="row" justifyContent="flex-end" alignItems="baseline">
+                              <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
                                 <Link href={`/blog/${slide.id}`}>
                                   <button className="btn submit-form me-2" style={{ backgroundColor: '#4054B2', color: 'white', border: '1px solid #A6A6A6', borderRadius: '100px' }}>Realizar Test</button>
                                 </Link>
@@ -155,7 +154,7 @@ const TestSlider = ({ slides }) => {
               </div>
             </Box>
             <ChevronRight sx={rightArrowStyles} onClick={nextSlide} />
-            <div style={dotsContainerStyles}>
+            <div style={matches && { ...dotsContainerStyles, backgroundColor: '#F1F1F1' }}>
               {Array(Math.ceil(slides.length)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
                   <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#4054B2' : '#3886FF' }} />
@@ -165,7 +164,7 @@ const TestSlider = ({ slides }) => {
           </div>
           : <div style={sliderStyles}>
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
-              <div className="row" style={{ backgroundColor: '#F1F1F1', paddingTop: '32px', margin: 0 }}>
+              <div className="row" style={{ paddingTop: '32px', margin: 0 }}>
                 <h2
                   className="sailec"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
@@ -182,9 +181,18 @@ const TestSlider = ({ slides }) => {
                             <Typography variant="body2" color="text.secondary">{(slides[currentIndex].texto).slice(5, 60)}</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
-                            <Grid container direction="row" justifyContent="flex-end" alignItems="baseline">
+                            <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
                               <Link href={`/blog/${slides[currentIndex].id}`}>
-                                <button className="btn submit-form me-2" style={{ backgroundColor: '#4054B2', color: 'white', border: '1px solid #A6A6A6', borderRadius: '100px' }}>Realizar Test</button>
+                                <button
+                                  className="btn submit-form me-2"
+                                  style={{
+                                    backgroundColor: '#4054B2',
+                                    color: 'white',
+                                    border: '1px solid #A6A6A6',
+                                    borderRadius: '100px'
+                                  }}>
+                                  Realizar Test
+                                </button>
                               </Link>
                             </Grid>
                           </CardActions>

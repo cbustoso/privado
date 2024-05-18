@@ -4,6 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import { useState } from 'react';
+import { useMediaQuery } from "@mui/material";
 
 import { AddCircleOutlineOutlined, RemoveCircleOutline } from '@mui/icons-material';
 
@@ -25,12 +26,13 @@ const questions = [
 
 const FrequentAskedQuestions = () => {
   const [expanded, setExpanded] = useState(false);
+  const matches = useMediaQuery('(min-width:600px)');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <Box sx={{ width: '90svw', margin: 'auto auto 40px' }} className='container col-12 col-lg-10 '>
+    <Box sx={{ width: '90svw', margin: 'auto auto 40px' }} className='container col-12 col-lg-10 ' id="preguntas_frecuentes">
       {
         questions.map((question, i) => (
           <Accordion
@@ -44,9 +46,9 @@ const FrequentAskedQuestions = () => {
             }
           >
             <AccordionSummary
-              expandIcon={expanded === question.id
+              expandIcon={ matches && ( expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
-                : <AddCircleOutlineOutlined />
+                : <AddCircleOutlineOutlined /> )
               }
               aria-controls={`panel${i}bh-content`}
               id={`panel${i}bh-header`}

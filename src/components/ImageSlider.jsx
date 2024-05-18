@@ -1,10 +1,11 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { CircleRounded } from "@mui/icons-material";
 import { Grid, Box, Typography, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { banner04, banner05, banner06, banner07 } from "./imagepath";
 import Image from "next/image";
+import { MdOutlineChromeReaderMode } from "react-icons/md";
 
 const slides = [
   {
@@ -85,6 +86,28 @@ const ImageSlider = ({ }) => {
 
   const [lasSlides, setLasSlides] = useState(slides[0])
   const [value, setValue] = useState(0);
+
+  const totalSlides = slides.length;
+  const timeoutRef = useRef(null);
+
+  const resetTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () => setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides),
+      5500 // Cambiar el slide cada 3 segundos
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [currentIndex, totalSlides]);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -193,12 +216,8 @@ const ImageSlider = ({ }) => {
     width: '100%',
   }
 
-  // setTimeout(() => {
-  //   goToNext()
-  // }, 5500);
-
   return (
-    <div style={matches ? {...sliderStyles, height: imgHeightDesktop} : sliderStyles }>
+    <div id="topicos" style={matches ? {...sliderStyles, height: imgHeightDesktop} : sliderStyles }>
       <div style={matches ? slideStyles : {}}></div>
 
       {matches ?
@@ -207,9 +226,9 @@ const ImageSlider = ({ }) => {
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
                 width: `${matches ? '840px' : '100%'}`,
-                // margin: '40px'
+                marginLeft: '40px'
               }}>
-                <div className="d-flex">
+                <div className="d-flex flex-column">
                   <h2
                     className="sailec"
                     style={{
@@ -220,6 +239,7 @@ const ImageSlider = ({ }) => {
                     }}>
                     {lasSlides.titulo}
                   </h2>
+                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode /> {lasSlides.tiempo} </p>
                 </div>
                 <Grid
                   container
@@ -254,6 +274,15 @@ const ImageSlider = ({ }) => {
               lineHeight: '28px',
               display: 'flex',
               alignItems: 'center',
+              '&:hover': {
+                color: 'yellowgreen'
+              },
+              '&:active': {
+                color: 'yellowgreen'
+              },
+              '&:visited': {
+                color: 'yellowgreen'
+              }
             }}
           >
             <CustomTabPanel
@@ -273,7 +302,7 @@ const ImageSlider = ({ }) => {
             {slides.map((slide, slideIndex) => (
               <Tab
                 key={slideIndex}
-                className="col-3 sailec"
+                className="col-3 sailec white_menu_urls"
                 onClick={() => goToSlide(slideIndex)}
                 sx={{
                   height: '97px',

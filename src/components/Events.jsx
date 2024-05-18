@@ -69,7 +69,7 @@ const Events = () => {
     resetTimeout();
     timeoutRef.current = setTimeout(
       () => setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides),
-      3000 // Cambiar el slide cada 3 segundos
+      5500 // Cambiar el slide cada 3 segundos
     );
 
     return () => {
@@ -147,7 +147,7 @@ const Events = () => {
   }
 
   return (
-    <div className='container col-12 align-self-center sailec'>
+    <div className='container col-12 align-self-center sailec' id="eventos">
       <div className="row" style={{ padding: 0, margin: 0 }}>
         <div className="col-sm-12 text-center" style={{ padding: 0 }}>
           <h2 style={{ fontSize: '32px', fontWeight: 700, lineHeight: '40px', paddingTop: '32px' }}>Eventos</h2>
@@ -200,7 +200,7 @@ const Events = () => {
                             {`Conferencia ${(blogs[i % totalSlides]?.titulo).split(':')[0]}`}
                           </Typography>
                         </CardContent>
-                        <CardActions sx={{ borderBottom: '1px solid #A6A6A6', marginBottom: '10px' }}>
+                        <CardActions sx={{ marginBottom: '10px' }}>
                           <Typography size="medium" sx={{ padding: '0 5px', color: '#000', borderRight: '1px solid #A6A6A6' }}>
                             <LocationOnOutlined sx={{ marginRight: '5px' }} /> {event.address}
                           </Typography>
@@ -218,9 +218,9 @@ const Events = () => {
             </div>
 
             <div style={dotsContainerStyles}>
-              {Array(Math.ceil(events.length / 2)).fill().map((_, dotIndex) => (
-                <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex * 2)}>
-                  <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex * 2 === currentIndex ? '#B82925' : '#FF5253' }} />
+              {Array(Math.ceil(events.length)).fill().map((_, dotIndex) => (
+                <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
+                  <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#B82925' : '#FF5253' }} />
                 </div>
               ))}
             </div>
@@ -270,7 +270,7 @@ const Events = () => {
                             {`Conferencia ${(blogs[i % totalSlides]?.titulo).split(':')[0]}`}
                           </Typography>
                         </CardContent>
-                        <CardActions sx={{ borderBottom: '1px solid #A6A6A6', marginBottom: '10px' }}>
+                        <CardActions sx={{  marginBottom: '10px' }}>
                           <Typography size="medium" sx={{ padding: '0 5px', color: '#000', borderRight: '1px solid #A6A6A6' }}>
                             <LocationOnOutlined sx={{ marginRight: '5px' }} /> {event.address}
                           </Typography>

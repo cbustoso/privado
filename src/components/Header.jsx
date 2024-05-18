@@ -18,10 +18,10 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const pages = [
-  { title: 'TÓPICOS', url: '/home' },
-  { title: 'TEST AUTODIAGNÓSTICO?', url: '/home/donde-pedir-ayuda' },
-  { title: 'EVENTOS', url: '/home/noticias' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/home/material-descargable' }
+  { title: 'TÓPICOS', url: '#topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '#test_autodiagnostico' },
+  { title: 'EVENTOS', url: '#eventos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' }
 ];
 
 const Header = () => {
@@ -139,7 +139,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            <img src={logoudp.src} height={70} alt="" />{" "}
+            <img src={logo.src} width={'180px'} alt="" />{" "}
           </Typography>
 
           {/* MENU DASHBOARD */}
@@ -176,9 +176,9 @@ const Header = () => {
                     >
                       {page.submenu.map(subpage => (
                         <MenuItem onClick={handleClose} key={subpage.title}>
-                          <a style={{ color: 'black' }} href={subpage.url}>
+                          <Link style={{ color: 'black' }} href={subpage.url}>
                             {subpage.title}
-                          </a>
+                          </Link>
                         </MenuItem>
                       ))}
                     </Menu>
