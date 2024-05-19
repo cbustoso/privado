@@ -1,7 +1,7 @@
 'use client'
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link';
 import TextEditor from '../../../components/TextEditor';
 import Sidebar from '../../../components/Sidebar';
@@ -13,6 +13,41 @@ import FooterDae from '@/components/FooterDae';
 import { blogs } from '@/utils/blogs';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+  >
+  </Box>
+);
+
+const card = (
+  <Fragment>
+    <CardContent sx={{padding: 0, bgcolor: '#F1F1F1'}}>
+      <Typography variant="h5" component="div" sx={{bgcolor: "#FABB00", height:'60px' , /* padding:'16px 24px 16px 24px' */}}>
+        be{bull}nev{bull}o{bull}lent
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        adjective
+      </Typography>
+      <Typography variant="body2">
+        well meaning and kindly.
+        <br />
+        {'"a benevolent smile"'}
+      </Typography>
+    </CardContent>
+    <CardActions sx={{ backgroundColor:"#F1F1F1"}}>
+      <button className='btn' style={{backgroundColor:"#3886FF", color:'#FFF'}}>Descargar</button>
+    </CardActions>
+  </Fragment>
+);
 
 const Blogdetails = ({ params }) => {
   const [blog, setBlog] = useState({})
@@ -34,7 +69,7 @@ const Blogdetails = ({ params }) => {
           {/* <Header/> */}
           {/* <Sidebar id='menu-item11' id1='menu-items11' activeClassName='blog-details' /> */}
           <div className="page-wrapper" style={{ marginLeft: 'unset' }}>
-            <div className="content">
+            <div className="content" style={{ padding: 0 }}>
               {/* Page Header */}
               {/* <div className="page-header">
                 <div className="row">
@@ -57,16 +92,16 @@ const Blogdetails = ({ params }) => {
               <div className="row d-flex justify-content-center">
 
                 {/* CONTENIDO DEL BLOG */}
-                <div className="col-12 col-lg-10 col-xl-6">
+                <div className="col-12 " style={{ padding: 0 }}>
                   <div className="blog-view">
-                    <article className="blog blog-single-post">
-                      <h3 className="blog-title">
+                    <article className="blog blog-single-post" style={{ padding: '10px', margin: '10px' }} >
+                      {/* <h3 className="blog-title">
                         {blog.titulo}
-                      </h3>
-                      <div className="blog-info clearfix">
+                      </h3> */}
+                      <div className="blog-info clearfix" style={{ padding: 0, margin: 0 }}>
                         <div className="post-left date-blks">
                           <ul>
-                            <li>
+                            {/* <li>
                               <Link href="#">
                                 <i className="feather-calendar" >
                                   <FeatherIcon icon="calendar" />
@@ -74,7 +109,7 @@ const Blogdetails = ({ params }) => {
                                 </i>
                                 <span>05 Jul 2022</span>
                               </Link>
-                            </li>
+                            </li> */}
                             {/*  <li>
                               <Link href="#">
                                 <i className="feather-message" >
@@ -95,17 +130,27 @@ const Blogdetails = ({ params }) => {
                           </ul>
                         </div>
                       </div>
-                      <div className="blog-image">
-                        <Link href="#.">
-                          <img
-                            alt="#"
-                            src={blog.imagen}
-                            className="img-fluid"
-                          />
-                        </Link>
+                      <div /* className="blog-image" */ style={{
+                        height: '520px',
+                        overflow: 'hidden'
+                      }}>
+                        {/* <Link href="#."> */}
+                        <img
+                          alt="#"
+                          src={blog.imagen}
+                          width={'100%'}
+                          style={{
+                            backgroundPosition: 'center'
+                          }}
+                        // className="img-fluid"
+                        />
+                        {/* </Link> */}
                       </div>
-                      <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.texto }}>
-                        {/* {blog.texto} */}
+                      <div className="col-lg-6 col-12">
+
+                        <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.texto }}>
+                          {/* {blog.texto} */}
+                        </div>
                       </div>
                       {/* <div className="blog-share ">
                         <ul className="social-share nav">
@@ -131,14 +176,14 @@ const Blogdetails = ({ params }) => {
                           </li>
                         </ul>
                       </div> */}
-                      <div className="list-add-blogs">
+                      {/* <div className="list-add-blogs">
                         <ul className="nav">
 
                           <li># Ophthalmology</li>
                           <li># Beauty</li>
                           <li># Prevention</li>
                         </ul>
-                      </div>
+                      </div> */}
                     </article>
                     {/* <div className="widget author-widget ">
                 <div className="authr-blog-group text-center">
@@ -289,6 +334,13 @@ const Blogdetails = ({ params }) => {
                   </li>
                 </ul>
               </div> */}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12 col-lg-4">
+                    <Box sx={{ minWidth: 275 }}>
+                      <Card variant="outlined">{card}</Card>
+                    </Box>
                   </div>
                 </div>
 

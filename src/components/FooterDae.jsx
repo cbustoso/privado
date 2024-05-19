@@ -83,9 +83,10 @@ const FooterDae = () => {
                 backgroundColor: "#fff",
                 color: "#000",
                 borderRadius: "16px",
-                width: "fit-content"
+                width: "fit-content",
+                paddingBottom: '10px'
               }}>
-              <p style={{ fontWeight: 700, fontSize: "20px", lineHeight: "28px", margin: "10px 0 0" }}>¿Hablemos?</p>
+              <p style={{ fontWeight: 700, fontSize: "20px", lineHeight: "28px", margin: "10px 0 0"}}>¿Hablemos?</p>
               <p style={{ fontSize: "14px", lineHeight: "20px", marginBottom: "8px" }}>Si necesitas ayuda, contáctanos y te ayudaremos.</p>
               <ReserveBtn text='Reservar' bgColor="#FABB00" color="#000" />
             </div>
