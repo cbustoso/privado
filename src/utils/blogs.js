@@ -1,6 +1,6 @@
 
 import {
-  saludMental01, saludMental02, saludMental03, saludMental04, saludMental05,
+  banner04, banner05, banner06, banner07,
 }
   from '@/components/imagepath';
 export const blogs = [
@@ -9,8 +9,7 @@ export const blogs = [
     titulo: 'El Análisis Funcional en Psicología: Procedimiento y Aplicaciones en Salud Mental',
     bajada: `El análisis funcional es una herramienta fundamental en la terapia cognitivo conductual (TCC) que permite a los terapeutas entender las interacciones entre estímulos, respuestas y las consecuencias de estas últimas. Este enfoque se basa en la premisa de que el comportamiento es una función del entorno y puede ser modificado al cambiar estos elementos interactivos.`,
     texto: `
-    <h1>El Análisis Funcional en Psicología: Procedimiento y Aplicaciones en Salud Mental</h1>
-<h2>Introducción:</h2>
+    <h2>Introducción:</h2>
 <p>
 El análisis funcional es una herramienta fundamental en la terapia cognitivo conductual (TCC) que permite a los terapeutas entender las interacciones entre estímulos, respuestas y las consecuencias de estas últimas. Este enfoque se basa en la premisa de que el comportamiento es una función del entorno y puede ser modificado al cambiar estos elementos interactivos.
 </p>
@@ -35,7 +34,20 @@ En el tratamiento de la depresión, el análisis funcional puede revelar cómo c
 El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un marco estructurado para entender y modificar comportamientos problemáticos. Su aplicación no solo está limitada a tratamientos individuales, sino que también se extiende a intervenciones grupales y programas de prevención, lo que lo convierte en una herramienta versátil en el campo de la salud mental.
 </p>
 `,
-    imagen: saludMental01.src
+    imagen: banner04.src,
+    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Estrés Académico',
+        bajada: 'A veces creemos que sentir estrés en la universidad es signo de "debilidad" y muchas veces somos juzgados por lo mismo. ¿Pero sabías que puede ser un sentir propio de una situación nueva y de un proceso de aprendizaje?',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/Que-es-el-estres-academico.pdf'
+      },
+      {
+        titulo: 'Estrategias para el Estrés',
+        bajada: 'Aquí encontrarás algunas estrategias de afrontamiento ante situaciones estresantes, que te pueden servir tanto en tu trayectoria universitaria como en tu quehacer diario.',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/Como-afrontar-el-estres-academico.pdf'
+      }
+    ]
   },
   {
     id: '1',
@@ -70,7 +82,15 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 <h2>Conclusiones</h2>
 <p>La Terapia Cognitivo-Conductual ofrece un enfoque estructurado y eficaz para tratar la ansiedad, con técnicas que se adaptan a las causas específicas y tipos de ansiedad.</p>
 `,
-    imagen: saludMental02.src
+    imagen: banner05.src,
+    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Depresión Estudiantil',
+        bajada: '¿Hablemos de depresión?',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/hablemos-de-depresion-estudiantil.pdf'
+      }
+    ]
   },
   {
     id: '2',
@@ -114,7 +134,15 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
     de la ansiedad y disfrutar de una experiencia universitaria más plena y satisfactoria.
     </p>
     `,
-    imagen: saludMental05.src
+    imagen: banner06.src,
+    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Alteraciones Psicológicas',
+        bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/%C2%BFQue.pdf'
+      }
+    ]
   },
   {
     id: '3',
@@ -151,7 +179,15 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 
 .</p>
 `,
-    imagen: saludMental04.src
+    imagen: banner07.src,
+    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Factores Protectores',
+        bajada: 'Poco se habla de esas prácticas que es sano llevar a cabo cuando estamos en un proceso de aprendizaje. Aquí te dejamos algunas de ellas.',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/%C2%BFQue.pdf'
+      }
+    ]
   },
   {
     id: '4',
@@ -193,7 +229,15 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 <h2>Conclusión</h2>
 <p>Las instituciones educativas deben adoptar un enfoque proactivo para abordar la desmotivación entre los estudiantes universitarios. Implementando programas de tutoría robustos, asegurando que los docentes estén bien preparados y comprometidos, y manteniendo los currículos relevantes y alineados con las expectativas estudiantiles, podemos crear un entorno educativo que no solo retenga a los estudiantes sino que también los motive a alcanzar su máximo potencial académico y personal.</p>
 `,
-    imagen: saludMental03.src
+    imagen: banner04.src,
+    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Crisis de Ansiedad',
+        bajada: 'Te ayudamos con una técnica práctica pero esos momentos donde identificas que te puede dar o te está dando una crisis de ansiedad.',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/Infografia-Grounding.pdf'
+      }
+    ]
   },
   {
     id: '5',
@@ -229,7 +273,15 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 
 ar el estrés académico no solo mejorará tu bienestar, sino que también puede potenciar tu rendimiento académico, permitiéndote disfrutar más plenamente de tu experiencia universitaria.</p>
 `,
-    imagen: saludMental03.src
+    imagen: banner05.src,
+    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Manual de Autocuidado',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/11/230905_UDP_ManualAutocuidado-1.pdf'
+      }
+    ]
   },
   {
     id: '6',
@@ -263,7 +315,15 @@ ar el estrés académico no solo mejorará tu bienestar, sino que también puede
     La historia de la Terapia Cognitivo Conductual es un testimonio de la evolución continua en el campo de la psicoterapia. A medida que investigaciones nuevas y más profundas se llevan a cabo, la TCC sigue adaptándose y evolucionando, prometiendo nuevas y más eficaces formas de ayudar a las personas a gestionar y superar sus desafíos psicológicos.
     </p>
     `,
-    imagen: saludMental03.src
+    imagen: banner06.src,
+    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Prevensión del suicidio en Universitarios: ¿Qué debes saber?',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://drive.google.com/file/d/1bSTiIa0hfuxDUBkEdpIESlyevdihrzQW/view'
+      }
+    ]
   },
   {
     id: '7',
@@ -332,7 +392,15 @@ ar el estrés académico no solo mejorará tu bienestar, sino que también puede
 
 la universidad es un periodo de grandes cambios y desafíos. Comprender y aceptar que estas incertidumbres son una parte normal del proceso puede ayudar a los estudiantes a gestionar mejor sus expectativas y a adaptarse más eficazmente. Con el apoyo adecuado y una actitud proactiva, los estudiantes pueden no solo sobrevivir, sino prosperar en su nuevo entorno universitario, transformando los desafíos en oportunidades de crecimiento personal y académico.</p>
 `,
-    imagen: saludMental03.src
+    imagen: banner07.src,
+    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Depresión en Universitarios: ¿Qué es?, sintomatología y factores protectores',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://drive.google.com/file/d/1ipMa0gTHavUkJ3MtsqPrQf3GfrFYxLdj/view'
+      }
+    ]
   },
   {
     id: '8',
@@ -391,6 +459,14 @@ la universidad es un periodo de grandes cambios y desafíos. Comprender y acepta
     abordar la sobrecarga académica y mejorar las habilidades de gestión del tiempo. La implementación de talleres y recursos que enseñen técnicas efectivas de manejo del tiempo podría ser un paso vital hacia el mejoramiento del bienestar estudiantil y su éxito académico. Además, ajustar la carga de trabajo académico para hacerla más manejable puede ayudar a aliviar el estrés estudiantil y promover un ambiente educativo más saludable y productivo.</p>
     
     `,
-    imagen: saludMental03.src
+    imagen: banner04.src,
+    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Ataques de pánico: ¿Qué hacer?',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B/view'
+      }
+    ]
   },
 ]
