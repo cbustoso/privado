@@ -20,27 +20,6 @@ import FooterDae from "@/components/FooterDae";
 import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
 import TestContainer from "@/components/ReservaHora";
 import { blogs } from "@/utils/blogs";
-/* const blogs = [
-  {
-    id: '1',
-    titulo: 'Titulo 01',
-    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
-    imagen: saludMental01.src
-  },
-  {
-    id: '2',
-    titulo: 'Titulo 02',
-    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
-    imagen: saludMental02.src
-  },
-  {
-    id: '3',
-    titulo: 'Titulo 03',
-    texto: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem molestias eos. Ullam nihil quis inventore. Dolore, perspiciatis culpa quisquam, eligendi dolorum magnam, aliquid ipsam eos unde expedita eveniet tempore.',
-    imagen: saludMental03.src
-  }
-] */
-// console.log(blogs);
 
 export default function Home() {
   // const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
@@ -56,7 +35,6 @@ export default function Home() {
 
   const matches = useMediaQuery('(min-width:600px)');
 
-  console.log('MATCHES APP PAGE', matches);
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };

@@ -84,7 +84,6 @@ const ImageSlider = ({ }) => {
   const [idBlog, setIdBlog] = useState(slides[0].id)
   const matches = useMediaQuery('(min-width:600px)');
 
-  const [lasSlides, setLasSlides] = useState(slides[0])
   const [value, setValue] = useState(0);
 
   const totalSlides = slides.length;
@@ -99,7 +98,10 @@ const ImageSlider = ({ }) => {
   useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(
-      () => setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides),
+      () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
+        
+      },
       5500 // Cambiar el slide cada 3 segundos
     );
 
@@ -132,7 +134,7 @@ const ImageSlider = ({ }) => {
   }
 
   const slideStylesMobile = {
-    backgroundColor: lasSlides.color,
+    backgroundColor: slides[currentIndex].color,
     width: '100%',
     height: matches ? imgHeightDesktop : imgHeightMobile,
     backgroundPosition: 'center',
@@ -170,7 +172,6 @@ const ImageSlider = ({ }) => {
     setContent(truncarPalabras(slides[newIndex].bajada, 205))
     setColor(slides[newIndex].color)
     setIdBlog(slides[newIndex].id)
-    setLasSlides(slides[newIndex])
   }
 
   const goToNext = () => {
@@ -181,7 +182,6 @@ const ImageSlider = ({ }) => {
     setContent(truncarPalabras(slides[newIndex].bajada, 205))
     setColor(slides[newIndex].color)
     setIdBlog(slides[newIndex].id)
-    setLasSlides(slides[newIndex])
   }
 
   const goToSlide = slideIndex => {
@@ -190,7 +190,6 @@ const ImageSlider = ({ }) => {
     setContent(truncarPalabras(slides[slideIndex].bajada, 205))
     setColor(slides[slideIndex].color)
     setIdBlog(slides[slideIndex].id)
-    setLasSlides(slides[slideIndex])
   }
 
   const boxStyleDesktop = {
@@ -237,9 +236,9 @@ const ImageSlider = ({ }) => {
                       fontWeight: 700,
                       lineHeight: '116px',
                     }}>
-                    {lasSlides.titulo}
+                    {slides[currentIndex].titulo}
                   </h2>
-                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode /> {lasSlides.tiempo} </p>
+                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode /> {slides[currentIndex].tiempo} </p>
                 </div>
                 <Grid
                   container
@@ -249,8 +248,8 @@ const ImageSlider = ({ }) => {
                     <button
                       className="btn submit-form me-2"
                       style={{
-                        backgroundColor: lasSlides.color,
-                        border: `1px solid ${lasSlides.border}`,
+                        backgroundColor: slides[currentIndex].color,
+                        border: `1px solid ${slides[currentIndex].border}`,
                         borderRadius: '100px',
                         color: '#fff'
                       }}> Ver más + </button>
@@ -260,14 +259,14 @@ const ImageSlider = ({ }) => {
             </div>
           </Box>
           <div
-            key={lasSlides.key}
+            key={slides[currentIndex].key}
             className="col col-3"
             style={{
               borderBottom: '1px solid white',
               height: '200px',
               marginTop: '-240px',
-              marginLeft: `calc((25vw * ${lasSlides.id}) - (${lasSlides.id} * 4px) )`,
-              backgroundColor: lasSlides.color,
+              marginLeft: `calc((25vw * ${slides[currentIndex].id}) - (${slides[currentIndex].id} * 4px) )`,
+              backgroundColor: slides[currentIndex].color,
               color: "#fff",
               fontWeight: 400,
               fontSize: '20px',
@@ -286,10 +285,10 @@ const ImageSlider = ({ }) => {
             }}
           >
             <CustomTabPanel
-              value={lasSlides.key}
-              index={lasSlides.key}
+              value={slides[currentIndex].key}
+              index={slides[currentIndex].key}
             >
-              {lasSlides.bajada}
+              {slides[currentIndex].bajada}
             </CustomTabPanel>
           </div>
           <Tabs
@@ -361,7 +360,7 @@ const ImageSlider = ({ }) => {
                       }}> Ver más + </button>
                   </Link>
                   <img
-                    src={lasSlides.img.src}
+                    src={slides[currentIndex].img.src}
                     alt=""
                     width={'90%'}
                     height={250}

@@ -19,32 +19,40 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { FaArrowLeft } from "react-icons/fa";
+import { FaDownload } from 'react-icons/fa';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-  </Box>
-);
-
-const card = (
+const card = (item) => (
   <Fragment>
-    <CardContent sx={{padding: 0, bgcolor: '#F1F1F1'}}>
-      <Typography variant="h5" component="div" sx={{bgcolor: "#FABB00", height:'60px' , /* padding:'16px 24px 16px 24px' */}}>
-        be{bull}nev{bull}o{bull}lent
+    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
+      <Typography variant="h5" component="div" sx={{ bgcolor: "#FABB00", height: '60px', padding: '16px 24px 16px 24px' }}>
+        {item.titulo}
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        adjective
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
+      <Typography variant="body2" sx={{
+        padding: '16px 24px 16px 24px',
+        fontSize: '18px',
+        lineHeight: '28px',
+        fontWeight: 400
+      }}>
+        {item.bajada}
       </Typography>
     </CardContent>
-    <CardActions sx={{ backgroundColor:"#F1F1F1"}}>
-      <button className='btn' style={{backgroundColor:"#3886FF", color:'#FFF'}}>Descargar</button>
+    <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
+      <button
+        className='btn'
+        style={{
+          backgroundColor: "#3886FF",
+          color: '#FFF',
+          height: '48',
+          width: '200px',
+          padding: '4px 24px',
+          margin: '8px',
+          borderRadius: '100px',
+          fontSize: '16px',
+          fontWeight: 500
+        }}>
+        Descargar <FaDownload />
+      </button>
     </CardActions>
   </Fragment>
 );
@@ -66,42 +74,52 @@ const Blogdetails = ({ params }) => {
     <div>
       <>
         <div className="main-wrapper">
-          {/* <Header/> */}
-          {/* <Sidebar id='menu-item11' id1='menu-items11' activeClassName='blog-details' /> */}
+          {matches && <div style={{
+            height: '520px',
+            overflow: 'hidden'
+          }}>
+            <img
+              alt="#"
+              src={blog.imagen}
+              width={'100%'}
+              style={{
+                backgroundPosition: 'center'
+              }}
+            />
+
+          </div>}
+          {matches &&
+            <button className='btn mt-4 mb-5'
+              style={{
+                border: '1px solid #A6A6A6',
+                height: '56px',
+                width: '163px',
+                padding: '0px 24px',
+                borderRadius: '100px',
+                marginLeft: '76px'
+              }}>
+              <FaArrowLeft /> Volver
+            </button>}
           <div className="page-wrapper" style={{ marginLeft: 'unset' }}>
             <div className="content" style={{ padding: 0 }}>
-              {/* Page Header */}
-              {/* <div className="page-header">
-                <div className="row">
-                  <div className="col-12 col-lg-10">
-                    <ul className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <Link href="#">Blog </Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <i className="feather-chevron-right">
-                          <FeatherIcon icon="chevron-right" />
-                        </i>
-                      </li>
-                      <li className="breadcrumb-item active">Vista Blog</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> */}
+
               {/* /Page Header */}
-              <div className="row d-flex justify-content-center">
+              <div className="row d-flex justify-content-center" style={{ margin: 0 }}>
 
                 {/* CONTENIDO DEL BLOG */}
-                <div className="col-12 " style={{ padding: 0 }}>
+                <div className="col-12 " style={{ padding: matches ? 0 : '20px' }}>
                   <div className="blog-view">
-                    <article className="blog blog-single-post" style={{ padding: '10px', margin: '10px' }} >
-                      {/* <h3 className="blog-title">
+                    <div className="col-lg-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
+                      <h3 className="blog-title" style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                         {blog.titulo}
-                      </h3> */}
-                      <div className="blog-info clearfix" style={{ padding: 0, margin: 0 }}>
+                      </h3>
+                    </div>
+                    <article className="blog blog-single-post d-flex justify-content-between flex-wrap" >
+
+                      {/*       <div className="blog-info clearfix" style={{ padding: 0, margin: 5 }}>
                         <div className="post-left date-blks">
                           <ul>
-                            {/* <li>
+                            <li>
                               <Link href="#">
                                 <i className="feather-calendar" >
                                   <FeatherIcon icon="calendar" />
@@ -109,8 +127,8 @@ const Blogdetails = ({ params }) => {
                                 </i>
                                 <span>05 Jul 2022</span>
                               </Link>
-                            </li> */}
-                            {/*  <li>
+                            </li>
+                             <li>
                               <Link href="#">
                                 <i className="feather-message" >
                                   <FeatherIcon icon="message-square" />
@@ -126,607 +144,44 @@ const Blogdetails = ({ params }) => {
                                 </i>
                                 <span>2.8k</span>
                               </Link>
-                            </li> */}
+                            </li>
                           </ul>
                         </div>
-                      </div>
-                      <div /* className="blog-image" */ style={{
-                        height: '520px',
-                        overflow: 'hidden'
-                      }}>
-                        {/* <Link href="#."> */}
-                        <img
-                          alt="#"
-                          src={blog.imagen}
-                          width={'100%'}
-                          style={{
-                            backgroundPosition: 'center'
-                          }}
-                        // className="img-fluid"
-                        />
-                        {/* </Link> */}
-                      </div>
-                      <div className="col-lg-6 col-12">
+                      </div> */}
+                      {/* TEXTO */}
 
+                      <div className="col-lg-5 col-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
                         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
                       </div>
-                      {/* <div className="blog-share ">
-                        <ul className="social-share nav">
-                          <li>
-                            <Link href="#">
-                              <img alt="#" src={social01.src} />
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="#">
-                              <img alt="#" src={social02.src} />
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="#">
-                              <img alt="#" src={social03.src} />
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="#">
-                              <img alt="#" src={social04.src} />
-                            </Link>
-                          </li>
-                        </ul>
-                      </div> */}
-                      {/* <div className="list-add-blogs">
-                        <ul className="nav">
 
-                          <li># Ophthalmology</li>
-                          <li># Beauty</li>
-                          <li># Prevention</li>
-                        </ul>
-                      </div> */}
+                      <div className="col-lg-5 col-12 d-flex flex-wrap" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
+                        <div className="blog-content" style={{marginBottom: matches ? 'auto' : '20px'}} >
+                          <img src={blog.imagen} alt="" style={{ width: '100%' }} />
+                        </div>
+
+                        <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                      </div>
                     </article>
-                    {/* <div className="widget author-widget ">
-                <div className="authr-blog-group text-center">
-                  <div className="authr-blg-img mb-2">
-                    <img
-                      className="avatar"
-                     alt="#"
-                      src={profiles03.src}
-                    />
-                  </div>
-                  <h2>Markhay smith</h2>
-                  <span>Dentist</span>
-                  <p>
-                    {" "}
-                    Integer enim neque volutpat ac tincidunt vitae semper quis.
-                    Orci sagittis eu volutpat odio facilisis mauris sit. Sed
-                    risus ultricies tristique nulla aliquet enim tortor at
-                    auctor.{" "}
-                  </p>
-                  <ul className="nav social-blk">
-                    <li>
-                      <Link href="#">
-                        <img alt="#" src={iconsocial.src} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <img alt="#" src={iconsocial02.src} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <img alt="#" src={iconsocial03.src} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <img alt="#" src={iconsocial04.src} />
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div> */}
-                    {/* <div className="widget blog-comments clearfix">
-                <h3>Comments</h3>
-                <ul className="comments-list">
-                  <li>
-                    <div className="comment">
-                      <div className="comment-author">
-                        <Link href="#">
-                          <img
-                            className="avatar"
-                           alt="#"
-                            src={profileavatar03.src}
-                          />
-                        </Link>
-                      </div>
-                      <div className="comment-block">
-                        <div className="comment-by">
-                          <div className="week-group">
-                            <h5 className="blog-author-name">Diana Bailey</h5>
-                            <span className="week-list">2 Weeks ago</span>
-                          </div>
-                          <span className="float-end">
-                            <span className="blog-reply">
-                              <Link href="#.">
-                                <i className="fa fa-reply" /> Reply
-                              </Link>
-                            </span>
-                          </span>
-                        </div>
-                        <p>
-                          Integer enim neque volutpat ac tincidunt vitae semper
-                          quis. Orci sagittis eu volutpat odio facilisis mauris
-                          sit. Sed risus ultricies tristique nulla aliquet enim
-                          tortor at auctor.{" "}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="comment">
-                      <div className="comment-author">
-                        <Link href="#">
-                          <img
-                            className="avatar"
-                           alt="#"
-                            src={profileavatar04.src}
-                          />
-                        </Link>
-                      </div>
-                      <div className="comment-block">
-                        <div className="comment-by">
-                          <div className="week-group">
-                            <h5 className="blog-author-name">Diana Bailey</h5>
-                            <span className="week-list">2 Weeks ago</span>
-                          </div>
-                          <span className="float-end">
-                            <span className="blog-reply">
-                              <Link href="#.">
-                                <i className="fa fa-reply" /> Reply
-                              </Link>
-                            </span>
-                          </span>
-                        </div>
-                        <p>
-                          Integer enim neque volutpat ac tincidunt vitae semper
-                          quis. Orci sagittis eu volutpat odio facilisis mauris
-                          sit. Sed risus ultricies tristique nulla aliquet enim
-                          tortor at auctor.{" "}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="comment">
-                      <div className="comment-author">
-                        <Link href="#">
-                          <img
-                            className="avatar"
-                           alt="#"
-                            src={profileavatar05.src}
-                          />
-                        </Link>
-                      </div>
-                      <div className="comment-block">
-                        <div className="comment-by">
-                          <div className="week-group">
-                            <h5 className="blog-author-name">Diana Bailey</h5>
-                            <span className="week-list">2 Weeks ago</span>
-                          </div>
-                          <span className="float-end">
-                            <span className="blog-reply">
-                              <Link href="#.">
-                                <i className="fa fa-reply" /> Reply
-                              </Link>
-                            </span>
-                          </span>
-                        </div>
-                        <p>
-                          Integer enim neque volutpat ac tincidunt vitae semper
-                          quis. Orci sagittis eu volutpat odio facilisis mauris
-                          sit. Sed risus ultricies tristique nulla aliquet enim
-                          tortor at auctor.{" "}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div> */}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12 col-lg-4">
-                    <Box sx={{ minWidth: 275 }}>
-                      <Card variant="outlined">{card}</Card>
-                    </Box>
-                  </div>
-                </div>
 
-                {/*  <Link className="col-md-4" href="#">
-                  <div className="widget post-widget">
-                    <div className="relat-head">
-                      <h5>Related Posts</h5>
-                      <Link href="#">Show All</Link>
-                    </div>
-                    <ul className="latest-posts">
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog7.src}
-                              alt="#"
-                            />
-                          </Link>
+                    <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >
+                      {console.log('leblog', blog.downloads)}
+                      <div className="col-12">
+                        <h3>Contenido descargable</h3>
+                      </div>
+                      {blog?.downloads && blog['downloads'].map((item, index) => (
+
+                        <div className="col-12 col-lg-4 mb-3" key={index}>
+                          <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
+                            <Card variant="outlined">{card(item)}</Card>
+                          </Box>
                         </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Health</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Hydration or Moisturization – What to do this Winter?
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 10 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog08.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Ophthalmology</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Keep proper monitor distance and room lighting.
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 5 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog09.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Safety</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Keep Hand Sanitizers Away from Young Children
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 4 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog10.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Ophthalmology</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Hair Loss – Causes, Treatment and Preventions
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 10 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="widget tags-widget">
-                    <div className="relat-head">
-                      <h5>Tags</h5>
-                    </div>
-                    <ul className="tags">
-                      <li>
-                        <Link href="#." className="tag">
-                          # Endodontics (10)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Endodontics (15)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Neurology (70)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Insurance (16)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Dental (60)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Neurology (70)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Diabetes (10)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Dermotology (15)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#." className="tag">
-                          # Stress (25)
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="widget post-widget">
-                    <div className="relat-head">
-                      <h5>Most Reads</h5>
-                      <Link href="#">Show All</Link>
-                    </div>
-                    <ul className="latest-posts">
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog11.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Health</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Hydration or Moisturization – What to do this Winter?
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 10 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog12.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Ophthalmology</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Hair Loss – Causes, Treatment and Preventions
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 5 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="post-thumb">
-                          <Link href="#">
-                            <img
-                              className="img-fluid"
-                              src={blog13.src}
-                              alt="#"
-                            />
-                          </Link>
-                        </div>
-                        <div className="post-info">
-                          <div className="date-posts">
-                            <h5>Safety</h5>
-                            <span className="ms-2">05 Sep 2022</span>
-                          </div>
-                          <h4>
-                            <Link href="#">
-                              Simple Changes That Lowered My Mom Blood Pressure
-                            </Link>
-                          </h4>
-                          <p>
-                            {" "}
-                            Read more in 4 Minutes
-                            <i className="fa fa-long-arrow-right ms-2" />
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="widget category-widget">
-                    <div className="relat-head mb-0">
-                      <h5> Categories</h5>
-                    </div>
-                    <ul className="categories">
-                      <li>
-                        <Link href="#.">
-                          <img
-                            src={tag.src}
-                            className="me-1"
-                            alt="#"
-                          />
-                          Hydration or Moisturization (10)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#.">
-                          <img
-                            src={tag1.src}
-                            className="me-1"
-                            alt="#"
-                          />
-                          Ophthalmology (50)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#.">
-                          <img
-                            src={tag2.src}
-                            className="me-1"
-                            alt="#"
-                          />
-                          Blood Pressure (24)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#.">
-                          <img
-                            src={tag3.src}
-                            className="me-1"
-                            alt="#"
-                          />
-                          Corona Virus (32)
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#.">
-                          <img
-                            src={tag4.src}
-                            className="me-1"
-                            alt="#"
-                          />
-                          Dental (15)
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Link> */}
-                {/* <div className="col-md-12">
-            <div className="widget new-comment clearfix">
-              <h3>Leave a Comment</h3>
-              <form>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-xl-6">
-                    <div className="form-group local-forms">
-                      <label>
-                        Name <span className="login-danger">*</span>
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder="Enter Name"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-6 col-xl-6">
-                    <div className="form-group local-forms">
-                      <label>
-                        Email<span className="login-danger">*</span>
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder="Enter Email"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-12 col-sm-12">
-                    <div className="form-group local-forms">
-                      <label>
-                        Comments <span className="login-danger">*</span>
-                      </label>
-                      <textarea
-                        className="form-control"
-                        rows={3}
-                        cols={30}
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="remember-me">
-                      <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
-                        {" "}
-                        Save my name, email, and website in this browser for the
-                        next time I comment.
-                        <input type="checkbox" name="radio" defaultChecked="" />
-                        <span className="checkmark" />
-                      </label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="doctor-submit text-end">
-                      <button
-                        type="submit"
-                        className="btn btn-primary submit-form me-2"
-                      >
-                        Submit
-                      </button>
+
+                      ))}
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
-          </div> */}
               </div>
             </div>
           </div>

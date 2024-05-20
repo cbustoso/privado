@@ -88,9 +88,7 @@ const TestContainer = ({ slides }) => {
                         lineHeight: '40px',
                         fontWeight: 700
                       }}>
-                      <p>
                         Reserva tu hora
-                      </p>
                     </Typography>
                     <Typography
                       variant="body2"
@@ -101,12 +99,18 @@ const TestContainer = ({ slides }) => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      <p>
                         Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
-                      </p>
-                      <p>
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className="sailec"
+                      sx={{
+                        color: '#000',
+                        // textWrap: 'balance',
+                        fontSize: '20px',
+                        lineHeight: '28px'
+                      }}>
                         Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
-                      </p>
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
@@ -136,7 +140,7 @@ const TestContainer = ({ slides }) => {
                         Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
 
                       </p>
-                      <ReserveBtn text={'Reservar aquí'} bgColor={'#FABB00'} color={'#000'} />
+                      <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                     </div>
                   </Box>
                 </div>
