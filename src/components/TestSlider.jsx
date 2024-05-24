@@ -134,12 +134,12 @@ const TestSlider = ({ slides }) => {
                           <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '100%', margin: 'auto' }}>
                             <CardMedia component="img" height="320" image={slide.imagen} alt="Slide image" />
                             <CardContent>
-                              <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>Psicología</Typography>
-                              <Typography variant="body2" color="text.secondary">{(slide.texto).slice(5, 60)}</Typography>
+                              <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slide.titulo}</Typography>
+                              <Typography variant="body2" color="text.secondary"></Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                                <Link href={`/blog/${slide.id}`}>
+                                <Link href={slide.url}>
                                   <button className="btn submit-form me-2" style={{ backgroundColor: '#4054B2', color: 'white', border: '1px solid #A6A6A6', borderRadius: '100px' }}>Realizar Test</button>
                                 </Link>
                               </Grid>
