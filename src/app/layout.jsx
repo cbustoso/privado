@@ -37,6 +37,8 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <title>Salud Mental Estudiantil UDP</title>
+        <link rel="stylesheet" id="bootstrap_css-css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" type="text/css" media="all" />
+        <Script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" id="bootstrap_js-js" strategy="afterInteractive"></Script>
         <Script src="https://kit.fontawesome.com/7a6fedca6c.js" ></Script>
         <Script id="fontawesome" src="https://kit.fontawesome.com/a790242b27.js" ></Script>
         <Script id="hotjar" strategy="afterInteractive" dangerouslySetInnerHTML={{
@@ -60,6 +62,7 @@ export default async function RootLayout({ children }) {
             {children}
           </TanstackProvider>
         </AuthProvider>
+        <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script>
       </body>
     </html>
   );

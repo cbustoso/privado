@@ -18,8 +18,58 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Carrousel from "@/components/skeletons/Carrousel";
 import FooterDae from "@/components/FooterDae";
 import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
-import TestContainer from "@/components/ReservaHora";
+import ReservaTuHora from "@/components/ReservaHora";
+import { saludMental05 } from '@/components/imagepath';
+
 import { blogs } from "@/utils/blogs";
+const events = [
+/*   {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Centro",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
+  } */
+]
+
+const tests = [
+
+  {
+    id: '0',
+    titulo: 'Test de ansiedad de Beck',
+    url: 'https://cetep.cl/test_salud_mental/test-de-ansiedad-de-beck/',
+    imagen: saludMental05.src,
+  },
+]
 
 export default function Home() {
   // const { isSuccess, isLoading, isError, data: blogs = [] } = useQuery({
@@ -55,17 +105,17 @@ export default function Home() {
       <main >
         {/* <main style={{ backgroundColor: '#fff' }}> */}
         {/* {matches && <Headerudp />} */}
-        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0,4)} />}
+        {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 4)} />}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
         {/* {isError && <p>Ha habido un error</p>} */}
 
         {/* {!isError && blogs.length === 0 && <Carrousel />} */}
 
-        {blogs.length > 0 && <TestContainer slides={blogs.slice(0, 5)} />}
-        {blogs.length > 0 && <TestSlider slides={blogs.slice(0, 4)} />}
+        {blogs.length > 0 && <ReservaTuHora slides={blogs.slice(0, 5)} />}
+        {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} />}
 
-        <Events matches={matches} />
+        {events.length !== 0 && <Events events={events} matches={matches} />}
 
         <div className="row" style={{ padding: 0, margin: 0 }}>
           <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
