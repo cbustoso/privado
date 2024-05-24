@@ -17,11 +17,22 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = [
+
+const pagesWithEvents = [
   { title: 'TÓPICOS', url: '#topicos' },
   { title: 'TEST AUTODIAGNÓSTICO?', url: '#test_autodiagnostico' },
   { title: 'EVENTOS', url: '#eventos' },
-  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' }
+  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
+];
+
+const pagesWithoutEvents = [
+  { title: 'TÓPICOS', url: '#topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '#test_autodiagnostico' },
+  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
 ];
 
 const Header = () => {
@@ -30,6 +41,8 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { data: session } = useSession()
+  const EVENTS = 0;
+  const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,7 +68,7 @@ const Header = () => {
 
 
   return (
-    <AppBar position="sticky" style={{ background: 'white', color: 'black', margin: 0 }}>
+    <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0 }}>
       <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -111,16 +124,17 @@ const Header = () => {
                 display: { xs: 'block', lg: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <a href={page.url} style={{ color: 'black' }}>
-                      {page.title}
-                    </a>
-                  </Typography>
-                </MenuItem>
-              ))}
-
+              {
+                pages.map((page) => (
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <a href={page.url} style={{ color: 'black' }}>
+                        {page.title}
+                      </a>
+                    </Typography>
+                  </MenuItem>
+                ))
+              }
             </Menu>
           </Box>
           <Typography
@@ -221,7 +235,7 @@ const Header = () => {
 
             {/* </IconButton> */}
             {/* </Tooltip> */}
-          
+
           </Box>
         </Toolbar>
       </Container>

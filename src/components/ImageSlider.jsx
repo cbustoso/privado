@@ -6,8 +6,9 @@ import { Grid, Box, Typography, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { banner04, banner05, banner06, banner07 } from "./imagepath";
 import Image from "next/image";
 import { MdOutlineChromeReaderMode } from "react-icons/md";
+import { blogs } from "@/utils/blogs";
 
-const slides = [
+const styles = [
   {
     id: 0,
     key: 'banner01',
@@ -51,6 +52,14 @@ const slides = [
 
 ]
 
+function estimateReadingTime(text) {
+  const wordsPerMinute = 250; // Puedes ajustar este valor según la velocidad de lectura deseada
+  const words = text.split(/\s+/).length; // Divide el texto en palabras por los espacios en blanco
+  const readingTimeMinutes = words / wordsPerMinute;
+  
+  return Math.ceil(readingTimeMinutes); // Retorna el tiempo estimado de lectura en minutos, redondeado al entero superior
+}
+
 function CustomTabPanel({ children, value, index, ...other }) {
   return (
     <div
@@ -77,11 +86,12 @@ function a11yProps(index) {
 }
 
 const ImageSlider = ({ }) => {
+  const [slides, setSlides] = useState(blogs.slice(0,4))
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [title, setTitle] = useState(slides[0].titulo)
-  const [content, setContent] = useState(slides[0].bajada)
-  const [color, setColor] = useState(slides[0].color)
-  const [idBlog, setIdBlog] = useState(slides[0].id)
+  const [title, setTitle] = useState(blogs[0].titulo)
+  const [content, setContent] = useState(blogs[0].bajada)
+  const [color, setColor] = useState(blogs[0].color)
+  const [idBlog, setIdBlog] = useState(blogs[0].id)
   const matches = useMediaQuery('(min-width:600px)');
 
   const [value, setValue] = useState(0);
@@ -102,7 +112,7 @@ const ImageSlider = ({ }) => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
         
       },
-      5500 // Cambiar el slide cada 3 segundos
+      8000 // Cambiar el slide cada 3 segundos
     );
 
     return () => {
@@ -126,7 +136,7 @@ const ImageSlider = ({ }) => {
   }
 
   const slideStyles = {
-    backgroundImage: `url(${slides[currentIndex].img.src})`,
+    backgroundImage: `url(${slides[currentIndex].imagen})`,
     width: '100%',
     height: matches ? imgHeightDesktop : imgHeightMobile,
     backgroundPosition: 'center',
@@ -134,7 +144,7 @@ const ImageSlider = ({ }) => {
   }
 
   const slideStylesMobile = {
-    backgroundColor: slides[currentIndex].color,
+    backgroundColor: styles[currentIndex].color,
     width: '100%',
     height: matches ? imgHeightDesktop : imgHeightMobile,
     backgroundPosition: 'center',
@@ -170,7 +180,7 @@ const ImageSlider = ({ }) => {
     setCurrentIndex(newIndex)
     setTitle(slides[newIndex].titulo)
     setContent(truncarPalabras(slides[newIndex].bajada, 205))
-    setColor(slides[newIndex].color)
+    setColor(styles[newIndex].color)
     setIdBlog(slides[newIndex].id)
   }
 
@@ -180,7 +190,7 @@ const ImageSlider = ({ }) => {
     setCurrentIndex(newIndex)
     setTitle(slides[newIndex].titulo)
     setContent(truncarPalabras(slides[newIndex].bajada, 205))
-    setColor(slides[newIndex].color)
+    setColor(styles[newIndex].color)
     setIdBlog(slides[newIndex].id)
   }
 
@@ -188,7 +198,7 @@ const ImageSlider = ({ }) => {
     setCurrentIndex(slideIndex)
     setTitle(slides[slideIndex].titulo)
     setContent(truncarPalabras(slides[slideIndex].bajada, 205))
-    setColor(slides[slideIndex].color)
+    setColor(styles[slideIndex].color)
     setIdBlog(slides[slideIndex].id)
   }
 
@@ -224,7 +234,7 @@ const ImageSlider = ({ }) => {
           <Box sx={boxStyleDesktop}>
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
-                width: `${matches ? '840px' : '100%'}`,
+                width: `${matches ? '90vw' : '100%'}`,
                 marginLeft: '40px'
               }}>
                 <div className="d-flex flex-column">
@@ -238,7 +248,7 @@ const ImageSlider = ({ }) => {
                     }}>
                     {slides[currentIndex].titulo}
                   </h2>
-                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode /> {slides[currentIndex].tiempo} </p>
+                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode style={{marginTop: '-3px'}}/> {estimateReadingTime(slides[currentIndex].texto)} min. </p>
                 </div>
                 <Grid
                   container
@@ -248,8 +258,8 @@ const ImageSlider = ({ }) => {
                     <button
                       className="btn submit-form me-2"
                       style={{
-                        backgroundColor: slides[currentIndex].color,
-                        border: `1px solid ${slides[currentIndex].border}`,
+                        backgroundColor: styles[currentIndex].color,
+                        border: `1px solid ${styles[currentIndex].border}`,
                         borderRadius: '100px',
                         color: '#fff'
                       }}> Ver más + </button>
@@ -266,7 +276,7 @@ const ImageSlider = ({ }) => {
               height: '200px',
               marginTop: '-240px',
               marginLeft: `calc((25vw * ${slides[currentIndex].id}) - (${slides[currentIndex].id} * 4px) )`,
-              backgroundColor: slides[currentIndex].color,
+              backgroundColor: styles[currentIndex].color,
               color: "#fff",
               fontWeight: 400,
               fontSize: '20px',
@@ -288,7 +298,7 @@ const ImageSlider = ({ }) => {
               value={slides[currentIndex].key}
               index={slides[currentIndex].key}
             >
-              {slides[currentIndex].bajada}
+              {slides[currentIndex].bajada.slice(0,200) + '...'}
             </CustomTabPanel>
           </div>
           <Tabs
@@ -305,7 +315,7 @@ const ImageSlider = ({ }) => {
                 onClick={() => goToSlide(slideIndex)}
                 sx={{
                   height: '97px',
-                  bgcolor: slide.color,
+                  bgcolor: styles[slideIndex].color,
                   color: '#fff',
                   textTransform: 'capitalize',
                   fontWeight: 700,
@@ -314,7 +324,7 @@ const ImageSlider = ({ }) => {
                   maxWidth: 'unset',
                   alignItems: 'baseline',
                 }}
-                label={slide.titulo}
+                label={slide.titulo.slice(0, slide.titulo.indexOf(':'))}
                 {...a11yProps(slideIndex)}
               />
             ))}

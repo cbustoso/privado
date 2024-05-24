@@ -309,3 +309,5 @@ export { default as saludMental05 } from "../assets/img/ansiedad.jpg"
 
 export { default as conferencia } from "../assets/img/salon01.jpg"
 export { default as profesional01} from "../assets/img/homepage/sicologa.png"
+
+export { default as bot_icon } from "../assets/img/bot_salud_mental.png"

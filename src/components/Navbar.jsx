@@ -53,6 +53,16 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link className="sailec" href="/quienes-somos" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              QUIÉNES SOMOS
+            </Link>
+          </li>
+          <li>
+            <Link className="sailec" href="material-descargable" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>
+              MATERIAL DESCARGABLE
+            </Link>
+          </li>
+          <li>
             <ReserveBtn text={'Reservar'} bgColor={'#FF5253'} color={'#fff'} />
           </li>
           {/* <Link className="sailec" href="/middlewareside" style={{ backgroundColor: 'white', color: 'black', fontWeight: 500, fontSize: '14px' }}>

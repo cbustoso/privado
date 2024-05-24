@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import TextEditor from '../../../components/TextEditor';
 import Sidebar from '../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
@@ -60,6 +61,7 @@ const card = (item) => (
 const Blogdetails = ({ params }) => {
   const [blog, setBlog] = useState({})
   const matches = useMediaQuery('(min-width:600px)');
+  const router = useRouter()
 
   useEffect(() => {
     // const fetchData = async() => {
@@ -97,7 +99,9 @@ const Blogdetails = ({ params }) => {
                 padding: '0px 24px',
                 borderRadius: '100px',
                 marginLeft: '76px'
-              }}>
+              }}
+              onClick={() => router.back()}
+            >
               <FaArrowLeft /> Volver
             </button>}
           <div className="page-wrapper" style={{ marginLeft: 'unset' }}>
@@ -157,7 +161,7 @@ const Blogdetails = ({ params }) => {
                       </div>
 
                       <div className="col-lg-5 col-12 d-flex flex-wrap" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
-                        <div className="blog-content" style={{marginBottom: matches ? 'auto' : '20px'}} >
+                        <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
                           <img src={blog.imagen} alt="" style={{ width: '100%' }} />
                         </div>
 

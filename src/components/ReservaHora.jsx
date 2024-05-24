@@ -12,7 +12,7 @@ import ReserveBtn from "./ReserveBtn";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { profesional01 } from "./imagepath";
 
-const TestContainer = ({ slides }) => {
+const ReservaTuHora = ({ slides }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(slides[0].title)
@@ -152,4 +152,4 @@ const TestContainer = ({ slides }) => {
   )
 }
 
-export default TestContainer;
+export default ReservaTuHora;

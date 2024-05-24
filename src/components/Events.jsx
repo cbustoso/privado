@@ -6,46 +6,9 @@ import { ChevronLeft, ChevronRight, CircleRounded, LocationOnOutlined, AccessTim
 import { useMediaQuery } from "@mui/material";
 
 import { blogs } from '@/utils/blogs';
-const events = [
-  {
-    title: "Salud Mental",
-    address: "Av. Portugal 782, Santiago",
-    date: "2024/02/18",
-    time: "09:00",
-    campus: "Sede Santiago",
-    location: "Auditorio",
-    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
-  },
-  {
-    title: "Salud Mental",
-    address: "Av. Portugal 782, Santiago",
-    date: "2024/02/18",
-    time: "09:00",
-    campus: "Sede Centro",
-    location: "Auditorio",
-    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
-  },
-  {
-    title: "Salud Mental",
-    address: "Av. Portugal 782, Santiago",
-    date: "2024/02/18",
-    time: "09:00",
-    campus: "Sede Santiago",
-    location: "Auditorio",
-    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
-  },
-  {
-    title: "Salud Mental",
-    address: "Av. Portugal 782, Santiago",
-    date: "2024/02/18",
-    time: "09:00",
-    campus: "Sede Santiago",
-    location: "Auditorio",
-    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg'
-  }
-]
 
-const Events = () => {
+
+const Events = ({ events }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = events.length;
   const timeoutRef = useRef(null);
