@@ -51,8 +51,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
   },
   {
     id: '1',
-    titulo: 'Tratamiento de la Ansiedad con Terapia Cognitivo-Conductual',
-    bajada: `Enfoques y Duración`,
+    titulo: 'Tratamiento de la Ansiedad',
+    bajada: `Con Terapia Cognitivo-Conductual: Enfoques y Duración`,
     texto: `
 <p>La ansiedad, un trastorno que puede manifestarse de diversas formas y ser desencadenada por múltiples causas, es una de las condiciones de salud mental más comunes. La Terapia Cognitivo-Conductual (TCC) ha demostrado ser uno de los tratamientos más efectivos para manejar y superar la ansiedad. Este artículo explora cómo la TCC aborda la ansiedad, la duración típica de los tratamientos y las variaciones según las causas subyacentes del trastorno.</p>
 
@@ -147,7 +147,7 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
     id: '3',
     titulo: 'Los Efectos de la Cafeína sobre la Salud Mental',
     bajada: `
-    La cafeína, un estimulante del sistema nervioso central presente comúnmente en el café, el té, las bebidas energéticas, y ciertos medicamentos, ha sido objeto de numerosos estudios debido a sus efectos sobre la salud mental. A pesar de su consumo mundial y la percepción general de su seguridad, las implicaciones de la cafeína en la salud mental son complejas y merecen un análisis detallado, especialmente en lo que respecta a su relación con la ansiedad.
+    La cafeína, un estimulante del sistema nervioso central presente comúnmente en el café, el té, las bebidas energéticas, y ciertos medicamentos
     `,
     texto: `
     <h1>Los Efectos de la Cafeína sobre la Salud Mental: Un Análisis Basado en Investigaciones Recientes</h1>

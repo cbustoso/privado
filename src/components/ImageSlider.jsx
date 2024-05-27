@@ -12,47 +12,31 @@ const styles = [
   {
     id: 0,
     key: 'banner01',
-    titulo: 'La ansiedad y la educación',
-    tiempo: '5 min. aprox',
-    bajada: 'Conoce los diferentes factores que pueden estar afectando tu vida Universitaria.',
-    img: banner04,
     color: '#3886FF',
     border: '#A5C8FF',
   },
   {
     id: 1,
     key: 'banner02',
-    titulo: 'Vida universitaria',
-    tiempo: '5 min. aprox',
-    bajada: 'Conoce los diferentes factores que pueden estar afectando tu vida Universitaria.',
-    img: banner05,
     color: '#FABB00',
     border: '#FFCB7E',
   },
   {
     id: 2,
     key: 'banner03',
-    titulo: 'Biblioteca viva',
-    tiempo: '5 min. aprox',
-    bajada: 'Conoce los diferentes factores que pueden estar afectando tu vida Universitaria.',
-    img: banner06,
     color: '#1ABC9C',
     border: '#73CDCD',
   },
   {
     id: 3,
     key: 'banner04',
-    titulo: 'Distracción positiva',
-    tiempo: '5 min. aprox',
-    bajada: 'Conoce los diferentes factores que pueden estar afectando tu vida Universitaria.',
-    img: banner07,
     color: '#B82925',
     border: '#FF5253',
   },
 
 ]
 
-function estimateReadingTime(text) {
+const estimateReadingTime = text => {
   const wordsPerMinute = 250; // Puedes ajustar este valor según la velocidad de lectura deseada
   const words = text.split(/\s+/).length; // Divide el texto en palabras por los espacios en blanco
   const readingTimeMinutes = words / wordsPerMinute;
@@ -60,7 +44,7 @@ function estimateReadingTime(text) {
   return Math.ceil(readingTimeMinutes); // Retorna el tiempo estimado de lectura en minutos, redondeado al entero superior
 }
 
-function CustomTabPanel({ children, value, index, ...other }) {
+const CustomTabPanel = ({ children, value, index, ...other }) => {
   return (
     <div
       role="tabpanel"
@@ -112,7 +96,7 @@ const ImageSlider = ({ }) => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
         
       },
-      8000 // Cambiar el slide cada 3 segundos
+      8000 // Cambiar el slide cada 8 segundos
     );
 
     return () => {
@@ -126,7 +110,7 @@ const ImageSlider = ({ }) => {
   };
 
   const imgHeightMobile = '72vh'
-  const imgHeightDesktop = '90vh'
+  const imgHeightDesktop = '100vh'
 
   const sliderStyles = {
     position: 'relative',
@@ -242,9 +226,10 @@ const ImageSlider = ({ }) => {
                     className="sailec"
                     style={{
                       color: 'white',
-                      fontSize: '96px',
+                      fontSize: '80px',
                       fontWeight: 700,
                       lineHeight: '116px',
+                      textWrap:'balance'
                     }}>
                     {slides[currentIndex].titulo}
                   </h2>
@@ -298,7 +283,7 @@ const ImageSlider = ({ }) => {
               value={slides[currentIndex].key}
               index={slides[currentIndex].key}
             >
-              {slides[currentIndex].bajada.slice(0,200) + '...'}
+              {slides[currentIndex].bajada.slice(0,200)}
             </CustomTabPanel>
           </div>
           <Tabs
@@ -324,7 +309,7 @@ const ImageSlider = ({ }) => {
                   maxWidth: 'unset',
                   alignItems: 'baseline',
                 }}
-                label={slide.titulo.slice(0, slide.titulo.indexOf(':'))}
+                label={slide.titulo}
                 {...a11yProps(slideIndex)}
               />
             ))}
