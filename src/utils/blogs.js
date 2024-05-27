@@ -6,8 +6,8 @@ import {
 export const blogs = [
   {
     id: '0',
-    titulo: 'El Análisis Funcional en Psicología: Procedimiento y Aplicaciones en Salud Mental',
-    bajada: `El análisis funcional es una herramienta fundamental en la terapia cognitivo conductual (TCC) que permite a los terapeutas entender las interacciones entre estímulos, respuestas y las consecuencias de estas últimas. Este enfoque se basa en la premisa de que el comportamiento es una función del entorno y puede ser modificado al cambiar estos elementos interactivos.`,
+    titulo: 'El Análisis Funcional en Psicología ',
+    bajada: `Procedimiento y Aplicaciones en Salud Mental`,
     texto: `
     <h2>Introducción:</h2>
 <p>
@@ -52,9 +52,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
   {
     id: '1',
     titulo: 'Tratamiento de la Ansiedad con Terapia Cognitivo-Conductual',
-    bajada: `La ansiedad, un trastorno que puede manifestarse de diversas formas y ser desencadenada por múltiples causas, es una de las condiciones de salud mental más comunes. La Terapia Cognitivo-Conductual (TCC) ha demostrado ser uno de los tratamientos más efectivos para manejar y superar la ansiedad. Este artículo explora cómo la TCC aborda la ansiedad, la duración típica de los tratamientos y las variaciones según las causas subyacentes del trastorno.`,
+    bajada: `Enfoques y Duración`,
     texto: `
-    <h1>Tratamiento de la Ansiedad con Terapia Cognitivo-Conductual: Enfoques y Duración</h1>
 <p>La ansiedad, un trastorno que puede manifestarse de diversas formas y ser desencadenada por múltiples causas, es una de las condiciones de salud mental más comunes. La Terapia Cognitivo-Conductual (TCC) ha demostrado ser uno de los tratamientos más efectivos para manejar y superar la ansiedad. Este artículo explora cómo la TCC aborda la ansiedad, la duración típica de los tratamientos y las variaciones según las causas subyacentes del trastorno.</p>
 
 <h2>Entendiendo la Ansiedad y sus Causas</h2>
@@ -94,8 +93,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
   },
   {
     id: '2',
-    titulo: 'Manejo de la Ansiedad Universitaria: Soluciones Efectivas a Través de la Terapia Cognitivo Conductual',
-    bajada: `La ansiedad entre los estudiantes universitarios puede ser una barrera significativa para el éxito académico y el bienestar personal. La Terapia Cognitivo Conductual (TCC) ofrece herramientas efectivas y estrategias concretas para abordar y manejar esta ansiedad, adaptadas a la variedad de causas y manifestaciones que puede presentar.`,
+    titulo: 'Manejo de la Ansiedad Universitaria',
+    bajada: `Soluciones Efectivas a Través de la Terapia Cognitivo Conductual`,
     texto: `
     <h1>Manejo de la Ansiedad Universitaria: Soluciones Efectivas a Través de la Terapia Cognitivo Conductual</h1>
     <h2>Introducción:</h2>

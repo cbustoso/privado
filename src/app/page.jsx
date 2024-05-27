@@ -66,6 +66,7 @@ const tests = [
   {
     id: '0',
     titulo: 'Test de ansiedad de Beck',
+    texto: '',
     url: 'https://cetep.cl/test_salud_mental/test-de-ansiedad-de-beck/',
     imagen: saludMental05.src,
   },

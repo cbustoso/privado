@@ -38,7 +38,6 @@ const FooterDae = () => {
     },
   ]
 
-  console.log('MATCHES', matches);
   return (
     <>
       <div className="row d-flex justify-content-center" style={{ backgroundColor: '#2D2D2D', margin: 0 }}>

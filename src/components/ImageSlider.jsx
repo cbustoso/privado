@@ -370,7 +370,7 @@ const ImageSlider = ({ }) => {
                       }}> Ver más + </button>
                   </Link>
                   <img
-                    src={slides[currentIndex].img.src}
+                    src={slides[currentIndex].imagen}
                     alt=""
                     width={'90%'}
                     height={250}
