@@ -62,7 +62,7 @@ const CustomTabPanel = ({ children, value, index, ...other }) => {
   );
 }
 
-function a11yProps(index) {
+const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -219,14 +219,15 @@ const ImageSlider = ({ }) => {
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
                 width: `${matches ? '90vw' : '100%'}`,
-                marginLeft: '40px'
+                marginLeft: '60px'
               }}>
                 <div className="d-flex flex-column">
                   <h2
                     className="sailec"
                     style={{
+                      marginTop: '1em',
                       color: 'white',
-                      fontSize: '80px',
+                      fontSize: '72px',
                       fontWeight: 700,
                       lineHeight: '116px',
                       textWrap:'balance'
@@ -308,6 +309,7 @@ const ImageSlider = ({ }) => {
                   lineHeight: '32px',
                   maxWidth: 'unset',
                   alignItems: 'baseline',
+                  textAlign: 'left',
                 }}
                 label={slide.titulo}
                 {...a11yProps(slideIndex)}
