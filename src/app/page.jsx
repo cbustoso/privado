@@ -105,7 +105,9 @@ export default function Home() {
       {/* <Header /> */}
       <main >
         {/* <main style={{ backgroundColor: '#fff' }}> */}
-        {/* {matches && <Headerudp />} */}
+        {/* {matches && <Headerudp />} */}  
+        {/* {console.log('LENGHT', blogs.length)}
+        {console.log('MATCHES', matches)} */}
         {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 4)} />}
         {/* {isLoading && <strong>Cargando...</strong>} */}
 
