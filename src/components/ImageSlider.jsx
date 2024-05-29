@@ -7,6 +7,19 @@ import { banner04, banner05, banner06, banner07 } from "./imagepath";
 import Image from "next/image";
 import { MdOutlineChromeReaderMode } from "react-icons/md";
 import { blogs } from "@/utils/blogs";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { lime } from '@mui/material/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#ff7961',
+      main: '#ffffff',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 const styles = [
   {
@@ -40,7 +53,7 @@ const estimateReadingTime = text => {
   const wordsPerMinute = 250; // Puedes ajustar este valor según la velocidad de lectura deseada
   const words = text.split(/\s+/).length; // Divide el texto en palabras por los espacios en blanco
   const readingTimeMinutes = words / wordsPerMinute;
-  
+
   return Math.ceil(readingTimeMinutes); // Retorna el tiempo estimado de lectura en minutos, redondeado al entero superior
 }
 
@@ -70,7 +83,7 @@ const a11yProps = (index) => {
 }
 
 const ImageSlider = ({ }) => {
-  const [slides, setSlides] = useState(blogs.slice(0,4))
+  const [slides, setSlides] = useState(blogs.slice(0, 4))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(blogs[0].titulo)
   const [content, setContent] = useState(blogs[0].bajada)
@@ -94,7 +107,7 @@ const ImageSlider = ({ }) => {
     timeoutRef.current = setTimeout(
       () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
-        
+
       },
       8000 // Cambiar el slide cada 8 segundos
     );
@@ -210,7 +223,7 @@ const ImageSlider = ({ }) => {
   }
 
   return (
-    <div id="topicos" style={matches ? {...sliderStyles, height: imgHeightDesktop} : sliderStyles }>
+    <div id="topicos" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : sliderStyles}>
       <div style={matches ? slideStyles : {}}></div>
 
       {matches ?
@@ -230,11 +243,11 @@ const ImageSlider = ({ }) => {
                       fontSize: '72px',
                       fontWeight: 700,
                       lineHeight: '116px',
-                      textWrap:'balance'
+                      textWrap: 'balance'
                     }}>
                     {slides[currentIndex].titulo}
                   </h2>
-                  <p style={{color: '#FFF'}}> <MdOutlineChromeReaderMode style={{marginTop: '-3px'}}/> {estimateReadingTime(slides[currentIndex].texto)} min. </p>
+                  <p style={{ color: '#FFF' }}> <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].texto)} min. </p>
                 </div>
                 <Grid
                   container
@@ -284,38 +297,42 @@ const ImageSlider = ({ }) => {
               value={slides[currentIndex].key}
               index={slides[currentIndex].key}
             >
-              {slides[currentIndex].bajada.slice(0,200)}
+              {slides[currentIndex].bajada.slice(0, 200)}
             </CustomTabPanel>
           </div>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            // textColor="secondary"
-            indicatorColor="white"
-          >
-            {slides.map((slide, slideIndex) => (
-              <Tab
-                key={slideIndex}
-                className="col-3 sailec white_menu_urls"
-                onClick={() => goToSlide(slideIndex)}
-                sx={{
-                  height: '97px',
-                  bgcolor: styles[slideIndex].color,
-                  color: '#fff',
-                  textTransform: 'capitalize',
-                  fontWeight: 700,
-                  fontSize: '24px',
-                  lineHeight: '32px',
-                  maxWidth: 'unset',
-                  alignItems: 'baseline',
-                  textAlign: 'left',
-                }}
-                label={slide.titulo}
-                {...a11yProps(slideIndex)}
-              />
-            ))}
-          </Tabs>
+          <ThemeProvider theme={theme}>
+
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              textColor="primary"
+              indicatorColor="white"
+            >
+              {slides.map((slide, slideIndex) => (
+                <Tab
+                  key={slideIndex}
+                  className="col-3 sailec white_menu_urls"
+                  onClick={() => goToSlide(slideIndex)}
+                  sx={{
+                    height: '97px',
+                    bgcolor: styles[slideIndex].color,
+                    color: '#fff',
+                    textTransform: 'capitalize',
+                    fontWeight: 700,
+                    fontSize: '24px',
+                    lineHeight: '32px',
+                    maxWidth: 'unset',
+                    alignItems: 'baseline',
+                    textAlign: 'left',
+                  }}
+                  label={slide.titulo}
+                  {...a11yProps(slideIndex)}
+                />
+              ))}
+            </Tabs>
+          </ThemeProvider>
+
         </> :
         <>
           <div style={slideStylesMobile}></div>

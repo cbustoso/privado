@@ -11206,10 +11206,3 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 #menu-appbar {
   width: 430px !important;
 }
-
-
-.css-ak9tg0-MuiButtonBase-root-MuiTab-root.Mui-selected,
-.css-1223xio-MuiButtonBase-root-MuiTab-root.Mui-selected,
-.css-v4yx4z-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: white;
-}
