@@ -67,7 +67,7 @@ const tests = [
   {
     id: '0',
     titulo: 'Test de ansiedad de Beck',
-    texto: '',
+    bajada: 'El test puede ser evaluado por un profesional y/o por ti mismo. Lo anterior, no implica que puedas realizar un diagnóstico, pero sí puede entregarte claridad respecto a las acciones a realizar.',
     url: 'https://cetep.cl/test_salud_mental/test-de-ansiedad-de-beck/',
     imagen: saludMental05.src,
   },
@@ -130,14 +130,10 @@ export default function Home() {
           <SimpleBackdrop />
           :
           <>
-
-
             {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(0, 4)} />}
             {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(0, 4)} />}
             {/* {isLoading && <strong>Cargando...</strong>} */}
-
             {/* {isError && <p>Ha habido un error</p>} */}
-
             {/* {!isError && blogs.length === 0 && <Carrousel />} */}
 
             {blogs.length > 0 && <ReservaTuHora slides={blogs.slice(0, 5)} />}
@@ -151,9 +147,7 @@ export default function Home() {
               </div>
             </div>
             <FrequentAskedQuestions />
-
             <FooterDae matches={matches} />
-
           </>
         }
       </main>

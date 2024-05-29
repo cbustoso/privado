@@ -36,7 +36,7 @@ const ReservaTuHora = ({ slides }) => {
           textWrap: 'pretty',
           margin: '0 auto'
         }}>
-          <div className="row" style={{margin: 0}} >
+          <div className="row" style={{ margin: 0 }} >
             {
               matches
                 ?
@@ -78,7 +78,7 @@ const ReservaTuHora = ({ slides }) => {
                       paddingBottom: '10px',
                       padding: '2em',
                     }}>
-                         <Typography
+                    <Typography
                       variant="body2"
                       className="sailec"
                       sx={{
@@ -88,7 +88,7 @@ const ReservaTuHora = ({ slides }) => {
                         lineHeight: '40px',
                         fontWeight: 700
                       }}>
-                        Reserva tu hora
+                      Reserva tu hora
                     </Typography>
                     <Typography
                       variant="body2"
@@ -99,7 +99,7 @@ const ReservaTuHora = ({ slides }) => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                        Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
+                      Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
                     </Typography>
                     <Typography
                       variant="body2"
@@ -110,7 +110,7 @@ const ReservaTuHora = ({ slides }) => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                        Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
+                      Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
@@ -128,11 +128,25 @@ const ReservaTuHora = ({ slides }) => {
                     fontWeight: 400,
                     lineHeight: '32px',
                     borderRadius: '12px',
-                    padding:0,
+                    padding: 0,
                   }}
                 >
                   <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
                     <div className="media-body sailec" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
+                      <Typography
+                        variant="body2"
+                        className="sailec"
+                        sx={{
+                          color: '#000',
+                          // textWrap: 'balance',
+                          fontSize: '32px',
+                          lineHeight: '40px',
+                          fontWeight: 700,
+                          margin: '16px 0'
+                        }}>
+                        Reserva tu hora
+                      </Typography>
+
                       <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
                         Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
                       </p>

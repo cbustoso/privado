@@ -21,8 +21,8 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
     } catch (error) {
       // Maneja el error de autenticación
-      redirect('/login')
       console.log('ERRRR', error);
+      redirect('/login')
       if (error.message === 'No se pudo acceder. Correo no autorizado.') {
         // Muestra un mensaje de error personalizado al usuario
         alert('No tienes acceso. Tu correo no está autorizado.');
@@ -52,7 +52,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
         }}
       // onClick={handleOpen}
       >
-        <Today style={{margin: '-2px 4px 0 0', fontSize: '15px'}}/>
+        <Today style={{ margin: '-2px 4px 0 0', fontSize: '15px' }} />
         {text}
       </button>
       {/* </Link> */}

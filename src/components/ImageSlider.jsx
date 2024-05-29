@@ -8,7 +8,6 @@ import Image from "next/image";
 import { MdOutlineChromeReaderMode } from "react-icons/md";
 import { blogs } from "@/utils/blogs";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { lime } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {

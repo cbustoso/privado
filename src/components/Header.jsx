@@ -19,18 +19,18 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 const pagesWithEvents = [
-  { title: 'TÓPICOS', url: '#topicos' },
-  { title: 'TEST AUTODIAGNÓSTICO?', url: '#test_autodiagnostico' },
-  { title: 'EVENTOS', url: '#eventos' },
-  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' },
+  { title: 'TÓPICOS', url: '/#topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico' },
+  { title: 'EVENTOS', url: '/#eventos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes' },
   { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
 ];
 
 const pagesWithoutEvents = [
-  { title: 'TÓPICOS', url: '#topicos' },
-  { title: 'TEST AUTODIAGNÓSTICO?', url: '#test_autodiagnostico' },
-  { title: 'PREGUNTAS FRECUENTES', url: '#preguntas_frecuentes' },
+  { title: 'TÓPICOS', url: '/#topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes' },
   { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
 ];

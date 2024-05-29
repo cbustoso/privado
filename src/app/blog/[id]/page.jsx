@@ -165,7 +165,7 @@ const Blogdetails = ({ params }) => {
                           <img src={blog.imagen} alt="" style={{ width: '100%' }} />
                         </div>
 
-                        <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                       { blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>}
                       </div>
                     </article>
 

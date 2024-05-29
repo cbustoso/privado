@@ -116,9 +116,9 @@ const TestSlider = ({ slides }) => {
       {
         matches
           ? <div style={sliderStyles}>
-            <ChevronLeft sx={leftArrowStyles} onClick={prevSlide} />
+            {slides.length >= 2 && <ChevronLeft sx={leftArrowStyles} onClick={prevSlide} />}
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
-              <div className="row" style={{ backgroundColor: '#F1F1F1', paddingTop: '32px' }}>
+              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0' }}>
                 <h2
                   className="sailec"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
@@ -135,11 +135,11 @@ const TestSlider = ({ slides }) => {
                             <CardMedia component="img" height="320" image={slide.imagen} alt="Slide image" />
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary"></Typography>
+                              <Typography variant="body2" color="text.secondary">{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                                <Link href={slide.url}>
+                                <Link href={slide.url} target="_blank" >
                                   <button className="btn submit-form me-2" style={{ backgroundColor: '#4054B2', color: 'white', border: '1px solid #A6A6A6', borderRadius: '100px' }}>Realizar Test</button>
                                 </Link>
                               </Grid>
@@ -153,14 +153,14 @@ const TestSlider = ({ slides }) => {
                 </div>
               </div>
             </Box>
-            <ChevronRight sx={rightArrowStyles} onClick={nextSlide} />
-            <div style={matches && { ...dotsContainerStyles, backgroundColor: '#F1F1F1' }}>
+            {slides.length >= 2 && <ChevronRight sx={rightArrowStyles} onClick={nextSlide} />}
+            {slides.length >= 2 && <div style={matches && { ...dotsContainerStyles, backgroundColor: '#F1F1F1' }}>
               {Array(Math.ceil(slides.length)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
                   <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#4054B2' : '#3886FF' }} />
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
           : <div style={sliderStyles}>
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
@@ -177,12 +177,12 @@ const TestSlider = ({ slides }) => {
                         <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '90%', margin: 'auto' }}>
                           <CardMedia component="img" height="320" image={slides[currentIndex].imagen} alt="Slide image" />
                           <CardContent>
-                            <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>Psicología</Typography>
-                            <Typography variant="body2" color="text.secondary">{(slides[currentIndex].texto).slice(5, 60)}</Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slide.titulo}</Typography>
+                            <Typography variant="body2" color="text.secondary">{slide.bajada}</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                              <Link href={`/blog/${slides[currentIndex].id}`}>
+                              <Link href={slide.url} target="_blank">
                                 <button
                                   className="btn submit-form me-2"
                                   style={{
@@ -203,13 +203,13 @@ const TestSlider = ({ slides }) => {
                 </div>
               </div>
             </Box>
-            <div style={dotsContainerStyles}>
+            {slides.length >= 2 && <div style={dotsContainerStyles}>
               {Array(Math.ceil(slides.length)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
                   <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#4054B2' : '#3886FF' }} />
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
       }
 

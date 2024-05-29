@@ -5,6 +5,8 @@ import { blogs } from "@/utils/blogs";
 import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mui/material";
 import { FaArrowLeft } from "react-icons/fa";
+import FooterDae from "@/components/FooterDae";
+import SimpleBackdrop from "@/components/Backdrop";
 
 const material_descargable = [
   {
@@ -60,54 +62,75 @@ const material_descargable = [
 ]
 
 export default function MaterialDescargable() {
+  const isSmallDevice = useMediaQuery(
+    "only screen and (max-width : 640px)"
+  );
+  const isMediumDevice = useMediaQuery(
+    "only screen and (min-width : 641px) and (max-width : 768px)"
+  );
+  const isLargeDevice = useMediaQuery(
+    "only screen and (min-width : 769px) and (max-width : 1024px)"
+  );
+  const isExtraLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1025px)"
+  );
   const matches = useMediaQuery('(min-width:600px)');
   const router = useRouter()
 
   return (
     <>
-      {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 4)} />}
-      <div className="row flex-column d-flex align-items-center sailec" style={{marginTop: '10px'}}>
-        <div className="col-12 col-lg-10">
-          <div className="card" style={{border: 'none'}}>
-          {matches &&
-            <button className='btn mt-4 mb-5'
-              style={{
-                border: '1px solid #A6A6A6',
-                height: '56px',
-                width: '163px',
-                padding: '0px 24px',
-                borderRadius: '100px',
-                marginLeft: '76px'
-              }}
-              onClick={() => router.back()}
-            >
-              <FaArrowLeft /> Volver
-            </button>}
-            <div className="card-body flex-row d-flex justify-content-center">
-              <h3 style={{ fontWeight: 600, fontSize: '48px' }}>Material descargable</h3>
+      {!isSmallDevice && !isMediumDevice && !isLargeDevice && !isExtraLargeDevice
+        ?
+        <SimpleBackdrop />
+        :
+        <>
+          {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(0, 4)} />}
+          {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(0, 4)} />}
 
-            </div>
+          <div className="row flex-column d-flex align-items-center sailec" style={{ marginTop: '10px' }}>
+            <div className="col-12 col-lg-10">
+              <div className="card" style={{ border: 'none' }}>
+                {matches &&
+                  <button className='btn mt-4 mb-5'
+                    style={{
+                      border: '1px solid #A6A6A6',
+                      height: '56px',
+                      width: '163px',
+                      padding: '0px 24px',
+                      borderRadius: '100px',
+                      marginLeft: '76px'
+                    }}
+                    onClick={() => router.back()}
+                  >
+                    <FaArrowLeft /> Volver
+                  </button>}
+                <div className="card-body flex-row d-flex justify-content-center">
+                  <h3 style={{ fontWeight: 600, fontSize: '48px' }}>Material descargable</h3>
 
-            <div className="card-body flex-md-column flex-lg-row d-flex align-self-center" style={{ fontSize: '20px', textAlign: 'center' }}>
-              <p>
-                El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
-              </p>
-            </div>
-
-            <div className="row card-body flex-md-column flex-lg-row d-flex justify-content-center align-items-center" style={{ rowGap: '20px' }}>
-              {material_descargable.map(item => (
-                <div className="col-12 col-lg-6" key={item.titulo}>
-                  <FlipCard
-                    titulo={item.titulo}
-                    descripcion={item.descripcion}
-                    archivo={item.archivo}
-                  />
                 </div>
-              ))}
+
+                <div className="card-body flex-md-column flex-lg-row d-flex align-self-center" style={{ fontSize: '20px', textAlign: 'center' }}>
+                  <p>
+                    El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
+                  </p>
+                </div>
+
+                <div className="row card-body flex-md-column flex-lg-row d-flex justify-content-center align-items-center" style={{ rowGap: '20px' }}>
+                  {material_descargable.map(item => (
+                    <div className="col-12 col-lg-6" key={item.titulo}>
+                      <FlipCard
+                        titulo={item.titulo}
+                        descripcion={item.descripcion}
+                        archivo={item.archivo}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <FooterDae matches={matches} />
+        </>}
     </>
 
   );

@@ -9,33 +9,34 @@ export const blogs = [
     titulo: 'El Análisis Funcional en Psicología ',
     bajada: `Procedimiento y Aplicaciones en Salud Mental`,
     texto: `
-    <h2>Introducción:</h2>
+    <h2>Introducción</h2>
 <p>
 El análisis funcional es una herramienta fundamental en la terapia cognitivo conductual (TCC) que permite a los terapeutas entender las interacciones entre estímulos, respuestas y las consecuencias de estas últimas. Este enfoque se basa en la premisa de que el comportamiento es una función del entorno y puede ser modificado al cambiar estos elementos interactivos.
 </p>
-<h2>Procedimiento General:</h2>
+<h2>Procedimiento General</h2>
 <p>
 El análisis funcional comienza con la identificación de los comportamientos problemáticos específicos que se quieren cambiar. Una vez identificados, el terapeuta y el paciente trabajan juntos para determinar los estímulos que desencadenan estos comportamientos (antecedentes) y las consecuencias que los mantienen. Este proceso implica la recopilación de datos detallados sobre el contexto en el que ocurren los comportamientos, incluyendo factores emocionales, cognitivos y ambientales.
 </p>
-<h2>Identificación de Patrones:</h2>
+<h2>Identificación de Patrones</h2>
 <p>
 La clave del análisis funcional es identificar patrones en los comportamientos del paciente. Esto se hace a través de la observación directa y el uso de diarios de auto-registro donde los pacientes anotan sus comportamientos, las condiciones bajo las cuales estos ocurren y las consecuencias que siguen. Este enfoque ayuda a visualizar claramente cómo los comportamientos están vinculados a ciertos antecedentes y reforzados por sus consecuencias.
 </p>
-<h2>Aplicaciones en Salud Mental:</h2>
+<h2>Aplicaciones en Salud Mental</h2>
 <p>
 El análisis funcional se aplica de manera efectiva en el tratamiento de una amplia gama de problemas de salud mental. Por ejemplo, en los casos de ansiedad, este método puede ayudar a identificar situaciones específicas o pensamientos que desencadenan respuestas ansiosas. Al comprender estos gatillos, se pueden desarrollar estrategias para modificar las respuestas del paciente o cambiar su entorno para reducir la frecuencia de la ansiedad.
 </p>
-<h2>Caso de Depresión:</h2>
+<h2>Caso de Depresión</h2>
 <p>
 En el tratamiento de la depresión, el análisis funcional puede revelar cómo ciertos patrones de pensamiento negativo y comportamientos de evitación contribuyen al mantenimiento del estado depresivo. Identificar estos patrones permite al terapeuta trabajar con el paciente para desarrollar habilidades que promuevan comportamientos más adaptativos y pensamientos positivos.
 </p>
-<h2>Conclusión:</h2>
+<h2>Conclusión</h2>
 <p>
 El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un marco estructurado para entender y modificar comportamientos problemáticos. Su aplicación no solo está limitada a tratamientos individuales, sino que también se extiende a intervenciones grupales y programas de prevención, lo que lo convierte en una herramienta versátil en el campo de la salud mental.
 </p>
 `,
     imagen: banner04.src,
-    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    video: '',
+    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
         titulo: 'Estrés Académico',
@@ -82,7 +83,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 <p>La Terapia Cognitivo-Conductual ofrece un enfoque estructurado y eficaz para tratar la ansiedad, con técnicas que se adaptan a las causas específicas y tipos de ansiedad.</p>
 `,
     imagen: banner05.src,
-    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    video: '',
+    // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
       {
         titulo: 'Depresión Estudiantil',
@@ -97,23 +99,23 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
     bajada: `Soluciones Efectivas a Través de la Terapia Cognitivo Conductual`,
     texto: `
     <h1>Manejo de la Ansiedad Universitaria: Soluciones Efectivas a Través de la Terapia Cognitivo Conductual</h1>
-    <h2>Introducción:</h2>
+    <h2>Introducción</h2>
     <p>
     La ansiedad entre los estudiantes universitarios puede ser una barrera significativa para el éxito académico y el bienestar personal. La Terapia Cognitivo Conductual (TCC) ofrece herramientas efectivas y estrategias concretas para abordar y manejar esta ansiedad, adaptadas a la variedad de causas y manifestaciones que puede presentar.
     </p>
-    <h2>Causas Comunes de la Ansiedad en Estudiantes Universitarios:</h2>
+    <h2>Causas Comunes de la Ansiedad en Estudiantes Universitarios</h2>
     <ul>
     <li><strong>Presión Académica:</strong> La carga de los exámenes, las expectativas de rendimiento y la competencia pueden ser abrumadoras.</li>
     <li><strong>Transición a la Vida Independiente:</strong> Adaptarse a vivir lejos de casa y gestionar la independencia puede provocar ansiedad.</li>
     <li><strong>Preocupaciones Sociales y Personales:</strong> Desde formar nuevas amistades hasta manejar relaciones a larga distancia, los desafíos sociales son comunes.</li>
     </ul>
-    <h2>Técnicas de TCC para la Ansiedad:</h2>
+    <h2>Técnicas de TCC para la Ansiedad</h2>
     <ol>
     <li><strong>Reestructuración Cognitiva:</strong> Esta técnica ayuda a los estudiantes a identificar y desafiar pensamientos automáticos negativos que surgen típicamente de situaciones estresantes académicas y sociales.</li>
     <li><strong>Técnica de Exposición:</strong> Especialmente útil para la ansiedad social, esta técnica involucra una exposición gradual y sistemática a situaciones sociales temidas.</li>
     <li><strong>Entrenamiento en Relajación y Respiración:</strong> Estrategias como la respiración diafragmática y la relajación muscular progresiva enseñan a los estudiantes a calmar físicamente su cuerpo y mente.</li>
     </ol>
-    <h2>Duración de los Tratamientos:</h2>
+    <h2>Duración de los Tratamientos</h2>
     <p>
     La duración de la TCC para la ansiedad puede variar dependiendo de la intensidad y las causas específicas de la ansiedad del estudiante:
     <ul>
@@ -121,12 +123,12 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
     <li><strong>Tratamientos Más Largos:</strong> Para casos más severos, la terapia puede extenderse por varios meses, permitiendo un trabajo más profundo en las técnicas de TCC.</li>
     </ul>
     </p>
-    <h2>Ejemplos Prácticos:</h2>
+    <h2>Ejemplos Prácticos</h2>
     <ul>
     <li><strong>Caso de Estudio de Ansiedad por Exámenes:</strong> Un estudiante podría comenzar con sesiones enfocadas en identificar pensamientos catastróficos sobre el fracaso, seguido por sesiones prácticas de exposición a situaciones de examen en un entorno controlado.</li>
     <li><strong>Caso de Adaptación a la Vida Universitaria:</strong> Un estudiante que lucha con la vida independiente podría beneficiarse de técnicas que exploran y reestructuran su percepción de las habilidades personales y la autoeficacia.</li>
     </ul>
-    <h2>Conclusión:</h2>
+    <h2>Conclusión</h2>
     <p>
     La Terapia Cognitivo Conductual no sólo es efectiva para tratar la ansiedad específica de situaciones universitarias, sino que también equipa a los estudiantes con habilidades para la vida que pueden mejorar su bienestar general y rendimiento académico. Al entender las causas de su ansiedad y aplicar técnicas específicas de TCC, los estudiantes pueden liberarse de las cadenas
     
@@ -134,7 +136,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
     </p>
     `,
     imagen: banner06.src,
-    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    video: '',
+    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
         titulo: 'Alteraciones Psicológicas',
@@ -179,7 +182,8 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
 .</p>
 `,
     imagen: banner07.src,
-    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    video: '',
+    // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
       {
         titulo: 'Factores Protectores',
