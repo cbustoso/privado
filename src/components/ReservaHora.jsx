@@ -132,7 +132,7 @@ const ReservaTuHora = ({ slides }) => {
                   }}
                 >
                   <Box sx={{ bgcolor: '#99D6E9', fontFamily: 'sailec', lineHeight: '30px', }}>
-                    <div className="media-body sailec" style={{ margin: '0 20px', paddingTop: '10px', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
+                    <div className="media-body sailec" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
                       <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
                         Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
                       </p>
