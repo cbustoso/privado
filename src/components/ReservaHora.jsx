@@ -55,12 +55,12 @@ const ReservaTuHora = ({ slides }) => {
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
-                      padding: '2em 0',
-                      width: '',
+                      padding: '2em 0'
                     }}>
                     <CardMedia
                       component="img"
                       height="240"
+                      width="240"
                       image={profesional01.src}
                       sx={{ borderRadius: '8px' }}
                     />
