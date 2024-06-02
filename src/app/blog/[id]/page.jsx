@@ -25,7 +25,7 @@ import { FaDownload } from 'react-icons/fa';
 
 const card = (item) => (
   <Fragment>
-    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1' }}>
+    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1', height:'16em' }}>
       <Typography variant="h5" component="div" sx={{ bgcolor: "#FABB00", height: '60px', padding: '16px 24px 16px 24px' }}>
         {item.titulo}
       </Typography>

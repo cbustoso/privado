@@ -11181,10 +11181,49 @@ div.fc-daygrid-event-harness{
   font-family: sailec;
   src: url(../assets/fonts/Sailec-Font/SailecLight/SailecLight.ttf);
 }
-
 .sailec {
   font-family: sailec;
 }
+
+@font-face {
+  font-family: sailecbold;
+  src: url(../assets/fonts/Sailec-Font/SailecBold/SailecBold.ttf);
+}
+.sailec-bold {
+  font-family: sailecbold;
+}
+
+@font-face {
+  font-family: sailecmedium;
+  src: url(../assets/fonts/Sailec-Font/SailecMedium/SailecMedium.ttf);
+}
+.sailec-medium {
+  font-family: sailecmedium;
+}
+
+@font-face {
+  font-family: sailecitalic;
+  src: url(../assets/fonts/Sailec-Font/SailecRegularItalic/SailecRegularItalic.ttf);
+}
+.sailec-italic {
+  font-family: sailecitalic;
+}
+
+@font-face {
+  font-family: sailecthin;
+  src: url(../assets/fonts/Sailec-Font/SailecThin/SailecThin.ttf);
+}
+.sailec-thin {
+  font-family: sailecthin;
+}
+
+
+.sailec-titulo  {
+
+}
+
+
+
 
 @font-face {
   font-family: lato;

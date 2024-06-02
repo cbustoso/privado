@@ -46,7 +46,7 @@ const TestSlider = ({ slides }) => {
   const cardContainerStyles = {
     display: 'flex',
     gap: '20px',
-    overflow: 'hidden',
+    // overflow: 'hidden',
   };
 
   const arrowStyles = {
@@ -131,16 +131,33 @@ const TestSlider = ({ slides }) => {
                       const slide = slides[slideIndex];
                       return (
                         <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
-                          <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '100%', margin: 'auto' }}>
+                          <Card
+                            sx={{ 
+                              boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
+                              border: '1px solid #A6A6A6',
+                              borderRadius: '24px',
+                              width: '100%',
+                              margin: 'auto',
+                            }}>
                             <CardMedia component="img" height="320" image={slide.imagen} alt="Slide image" />
                             <CardContent>
-                              <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary">{slide.bajada}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="sailec-bold"
+                              sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px' }}>{slide.titulo}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="lato">{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                                <Link href={slide.url} target="_blank" >
-                                  <button className="btn submit-form me-2" style={{ backgroundColor: '#4054B2', color: 'white', border: '1px solid #A6A6A6', borderRadius: '100px' }}>Realizar Test</button>
+                                <Link href={slide.url} target="_blank" className="sailec-medium" >
+                                  <button className="btn submit-form me-2" 
+                                  style={{ 
+                                    padding: '16px 32px',
+                                    backgroundColor: '#4054B2', 
+                                    color: 'white', 
+                                    border: '1px solid #A6A6A6', 
+                                    borderRadius: '100px', 
+                                    fontWeight: 500, 
+                                    fontSize: '18px', 
+                                    lineHeight: '24px' }}>Realizar Test</button>
                                 </Link>
                               </Grid>
                             </CardActions>

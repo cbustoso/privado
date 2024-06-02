@@ -21,26 +21,26 @@ const FooterDae = () => {
 
   const LINKS = [
     {
-      title: 'Link 1',
-      url: '',
+      title: 'Departamento de vida universitaria',
+      url: 'https://dae.udp.cl/vida-universitaria/',
     },
     {
-      title: 'Link 2',
-      url: '',
+      title: 'Departamento de bienestar',
+      url: 'https://dae.udp.cl/bienestar-estudiantil/',
     },
     {
-      title: 'Link 3',
-      url: '',
+      title: 'Inclusión UDP',
+      url: 'https://inclusiva.udp.cl/',
     },
     {
-      title: 'Link 4',
-      url: '',
+      title: 'Departamento de género UDP',
+      url: 'https://genero.udp.cl/',
     },
   ]
 
   return (
     <>
-      <div className="row d-flex justify-content-center" style={{ backgroundColor: '#2D2D2D', margin: 0 }}>
+      <div className="row d-flex justify-content-center sailec" style={{ backgroundColor: '#2D2D2D', margin: 0 }}>
         <Box className="container col-12 col-lg-10"
           sx={{
             color: 'white',
@@ -61,12 +61,15 @@ const FooterDae = () => {
               borderBottom: '1px solid white',
             }}
           >
-            {/*         <div className={`col-10 col-md-8 ${matches ? '' : 'mt-4'}`}>
-              <div className="row" style={{height:'80%'}}>
+            <div className={`col-10 col-md-8 ${matches ? '' : 'mt-4'}`}>
+              <div className="row" style={{ height: '80%' }}>
 
                 {
                   LINKS.map((link, index) => (
-                    <div key={index} className='col-lg-6 col-12' style={{borderBottom: '1px solid #fff', width: matches ? '47%' :'90%', margin: '10px'}}>
+                    <div
+                      key={index}
+                      className='col-lg-6 col-12'
+                      style={{ borderBottom: '1px solid #fff', width: matches ? '47%' : '90%', margin: '10px' }}>
                       <Link href={link.url} style={{ margin: '10px', color: '#fff' }}>
                         {link.title}
                       </Link>
@@ -74,29 +77,8 @@ const FooterDae = () => {
                   ))
                 }
               </div>
-            </div> */}
-            <div className="col-10 col-lg-3 mt-0">
-              <h4>Bienestar Estudiantil</h4>
-              <p><Map /> Manuel Rodríguez Sur 343</p>
-              <p><Phone /> +56 2 2676 8314</p>
-              <p><Mail /> bienestarestudiantil@udp.cl</p>
             </div>
-            <div className={`col-10 col-lg-3 ${matches ? '' : 'mt-4'}`}>
-              <h4>Salud Mental</h4>
-              <p><Map /> Manuel Rodríguez Sur 343</p>
-              <p><Mail /> saludmentalestudiantil@mail.udp.cl</p>
-              <Link href='/login'>
-                <button className='btn btn-secondary '>
-                  Acceso profesionales
-                </button>
-              </Link>
-            </div>
-            <div className={`col-10 col-lg-3 ${matches ? '' : 'mt-4'}`}>
-              <h4>Vida Universitaria</h4>
-              <p><Map /> Manuel Rodríguez Sur 361</p>
-              <p><Phone /> +56 2 2676 2002</p>
-              <p><Mail /> vidauniversitaria@mail.udp.cl</p>
-            </div>
+
 
             {/* BTN RESERVAR */}
             <div className={`col-10 col-md-3 ${matches ? '' : 'mt-4'} d-flex flex-column align-items-center justify-content-center`}

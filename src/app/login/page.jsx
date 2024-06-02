@@ -29,7 +29,7 @@ const Login = () => {
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('DATA', data);
     try {
-      const res = await  signIn('credentials', { callbackUrl: '/citas' })
+      const res = await signIn('credentials', { callbackUrl: '/citas' })
       console.log(res);
       if (res.validacion === false) {
         setIsInvalid(true)
@@ -42,12 +42,18 @@ const Login = () => {
     }
   })
 
+  const [activeTab, setActiveTab] = useState('basictab1');
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+  };
+
   // if(isLoggedIn) return <Navigate to={'/appoinmentlist'}/>
 
   return (
     <>
       {/* Main Wrapper */}
-      <div className="main-wrapper login-body">
+      <div className="main-wrapper login-body sailec">
         <div className="container-fluid px-0">
           <div className="row">
             {/* Login logo */}
@@ -68,6 +74,7 @@ const Login = () => {
             </div>
             {/* /Login logo */}
             {/* Login Content */}
+
             <div className="col-12 col-lg-6 login-wrap-bg">
               <div className="login-wrapper">
                 <div className="loginbox">
@@ -78,9 +85,126 @@ const Login = () => {
                           <img src={logo.src} width={380} alt="logo" />
                         </Link>
                       </div>
-                      <h2>Login</h2>
-                      {/* Form */}
-                      <form >
+
+                      <section className="comp-section" id="comp_tabs">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="card">
+                              <div className="card-body">
+                                {/* <h4 className="card-title">Login</h4> */}
+                                <h3 className="section-title">Login</h3>
+
+                                <ul className="nav nav-tabs">
+                                  <li className="nav-item">
+                                    <a
+                                      className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
+                                      onClick={() => handleTabClick('basictab1')}
+                                      href="#basictab1"
+                                    >
+                                      Profesionales
+                                    </a>
+                                  </li>
+                                  <li className="nav-item">
+                                    <a
+                                      className={`nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
+                                      onClick={() => handleTabClick('basictab2')}
+                                      href="#basictab2"
+                                    >
+                                      Estudiantes
+                                    </a>
+                                  </li>
+                                </ul>
+                                <div className="tab-content">
+                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab1">
+
+
+                                    <form >
+                                      <div className="form-group">
+                                        <label>
+                                          Correo electrónico <span className="login-danger">*</span>
+                                        </label>
+                                        <input
+                                          className="form-control"
+                                          type="email"
+                                          {...register('email', {
+                                            required: {
+                                              value: true,
+                                              message: 'Correo es requerido'
+                                            },
+                                            pattern: {
+                                              value: /^[A-Za-z0-9._%+-]+@gmail\.com$/,
+                                              message: 'Correo no es válido'
+                                            }
+                                          })}
+                                        />
+                                        {errors.email && <span><small>{errors.email.message}</small></span>}
+
+                                      </div>
+                                      <div className="form-group">
+                                        <label>
+                                          Contraseña <span className="login-danger">*</span>
+                                        </label>
+                                        <input
+                                          className="form-control pass-input"
+                                          type={passwordVisible ? 'password' : ''}
+                                          {...register('password', {
+                                            required: {
+                                              value: true,
+                                              message: 'Contraseña es requerida'
+                                            },
+                                            minLength: {
+                                              value: 6,
+                                              message: 'Contraseña incorrecta'
+                                            }
+                                          })}
+                                        />
+                                        {
+                                          errors.password && <span><small>{errors.password.message}</small></span>
+                                        }
+
+                                        <span
+                                          className="toggle-password"
+                                          onClick={togglePasswordVisibility}
+                                        >
+                                          {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
+                                        </span>
+                                      </div>
+
+                                      <div className="forgotpass">
+                                        {/* <div className="remember-me">
+                            <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
+                              {" "}
+                              Remember me
+                              <input type="checkbox" name="radio" />
+                              <span className="checkmark" />
+                            </label>
+                          </div>
+                          <Link href="/forgotpassword">¿Olvidaste la contraseña?</Link> */}
+                                      </div>
+                                      <div>
+                                        {isInvalid && <span style={{ color: 'red' }}><small>Usuario no encontrado</small></span>}
+                                      </div>
+                                      <div className="form-group login-btn">
+                                        <button
+                                          className="btn btn-primary btn-block"
+                                          onClick={handleOnSubmit}
+                                        >
+                                          Iniciar sesión
+                                        </button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div className={`tab-pane ${activeTab === 'basictab2' ? 'show active' : ''}`} id="basictab2">
+                                    Tab content 2
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+
+                      {/* <form >
                         <div className="form-group">
                           <label>
                             Correo electrónico <span className="login-danger">*</span>
@@ -133,15 +257,7 @@ const Login = () => {
                         </div>
 
                         <div className="forgotpass">
-                          {/* <div className="remember-me">
-                            <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
-                              {" "}
-                              Remember me
-                              <input type="checkbox" name="radio" />
-                              <span className="checkmark" />
-                            </label>
-                          </div>
-                          <Link href="/forgotpassword">¿Olvidaste la contraseña?</Link> */}
+                  
                         </div>
                         <div>
                           {isInvalid && <span style={{ color: 'red' }}><small>Usuario no encontrado</small></span>}
@@ -154,14 +270,14 @@ const Login = () => {
                             Iniciar sesión
                           </button>
                         </div>
-                      </form>
+                      </form> */}
                       {/* /Form */}
                       <div className="next-sign">
                         <p className="account-subtitle">
                           {/* ¿No tienes una cuenta? <Link href="/signup">Regístrate</Link> */}
                         </p>
                         {/* Social Login */}
-                        
+
                         {/* /Social Login */}
                       </div>
                     </div>
