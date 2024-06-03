@@ -19,8 +19,11 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  pt: 2,
+  px: 4,
+  pb: 3,
 };
+
 const preguntas = [
   {
     pregunta: 'Torpe o entumecido.',
@@ -110,25 +113,54 @@ const preguntas = [
 
 const resultados = [
   {
-    puntaje: [0, 15],
-    descripcion: 'Ansiedad leve'
+    puntaje: [0, 21],
+    titulo: 'Ansiedad leve',
+    descripcion: 'Descripción'
   },
   {
-    puntaje: [16, 31],
-    descripcion: 'Ansiedad moderada'
+    puntaje: [22, 35],
+    titulo: 'Ansiedad moderada',
+    descripcion: 'Descripción'
   },
   {
-    puntaje: [31, 46],
-    descripcion: 'Ansiedad alta'
-  },
-  {
-    puntaje: [47, 63],
-    descripcion: 'Ansiedad terrible'
+    puntaje: [36, 46],
+    titulo: 'Ansiedad alta',
+    descripcion: 'Descripción'
   },
 ]
 
 const determinarDescripcion = (puntaje) =>
   resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
+
+function ChildModal(text) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Button onClick={handleOpen}>Resultado test</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 200 }}>
+          <h2 id="child-modal-title">Text in a child modal</h2>
+          <p id="child-modal-description">
+            {text}
+          </p>
+          <Button onClick={handleClose}>Cerrar</Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
 
 const TestAnsiedad = () => {
   const [resultado, setResultado] = useState(null)
@@ -324,6 +356,7 @@ const TestAnsiedad = () => {
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     {resultado >= 0 && <p>Presentas: {determinarDescripcion(resultado).descripcion} </p>}
                   </Typography>
+                  <ChildModal />
                 </Box>
               </Modal>
             </div>

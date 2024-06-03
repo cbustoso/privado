@@ -14,6 +14,7 @@ import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 import { signIn } from "next-auth/react"
 
 const Login = () => {
+  const [activeTab, setActiveTab] = useState('basictab1');
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isInvalid, setIsInvalid] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -42,14 +43,33 @@ const Login = () => {
     }
   })
 
-  const [activeTab, setActiveTab] = useState('basictab1');
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
 
   // if(isLoggedIn) return <Navigate to={'/appoinmentlist'}/>
+  const handleSignIn = async () => {
+    try {
+      // Realiza la autenticación
+      await signIn('google', { callbackUrl: '/citas' }) // Se puede pasar el nombre del proveedor que se esté utilizando
+      // Si la autenticación es exitosa, se redirigirá automáticamente a la página de destino configurada en NextAuth
 
+    } catch (error) {
+      // Maneja el error de autenticación
+      console.log('ERRRR', error);
+      redirect('/login')
+      if (error.message === 'No se pudo acceder. Correo no autorizado.') {
+        // Muestra un mensaje de error personalizado al usuario
+        alert('No tienes acceso. Tu correo no está autorizado.');
+      } else {
+        // Maneja otros errores de autenticación
+        console.error('Error de autenticación:', error);
+        // Muestra un mensaje de error genérico al usuario
+        alert('Ha ocurrido un error durante la autenticación. Por favor, inténtalo de nuevo.');
+      }
+    }
+  }
   return (
     <>
       {/* Main Wrapper */}
@@ -100,8 +120,12 @@ const Login = () => {
                                       className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('basictab1')}
                                       href="#basictab1"
+                                      style={{
+                                        background: activeTab === 'basictab1' ? '#4e57cd ' : '',
+                                        color: activeTab === 'basictab1' ? '#FFF ' : '',
+                                      }}
                                     >
-                                      Profesionales
+                                      Estudiantes
                                     </a>
                                   </li>
                                   <li className="nav-item">
@@ -109,13 +133,51 @@ const Login = () => {
                                       className={`nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('basictab2')}
                                       href="#basictab2"
+                                      style={{
+                                        background: activeTab === 'basictab2' ? '#4e57cd ' : '',
+                                        color: activeTab === 'basictab2' ? '#FFF ' : '',
+                                      }}
                                     >
-                                      Estudiantes
+                                      Profesionales
                                     </a>
                                   </li>
                                 </ul>
-                                <div className="tab-content">
-                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab1">
+                                <div className="tab-content" style={{ height: '250px' }}>
+
+                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab2">
+                                    <p>Ingresa con tu mail UDP para poder realizar una reserva.</p>
+                                    <div>
+
+                                      <button className="gsi-material-button btn btn-primary btn-block"
+                                        onClick={() => handleSignIn()}
+                                        style={{
+                                          color: '#fff', background: '#4e57cd',
+                                          width: '100%',
+                                          '&:hover': {
+                                            background: 'red'
+                                          }
+                                        }}
+                                      >
+                                        
+                                        <div className="gsi-material-button-state"></div>
+                                        <div className="gsi-material-button-content-wrapper">
+                                          <div className="gsi-material-button-icon">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlnsXlink="http://www.w3.org/1999/xlink" style={{ display: 'block' }}>
+                                              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                                              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                                              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                                              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                                              <path fill="none" d="M0 0h48v48H0z"></path>
+                                            </svg>
+                                          </div>
+                                          <span className="gsi-material-button-contents">Inicia sesión con Google</span>
+                                          <span style={{ display: 'none' }}>Inicia sesión con Google</span>
+                                        </div>
+                                      </button>
+                                    </div>
+
+                                  </div>
+                                  <div className={`tab-pane ${activeTab === 'basictab2' ? 'show active' : ''}`} id="basictab1">
 
 
                                     <form >
@@ -193,9 +255,6 @@ const Login = () => {
                                         </button>
                                       </div>
                                     </form>
-                                  </div>
-                                  <div className={`tab-pane ${activeTab === 'basictab2' ? 'show active' : ''}`} id="basictab2">
-                                    Tab content 2
                                   </div>
                                 </div>
                               </div>

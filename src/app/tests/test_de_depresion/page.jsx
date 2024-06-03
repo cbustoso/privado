@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import { Fragment } from "react";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -19,8 +19,11 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  pt: 2,
+  px: 4,
+  pb: 3,
 };
+
 const preguntas = [
   {
     pregunta: 'Tener poco interés o placer en hacer las cosas.',
@@ -62,25 +65,55 @@ const preguntas = [
 
 const resultados = [
   {
-    puntaje: [0, 6],
-    descripcion: 'Depresión leve'
+    puntaje: [0, 9],
+    titulo: 'Sin sintomatología depresiva',
+    descripcion: 'Descripción'
   },
   {
-    puntaje: [7, 13],
-    descripcion: 'Depresión moderada'
+    puntaje: [10, 18],
+    titulo: 'Sintomatología depresiva moderada',
+    descripcion: 'Descripción'
   },
   {
-    puntaje: [14, 20],
-    descripcion: 'Depresión alta'
-  },
-  {
-    puntaje: [21, 27],
-    descripcion: 'Depresión grave'
+    puntaje: [19, 27],
+    titulo: 'Sintomatología depresiva grave',
+    descripcion: 'Descripción'
   },
 ]
 
 const determinarDescripcion = (puntaje) =>
   resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
+
+function ChildModal({result}) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Fragment>
+      <Button onClick={handleOpen}>Enviar correo</Button>
+      <Button onClick={handleOpen}>Resultados</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+          <h2 id="child-modal-title">{result.titulo}</h2>
+          <p id="child-modal-description">
+          {result.descripcion}
+          </p>
+          <Button onClick={handleClose}>Cerrar</Button>
+        </Box>
+      </Modal>
+    </Fragment>
+  );
+}
 
 const TestDepresion = () => {
   const [resultado, setResultado] = useState(null)
@@ -246,9 +279,9 @@ const TestDepresion = () => {
                           <button
                             type="button"
                             className="btn btn-primary submit-form me-2"
-                            onClick={calculate}
+                            onClick={handleOpen}
                           >
-                            Obtener resultados
+                            Continuar
                           </button>
                           <button
                             type="submit"
@@ -273,12 +306,47 @@ const TestDepresion = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
+                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginBottom: '20px'}}>
+                    Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {resultado >= 0 && <p>Presentas: {determinarDescripcion(resultado).descripcion} </p>}
-                  </Typography>
+                  <div className="col-12 ">
+                    <div className="form-group local-forms">
+                      <label>
+                        Nombre <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-group local-forms">
+                      <label>
+                        Apellido <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-group local-forms">
+                      <label>
+                        Email <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="email"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                 
+                  <ChildModal result={determinarDescripcion(resultado)}/>
                 </Box>
               </Modal>
             </div>
