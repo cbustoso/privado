@@ -68,7 +68,14 @@ const tests = [
     id: '0',
     titulo: 'Test de ansiedad de Beck',
     bajada: 'El test puede ser evaluado por un profesional y/o por ti mismo. Lo anterior, no implica que puedas realizar un diagnóstico, pero sí puede entregarte claridad respecto a las acciones a realizar.',
-    url: 'https://cetep.cl/test_salud_mental/test-de-ansiedad-de-beck/',
+    url: '/tests/test_de_ansiedad',
+    imagen: saludMental05.src,
+  },
+  {
+    id: '0',
+    titulo: 'Test de depresión',
+    bajada: 'El test puede ser evaluado por un profesional y/o por ti mismo. Lo anterior, no implica que puedas realizar un diagnóstico, pero sí puede entregarte claridad respecto a las acciones a realizar.',
+    url: '/tests/test_de_depresion',
     imagen: saludMental05.src,
   },
 ]
