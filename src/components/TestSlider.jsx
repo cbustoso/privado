@@ -46,7 +46,7 @@ const TestSlider = ({ slides }) => {
   const cardContainerStyles = {
     display: 'flex',
     gap: '20px',
-    // overflow: 'hidden',
+    overflow: 'hidden',
   };
 
   const arrowStyles = {
