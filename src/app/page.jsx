@@ -17,9 +17,8 @@ import { Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Carrousel from "@/components/skeletons/Carrousel";
 import FooterDae from "@/components/FooterDae";
-import { saludMental01, saludMental02, saludMental03 } from '@/components/imagepath'
+import { saludMental01, saludMental02, saludMental03, saludMental05 } from '@/components/imagepath'
 import ReservaTuHora from "@/components/ReservaHora";
-import { saludMental05 } from '@/components/imagepath';
 import SimpleBackdrop from "@/components/Backdrop";
 
 import { blogs } from "@/utils/blogs";
@@ -76,7 +75,7 @@ const tests = [
     titulo: 'Test de depresión',
     bajada: 'El test puede ser evaluado por un profesional y/o por ti mismo. Lo anterior, no implica que puedas realizar un diagnóstico, pero sí puede entregarte claridad respecto a las acciones a realizar.',
     url: '/tests/test_de_depresion',
-    imagen: saludMental05.src,
+    imagen: saludMental01.src,
   },
 ]
 

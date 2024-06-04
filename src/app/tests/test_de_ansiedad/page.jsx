@@ -278,7 +278,11 @@ const TestAnsiedad = () => {
                                         name={item.label}
                                         value={0}
                                         className="form-check-input d-block me-0"
-                                        {...register(item.label)}
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }})}
                                       />
                                       0
                                     </label>
@@ -292,7 +296,11 @@ const TestAnsiedad = () => {
                                         name={item.label}
                                         value={1}
                                         className="form-check-input d-block me-0"
-                                        {...register(item.label)}
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }})}
                                       />
                                       1
                                     </label>
@@ -306,7 +314,11 @@ const TestAnsiedad = () => {
                                         name={item.label}
                                         value={2}
                                         className="form-check-input d-block me-0"
-                                        {...register(item.label)}
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }})}
                                       />
                                       2
                                     </label>
@@ -320,7 +332,11 @@ const TestAnsiedad = () => {
                                         name={item.label}
                                         value={3}
                                         className="form-check-input d-block me-0"
-                                        {...register(item.label)}
+                                        {...register(item.label, {
+                                          required: {
+                                            value: true,
+                                            message: 'Debes seleccionar una opción'
+                                          }})}
                                       />
                                       3
                                     </label>
@@ -375,6 +391,11 @@ const TestAnsiedad = () => {
                         className="form-control"
                         type="text"
                         placeholder=""
+                        {...register('nombre', {
+                          required: {
+                            value: true,
+                            message: 'Nombre es requerido'
+                          }})}
                       />
                     </div>
                   </div>
@@ -387,6 +408,11 @@ const TestAnsiedad = () => {
                         className="form-control"
                         type="text"
                         placeholder=""
+                        {...register('apellido', {
+                          required: {
+                            value: true,
+                            message: 'Apellido es requerido'
+                          }})}
                       />
                     </div>
                   </div>
@@ -399,6 +425,11 @@ const TestAnsiedad = () => {
                         className="form-control"
                         type="email"
                         placeholder=""
+                        {...register('email', {
+                          required: {
+                            value: true,
+                            message: 'Correo electrónico es requerido'
+                          }})}
                       />
                     </div>
                   </div>

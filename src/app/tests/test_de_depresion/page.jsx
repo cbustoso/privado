@@ -104,7 +104,7 @@ const ChildModal = ({ result }) => {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style }}>
+        <Box sx={{ ...style, width: '800px' }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
             {result.descripcion}
@@ -234,7 +234,11 @@ const TestDepresion = () => {
                                       name={item.label}
                                       value={0}
                                       className="form-check-input d-block me-0"
-                                      {...register(item.label)}
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }})}
                                     />
                                     0
                                   </label>
@@ -248,7 +252,11 @@ const TestDepresion = () => {
                                       name={item.label}
                                       value={1}
                                       className="form-check-input d-block me-0"
-                                      {...register(item.label)}
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }})}
                                     />
                                     1
                                   </label>
@@ -262,7 +270,11 @@ const TestDepresion = () => {
                                       name={item.label}
                                       value={2}
                                       className="form-check-input d-block me-0"
-                                      {...register(item.label)}
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }})}
                                     />
                                     2
                                   </label>
@@ -276,7 +288,11 @@ const TestDepresion = () => {
                                       name={item.label}
                                       value={3}
                                       className="form-check-input d-block me-0"
-                                      {...register(item.label)}
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }})}
                                     />
                                     3
                                   </label>
@@ -331,6 +347,11 @@ const TestDepresion = () => {
                         className="form-control"
                         type="text"
                         placeholder=""
+                        {...register('nombre', {
+                          required: {
+                            value: true,
+                            message: 'Nombre es requerido'
+                          }})}
                       />
                     </div>
                   </div>
@@ -343,6 +364,11 @@ const TestDepresion = () => {
                         className="form-control"
                         type="text"
                         placeholder=""
+                        {...register('apellido', {
+                          required: {
+                            value: true,
+                            message: 'Apellido es requerido'
+                          }})}
                       />
                     </div>
                   </div>
@@ -355,6 +381,11 @@ const TestDepresion = () => {
                         className="form-control"
                         type="email"
                         placeholder=""
+                        {...register('email', {
+                          required: {
+                            value: true,
+                            message: 'Correo electrónico es requerido'
+                          }})}
                       />
                     </div>
                   </div>
