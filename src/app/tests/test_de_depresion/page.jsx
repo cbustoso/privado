@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Fragment } from "react";
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -84,7 +85,7 @@ const resultados = [
 const determinarDescripcion = (puntaje) =>
   resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
 
-function ChildModal({result}) {
+const ChildModal = ({ result }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -106,7 +107,7 @@ function ChildModal({result}) {
         <Box sx={{ ...style }}>
           <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
-          {result.descripcion}
+            {result.descripcion}
           </p>
           <Button onClick={handleClose}>Cerrar</Button>
         </Box>
@@ -184,7 +185,7 @@ const TestDepresion = () => {
               <div className="card" style={{ border: 'none' }}>
                 <div className="card-body">
                   <form>
-                    <div className="row">
+                    <div className="row d-flex flex-column align-items-center">
                       <div className="col-12">
                         <div className="form-heading">
                           <div className="card-body flex-row d-flex justify-content-center mt-4">
@@ -194,21 +195,24 @@ const TestDepresion = () => {
                               Test de Depresión
                             </h2>
                           </div>
-                          <p>
-                            Durante las dos últimas semanas ¿con qué frecuencia le han molestado los siguientes problemas?
-                          </p>
-                          <div className="ms-5">
-                            <p>0 = Nunca</p>
-                            <p>1 = Varios días</p>
-                            <p>2 = Más de la mitad de los días</p>
-                            <p>3 = Casi todos los días</p>
+                          <div className="row">
+                            <div className="col-12 col-md-10 ms-md-5">
+                              <p>
+                                Durante las dos últimas semanas ¿con qué frecuencia le han molestado los siguientes problemas?
+                              </p>
+                              <p>0 = Nunca</p>
+                              <p>1 = Varios días</p>
+                              <p>2 = Más de la mitad de los días</p>
+                              <p>3 = Casi todos los días</p>
+                            </div>
                           </div>
                         </div>
                       </div>
+
                       {
                         preguntas.map((item, index) => (
                           <div
-                            className="col-12 col-md-8"
+                            className="col-12 col-md-11"
                             key={index + item.label}
                             style={{
                               background: index % 2 === 0 && 'lightgrey'
@@ -216,53 +220,62 @@ const TestDepresion = () => {
                           >
                             <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
 
-                              <label className="col-9">
+                              <label className="col-6 col-md-9">
                                 {item.pregunta}
                               </label>
-                              <div className=" col-3">
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
+                              <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
+                                <div className="form-check-inline me-1 me-md-3" >
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}
+                                  >
                                     <input
                                       type="radio"
                                       name={item.label}
                                       value={0}
-                                      className="form-check-input"
+                                      className="form-check-input d-block me-0"
                                       {...register(item.label)}
                                     />
                                     0
                                   </label>
                                 </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
                                       name={item.label}
                                       value={1}
-                                      className="form-check-input"
+                                      className="form-check-input d-block me-0"
                                       {...register(item.label)}
                                     />
                                     1
                                   </label>
                                 </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
                                       name={item.label}
                                       value={2}
-                                      className="form-check-input"
+                                      className="form-check-input d-block me-0"
                                       {...register(item.label)}
                                     />
                                     2
                                   </label>
                                 </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
                                       name={item.label}
                                       value={3}
-                                      className="form-check-input"
+                                      className="form-check-input d-block me-0"
                                       {...register(item.label)}
                                     />
                                     3
@@ -274,7 +287,7 @@ const TestDepresion = () => {
                         ))
                       }
 
-                      <div className="col-12">
+                      <div className="col-12 mt-4">
                         <div className="doctor-submit text-end">
                           <button
                             type="button"
@@ -287,7 +300,7 @@ const TestDepresion = () => {
                             type="submit"
                             className="btn btn-primary cancel-form"
                           >
-                            Cancel
+                            Cancelar
                           </button>
                         </div>
                       </div>
@@ -306,7 +319,7 @@ const TestDepresion = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginBottom: '20px'}}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px' }}>
                     Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                   </Typography>
                   <div className="col-12 ">
@@ -345,8 +358,8 @@ const TestDepresion = () => {
                       />
                     </div>
                   </div>
-                 
-                  <ChildModal result={determinarDescripcion(resultado)}/>
+
+                  <ChildModal result={determinarDescripcion(resultado)} />
                 </Box>
               </Modal>
             </div>

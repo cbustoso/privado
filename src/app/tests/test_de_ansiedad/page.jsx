@@ -114,7 +114,7 @@ const preguntas = [
 const resultados = [
   {
     puntaje: [0, 21],
-    titulo: 'Ansiedad leve',
+    titulo: 'Ansiedad muy baja',
     descripcion: 'Descripción'
   },
   {
@@ -124,7 +124,7 @@ const resultados = [
   },
   {
     puntaje: [36, 46],
-    titulo: 'Ansiedad alta',
+    titulo: 'Ansiedad severa',
     descripcion: 'Descripción'
   },
 ]
@@ -132,8 +132,8 @@ const resultados = [
 const determinarDescripcion = (puntaje) =>
   resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
 
-function ChildModal(text) {
-  const [open, setOpen] = React.useState(false);
+const ChildModal = ({ result }) => {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -142,23 +142,24 @@ function ChildModal(text) {
   };
 
   return (
-    <React.Fragment>
-      <Button onClick={handleOpen}>Resultado test</Button>
+    <Fragment>
+      <Button onClick={handleOpen}>Enviar correo</Button>
+      <Button onClick={handleOpen}>Resultados</Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 200 }}>
-          <h2 id="child-modal-title">Text in a child modal</h2>
+        <Box sx={{ ...style }}>
+          <h2 id="child-modal-title">{result.titulo}</h2>
           <p id="child-modal-description">
-            {text}
+            {result.descripcion}
           </p>
           <Button onClick={handleClose}>Cerrar</Button>
         </Box>
       </Modal>
-    </React.Fragment>
+    </Fragment>
   );
 }
 
@@ -229,7 +230,7 @@ const TestAnsiedad = () => {
               <div className="card" style={{ border: 'none' }}>
                 <div className="card-body">
                   <form>
-                    <div className="row">
+                    <div className="row d-flex flex-column align-items-center">
                       <div className="col-12">
                         <div className="form-heading">
                           <div className="card-body flex-row d-flex justify-content-center mt-4">
@@ -239,103 +240,114 @@ const TestAnsiedad = () => {
                               Test de Ansiedad de Beck
                             </h2>
                           </div>
-                          <p>
-                            En el cuestionario hay una lista de síntomas comunes de la ansiedad. Lea cada uno de los ítems atentamente, e indique cuanto le ha afectado en la última semana incluyendo hoy:
-                          </p>
-                          <div className="ms-5">
-                            <p>0 = En absoluto</p>
-                            <p>1 = Levemente</p>
-                            <p>2 = Moderadamente</p>
-                            <p>3 = Severamente</p>
+                          <div className="row">
+                            <div className="col-12 col-md-10 ms-md-5">
+                              <p>
+                                En el cuestionario hay una lista de síntomas comunes de la ansiedad. Lea cada uno de los ítems atentamente, e indique cuanto le ha afectado en la última semana incluyendo hoy:
+                              </p>
+                              <p>0 = En absoluto</p>
+                              <p>1 = Levemente</p>
+                              <p>2 = Moderadamente</p>
+                              <p>3 = Severamente</p>
+                            </div>
+                          </div>
                           </div>
                         </div>
-                      </div>
-                      {
-                        preguntas.map((item, index) => (
-                          <div
-                            className="col-12 col-md-8"
-                            key={index + item.label}
-                            style={{
-                              background: index % 2 === 0 && 'lightgrey'
-                            }}
-                          >
-                            <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
-                              <label >
-                                {item.pregunta}
-                              </label>
-                              <div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={0}
-                                      className="form-check-input"
-                                      {...register(item.label)}
-                                    />
-                                    0
-                                  </label>
-                                </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={1}
-                                      className="form-check-input"
-                                      {...register(item.label)}
-                                    />
-                                    1
-                                  </label>
-                                </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={2}
-                                      className="form-check-input"
-                                      {...register(item.label)}
-                                    />
-                                    2
-                                  </label>
-                                </div>
-                                <div className="form-check-inline">
-                                  <label className="form-check-label">
-                                    <input
-                                      type="radio"
-                                      name={item.label}
-                                      value={3}
-                                      className="form-check-input"
-                                      {...register(item.label)}
-                                    />
-                                    3
-                                  </label>
+                        {
+                          preguntas.map((item, index) => (
+                            <div
+                              className="col-12 col-md-11"
+                              key={index + item.label}
+                              style={{
+                                background: index % 2 === 0 && 'lightgrey'
+                              }}
+                            >
+                              <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
+                                <label className="col-6 col-md-9">
+                                  {item.pregunta}
+                                </label>
+                                <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
+                                  <div className="form-check-inline me-1 me-md-3" >
+                                    <label
+                                      className="form-check-label"
+                                      style={{ textAlign: 'center' }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={0}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label)}
+                                      />
+                                      0
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className="form-check-label"
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={1}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label)}
+                                      />
+                                      1
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className="form-check-label"
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={2}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label)}
+                                      />
+                                      2
+                                    </label>
+                                  </div>
+                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                    <label
+                                      className="form-check-label"
+                                      style={{ textAlign: 'center' }}>
+                                      <input
+                                        type="radio"
+                                        name={item.label}
+                                        value={3}
+                                        className="form-check-input d-block me-0"
+                                        {...register(item.label)}
+                                      />
+                                      3
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        ))
-                      }
+                          ))
+                        }
 
-                      <div className="col-12">
-                        <div className="doctor-submit text-end">
-                          <button
-                            type="button"
-                            className="btn btn-primary submit-form me-2"
-                            onClick={calculate}
-                          >
-                            Obtener resultados
-                          </button>
-                          <button
-                            type="submit"
-                            className="btn btn-primary cancel-form"
-                          >
-                            Cancel
-                          </button>
+                        <div className="col-12 mt-4">
+                          <div className="doctor-submit text-end">
+                            <button
+                              type="button"
+                              className="btn btn-primary submit-form me-2"
+                              onClick={handleOpen}
+                            >
+                              Continuar
+                            </button>
+                            <button
+                              type="submit"
+                              className="btn btn-primary cancel-form"
+                            >
+                              Cancelar
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </form>
                 </div>
               </div>
@@ -350,13 +362,47 @@ const TestAnsiedad = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
+                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginBottom: '20px' }}>
+                    Puedes ingresar tus datos y enviaremos los resultados a tu correo, o puedes continuar anónimamente.
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {resultado >= 0 && <p>Presentas: {determinarDescripcion(resultado).descripcion} </p>}
-                  </Typography>
-                  <ChildModal />
+                  <div className="col-12 ">
+                    <div className="form-group local-forms">
+                      <label>
+                        Nombre <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-group local-forms">
+                      <label>
+                        Apellido <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-group local-forms">
+                      <label>
+                        Email <span className="login-danger">*</span>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="email"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+
+                  <ChildModal result={determinarDescripcion(resultado)} />
                 </Box>
               </Modal>
             </div>
