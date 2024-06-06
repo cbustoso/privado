@@ -11353,3 +11353,43 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
   background-color: #303030;
   opacity: 8%;
 }
+
+.active-header {
+  border-radius: 0;
+  border-bottom: 2px solid blue;
+}
+
+.btn.btn-rounded.btn-reservar:hover{
+  background-color: #dfa805 !important;
+  border: none;
+  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.30);
+  -webkit-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.30);
+  -moz-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.30);
+}
+
+.btn.btn-rounded.btn-reservar:not(:hover){
+  border: none;
+}
+
+/* // 347beb
+// 3176E0
+// e3a813
+// dfa805 
+d29e08
+
+*/
+.btn-0:hover{
+  background-color: #3176E0 !important;
+}
+
+.btn-1:hover{
+  background-color: #d29e08 !important;
+}
+
+.btn-2:hover{
+  background-color: #1ABC9C !important;
+}
+
+.btn-3:hover{
+  background-color: #B82925 !important;
+}

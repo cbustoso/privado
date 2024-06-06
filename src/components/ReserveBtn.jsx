@@ -18,7 +18,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
     <>
       <Link href="/login" >
       <button
-        className='btn btn-rounded'
+        className='btn btn-rounded btn-reservar'
         style={{
           width: matches ? '189px' : '121px',
           height: matches ? '56px' : '40px',
