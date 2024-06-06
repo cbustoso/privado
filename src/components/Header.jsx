@@ -1,62 +1,50 @@
 'use client'
 /* eslint-disable no-unused-vars */
-import React from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSection } from "@/context/SectionContext";
 import ReserveBtn from "./ReserveBtn";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { logo, logoudp } from "./imagepath";
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-
+import { usePathname } from "next/navigation";
 
 const pagesWithEvents = [
-  { title: 'TÓPICOS', url: '/#topicos' },
-  { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico' },
-  { title: 'EVENTOS', url: '/#eventos' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
+  { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
+  { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' }
 ];
 
 const pagesWithoutEvents = [
-  { title: 'TÓPICOS', url: '/#topicos' },
-  { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material-descargable' }
+  { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
+  { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
+  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' }
 ];
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { activeSection, setActiveSection } = useSection();
   const open = Boolean(anchorEl);
   const { data: session } = useSession()
   const EVENTS = 0;
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
+  const currentPage = usePathname()
+  const divRef = useRef();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const handleClick = (event) => {
@@ -66,6 +54,10 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const handleNavClick = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setActiveSection(id);
+  };
 
   return (
     <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0 }}>
@@ -159,59 +151,22 @@ const Header = () => {
           {/* MENU DASHBOARD */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }, justifyContent: 'flex-end' }}>
             {pages.map((page) => {
-              if (page.title === 'Recomendaciones') {
-                return (
-                  <div key={page.title}>
-                    <Button
-                      className="roboto"
-                      id="demo-positioned-button"
-                      aria-controls={open ? 'demo-positioned-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleClick}
-                      sx={{ my: 2, color: 'black' }}
-                    >
-                      {page.title}
-                    </Button>
-                    <Menu
-                      id="demo-positioned-menu"
-                      aria-labelledby="demo-positioned-button"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                    >
-                      {page.submenu.map(subpage => (
-                        <MenuItem onClick={handleClose} key={subpage.title}>
-                          <Link style={{ color: 'black' }} href={subpage.url}>
-                            {subpage.title}
-                          </Link>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </div>
-                )
-              } else {
-                return (
+              return (
+                <Link style={{ color: 'black' }} href={page.url} key={page.title} >
                   <Button
-                    className="roboto"
-                    key={page.title}
-                    onClick={handleCloseNavMenu}
+                    className={`sailec ${activeSection === page.label 
+                      ? 'active-header' 
+                      : ''
+                    }`}
+
+                    onClick={() => handleNavClick(page.label)}
                     sx={{ my: 2, color: 'black', display: 'block' }}
                   >
-                    <a style={{ color: 'black' }} href={page.url}>
-                      {page.title}
-                    </a>
+
+                    {page.title}
                   </Button>
-                )
-              }
+                </Link>
+              )
             }
             )}
           </Box>
