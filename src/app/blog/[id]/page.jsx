@@ -75,7 +75,7 @@ const Blogdetails = ({ params }) => {
   return (
     <div>
       <>
-        <div className="main-wrapper">
+        <div className="main-wrapper sailec">
           {matches && <div style={{
             height: '520px',
             overflow: 'hidden'
@@ -154,7 +154,7 @@ const Blogdetails = ({ params }) => {
                       </div> */}
                       {/* TEXTO */}
 
-                      <div className="col-lg-5 col-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
+                      <div className="sailec col-lg-10 col-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
                         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
@@ -172,11 +172,11 @@ const Blogdetails = ({ params }) => {
                     <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >
                       {console.log('leblog', blog.downloads)}
                       <div className="col-12">
-                        <h3>Contenido descargable</h3>
+                        <h3  className='sailec-medium'>Contenido descargable</h3>
                       </div>
                       {blog?.downloads && blog['downloads'].map((item, index) => (
 
-                        <div className="col-12 col-lg-4 mb-3" key={index}>
+                        <div className="col-12 col-lg-4 mb-3 mt-5" key={index} style={{margin: 'auto'}}>
                           <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
                             <Card variant="outlined">{card(item)}</Card>
                           </Box>

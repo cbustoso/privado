@@ -83,21 +83,21 @@ const Login = () => {
               backgroundPositionX: 'center'
             }}>
               <div className="login-sec">
-                <div className="log-img" >
-                  {/* <img
+                {/* <div className="log-img" >
+                  <img
                     className="img-fluid"
                     src="https://dae.udp.cl/cms/wp-content/uploads/2022/05/136.jpg"
                     alt="#"
-                  /> */}
-                </div>
+                  />
+                </div> */}
               </div>
             </div>
             {/* /Login logo */}
             {/* Login Content */}
 
-            <div className="col-12 col-lg-6 login-wrap-bg">
+            <div className="col-12 col-lg-6 login-wrap-bg" >
               <div className="login-wrapper">
-                <div className="loginbox">
+                <div className="loginbox" style={{boxShadow:'unset'}}>
                   <div className="login-right">
                     <div className="login-right-wrap">
                       <div className="account-logo">
@@ -117,7 +117,7 @@ const Login = () => {
                                 <ul className="nav nav-tabs">
                                   <li className="nav-item">
                                     <a
-                                      className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
+                                      className={`sailec-medium nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('basictab1')}
                                       href="#basictab1"
                                       style={{
@@ -130,7 +130,7 @@ const Login = () => {
                                   </li>
                                   <li className="nav-item">
                                     <a
-                                      className={`nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
+                                      className={`sailec-medium nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('basictab2')}
                                       href="#basictab2"
                                       style={{
@@ -144,18 +144,15 @@ const Login = () => {
                                 </ul>
                                 <div className="tab-content" style={{ height: '250px' }}>
 
-                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab2">
+                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="basictab2" style={{ height: '100%',textAlign: 'center',}}>
                                     <p>Ingresa con tu mail UDP para poder realizar una reserva.</p>
                                     <div>
-
                                       <button className="gsi-material-button btn btn-primary btn-block"
                                         onClick={() => handleSignIn()}
                                         style={{
                                           color: '#fff', background: '#4e57cd',
                                           width: '100%',
-                                          '&:hover': {
-                                            background: 'red'
-                                          }
+                                          
                                         }}
                                       >
                                         

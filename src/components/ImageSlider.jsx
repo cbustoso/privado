@@ -67,7 +67,13 @@ const CustomTabPanel = ({ children, value, index, ...other }) => {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography
+            className="sailec-medium"
+            sx={{
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '28px',
+            }}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -81,7 +87,7 @@ const a11yProps = (index) => {
   };
 }
 
-const ImageSlider = ({innerRef }) => {
+const ImageSlider = ({ innerRef }) => {
   const [slides, setSlides] = useState(blogs.slice(0, 4))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(blogs[0].titulo)
@@ -254,14 +260,16 @@ const ImageSlider = ({innerRef }) => {
                 >
                   <Link href={`/blog/${idBlog}`}>
                     <button
-                      className= {`btn submit-form me-2 sailec ${'btn-'+currentIndex}`}
+                      className={`btn submit-form me-2 sailec-medium ${'btn-' + currentIndex}`}
                       style={{
-                        width:'209px',
-                        height:'56px',
+                        width: '209px',
+                        height: '56px',
                         backgroundColor: styles[currentIndex].color,
                         border: `1px solid ${styles[currentIndex].border}`,
                         borderRadius: '100px',
                         color: '#fff',
+                        fontWeight: 500,
+                        fontSize: '16px',
                       }}> Ver más + </button>
                   </Link>
                 </Grid>
@@ -278,9 +286,6 @@ const ImageSlider = ({innerRef }) => {
               marginLeft: `calc((25vw * ${slides[currentIndex].id}) - (${slides[currentIndex].id} * 4px) )`,
               backgroundColor: styles[currentIndex].color,
               color: "#fff",
-              fontWeight: 400,
-              fontSize: '20px',
-              lineHeight: '28px',
               display: 'flex',
               alignItems: 'center',
               '&:hover': {

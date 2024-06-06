@@ -116,17 +116,23 @@ const resultados = [
   {
     puntaje: [0, 21],
     titulo: 'Ansiedad muy baja',
-    descripcion: 'Descripción'
+    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex totam officiis tempore distinctio commodi voluptatum omnis! Molestiae inventore soluta, unde eum id numquam, adipisci officiis, repellendus ipsam aliquid enim porro.`
   },
   {
     puntaje: [22, 35],
     titulo: 'Ansiedad moderada',
-    descripcion: 'Descripción'
+    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex totam officiis tempore distinctio commodi voluptatum omnis! Molestiae inventore soluta, unde eum id numquam, adipisci officiis, repellendus ipsam aliquid enim porro. 
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, iste? Fugit mollitia quasi praesentium magnam. Velit eos labore autem? Commodi dolorem error distinctio id in autem quisquam illo consequatur incidunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim repellat tempore, excepturi officiis officia nam? Est, in totam voluptatum suscipit itaque velit ea illum delectus nesciunt voluptatem libero asperiores vel. 
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quos soluta asperiores nulla incidunt consectetur, laudantium libero odio dolore repellendus voluptates illum necessitatibus ipsam iure facilis! Iusto, quo ex. 
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem accusantium possimus dignissimos error porro quibusdam quas officiis libero, laboriosam exercitationem ab officia explicabo consectetur vero, neque consequuntur at fugit!`
   },
   {
     puntaje: [36, 46],
     titulo: 'Ansiedad severa',
-    descripcion: 'Descripción'
+    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex totam officiis tempore distinctio commodi voluptatum omnis! Molestiae inventore soluta, unde eum id numquam, adipisci officiis, repellendus ipsam aliquid enim porro. 
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, iste? Fugit mollitia quasi praesentium magnam. Velit eos labore autem? Commodi dolorem error distinctio id in autem quisquam illo consequatur incidunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim repellat tempore, excepturi officiis officia nam? Est, in totam voluptatum suscipit itaque velit ea illum delectus nesciunt voluptatem libero asperiores vel. 
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quos soluta asperiores nulla incidunt consectetur, laudantium libero odio dolore repellendus voluptates illum necessitatibus ipsam iure facilis! Iusto, quo ex. 
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem accusantium possimus dignissimos error porro quibusdam quas officiis libero, laboriosam exercitationem ab officia explicabo consectetur vero, neque consequuntur at fugit!`
   },
 ]
 
