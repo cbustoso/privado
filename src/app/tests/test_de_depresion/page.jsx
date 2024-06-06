@@ -97,7 +97,7 @@ const ChildModal = ({ result }) => {
   return (
     <Fragment>
       <Button onClick={handleOpen}>Enviar correo</Button>
-      <Button onClick={handleOpen}>Resultados</Button>
+      <Button onClick={handleOpen}>Resultados anónimos</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -238,7 +238,8 @@ const TestDepresion = () => {
                                         required: {
                                           value: true,
                                           message: 'Debes seleccionar una opción'
-                                        }})}
+                                        }
+                                      })}
                                     />
                                     0
                                   </label>
@@ -256,7 +257,8 @@ const TestDepresion = () => {
                                         required: {
                                           value: true,
                                           message: 'Debes seleccionar una opción'
-                                        }})}
+                                        }
+                                      })}
                                     />
                                     1
                                   </label>
@@ -274,7 +276,8 @@ const TestDepresion = () => {
                                         required: {
                                           value: true,
                                           message: 'Debes seleccionar una opción'
-                                        }})}
+                                        }
+                                      })}
                                     />
                                     2
                                   </label>
@@ -292,7 +295,8 @@ const TestDepresion = () => {
                                         required: {
                                           value: true,
                                           message: 'Debes seleccionar una opción'
-                                        }})}
+                                        }
+                                      })}
                                     />
                                     3
                                   </label>
@@ -302,7 +306,9 @@ const TestDepresion = () => {
                           </div>
                         ))
                       }
-
+                      {Object.keys(errors).length !== 0 && <span className="login-danger">
+                        <small>Debes seleccionar una opción por cada pregunta</small>
+                      </span>}
                       <div className="col-12 mt-4">
                         <div className="doctor-submit text-end">
                           <button
@@ -351,7 +357,8 @@ const TestDepresion = () => {
                           required: {
                             value: true,
                             message: 'Nombre es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>
@@ -368,7 +375,8 @@ const TestDepresion = () => {
                           required: {
                             value: true,
                             message: 'Apellido es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>
@@ -385,7 +393,8 @@ const TestDepresion = () => {
                           required: {
                             value: true,
                             message: 'Correo electrónico es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>

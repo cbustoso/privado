@@ -145,7 +145,7 @@ const ChildModal = ({ result }) => {
   return (
     <Fragment>
       <Button onClick={handleOpen}>Enviar correo</Button>
-      <Button onClick={handleOpen}>Resultados</Button>
+      <Button onClick={handleOpen}>Resultados anónimos</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -165,6 +165,7 @@ const ChildModal = ({ result }) => {
 }
 
 const TestAnsiedad = () => {
+  const divRef = useRef();
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
