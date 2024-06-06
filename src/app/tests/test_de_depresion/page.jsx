@@ -66,25 +66,29 @@ const preguntas = [
 
 const resultados = [
   {
-    puntaje: [0, 9],
+    puntaje: [0, 4],
     titulo: 'Sin sintomatología depresiva',
-    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. `
+    descripcion: `Tus respuestas sugieren síntomas mínimos o nulos de depresión. Es probable que no estés experimentando signos significativos de depresión.`
   },
   {
-    puntaje: [10, 18],
+    puntaje: [5, 9],
+    titulo: 'Sintomatología depresiva leve',
+    descripcion: `	Indicas síntomas leves de depresión. Aunque estos síntomas pueden no estar interfiriendo gravemente en tu vida diaria, es importante estar atento a cómo evolucionan.`
+  },
+  {
+    puntaje: [10, 14],
     titulo: 'Sintomatología depresiva moderada',
-    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex totam officiis tempore distinctio commodi voluptatum omnis! Molestiae inventore soluta, unde eum id numquam, adipisci officiis, repellendus ipsam aliquid enim porro. 
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, iste? Fugit mollitia quasi praesentium magnam. Velit eos labore autem? Commodi dolorem error distinctio id in autem quisquam illo consequatur incidunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim repellat tempore, excepturi officiis officia nam? Est, in totam voluptatum suscipit itaque velit ea illum delectus nesciunt voluptatem libero asperiores vel. 
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quos soluta asperiores nulla incidunt consectetur, laudantium libero odio dolore repellendus voluptates illum necessitatibus ipsam iure facilis! Iusto, quo ex. 
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem accusantium possimus dignissimos error porro quibusdam quas officiis libero, laboriosam exercitationem ab officia explicabo consectetur vero, neque consequuntur at fugit!`
-  },
+    descripcion: `Tus síntomas son moderados. Pueden estar afectando tu vida diaria y podría ser útil considerar estrategias de manejo o buscar apoyo profesional.`
+  },,
   {
-    puntaje: [19, 27],
+    puntaje: [15, 19],
+    titulo: 'Sintomatología depresiva moderadamente severo',
+    descripcion: `Estás experimentando síntomas depresivos moderadamente severos, los cuales probablemente están afectando de manera significativa tu rutina diaria. Sería aconsejable buscar ayuda profesional. Te invitamos a reservar hora con nuestros servicios de salud mental.`
+  },,
+  {
+    puntaje: [20, 27],
     titulo: 'Sintomatología depresiva grave',
-    descripcion: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex totam officiis tempore distinctio commodi voluptatum omnis! Molestiae inventore soluta, unde eum id numquam, adipisci officiis, repellendus ipsam aliquid enim porro. 
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, iste? Fugit mollitia quasi praesentium magnam. Velit eos labore autem? Commodi dolorem error distinctio id in autem quisquam illo consequatur incidunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim repellat tempore, excepturi officiis officia nam? Est, in totam voluptatum suscipit itaque velit ea illum delectus nesciunt voluptatem libero asperiores vel. 
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quos soluta asperiores nulla incidunt consectetur, laudantium libero odio dolore repellendus voluptates illum necessitatibus ipsam iure facilis! Iusto, quo ex. 
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem accusantium possimus dignissimos error porro quibusdam quas officiis libero, laboriosam exercitationem ab officia explicabo consectetur vero, neque consequuntur at fugit!`
+    descripcion: `Tus síntomas son severos y es crucial que busques ayuda profesional de inmediato para manejar estos síntomas, ya que pueden estar impactando de manera considerable en tu bienestar general. Te invitamos a reservar hora con nuestros servicios de salud mental, haciendo click en el enlace.`
   },
 ]
 
