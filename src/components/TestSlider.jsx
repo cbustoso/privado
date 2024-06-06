@@ -10,12 +10,12 @@ import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import { useMediaQuery } from "@mui/material";
 
-const TestSlider = ({ slides }) => {
+const TestSlider = ({ slides, innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
   const matches = useMediaQuery('(min-width:600px)');
-
+  const divRef = useRef();
   const sliderStyles = {
     // height: '85svh',
     position: 'relative',
@@ -112,7 +112,7 @@ const TestSlider = ({ slides }) => {
 
 
   return (
-    <div className='container col-12 align-self-center' style={{ padding: '0px', margin: '0px', maxWidth: '100vw' }} id="test_autodiagnostico">
+    <div className='container col-12 align-self-center' style={{ padding: '0px', margin: '0px', maxWidth: '100vw' }} id="test_autodiagnostico" ref={ innerRef }>
       {
         matches
           ? <div style={sliderStyles}>

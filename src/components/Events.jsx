@@ -8,12 +8,13 @@ import { useMediaQuery } from "@mui/material";
 import { blogs } from '@/utils/blogs';
 
 
-const Events = ({ events }) => {
+const Events = ({ events, innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = events.length;
   const timeoutRef = useRef(null);
   const matches = useMediaQuery('(min-width:600px)');
-
+  const divRef = useRef();
+  
   const resetTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -110,7 +111,7 @@ const Events = ({ events }) => {
   }
 
   return (
-    <div className='container col-12 align-self-center sailec' id="eventos">
+    <div className='container col-12 align-self-center sailec' id="eventos" ref={innerRef}>
       <div className="row" style={{ padding: 0, margin: 0 }}>
         <div className="col-sm-12 text-center" style={{ padding: 0 }}>
           <h2 style={{ fontSize: '32px', fontWeight: 700, lineHeight: '40px', paddingTop: '32px' }}>Eventos</h2>

@@ -81,7 +81,7 @@ const a11yProps = (index) => {
   };
 }
 
-const ImageSlider = ({ }) => {
+const ImageSlider = ({innerRef }) => {
   const [slides, setSlides] = useState(blogs.slice(0, 4))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(blogs[0].titulo)
@@ -91,7 +91,7 @@ const ImageSlider = ({ }) => {
   const matches = useMediaQuery('(min-width:600px)');
 
   const [value, setValue] = useState(0);
-
+  const divRef = useRef();
   const totalSlides = slides.length;
   const timeoutRef = useRef(null);
 
@@ -222,7 +222,7 @@ const ImageSlider = ({ }) => {
   }
 
   return (
-    <div id="topicos" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : sliderStyles}>
+    <div id="topicos" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : sliderStyles} ref={innerRef}>
       <div style={matches ? slideStyles : {}}></div>
 
       {matches ?
@@ -254,12 +254,14 @@ const ImageSlider = ({ }) => {
                 >
                   <Link href={`/blog/${idBlog}`}>
                     <button
-                      className="btn submit-form me-2"
+                      className= {`btn submit-form me-2 sailec ${'btn-'+currentIndex}`}
                       style={{
+                        width:'209px',
+                        height:'56px',
                         backgroundColor: styles[currentIndex].color,
                         border: `1px solid ${styles[currentIndex].border}`,
                         borderRadius: '100px',
-                        color: '#fff'
+                        color: '#fff',
                       }}> Ver más + </button>
                   </Link>
                 </Grid>
