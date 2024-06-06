@@ -131,8 +131,9 @@ export default function MaterialDescargable() {
 
                   <Accordion>
                     <AccordionSummary
-                      sx={{ bgcolor: '#4054b2', color: 'white' }}
-                      expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
+                      className="sailec-medium"
+                      sx={{ bgcolor: '#fabb00', color: 'black' }}
+                      expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
                       aria-controls="panel3-content"
                       id="panel3-header"
                     >
