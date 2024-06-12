@@ -8,8 +8,9 @@ import Link from "next/link";
 import { logo, logoudp } from "./imagepath";
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from "next/navigation";
+import MenuIcon from '@mui/icons-material/Menu';
+import { IoMdLogIn } from "react-icons/io";
 
 const pagesWithEvents = [
   { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
@@ -154,10 +155,10 @@ const Header = () => {
               return (
                 <Link style={{ color: 'black' }} href={page.url} key={page.title} >
                   <Button
-                    className={`sailec ${activeSection === page.label 
-                      ? 'active-header' 
+                    className={`sailec ${activeSection === page.label
+                      ? 'active-header'
                       : ''
-                    }`}
+                      }`}
 
                     onClick={() => handleNavClick(page.label)}
                     sx={{ my: 2, color: 'black', display: 'block' }}
@@ -176,7 +177,12 @@ const Header = () => {
             {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
             {
               !session
-                ? <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                ? <>
+                  <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                  <Link href="/login#profesionales">
+                    <IoMdLogIn style={{ fontSize: '30px', color: '#000' }} />
+                  </Link>
+                </>
                 : <button className="btn">
                   <img
                     className="avatar-img rounded-circle"

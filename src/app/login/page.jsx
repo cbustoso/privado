@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AuthData } from "../../providers/AuthWrapper";
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import { fetchUserMailAndPass } from "../../services/UsersServices";
 
@@ -14,7 +15,7 @@ import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 import { signIn } from "next-auth/react"
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState('basictab1');
+  const [activeTab, setActiveTab] = useState('estudiantes');
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isInvalid, setIsInvalid] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -47,7 +48,11 @@ const Login = () => {
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+  if (!siteKey) {
+    throw new Error('ReCAPTCHA site key is not defined');
+  }
   // if(isLoggedIn) return <Navigate to={'/appoinmentlist'}/>
   const handleSignIn = async () => {
     try {
@@ -97,7 +102,7 @@ const Login = () => {
 
             <div className="col-12 col-lg-6 login-wrap-bg" >
               <div className="login-wrapper">
-                <div className="loginbox" style={{boxShadow:'unset'}}>
+                <div className="loginbox" style={{ boxShadow: 'unset' }}>
                   <div className="login-right">
                     <div className="login-right-wrap">
                       <div className="account-logo">
@@ -117,12 +122,12 @@ const Login = () => {
                                 <ul className="nav nav-tabs">
                                   <li className="nav-item">
                                     <a
-                                      className={`sailec-medium nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
-                                      onClick={() => handleTabClick('basictab1')}
-                                      href="#basictab1"
+                                      className={`sailec-medium nav-link ${activeTab === 'estudiantes' ? 'active' : ''}`}
+                                      onClick={() => handleTabClick('estudiantes')}
+                                      href="#estudiantes"
                                       style={{
-                                        background: activeTab === 'basictab1' ? '#4e57cd ' : '',
-                                        color: activeTab === 'basictab1' ? '#FFF ' : '',
+                                        background: activeTab === 'estudiantes' ? '#4e57cd ' : '',
+                                        color: activeTab === 'estudiantes' ? '#FFF ' : '',
                                       }}
                                     >
                                       Estudiantes
@@ -130,12 +135,12 @@ const Login = () => {
                                   </li>
                                   <li className="nav-item">
                                     <a
-                                      className={`sailec-medium nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
-                                      onClick={() => handleTabClick('basictab2')}
-                                      href="#basictab2"
+                                      className={`sailec-medium nav-link ${activeTab === 'profesionales' ? 'active' : ''}`}
+                                      onClick={() => handleTabClick('profesionales')}
+                                      href="#profesionales"
                                       style={{
-                                        background: activeTab === 'basictab2' ? '#4e57cd ' : '',
-                                        color: activeTab === 'basictab2' ? '#FFF ' : '',
+                                        background: activeTab === 'profesionales' ? '#4e57cd ' : '',
+                                        color: activeTab === 'profesionales' ? '#FFF ' : '',
                                       }}
                                     >
                                       Profesionales
@@ -144,7 +149,7 @@ const Login = () => {
                                 </ul>
                                 <div className="tab-content" style={{ height: '250px' }}>
 
-                                  <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="basictab2" style={{ height: '100%',textAlign: 'center',}}>
+                                  <div className={`tab-pane ${activeTab === 'estudiantes' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="profesionales" style={{ height: '100%', textAlign: 'center', }}>
                                     <p>Ingresa con tu mail UDP para poder realizar una reserva.</p>
                                     <div>
                                       <button className="gsi-material-button btn btn-primary btn-block"
@@ -152,10 +157,10 @@ const Login = () => {
                                         style={{
                                           color: '#fff', background: '#4e57cd',
                                           width: '100%',
-                                          
+
                                         }}
                                       >
-                                        
+
                                         <div className="gsi-material-button-state"></div>
                                         <div className="gsi-material-button-content-wrapper">
                                           <div className="gsi-material-button-icon">
@@ -174,7 +179,7 @@ const Login = () => {
                                     </div>
 
                                   </div>
-                                  <div className={`tab-pane ${activeTab === 'basictab2' ? 'show active' : ''}`} id="basictab1">
+                                  <div className={`tab-pane ${activeTab === 'profesionales' ? 'show active' : ''}`} id="estudiantes">
 
 
                                     <form >
@@ -228,6 +233,8 @@ const Login = () => {
                                           {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
                                         </span>
                                       </div>
+                                      <GoogleReCaptchaProvider
+                                        reCaptchaKey={siteKey} />
 
                                       <div className="forgotpass">
                                         {/* <div className="remember-me">
