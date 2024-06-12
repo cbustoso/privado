@@ -11395,11 +11395,20 @@ d29e08
 }
 
 
-.blog-content p {
+.blog-content p, .blog-content li {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
   color: #000000;
+  text-wrap: balance;
+}
+
+.blog-content-sm p, .blog-content-sm li {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000000;
+  text-wrap: balance;
 }
 
 .blog-content h2 {

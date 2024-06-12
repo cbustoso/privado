@@ -155,7 +155,7 @@ const Blogdetails = ({ params }) => {
                       {/* TEXTO */}
 
                       <div className="sailec col-lg-10 col-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
-                        <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.texto }}>
+                        <div className={matches ? "blog-content" : "blog-content-sm"} dangerouslySetInnerHTML={{ __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
                       </div>
