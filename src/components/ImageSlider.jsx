@@ -88,7 +88,7 @@ const a11yProps = (index) => {
 }
 
 const ImageSlider = ({ innerRef }) => {
-  const [slides, setSlides] = useState(blogs.slice(0, 4))
+  const [slides, setSlides] = useState(blogs.slice(-4))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [title, setTitle] = useState(blogs[0].titulo)
   const [content, setContent] = useState(blogs[0].bajada)

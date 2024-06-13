@@ -25,8 +25,14 @@ import { FaDownload } from 'react-icons/fa';
 
 const card = (item) => (
   <Fragment>
-    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1', height:'16em' }}>
-      <Typography variant="h5" component="div" sx={{ bgcolor: "#FABB00", height: '60px', padding: '16px 24px 16px 24px' }}>
+    <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1', height: '17rem' }}>
+      <Typography variant="h5" component="div"
+        sx={{
+          bgcolor: "#FABB00",
+          height: '6rem',
+          padding: '16px 24px 16px 24px'
+        }}
+      >
         {item.titulo}
       </Typography>
       <Typography variant="body2" sx={{
@@ -40,17 +46,18 @@ const card = (item) => (
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
       <button
-        className='btn'
+        className='btn btn-0'
         style={{
           backgroundColor: "#3886FF",
           color: '#FFF',
-          height: '48',
+          height: '48px',
           width: '200px',
           padding: '4px 24px',
           margin: '8px',
           borderRadius: '100px',
           fontSize: '16px',
-          fontWeight: 500
+          fontWeight: 600,
+          border: '2px solid #A5C8FF'
         }}>
         Descargar <FaDownload />
       </button>
@@ -113,8 +120,8 @@ const Blogdetails = ({ params }) => {
                 {/* CONTENIDO DEL BLOG */}
                 <div className="col-12 " style={{ padding: matches ? 0 : '20px' }}>
                   <div className="blog-view">
-                    <div className="col-lg-12" style={{ padding: matches ? 0 : '20px', margin: matches ? '0 0 0 56px' : '20px 0 0 0' }}>
-                      <h3 className="blog-title" style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+                    <div className="col-lg-12" style={{ padding: matches ? 0 : '20px 20px 0 20px', margin: matches ? '0 0 0 56px' : '20px 0 0 0' }}>
+                      <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                         {blog.titulo}
                       </h3>
                     </div>
@@ -154,29 +161,29 @@ const Blogdetails = ({ params }) => {
                       </div> */}
                       {/* TEXTO */}
 
-                      <div className="sailec col-lg-10 col-12" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px' }}>
+                      <div className="sailec col-lg-10 col-12" style={{ marginLeft: matches ? '56px' : '0px' }}>
                         <div className={matches ? "blog-content" : "blog-content-sm"} dangerouslySetInnerHTML={{ __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
                       </div>
 
-                      <div className="col-lg-5 col-12 d-flex flex-wrap" style={{ padding: matches ? 0 : '20px', marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
+                      <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
                         <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
                           <img src={blog.imagen} alt="" style={{ width: '100%' }} />
                         </div>
 
-                       { blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>}
+                        {blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>}
                       </div>
                     </article>
 
                     <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >
                       {console.log('leblog', blog.downloads)}
                       <div className="col-12">
-                        <h3  className='sailec-medium'>Contenido descargable</h3>
+                        <h3 className='sailec-medium' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px'}}>Contenido descargable</h3>
                       </div>
                       {blog?.downloads && blog['downloads'].map((item, index) => (
 
-                        <div className="col-12 col-lg-4 mb-3 mt-5" key={index} style={{margin: 'auto'}}>
+                        <div className="col-12 col-lg-4 col-md-8 mb-3 mt-3 mt-md-5" key={index} style={{ margin: 'auto' }}>
                           <Box sx={{ minWidth: 275, width: '100%', textAlign: 'left' }}>
                             <Card variant="outlined">{card(item)}</Card>
                           </Box>
