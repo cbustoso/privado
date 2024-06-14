@@ -165,7 +165,6 @@ const ChildModal = ({ result }) => {
 }
 
 const TestAnsiedad = () => {
-  const divRef = useRef();
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
@@ -253,119 +252,123 @@ const TestAnsiedad = () => {
                               <p>3 = Severamente</p>
                             </div>
                           </div>
-                          </div>
                         </div>
-                        {
-                          preguntas.map((item, index) => (
-                            <div
-                              className="col-12 col-md-11"
-                              key={index + item.label}
-                              style={{
-                                background: index % 2 === 0 && 'lightgrey'
-                              }}
-                            >
-                              <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
-                                <label className="col-6 col-md-9">
-                                  {item.pregunta}
-                                </label>
-                                <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
-                                  <div className="form-check-inline me-1 me-md-3" >
-                                    <label
-                                      className="form-check-label"
-                                      style={{ textAlign: 'center' }}
-                                    >
-                                      <input
-                                        type="radio"
-                                        name={item.label}
-                                        value={0}
-                                        className="form-check-input d-block me-0"
-                                        {...register(item.label, {
-                                          required: {
-                                            value: true,
-                                            message: 'Debes seleccionar una opción'
-                                          }})}
-                                      />
-                                      0
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                    <label
-                                      className="form-check-label"
-                                      style={{ textAlign: 'center' }}>
-                                      <input
-                                        type="radio"
-                                        name={item.label}
-                                        value={1}
-                                        className="form-check-input d-block me-0"
-                                        {...register(item.label, {
-                                          required: {
-                                            value: true,
-                                            message: 'Debes seleccionar una opción'
-                                          }})}
-                                      />
-                                      1
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                    <label
-                                      className="form-check-label"
-                                      style={{ textAlign: 'center' }}>
-                                      <input
-                                        type="radio"
-                                        name={item.label}
-                                        value={2}
-                                        className="form-check-input d-block me-0"
-                                        {...register(item.label, {
-                                          required: {
-                                            value: true,
-                                            message: 'Debes seleccionar una opción'
-                                          }})}
-                                      />
-                                      2
-                                    </label>
-                                  </div>
-                                  <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
-                                    <label
-                                      className="form-check-label"
-                                      style={{ textAlign: 'center' }}>
-                                      <input
-                                        type="radio"
-                                        name={item.label}
-                                        value={3}
-                                        className="form-check-input d-block me-0"
-                                        {...register(item.label, {
-                                          required: {
-                                            value: true,
-                                            message: 'Debes seleccionar una opción'
-                                          }})}
-                                      />
-                                      3
-                                    </label>
-                                  </div>
+                      </div>
+                      {
+                        preguntas.map((item, index) => (
+                          <div
+                            className="col-12 col-md-11"
+                            key={index + item.label}
+                            style={{
+                              background: index % 2 === 0 && 'lightgrey'
+                            }}
+                          >
+                            <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
+                              <label className="col-6 col-md-9">
+                                {item.pregunta}
+                              </label>
+                              <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
+                                <div className="form-check-inline me-1 me-md-3" >
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name={item.label}
+                                      value={0}
+                                      className="form-check-input d-block me-0"
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }
+                                      })}
+                                    />
+                                    0
+                                  </label>
+                                </div>
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
+                                    <input
+                                      type="radio"
+                                      name={item.label}
+                                      value={1}
+                                      className="form-check-input d-block me-0"
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }
+                                      })}
+                                    />
+                                    1
+                                  </label>
+                                </div>
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
+                                    <input
+                                      type="radio"
+                                      name={item.label}
+                                      value={2}
+                                      className="form-check-input d-block me-0"
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }
+                                      })}
+                                    />
+                                    2
+                                  </label>
+                                </div>
+                                <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
+                                  <label
+                                    className="form-check-label"
+                                    style={{ textAlign: 'center' }}>
+                                    <input
+                                      type="radio"
+                                      name={item.label}
+                                      value={3}
+                                      className="form-check-input d-block me-0"
+                                      {...register(item.label, {
+                                        required: {
+                                          value: true,
+                                          message: 'Debes seleccionar una opción'
+                                        }
+                                      })}
+                                    />
+                                    3
+                                  </label>
                                 </div>
                               </div>
                             </div>
-                          ))
-                        }
-
-                        <div className="col-12 mt-4">
-                          <div className="doctor-submit text-end">
-                            <button
-                              type="button"
-                              className="btn btn-primary submit-form me-2"
-                              onClick={handleOpen}
-                            >
-                              Continuar
-                            </button>
-                            <button
-                              type="submit"
-                              className="btn btn-primary cancel-form"
-                            >
-                              Cancelar
-                            </button>
                           </div>
+                        ))
+                      }
+
+                      <div className="col-12 mt-4">
+                        <div className="doctor-submit text-end">
+                          <button
+                            type="button"
+                            className="btn btn-primary submit-form me-2"
+                            onClick={handleOpen}
+                          >
+                            Continuar
+                          </button>
+                          <button
+                            type="submit"
+                            className="btn btn-primary cancel-form"
+                          >
+                            Cancelar
+                          </button>
                         </div>
                       </div>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -396,7 +399,8 @@ const TestAnsiedad = () => {
                           required: {
                             value: true,
                             message: 'Nombre es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>
@@ -413,7 +417,8 @@ const TestAnsiedad = () => {
                           required: {
                             value: true,
                             message: 'Apellido es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>
@@ -430,11 +435,26 @@ const TestAnsiedad = () => {
                           required: {
                             value: true,
                             message: 'Correo electrónico es requerido'
-                          }})}
+                          }
+                        })}
                       />
                     </div>
                   </div>
 
+                  <div className="col-12">
+                    <div className="form-group select-gender">
+                      <div className="form-check-inline">
+                        <label className="form-check-label">
+                          <input
+                            type="checkbox"
+                            name="gender"
+                            className="form-check-input"
+                          />
+                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con la USM, con fines de investigación.
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                   <ChildModal result={determinarDescripcion(resultado)} />
                 </Box>
               </Modal>

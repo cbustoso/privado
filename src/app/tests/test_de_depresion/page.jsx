@@ -79,12 +79,12 @@ const resultados = [
     puntaje: [10, 14],
     titulo: 'Sintomatología depresiva moderada',
     descripcion: `Tus síntomas son moderados. Pueden estar afectando tu vida diaria y podría ser útil considerar estrategias de manejo o buscar apoyo profesional.`
-  },,
+  }, ,
   {
     puntaje: [15, 19],
     titulo: 'Sintomatología depresiva moderadamente severo',
     descripcion: `Estás experimentando síntomas depresivos moderadamente severos, los cuales probablemente están afectando de manera significativa tu rutina diaria. Sería aconsejable buscar ayuda profesional. Te invitamos a reservar hora con nuestros servicios de salud mental.`
-  },,
+  }, ,
   {
     puntaje: [20, 27],
     titulo: 'Sintomatología depresiva grave',
@@ -408,7 +408,20 @@ const TestDepresion = () => {
                       />
                     </div>
                   </div>
-
+                  <div className="col-12">
+                    <div className="form-group select-gender">
+                      <div className="form-check-inline">
+                        <label className="form-check-label">
+                          <input
+                            type="checkbox"
+                            name="gender"
+                            className="form-check-input"
+                          />
+                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con la USM, con fines de investigación.
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                   <ChildModal result={determinarDescripcion(resultado)} />
                 </Box>
               </Modal>

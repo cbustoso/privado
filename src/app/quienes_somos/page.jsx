@@ -13,6 +13,7 @@ import ReserveBtn from "@/components/ReserveBtn";
 import { FaArrowLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import SimpleBackdrop from "@/components/Backdrop";
+import Elevation from "@/components/HowTo"
 
 export default function Dash() {
   const matches = useMediaQuery('(min-width:600px)');
@@ -181,9 +182,26 @@ export default function Dash() {
                   </div>
               }
             </div>
-            <div className="row" style={{ margin: '0 10px' }} >
 
-              <div className="card-body flex-column d-flex align-items-center my-3">
+            <div className="row" style={{ margin: '0 10px' }} >
+            </div>
+
+            <div className="row" style={{ margin: '0 10px' }} >
+              <div className="card-body flex-column d-flex align-items-center my-3 ">
+                {
+                  matches
+                    ?
+                    <h3 className="sailec-medium">¿Cómo puedo solicitar atención en el DSME?</h3>
+                    :
+                    <>
+                      <h3 className="sailec-medium">¿Cómo puedo solicitar </h3>
+                      <h3 className="sailec-medium">atención en el DSME?</h3>
+                    </>
+                }
+                <Elevation />
+              </div>
+              <div className="card-body flex-column d-flex align-items-center my-3 ">
+
                 <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
               </div>
 
