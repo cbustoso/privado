@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AuthData } from "../../providers/AuthWrapper";
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { useMediaQuery } from "@mui/material";
 
 import { fetchUserMailAndPass } from "../../services/UsersServices";
 
@@ -19,6 +20,8 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isInvalid, setIsInvalid] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const matches = useMediaQuery('(min-width:600px)');
+
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm()
@@ -80,7 +83,7 @@ const Login = () => {
       {/* Main Wrapper */}
       <div className="main-wrapper login-body sailec">
         <div className="container-fluid px-0">
-          <div className="row">
+          <div className="row ">
             {/* Login logo */}
             <div className="col-lg-6 login-wrap" style={{
               backgroundImage: 'url(https://dae.udp.cl/cms/wp-content/uploads/2022/05/136.jpg)',
@@ -100,9 +103,14 @@ const Login = () => {
             {/* /Login logo */}
             {/* Login Content */}
 
-            <div className="col-12 col-lg-6 login-wrap-bg" >
+            <div className="col-12 col-lg-6 login-wrap-bg" style={{padding: '15px 20px 15px'}}>
               <div className="login-wrapper">
-                <div className="loginbox" style={{ boxShadow: 'unset' }}>
+                <div className="loginbox"
+                  style={{
+                    background: 'white !important',
+                    width: matches ? '70%' : 'unset',
+                    // border: '1px solid lightgrey'
+                  }}>
                   <div className="login-right">
                     <div className="login-right-wrap">
                       <div className="account-logo">
@@ -114,7 +122,7 @@ const Login = () => {
                       <section className="comp-section" id="comp_tabs">
                         <div className="row">
                           <div className="col-12">
-                            <div className="card">
+                            <div className="card" style={{ border: 'none'}}>
                               <div className="card-body">
                                 {/* <h4 className="card-title">Login</h4> */}
                                 <h3 className="section-title">Login</h3>
@@ -126,7 +134,7 @@ const Login = () => {
                                       onClick={() => handleTabClick('estudiantes')}
                                       href="#estudiantes"
                                       style={{
-                                        background: activeTab === 'estudiantes' ? '#4e57cd ' : '',
+                                        background: activeTab === 'estudiantes' ? '#A6A6A6 ' : '',
                                         color: activeTab === 'estudiantes' ? '#FFF ' : '',
                                       }}
                                     >
@@ -139,7 +147,7 @@ const Login = () => {
                                       onClick={() => handleTabClick('profesionales')}
                                       href="#profesionales"
                                       style={{
-                                        background: activeTab === 'profesionales' ? '#4e57cd ' : '',
+                                        background: activeTab === 'profesionales' ? '#A6A6A6 ' : '',
                                         color: activeTab === 'profesionales' ? '#FFF ' : '',
                                       }}
                                     >
@@ -252,7 +260,7 @@ const Login = () => {
                                       </div>
                                       <div className="form-group login-btn">
                                         <button
-                                          className="btn btn-primary btn-block"
+                                          className="btn btn-primary btn-block sailec-medium"
                                           onClick={handleOnSubmit}
                                         >
                                           Iniciar sesión

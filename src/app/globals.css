@@ -1529,7 +1529,7 @@ textarea.form-control {
 }
 .login-wrapper .loginbox {
   background: #ffffff;
-  box-shadow: 0px 80px 80px rgba(46, 55, 164, 0.03);
+  box-shadow: 0px 40px 40px rgba(63, 66, 91, 0.123);
   border-radius: 24px;
   display: flex;
   max-width: 830px;
@@ -11436,4 +11436,14 @@ d29e08
 }
 .accordion-item {
   flex: 1;
+}
+
+
+.links-footer {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.links-footer:hover {
+  background-color: grey;
+  transform: scale(1.1);
 }

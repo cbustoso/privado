@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import BasicCard from "@/components/BasicCard";
 import Box from '@mui/material/Box';
 import Image from "next/image";
-import { carrousel01, profesional01 } from "@/components/imagepath";
+import { carrousel01, profesional01, map } from "@/components/imagepath";
 import { useMediaQuery } from "@mui/material";
 import { Card, CardMedia, CardActions, Typography } from "@mui/material";
 import { } from "@/components/imagepath";
@@ -55,7 +55,7 @@ export default function Dash() {
             <div className="card-body flex-row d-flex justify-content-center mt-4">
               <h2
                 className="sailec"
-                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
+                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center', marginTop: !matches && '50px' }}>
                 ¿Qué es el DSME?
               </h2>
             </div>
@@ -160,71 +160,60 @@ export default function Dash() {
                       lineHeight: '24px',
                       borderRadius: '12px',
                       padding: 0,
+                      margin: '0 10px'
                     }}
                   >
-                    <Box sx={{ fontFamily: 'sailec', lineHeight: '30px', }}>
-                      <div className="media-body sailec" style={{
-                        margin: '0 20px', paddingTop: '10px',
-                        fontSize: '20px',
-                        fontWeight: 400,
-                        lineHeight: '32px'
-                      }}>
-                        <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
-                          Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
-                        </p>
-                        <p>
-                          Nuestro modelo de intervención se basa en la <strong>Promoción, Prevención, Atención Grupal y Atención Clínica Individual</strong>; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
+                    <div className="media-body sailec" style={{
+                      margin: '0 20px', paddingTop: '10px',
+                      fontSize: '20px',
+                      fontWeight: 400,
+                      lineHeight: '32px'
+                    }}>
+                      <p className="media-body sailec" style={{ textWrap: 'balance' }}>
+                        Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
+                      </p>
+                      <p style={{ textWrap: 'balance' }}>
+                        Nuestro modelo de intervención se basa en la <strong>Promoción, Prevención, Atención Grupal y Atención Clínica Individual</strong>; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
+                      </p>
 
-                        </p>
-                      </div>
-                    </Box>
+
+                    </div>
                   </div>
               }
             </div>
-            {/*  <div className="card-body flex-column d-flex align-items-center">
-              <h3>¿Cómo solicitar atención en el departamento?</h3>
-              <Image
-                src={modelo_dsme}
-                sizes="100vw"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                }}
-                width={500}
-                height={300}
-                alt=""
-              />
-            </div> */}
+            <div className="row" style={{ margin: '0 10px' }} >
 
-            <div className="card-body flex-column d-flex align-items-center my-3">
-              <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+              <div className="card-body flex-column d-flex align-items-center my-3">
+                <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+              </div>
+
+              <div className="card-body flex-column d-flex align-items-center">
+
+                <h3 className="sailec-medium">¿Tienes preguntas o sugerencias?</h3>
+                <p style={{
+                  margin: '0 25px',
+                  textAlign: 'center',
+                  fontSize: '20px',
+                  fontWeight: 400,
+                  lineHeight: '32px',
+                  textWrap: 'balance'
+                }}>
+                  Puedes preguntar o sugerir lo que quieras, es totalmente anónimo, por lo que puedes sentirte seguro. Tus preguntas serán respondidas en el Canal de WhatsApp.</p>
+                <button className="btn btn-secondary me-1 p-2 my-3">
+                  <a style={{ color: 'white' }} href="https://forms.gle/nFShGTzpaBKcvhCX9">
+                    Buzón de preguntas
+                  </a>
+                </button>
+
+              </div>
             </div>
-
-            <div className="card-body flex-column d-flex align-items-center">
-
-              <h3>¿Tienes preguntas o sugerencias?</h3>
-              <p style={{
-                margin: '0 20px',
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 400,
-                lineHeight: '32px',
-                // textWrap: 'balance'
-              }}>
-                Puedes preguntar o sugerir lo que quieras, es totalmente anónimo, por lo que puedes sentirte seguro. Tus preguntas serán respondidas en el Canal de WhatsApp.</p>
-              <button className="btn btn-secondary me-1 p-2 my-3">
-                <a style={{ color: 'white' }} href="https://forms.gle/nFShGTzpaBKcvhCX9">
-                  Buzón de preguntas
-                </a>
-              </button>
-
-            </div>
-
-            <div className="card-body flex-column d-flex align-items-center">
-              <h3>¿Dónde se encuentra el</h3>
-              <h3><strong>DSME?</strong></h3>
-              <div className="col-12 col-lg-6 d-flex justify-content-center  m-3">
-                <iframe style={{ height: '400px', width: matches ? '100%' : '90%' }} loading="lazy" src="https://maps.google.com/maps?q=Manuel%20Rodriguez%20343&amp;t=m&amp;z=14&amp;output=embed&amp;iwloc=near" title="Manuel Rodriguez 343" aria-label="Manuel Rodriguez 343"></iframe>
+            <div className="row" style={{ margin: '0 10px' }} >
+              <div className="card-body flex-column d-flex align-items-center">
+                <h3>¿Dónde se encuentra el</h3>
+                <h3><strong>DSME?</strong></h3>
+                <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
+                  <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 600 : '90%'} />
+                </div>
               </div>
             </div>
           </div>
