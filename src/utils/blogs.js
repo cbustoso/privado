@@ -473,7 +473,7 @@ la universidad es un periodo de grandes cambios y desafíos. Comprender y acepta
     ]
   },
   {
-    id: '0',
+    id: '9',
     titulo: 'Comprensión y Manejo de la Ansiedad en Estudiantes Universitarios',
     bajada: `Comprensión y Manejo de la Ansiedad en Estudiantes Universitarios`,
     texto: `
@@ -530,7 +530,7 @@ la universidad es un periodo de grandes cambios y desafíos. Comprender y acepta
     ]
   },
   {
-    id: '1',
+    id: '10',
     titulo: 'Suicidio en la Universidad: Cómo Buscar Ayuda y Cómo Ayudar',
     bajada: `Con Terapia Cognitivo-Conductual: Enfoques y Duración`,
     texto: `
@@ -583,7 +583,7 @@ la universidad es un periodo de grandes cambios y desafíos. Comprender y acepta
     ]
   },
   {
-    id: '2',
+    id: '11',
     titulo: 'Drogas y Alcohol: Cómo evitar el exceso',
     bajada: `Soluciones Efectivas a Través de la Terapia Cognitivo Conductual`,
     texto: `

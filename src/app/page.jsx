@@ -19,7 +19,7 @@ import SimpleBackdrop from "@/components/Backdrop";
 import { blogs } from "@/utils/blogs";
 
 const events = [
-  /*   {
+    {
       title: "Salud Mental",
       address: "Av. Portugal 782, Santiago",
       date: "2024/02/18",
@@ -58,7 +58,7 @@ const events = [
       location: "Auditorio",
       image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
       highlight: false,
-    } */
+    }
 ]
 
 const tests = [
@@ -160,6 +160,7 @@ export default function Home() {
       });
     };
   }, [setActiveSection]);
+console.log('BLOGS', blogs.slice(-4 ))
 
   return (
     <>
@@ -169,8 +170,8 @@ export default function Home() {
           <SimpleBackdrop />
           :
           <>
-            {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
-            {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
+            {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(-4 )} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
+            {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
             {/* {isLoading && <strong>Cargando...</strong>} */}
             {/* {isError && <p>Ha habido un error</p>} */}
             {/* {!isError && blogs.length === 0 && <Carrousel />} */}

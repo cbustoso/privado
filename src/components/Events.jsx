@@ -7,6 +7,10 @@ import { useMediaQuery } from "@mui/material";
 
 import { blogs } from '@/utils/blogs';
 
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+import { FaStar } from "react-icons/fa";
 
 const Events = ({ events, innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +18,7 @@ const Events = ({ events, innerRef }) => {
   const timeoutRef = useRef(null);
   const matches = useMediaQuery('(min-width:600px)');
   const divRef = useRef();
-  
+
   const resetTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -135,6 +139,21 @@ const Events = ({ events, innerRef }) => {
                           display: 'inline-block',
                           margin: '0 10px',
                         }}>
+                        <IconButton aria-label={'Destacado'}>
+                          <Badge
+                            badgeContent={event.highlight ? `⭐DESTACADO` : 0}
+                            color="secondary"
+                            sx={{
+                              zIndex: '999',
+                              width: '100%',
+                              right: '-300px',
+                              zIndex: 999,
+                              marginTop: '30px',
+                              position: 'absolute'
+                            }}
+                          >
+                          </Badge>
+                        </IconButton>
                         <CardMedia
                           sx={{ fontSize: '20px', fontWeight: 700 }}
                           component="img"
@@ -149,18 +168,24 @@ const Events = ({ events, innerRef }) => {
                             borderRadius: '0 50px 50px 0',
                             color: '#fff',
                             padding: '12px',
-                            width: '50%',
+                            width: 'fit-content',
+                            maxWidth: '75%',
+                            minWidth: '50%',
                             marginTop: "-55px",
                             position: 'relative',
                             fontWeight: 400,
                             fontSize: '16px',
-                            lineHeight: '24px'
+                            lineHeight: '24px',
+                            height: '48px',
+                            overflow: 'hidden',
+                            textWrap: 'nowrap',
+                            zIndex: 999
                           }}>
                           {`${event.location} ${event.campus}`}
                         </Typography>
                         <CardContent>
 
-                          <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0, height: '4em', fontSize: '20px', fontWeight: 700 }}>
+                          <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0, height: '3rem', fontSize: '20px', fontWeight: 700 }}>
                             {`Conferencia ${(blogs[i % totalSlides]?.titulo).split(':')[0]}`}
                           </Typography>
                         </CardContent>
@@ -182,9 +207,9 @@ const Events = ({ events, innerRef }) => {
             </div>
 
             <div style={dotsContainerStyles}>
-              {Array(Math.ceil(events.length)).fill().map((_, dotIndex) => (
+              {Array(Math.ceil(events.length / 3)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
-                  <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#B82925' : '#FF5253' }} />
+                  <CircleRounded sx={{ fontSize: '20px', color: dotIndex === currentIndex ? '#B82925' : '#FF5253' }} />
                 </div>
               ))}
             </div>
@@ -195,7 +220,7 @@ const Events = ({ events, innerRef }) => {
               <Box sx={sliderStylesMobile}>
                 <div style={cardContainerStylesMobile}>
                   {
-                    events.map((event, i) => ( 
+                    events.map((event, i) => (
                       <Card
                         className='col-12 col-lg-4'
                         key={i}
@@ -205,6 +230,21 @@ const Events = ({ events, innerRef }) => {
                           display: 'inline-block',
                           width: '100%'
                         }}>
+                        <IconButton aria-label={'Destacado'}>
+                          <Badge
+                            badgeContent={event.highlight ? `⭐DESTACADO` : 0}
+                            color="secondary"
+                            sx={{
+                              zIndex: '999',
+                              width: '100%',
+                              right: '-300px',
+                              zIndex: 999,
+                              marginTop: '30px',
+                              position: 'absolute'
+                            }}
+                          >
+                          </Badge>
+                        </IconButton>
                         <CardMedia
                           sx={{ fontSize: '20px', fontWeight: 700 }}
                           component="img"
@@ -230,11 +270,11 @@ const Events = ({ events, innerRef }) => {
                         </Typography>
                         <CardContent>
 
-                          <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0, height: '4em', fontSize: '20px', fontWeight: 700 }}>
+                          <Typography gutterBottom variant="h5" component="div" sx={{ margin: 0, height: '3rem', fontSize: '20px', fontWeight: 700 }}>
                             {`Conferencia ${(blogs[i % totalSlides]?.titulo).split(':')[0]}`}
                           </Typography>
                         </CardContent>
-                        <CardActions sx={{  marginBottom: '10px' }}>
+                        <CardActions sx={{ marginBottom: '10px' }}>
                           <Typography size="medium" sx={{ padding: '0 5px', color: '#000', borderRight: '1px solid #A6A6A6' }}>
                             <LocationOnOutlined sx={{ marginRight: '5px' }} /> {event.address}
                           </Typography>
@@ -253,7 +293,7 @@ const Events = ({ events, innerRef }) => {
             <div style={dotsContainerStyles}>
               {Array(Math.ceil(events.length)).fill().map((_, dotIndex) => (
                 <div key={dotIndex} style={dotStyles} onClick={() => goToSlide(dotIndex)}>
-                  <CircleRounded sx={{ fontSize: '16px', margin: '24px 0', color: dotIndex === currentIndex ? '#B82925' : '#FF5253' }} />
+                  <CircleRounded sx={{ fontSize: '16px', color: dotIndex === currentIndex ? '#B82925' : '#FF5253' }} />
                 </div>
               ))}
             </div>

@@ -41,19 +41,20 @@ const FrequentAskedQuestions = () => {
             onChange={handleChange(question.id)}
             sx={
               expanded === question.id
-                ? { bgcolor: '#3886FF', color: '#fff', margin: '5px' }
-                : { boxShadow: 'none', border: '1px solid black', margin: '5px 0' }
+                ? { bgcolor: '#3886FF', color: '#fff', margin: '5px', borderRadius: '8px' }
+                : { boxShadow: 'none', border: '1px solid black', margin: '5px 0', borderRadius: '8px !important' }
             }
           >
             <AccordionSummary
-              expandIcon={ matches && ( expanded === question.id
+              sx={matches && (expanded === question.id) &&{ borderBottom: '1px solid #fff' }}
+              expandIcon={matches && (expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
-                : <AddCircleOutlineOutlined /> )
+                : <AddCircleOutlineOutlined />)
               }
               aria-controls={`panel${i}bh-content`}
               id={`panel${i}bh-header`}
             >
-              <Typography sx={{ fontWeight: 700}}>{question.title}</Typography>
+              <Typography sx={{ fontWeight: 700 }}>{question.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>

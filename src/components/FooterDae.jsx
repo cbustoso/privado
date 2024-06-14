@@ -1,4 +1,4 @@
-
+'use client'
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ import { BsInstagram, BsTwitterX } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import ReserveBtn from './ReserveBtn';
+import { useEffect } from 'react';
 
 const FooterDae = () => {
   const matches = useMediaQuery('(min-width:600px)');
@@ -37,6 +38,41 @@ const FooterDae = () => {
       url: 'https://genero.udp.cl/',
     },
   ]
+
+  useEffect(() => {
+    let lastCheckedLink = null;
+
+    const handleTouch = e => {
+      var touch = e.touches[0];
+
+      // get the DOM element
+      var element = document.elementFromPoint(touch.clientX, touch.clientY);
+      console.log('element', element);
+
+      // make sure an element was found and it is a link
+      if (element && element.tagName === 'A') {
+        // interact with the DOM element
+        if (lastCheckedLink) {
+          lastCheckedLink.parentElement.style.backgroundColor = '';
+        }
+
+        element.parentElement.style.backgroundColor = 'grey';
+        element.parentElement.style.color = 'black';
+        lastCheckedLink = element;
+      } else {
+        if (lastCheckedLink) {
+          lastCheckedLink.parentElement.style.backgroundColor = '';
+          lastCheckedLink = null;
+        }
+      }
+    };
+
+    document.addEventListener('touchstart', handleTouch);
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouch);
+    };
+  }, []);
 
   return (
     <>
@@ -62,13 +98,13 @@ const FooterDae = () => {
             }}
           >
             <div className={`col-10 col-md-8 ${matches ? '' : 'mt-4'}`}>
-              <div className="row" style={{ height: '80%' }}>
+              <div className="row" style={{ height: '80%' }} >
 
                 {
                   LINKS.map((link, index) => (
                     <div
                       key={index}
-                      className='col-lg-6 col-12'
+                      className='col-lg-6 col-12 links-footer'
                       style={{ borderBottom: '1px solid #fff', width: matches ? '47%' : '90%', margin: '10px' }}>
                       <Link href={link.url} style={{ margin: '10px', color: '#fff' }}>
                         {link.title}
