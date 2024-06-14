@@ -11,6 +11,17 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import { FaStar } from "react-icons/fa";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme({
+  palette: {
+    success: {
+      light: '#ff7961',
+      main: '#ffffff',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 const Events = ({ events, innerRef }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -140,19 +151,21 @@ const Events = ({ events, innerRef }) => {
                           margin: '0 10px',
                         }}>
                         <IconButton aria-label={'Destacado'}>
-                          <Badge
-                            badgeContent={event.highlight ? `⭐DESTACADO` : 0}
-                            color="secondary"
-                            sx={{
-                              zIndex: '999',
-                              width: '100%',
-                              right: '-300px',
-                              zIndex: 999,
-                              marginTop: '30px',
-                              position: 'absolute'
-                            }}
-                          >
-                          </Badge>
+                          <ThemeProvider theme={theme}>
+                            <Badge
+                              badgeContent={event.highlight ? `⭐DESTACADO` : 0}
+                              color="success"
+                              sx={{
+                                zIndex: '999',
+                                width: '100%',
+                                right: '-300px',
+                                zIndex: 999,
+                                marginTop: '30px',
+                                position: 'absolute'
+                              }}
+                            >
+                            </Badge>
+                          </ThemeProvider>
                         </IconButton>
                         <CardMedia
                           sx={{ fontSize: '20px', fontWeight: 700 }}
@@ -231,19 +244,21 @@ const Events = ({ events, innerRef }) => {
                           width: '100%'
                         }}>
                         <IconButton aria-label={'Destacado'}>
-                          <Badge
-                            badgeContent={event.highlight ? `⭐DESTACADO` : 0}
-                            color="secondary"
-                            sx={{
-                              zIndex: '999',
-                              width: '100%',
-                              right: '-300px',
-                              zIndex: 999,
-                              marginTop: '30px',
-                              position: 'absolute'
-                            }}
-                          >
-                          </Badge>
+                          <ThemeProvider theme={theme}>
+                            <Badge
+                              badgeContent={event.highlight ? `⭐DESTACADO` : 0}
+                              color="success"
+                              sx={{
+                                zIndex: '999',
+                                width: '100%',
+                                right: '-300px',
+                                zIndex: 999,
+                                marginTop: '30px',
+                                position: 'absolute'
+                              }}
+                            >
+                            </Badge>
+                          </ThemeProvider>
                         </IconButton>
                         <CardMedia
                           sx={{ fontSize: '20px', fontWeight: 700 }}

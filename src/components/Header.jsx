@@ -6,11 +6,13 @@ import ReserveBtn from "./ReserveBtn";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { logo, logoudp } from "./imagepath";
+import { useMediaQuery } from "@mui/material";
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import { usePathname } from "next/navigation";
 import MenuIcon from '@mui/icons-material/Menu';
 import { IoMdLogIn } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 
 const pagesWithEvents = [
   { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
@@ -39,6 +41,7 @@ const Header = () => {
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
   const currentPage = usePathname()
   const divRef = useRef();
+  const matches = useMediaQuery('(min-width:600px)');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -61,7 +64,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0 }}>
+    <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0 , height: matches? '112px' : '98px', justifyContent: matches ?'center' : 'flex-end'}}>
       <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -183,15 +186,18 @@ const Header = () => {
                     <IoMdLogIn style={{ fontSize: '30px', color: '#000' }} />
                   </Link>
                 </>
-                : <button className="btn">
-                  <img
-                    className="avatar-img rounded-circle"
-                    src={session.user.picture}
-                    alt="profile image"
-                    height={40}
-                  />
-                  {/* {session.user.name} */}
-                </button>
+                : session.user.picture ?
+                  <button className="btn">
+                    <img
+                      className="avatar-img rounded-circle"
+                      src={session.user.picture}
+                      alt="avatar"
+                      height={40}
+                    />
+                    {/* {session.user.name} */}
+                  </button>
+                  :
+                  <FaUserCircle style={{height:'40px'}}/>
             }
 
             {/* </IconButton> */}

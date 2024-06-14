@@ -124,7 +124,7 @@ export default function MaterialDescargable() {
             <div className="card-body flex-row d-flex justify-content-center mt-4">
               <h2
                 className="sailec"
-                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
+                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center',marginTop: !matches && '50px'  }}>
                 Material descargable
               </h2>
             </div>
@@ -136,61 +136,61 @@ export default function MaterialDescargable() {
             </div>
 
             <div className="row">
-              <div className="col-12 col-lg-6 card-body flex-md-column d-flex justify-content-start align-items-center" style={{ gap: '20px', width: '45%', marginRight: '10px' }}>
-              {pares.map(item => (
-              <div className="col-12" key={item.titulo}>
-                  <Accordion>
-                    <AccordionSummary
-                      className="sailec-medium"
-                      sx={{ bgcolor: '#99D6E9', color: 'black' }}
-                      expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
-                      aria-controls="panel3-content"
-                      id="panel3-header"
-                    >
-                      {item.titulo}
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
-                      {item.bajada}
-                    </AccordionDetails>
-                    <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
-                      <Button>
-                        <a href={item.archivo}>
-                          Descargar <FaDownload />
-                        </a>
-                      </Button>
-                    </AccordionActions>
-                  </Accordion>
-            </div>
-          ))}
-            </div>
+              <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: matches? '45%': '', marginRight: matches ? '10px': 'auto' }}>
+                {pares.map(item => (
+                  <div className="col-12" key={item.titulo}>
+                    <Accordion>
+                      <AccordionSummary
+                        className="sailec-medium"
+                        sx={{ bgcolor: '#99D6E9', color: 'black' }}
+                        expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
+                        aria-controls="panel3-content"
+                        id="panel3-header"
+                      >
+                        {item.titulo}
+                      </AccordionSummary>
+                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
+                        {item.bajada}
+                      </AccordionDetails>
+                      <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
+                        <Button>
+                          <a href={item.archivo}>
+                            Descargar <FaDownload />
+                          </a>
+                        </Button>
+                      </AccordionActions>
+                    </Accordion>
+                  </div>
+                ))}
+              </div>
 
-            <div className="col-12 col-lg-6 card-body flex-md-column d-flex justify-content-start align-items-center" style={{ gap: '20px', width: '45%', marginLeft: '10px'  }}>
-              {impares.map(item => (
-            <div className="col-12" key={item.titulo}>
-                  <Accordion>
-                    <AccordionSummary
-                      className="sailec-medium"
-                      sx={{ bgcolor: '#99D6E9', color: 'black' }}
-                      expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
-                      aria-controls="panel3-content"
-                      id="panel3-header"
-                    >
-                      {item.titulo}
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
-                      {item.bajada}
-                    </AccordionDetails>
-                    <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
-                      <Button>
-                        <a href={item.archivo} target="_blank">
-                          Descargar <FaDownload />
-                        </a>
-                      </Button>
-                    </AccordionActions>
-                  </Accordion>
-            </div>
-              ))}
-            </div>
+              <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: matches? '45%': '', marginLeft: matches ? '10px': 'auto', marginTop: matches? '' :'20px' }}>
+                {impares.map(item => (
+                  <div className="col-12" key={item.titulo}>
+                    <Accordion>
+                      <AccordionSummary
+                        className="sailec-medium"
+                        sx={{ bgcolor: '#99D6E9', color: 'black' }}
+                        expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
+                        aria-controls="panel3-content"
+                        id="panel3-header"
+                      >
+                        {item.titulo}
+                      </AccordionSummary>
+                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
+                        {item.bajada}
+                      </AccordionDetails>
+                      <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
+                        <Button>
+                          <a href={item.archivo} target="_blank">
+                            Descargar <FaDownload />
+                          </a>
+                        </Button>
+                      </AccordionActions>
+                    </Accordion>
+                  </div>
+                ))}
+              </div>
 
 
             </div>

@@ -56,33 +56,10 @@ export default function Dash() {
             <div className="card-body flex-row d-flex justify-content-center mt-4">
               <h2
                 className="sailec"
-                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center', marginTop: !matches && '50px' }}>
+                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center', marginTop: !matches && '90px' }}>
                 ¿Qué es el DSME?
               </h2>
             </div>
-
-            {/*   <div className="card-body flex-md-column flex-lg-row d-flex align-self-center">
-              <Box sx={{
-                display: 'flex',
-                flexFlow: { xs: 'column', lg: 'row' },
-                gap: { xs: '20px', lg: '50px' }
-              }}>
-                <BasicCard
-                  maxWidth={400}
-                  bgColor={'transparent'}
-                  fontSize={'20px'}
-                >
-                  Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
-                </BasicCard>
-                <BasicCard
-                  maxWidth={400}
-                  bgColor={'transparent'}
-                  fontSize={'20px'}
-                >
-                  Nuestro modelo de intervención se basa en la <strong>Promoción, Prevención, Atención Grupal y Atención Clínica Individual</strong>; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
-                </BasicCard>
-              </Box>
-            </div> */}
             <div className="row" style={{ margin: '0 10px' }} >
               {
                 matches
@@ -198,7 +175,7 @@ export default function Dash() {
                       <h3 className="sailec-medium">atención en el DSME?</h3>
                     </>
                 }
-                <Elevation />
+                <Elevation matches={matches} />
               </div>
               <div className="card-body flex-column d-flex align-items-center my-3 ">
 

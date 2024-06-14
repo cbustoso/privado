@@ -84,6 +84,7 @@ const Blogdetails = ({ params }) => {
       <>
         <div className="main-wrapper sailec">
           {matches && <div style={{
+            marginTop: '100px',
             height: '520px',
             overflow: 'hidden'
           }}>
@@ -120,7 +121,7 @@ const Blogdetails = ({ params }) => {
                 {/* CONTENIDO DEL BLOG */}
                 <div className="col-12 " style={{ padding: matches ? 0 : '20px' }}>
                   <div className="blog-view">
-                    <div className="col-lg-12" style={{ padding: matches ? 0 : '20px 20px 0 20px', margin: matches ? '0 0 0 56px' : '20px 0 0 0' }}>
+                    <div className="col-lg-12" style={{ padding: matches ? 0 : '20px 20px 0 20px', margin: matches ? '0 0 0 56px' : '80px 0 0 0' }}>
                       <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                         {blog.titulo}
                       </h3>
