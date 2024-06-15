@@ -1306,7 +1306,7 @@ const AddFirstAppoinments = () => {
         /> */}
         {success === 'success'
           ?
-          <div  style={{
+          <div style={{
             height: '100%',
             position: 'fixed',
             top: '0',
