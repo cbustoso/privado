@@ -77,7 +77,7 @@ const Calender = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       // console.log('id', id);
-      const { users: response } = await fetchScheduleByAvailability(id)
+      // const { users: response } = await fetchScheduleByAvailability(id)
       /*  const processed = response.map(item => {
          // detalleServicio y duracionServicio
          return (
@@ -90,121 +90,122 @@ const Calender = ({ id }) => {
            }
          )
        }) */
-      console.log('RESPONSE', response);
-      const {bloques : servicio2Response} = await fetchScheduleByUser(id)
+      // console.log('RESPONSE', response);
+      // const {bloques : servicio2Response} = await fetchScheduleByUser(id)
 
-      // Función para calcular los intervalos de tiempo
-      function calcularIntervalos(horaInicio, horaFin, duracionServicio, item) {
-        const intervalos = [];
-        let horaActual = horaInicio;
+      // // Función para calcular los intervalos de tiempo
+      // function calcularIntervalos(horaInicio, horaFin, duracionServicio, item) {
+      //   const intervalos = [];
+      //   let horaActual = horaInicio;
 
-        while (horaActual <= horaFin) {
-          const horaFinIntervalo = sumarMinutos(horaActual, duracionServicio);
-          if (horaFinIntervalo <= horaFin) {
-            intervalos.push({ ...item, horaInicioServicio: horaActual, horaFinServicio: horaFinIntervalo });
-            horaActual = horaFinIntervalo;
-          } else {
-            break; // Termina el bucle si el intervalo supera la hora de finalización
-          }
-        }
-        return intervalos;
-      }
-
-      function sumarMinutos(hora, minutos) {
-        const [horas, minutosInicio] = hora.split(":").map(Number);
-        const totalMinutos = horas * 60 + minutosInicio + minutos;
-        const horasResultado = Math.floor(totalMinutos / 60);
-        const minutosResultado = totalMinutos % 60;
-        return `${String(horasResultado).padStart(2, '0')}:${String(minutosResultado).padStart(2, '0')}`;
-      }
-
-      // Función para combinar los resultados
-      function combinarResultados(resultados) {
-        return resultados.reduce((acumulador, resultado) => {
-          return acumulador.concat(resultado);
-        }, []);
-      }
-
-      // Calculando los intervalos de tiempo para cada usuario
-      const resultadosIndividuales = response.map(usuario => {
-        return calcularIntervalos(usuario.horaIni, usuario.horaFin, usuario.duracionServicio, usuario);
-      });
-      // console.log('resultadosIndividuales', resultadosIndividuales.flat());
-      // Combinando los resultados individuales en un solo array
-      const intervalosDeTiempo = combinarResultados(resultadosIndividuales.flat());
-      console.log('intervalosDeTiempo', intervalosDeTiempo);
-      // // Filtrando los bloques del segundo servicio que coincidan con los intervalos calculados
-      const bloquesFiltrados = servicio2Response.filter(bloque => {
-        return intervalosDeTiempo.some(intervalo => {
-          const [bloqueHoraInicio, bloqueMinutosInicio] = bloque.hora_inicio.split(":").map(Number);
-          const [bloqueHoraFin, bloqueMinutosFin] = bloque.hora_fin.split(":").map(Number);
-          const [intervaloHora, intervaloMinutos] = intervalo['horaInicioServicio'].split(":").map(Number);
-          return (
-            bloqueHoraInicio === intervaloHora &&
-            bloqueMinutosInicio === intervaloMinutos &&
-            bloqueHoraFin <= intervaloHora &&
-            bloqueMinutosFin <= intervaloMinutos
-          );
-        });
-      });
-      console.log('bloquesFiltrados', bloquesFiltrados);
-
-
-
-      const algo = servicio2Response.map(bloque => {
-        return intervalosDeTiempo.some(intervalo => {
-          const [bloqueHoraInicio, bloqueMinutosInicio] = bloque.hora_inicio.split(":").map(Number);
-          const [bloqueHoraFin, bloqueMinutosFin] = bloque.hora_fin.split(":").map(Number);
-          const [intervaloHora, intervaloMinutos] = intervalo['horaInicioServicio'].split(":").map(Number);
-          return (
-            bloqueHoraInicio === intervaloHora &&
-            bloqueMinutosInicio === intervaloMinutos &&
-            bloqueHoraFin >= intervaloHora &&
-            bloqueMinutosFin >= intervaloMinutos
-          );
-        });
-      });
-
-
-
-
-
-      // Formateando los datos resultantes
-      const resultadoFinal = bloquesFiltrados.map(bloque => ({
-        horaInicio: bloque.hora_inicio
-      }));
-
-      console.log('RESULTADO FINAL', resultadoFinal);
-
-      // const ordered = processed.sort((a, b) => a.start - b.start);
-      // // console.log('ORDERED', ordered)
-      // const bloquesCombinados = ordered.reduce((resultado, bloque) => {
-      //   console.log('BLOQUE', bloque);
-      //   const ultimoBloque = resultado[resultado.length - 1];
-      //   if (ultimoBloque && ultimoBloque.end >= bloque.start) {
-      //     ultimoBloque.end = Math.max(ultimoBloque.end, bloque.end);
-      //   } else {
-      //     resultado.push(bloque);
+      //   while (horaActual <= horaFin) {
+      //     const horaFinIntervalo = sumarMinutos(horaActual, duracionServicio);
+      //     if (horaFinIntervalo <= horaFin) {
+      //       intervalos.push({ ...item, horaInicioServicio: horaActual, horaFinServicio: horaFinIntervalo });
+      //       horaActual = horaFinIntervalo;
+      //     } else {
+      //       break; // Termina el bucle si el intervalo supera la hora de finalización
+      //     }
       //   }
-      //   return resultado;
-      // }, [])
+      //   return intervalos;
+      // }
+
+      // function sumarMinutos(hora, minutos) {
+      //   const [horas, minutosInicio] = hora.split(":").map(Number);
+      //   const totalMinutos = horas * 60 + minutosInicio + minutos;
+      //   const horasResultado = Math.floor(totalMinutos / 60);
+      //   const minutosResultado = totalMinutos % 60;
+      //   return `${String(horasResultado).padStart(2, '0')}:${String(minutosResultado).padStart(2, '0')}`;
+      // }
+
+      // // Función para combinar los resultados
+      // function combinarResultados(resultados) {
+      //   return resultados.reduce((acumulador, resultado) => {
+      //     return acumulador.concat(resultado);
+      //   }, []);
+      // }
+
+      // // Calculando los intervalos de tiempo para cada usuario
+      // const resultadosIndividuales = response.map(usuario => {
+      //   return calcularIntervalos(usuario.horaIni, usuario.horaFin, usuario.duracionServicio, usuario);
+      // });
+      // // console.log('resultadosIndividuales', resultadosIndividuales.flat());
+      // // Combinando los resultados individuales en un solo array
+      // const intervalosDeTiempo = combinarResultados(resultadosIndividuales.flat());
+      // console.log('intervalosDeTiempo', intervalosDeTiempo);
+      // // // Filtrando los bloques del segundo servicio que coincidan con los intervalos calculados
+      // const bloquesFiltrados = servicio2Response.filter(bloque => {
+      //   return intervalosDeTiempo.some(intervalo => {
+      //     const [bloqueHoraInicio, bloqueMinutosInicio] = bloque.hora_inicio.split(":").map(Number);
+      //     const [bloqueHoraFin, bloqueMinutosFin] = bloque.hora_fin.split(":").map(Number);
+      //     const [intervaloHora, intervaloMinutos] = intervalo['horaInicioServicio'].split(":").map(Number);
+      //     return (
+      //       bloqueHoraInicio === intervaloHora &&
+      //       bloqueMinutosInicio === intervaloMinutos &&
+      //       bloqueHoraFin <= intervaloHora &&
+      //       bloqueMinutosFin <= intervaloMinutos
+      //     );
+      //   });
+      // });
+      // console.log('bloquesFiltrados', bloquesFiltrados);
 
 
-      const processed = resultadosIndividuales.map(item => {
-        // detalleServicio y duracionServicio
-        return (
-          {
-            ...item,
-            start: new Date(`${item.fechaInicio}T${item.horaIni}`).getTime(),
-            end: new Date(`${item.fechaFin}T${item.horaFin}`).getTime(),
-            className: "bg-purple",
-            title: item.detalleServicio || 'Disponible',
-          }
-        )
-      })
+
+      // const algo = servicio2Response.map(bloque => {
+      //   return intervalosDeTiempo.some(intervalo => {
+      //     const [bloqueHoraInicio, bloqueMinutosInicio] = bloque.hora_inicio.split(":").map(Number);
+      //     const [bloqueHoraFin, bloqueMinutosFin] = bloque.hora_fin.split(":").map(Number);
+      //     const [intervaloHora, intervaloMinutos] = intervalo['horaInicioServicio'].split(":").map(Number);
+      //     return (
+      //       bloqueHoraInicio === intervaloHora &&
+      //       bloqueMinutosInicio === intervaloMinutos &&
+      //       bloqueHoraFin >= intervaloHora &&
+      //       bloqueMinutosFin >= intervaloMinutos
+      //     );
+      //   });
+      // });
+
+
+
+
+
+      // // Formateando los datos resultantes
+      // const resultadoFinal = bloquesFiltrados.map(bloque => ({
+      //   horaInicio: bloque.hora_inicio
+      // }));
+
+      // console.log('RESULTADO FINAL', resultadoFinal);
+
+      // // const ordered = processed.sort((a, b) => a.start - b.start);
+      // // // console.log('ORDERED', ordered)
+      // // const bloquesCombinados = ordered.reduce((resultado, bloque) => {
+      // //   console.log('BLOQUE', bloque);
+      // //   const ultimoBloque = resultado[resultado.length - 1];
+      // //   if (ultimoBloque && ultimoBloque.end >= bloque.start) {
+      // //     ultimoBloque.end = Math.max(ultimoBloque.end, bloque.end);
+      // //   } else {
+      // //     resultado.push(bloque);
+      // //   }
+      // //   return resultado;
+      // // }, [])
+
+
+      // const processed = resultadosIndividuales.map(item => {
+      //   // detalleServicio y duracionServicio
+      //   return (
+      //     {
+      //       ...item,
+      //       start: new Date(`${item.fechaInicio}T${item.horaIni}`).getTime(),
+      //       end: new Date(`${item.fechaFin}T${item.horaFin}`).getTime(),
+      //       className: "bg-purple",
+      //       title: item.detalleServicio || 'Disponible',
+      //     }
+      //   )
+      // })
 
       // console.log('bloquesCombinados', bloquesCombinados);
-      setCalendario(resultadoFinal)
+      setCalendario(defaultEvents)
+      // setCalendario(resultadoFinal)
     }
     fetchData()
   }, [])

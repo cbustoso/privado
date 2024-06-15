@@ -47,9 +47,14 @@ const AddSchedule = ({ params }) => {
   // const label = { inputProps: { 'aria-label': 'Switch demo' } };
   useEffect(() => {
     const fetchProfesional = async () => {
-      const { especialidad: user } = await fetchSpeciality(params.id)
+      // const { especialidad: user } = await fetchSpeciality(params.id)
       // console.log('especialidad', user[0])
-      setProfesional(user[0])
+      // setProfesional(user[0])
+      setProfesional({
+        nombre: `Miguel González`,
+        especialidad: 'Psicología',
+      })
+      
     }
     fetchProfesional()
   }, [])
@@ -58,13 +63,20 @@ const AddSchedule = ({ params }) => {
     formState: { errors }
   } = useForm({
     defaultValues: async () => {
-      console.log('Params en add schedule', params.id);
-      const { especialidad: user } = await fetchSpeciality(params.id)
-      console.log('user', user);
+      // console.log('Params en add schedule', params.id);
+      // const { especialidad: user } = await fetchSpeciality(params.id)
+      // console.log('user', user);
+      // const obj = {
+      //   nombre: `${user[0].nombre} ${user[0].apellido}`,
+      //   especialidad: user[0].especialidad,
+      //   id: user[0].usuario_id,
+      //   horaIni: '00:00:00',
+      //   semanal: { dia: [] }
+      // }
       const obj = {
-        nombre: `${user[0].nombre} ${user[0].apellido}`,
-        especialidad: user[0].especialidad,
-        id: user[0].usuario_id,
+        nombre: `Miguel González`,
+        especialidad: 'Psicología',
+        id: 1,
         horaIni: '00:00:00',
         semanal: { dia: [] }
       }
@@ -93,39 +105,39 @@ const AddSchedule = ({ params }) => {
       dias: data.frecuencia === "semanal" ? data.semanal.dia : semana
     }
 
-    console.log('newData', newData);
+    // console.log('newData', newData);
     const dates = getDates(newData, fechas)
     let esValido = []
 
     if (dates.length === 0) {
-      console.log('CHAO NO SE PUEDE')
+      // console.log('CHAO NO SE PUEDE')
       esValido.push(false)
       return
     }
 
-    const promesas = []
-    dates.forEach(date => promesas.push(validateDates(date, data.horaIni, data.horaFin, data.id)))
+    // const promesas = []
+    // dates.forEach(date => promesas.push(validateDates(date, data.horaIni, data.horaFin, data.id)))
 
-    Promise.all(promesas)
-      .then(async (values) => {
-        console.log('VALUES', values);
-        if (values.includes(true)) {
-          console.log('GGGGGGGGGGG')
-        } else {
-          console.log('AT LAST!!!!')
+    // Promise.all(promesas)
+    //   .then(async (values) => {
+    //     // console.log('VALUES', values);
+    //     if (values.includes(true)) {
+    //       // console.log('GGGGGGGGGGG')
+    //     } else {
+          // console.log('AT LAST!!!!')
           try {
-            const req = await createSchedule(newData)
-            if (req.detalle === 'fail!!!') setSuccess('fail')
+            // const req = await createSchedule(newData)
+            // if (req.detalle === 'fail!!!') setSuccess('fail')
             setSuccess('success')
           } catch (error) {
             setSuccess('fail')
             console.log('ERRRR', err.message)
           }
-        }
-      })
-      .catch((reason) => {
-        console.log('reason', reason);
-      });
+      //   }
+      // })
+      // .catch((reason) => {
+      //   console.log('reason', reason);
+      // });
   })
 
   const duracion = [
@@ -160,7 +172,7 @@ const AddSchedule = ({ params }) => {
     <ProtectedPage level={ROL}>
       <Sidebar id='menu-item5' id1='menu-items5' activeClassName='add-shedule' />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">
@@ -965,7 +977,7 @@ const AddSchedule = ({ params }) => {
         </div>
         <div className="row">
           <div className="col-sm-12 col-lg-6">
-            {success === 'success'
+            {/* {success === 'success'
               ?
               <Alert
                 severity="success"
@@ -996,10 +1008,70 @@ const AddSchedule = ({ params }) => {
                   }}
                   spacing={2}
                 >
-                  Ha ocurrido un problema.{/*  {error} */}
+                  Ha ocurrido un problema.
                 </Alert>
                 : ''
-            }
+            } */}
+
+{success === 'success'
+          ?
+          <div  style={{
+            height: '100%',
+            position: 'fixed',
+            top: '0',
+            width: '100%',
+            zIndex: 99999,
+            background: '#00000080'
+          }}>
+            {/* <div className="col-sm-12 col-lg-6"> */}
+            <Alert
+              severity="success"
+              onClose={() => { setSuccess('initial') }}
+              sx={{
+                zIndex: 'tooltip',
+                position: 'absolute',
+                left: '30%',
+                width: '50%',
+                padding: '50px',
+                bottom: '50vh'
+              }}
+              spacing={2}
+            >
+              Se ha agregado la disponibilidad horario con éxito.
+            </Alert>
+            {/* </div> */}
+          </div>
+
+          : success === 'fail'
+            ?
+            <div className="row" style={{
+              height: '100%',
+              position: 'fixed',
+              top: '0',
+              width: '100%',
+              zIndex: 99999,
+              background: '#00000080'
+            }}>
+              <div className="col-sm-12 col-lg-6">
+                <Alert
+                  severity="error"
+                  onClose={() => { setSuccess('initial') }}
+                  sx={{
+                    zIndex: 'tooltip',
+                    position: 'absolute',
+                    left: '30%',
+                    width: '50%',
+                    padding: '50px',
+                    bottom: '50vh'
+                  }}
+                  spacing={2}
+                >
+                  Ha ocurrido un problema. {error}
+                </Alert>
+              </div>
+            </div>
+            : ''
+        }
           </div>
         </div>
       </>

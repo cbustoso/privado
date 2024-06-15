@@ -10,12 +10,13 @@ import { SectionProvider } from "@/context/SectionContext";
 import { getServerSession } from "next-auth";
 const inter = Inter({ subsets: ["latin"] });
 import { blogs } from "@/utils/blogs";
-import Hotjar from '@hotjar/browser';
+// import Hotjar from '@hotjar/browser';
+import GoogleReCaptchaWrapper from "@/providers/GoogleCaptchaWrapper";
 
 const siteId = 3920275;
-const hotjarVersion = 6;
+// const hotjarVersion = 6;
 
-Hotjar.init(siteId, hotjarVersion);
+// Hotjar.init(siteId, hotjarVersion);
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -44,7 +45,7 @@ export default async function RootLayout({ children }) {
 
         <Script src="https://kit.fontawesome.com/7a6fedca6c.js" ></Script>
         <Script id="fontawesome" src="https://kit.fontawesome.com/a790242b27.js" ></Script>
-        <Script id="hotjar" strategy="afterInteractive" dangerouslySetInnerHTML={{
+        {/* <Script id="hotjar" strategy="afterInteractive" dangerouslySetInnerHTML={{
           __html:
             `(function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -54,18 +55,20 @@ export default async function RootLayout({ children }) {
                 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                 a.appendChild(r);
             })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')`
-        }}></Script>
+        }}></Script> */}
       </head>
       <body className={`${roboto_init.variable}`}>
         <AuthProvider session={session}>
-          <SectionProvider>
-            <TanstackProvider>
-              <Header />
-              {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
+          <GoogleReCaptchaWrapper>
+            <SectionProvider>
+              <TanstackProvider>
+                <Header />
+                {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
 
-              {children}
-            </TanstackProvider>
-          </SectionProvider>
+                {children}
+              </TanstackProvider>
+            </SectionProvider>
+          </GoogleReCaptchaWrapper>
         </AuthProvider>
         <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script>
       </body>

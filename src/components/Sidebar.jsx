@@ -42,7 +42,7 @@ const Sidebar = (props) => {
   return (
     <ProtectedPage level={ROL}>
 
-      <div className="sidebar" id="sidebar">
+      <div className="sidebar mt-5" id="sidebar">
         {/* <Scrollbars
           autoHide
           autoHideTimeout={1000}

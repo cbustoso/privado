@@ -1,19 +1,21 @@
 "use client"
 import { useState, useEffect } from "react";
-// import { Link, redirect, Navigate } from "react-router-dom";
-import { useForm, Controller } from 'react-hook-form';
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react"
+
+import { useForm } from 'react-hook-form';
+import axios from "axios";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+
 import { AuthData } from "../../providers/AuthWrapper";
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import { useMediaQuery } from "@mui/material";
 
 import { fetchUserMailAndPass } from "../../services/UsersServices";
 
+import { useMediaQuery } from "@mui/material";
 import { logo } from "../../components/imagepath";
 import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 
-import { signIn } from "next-auth/react"
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState('estudiantes');
@@ -21,11 +23,14 @@ const Login = () => {
   const [isInvalid, setIsInvalid] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const matches = useMediaQuery('(min-width:600px)');
+  const [submit, setSubmit] = useState('')
 
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm()
   const { login } = AuthData()
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -33,6 +38,37 @@ const Login = () => {
 
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('DATA', data);
+    setSubmit('')
+
+//     if (!executeRecaptcha) {
+//       console.log('NO DISPONIBLE', executeRecaptcha)
+//       return
+//     }
+
+//     const gRecaptchaToken = await executeRecaptcha('inquirySubmit')
+// console.log('gRecaptchaToken', gRecaptchaToken);
+//     const response = await axios({
+//       method: "post",
+//       url: "/api/recaptchaSubmit",
+//       data: {
+//         gRecaptchaToken,
+//       },
+//       headers: {
+//         Accept: "application/json, text/plain, */*",
+//         "Content-Type": "application/json",
+//       }
+//     })
+
+//     if (response?.data?.success === true) {
+//       console.log(`Success with score: ${response?.data?.score}`);
+//       setSubmit('Recaptcha Verified!!')
+//     } else {
+//       console.log(`Failure with score: ${response?.data?.score}`);
+//       setSubmit('Feiled to Verify recaptcha! You must be a robot!')
+//     }  
+
+
+    console.log('HOLA');
     try {
       const res = await signIn('credentials', { callbackUrl: '/citas' })
       console.log(res);
@@ -51,11 +87,11 @@ const Login = () => {
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  // const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  if (!siteKey) {
-    throw new Error('ReCAPTCHA site key is not defined');
-  }
+  // if (!siteKey) {
+  //   throw new Error('ReCAPTCHA site key is not defined');
+  // }
   // if(isLoggedIn) return <Navigate to={'/appoinmentlist'}/>
   const handleSignIn = async () => {
     try {
@@ -103,7 +139,7 @@ const Login = () => {
             {/* /Login logo */}
             {/* Login Content */}
 
-            <div className="col-12 col-lg-6 login-wrap-bg" style={{padding: '15px 20px 15px'}}>
+            <div className="col-12 col-lg-6 login-wrap-bg" style={{ padding: '15px 20px 15px' }}>
               <div className="login-wrapper">
                 <div className="loginbox"
                   style={{
@@ -122,7 +158,7 @@ const Login = () => {
                       <section className="comp-section" id="comp_tabs">
                         <div className="row">
                           <div className="col-12">
-                            <div className="card" style={{ border: 'none'}}>
+                            <div className="card" style={{ border: 'none' }}>
                               <div className="card-body">
                                 {/* <h4 className="card-title">Login</h4> */}
                                 <h3 className="section-title">Login</h3>
@@ -241,8 +277,8 @@ const Login = () => {
                                           {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
                                         </span>
                                       </div>
-                                      <GoogleReCaptchaProvider
-                                        reCaptchaKey={siteKey} />
+                                      {/* <GoogleReCaptchaProvider
+                                        reCaptchaKey={siteKey} /> */}
 
                                       <div className="forgotpass">
                                         {/* <div className="remember-me">

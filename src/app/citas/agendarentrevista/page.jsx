@@ -76,6 +76,7 @@ const AddFirstAppoinments = () => {
   const [time, setTime] = useState('')
   const [allDays, setAllDays] = useState([])
   const [checked, setChecked] = useState(true);
+  const [menuPortalTarget, setMenuPortalTarget] = useState(null);
   const [rut, setRut] = useState('');
   // fechas siguiente
   const [indiceDias, setIndiceDias] = useState(0);
@@ -90,35 +91,45 @@ const AddFirstAppoinments = () => {
   const { register, handleSubmit, watch, control,
     formState: { errors }
   } = useForm({
-    defaultValues: async () => fetchUsers().then(response => {
-      // console.log('response', response);
-      if (session?.user) {
-        // console.log('session?.user', session?.user)
-        const patient = response.users.filter(user => user.email === session?.user.email)
-        // console.log('SESSION async', session);
-        const obj = {
-          name: patient[0].nombre,
-          lastName: patient[0].apellido,
-          email: session.user.email,
-          birthday: dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD'),
-          genero: patient[0].genero,
-          mobile: patient[0].telefono
+    defaultValues: {
+      name: 'Juan',
+      lastName: 'Perez',
+      email: 'juanperez@udp.cl',
+      birthday: '12/12/2002',
+      genero: 'hombre',
+      mobile: '987654321'
 
-        }
-        console.log('obj', patient);
-        return obj
-      } else {
-        console.log('No encuentra al usuario')
-      }
-    })
-      .catch(error =>
-        console.log('err', error)
-      )
+    }
+    /*  async () => fetchUsers().then(response => {
+       // console.log('response', response);
+       if (session?.user) {
+         // console.log('session?.user', session?.user)
+         const patient = response.users.filter(user => user.email === session?.user.email)
+         // console.log('SESSION async', session);
+         const obj = {
+           name: patient[0].nombre,
+           lastName: patient[0].apellido,
+           email: session.user.email,
+           birthday: dayjs(patient[0].fecha_nacimiento).format('YYYY-MM-DD'),
+           genero: patient[0].genero,
+           mobile: patient[0].telefono
+ 
+         }
+         console.log('obj', patient);
+         return obj
+       } else {
+         console.log('No encuentra al usuario')
+       }
+     })
+       .catch(error =>
+         console.log('err', error)
+       ) */
   })
 
   useEffect(() => {
     fetchData()
-    fetchDoctors()
+    // fetchDoctors()
+    setMenuPortalTarget(document.body);
   }, [])
 
   const selectedRegion = watch('region')
@@ -156,12 +167,46 @@ const AddFirstAppoinments = () => {
     setDate('')
     setTime('')
     try {
-      const { users: byProf } = await fetchScheduleByAvailability(e.id)
-      const { bloques } = await fetchScheduleByUser(e.id)
+      // const { users: byProf } = await fetchScheduleByAvailability(e.id)
+      // const { bloques } = await fetchScheduleByUser(e.id)
 
-      const bloque = obtenerDias(byProf)
-      setAllDays(byProf)
-      setDays(bloque)
+      // const bloque = obtenerDias(byProf)
+      // setAllDays(byProf)
+      // setDays(bloque)
+      setDays([
+        {
+          fechaInicio: '2024-06-20',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-21',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-24',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-25',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-26',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-27',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-06-28',
+          id_user: 2
+        },
+        {
+          fechaInicio: '2024-07-01',
+          id_user: 2
+        },
+      ])
     } catch (error) {
       console.log('Error: ', error)
     }
@@ -206,11 +251,11 @@ const AddFirstAppoinments = () => {
     e.preventDefault()
     // console.log('handle.days', fecha, id)
     const fechaMod = dayjs(fecha).format('YYYY-MM-DD')
-    console.log('fechamod', fecha);
+    // console.log('fechamod', fecha);
     try {
-      const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
-      console.log('BLOQUES', bloques)
-      console.log('allDays', allDays)
+      // const { bloques } = await fetchScheduleByDate(parseInt(id), fechaMod)
+      // console.log('BLOQUES', bloques)
+      // console.log('allDays', allDays)
       setDate(fechaMod)
       // const newBloques = agruparBloquesPorHora(bloques)
       const selectedDays = allDays.filter(item => item.fechaInicio === fechaMod)
@@ -221,19 +266,50 @@ const AddFirstAppoinments = () => {
       })
 
       const flatted = newBloques.flat()
-      console.log('flatted', flatted);
+      // console.log('flatted', flatted);
 
-      const horasDisponibles = flatted.filter(hora => {
-        // Busca la disponibilidad correspondiente en el segundo array
-        console.log(('HORA', hora));
-        const disponibilidadHora = bloques.find(item => {
-          return ((item.hora_inicio).length === 7 ? `0${item.hora_inicio}` : item.hora_inicio) === hora.horaInicioBloque
-        });
-        // Si la disponibilidadHora existe y está disponible, devuelve true (se incluirá en el resultado)
-        return disponibilidadHora && disponibilidadHora.disponible === 1;
-      });
+      // const horasDisponibles = flatted.filter(hora => {
+      //   // Busca la disponibilidad correspondiente en el segundo array
+      //   console.log(('HORA', hora));
+      //   const disponibilidadHora = bloques.find(item => {
+      //     return ((item.hora_inicio).length === 7 ? `0${item.hora_inicio}` : item.hora_inicio) === hora.horaInicioBloque
+      //   });
+      //   // Si la disponibilidadHora existe y está disponible, devuelve true (se incluirá en el resultado)
+      //   return disponibilidadHora && disponibilidadHora.disponible === 1;
+      // });
+      const horasDisponibles = [
+        {
+          id: 1,
+          horaInicioBloque: '10:30'
+        },
+        {
+          id: 2,
+          horaInicioBloque: '11:30'
+        },
+        {
+          id: 3,
+          horaInicioBloque: '12:30'
+        },
+        {
+          id: 4,
+          horaInicioBloque: '14:30'
+        },
+        {
+          id: 5,
+          horaInicioBloque: '15:30'
+        },
+        {
+          id: 6,
+          horaInicioBloque: '16:30'
+        },
+        {
+          id: 7,
+          horaInicioBloque: '17:30'
+        },
+      ]
 
-      console.log('horasDisponibles', horasDisponibles);
+      // console.log('horasDisponibles', horasDisponibles);
+
       setHours(horasDisponibles)
     } catch (error) {
       console.log(error)
@@ -253,7 +329,21 @@ const AddFirstAppoinments = () => {
   const handleClose = () => setOpen(false);
 
   const fetchData = async () => {
-    const { users } = await fetchDoctors()
+    // const { users } = await fetchDoctors()
+    const users = [
+      {
+        id: 0,
+        nombre: 'Miguel',
+        apellido: 'González',
+        email: 'miguelgonzález@udp.cl'
+      },
+      {
+        id: 1,
+        nombre: 'Ximena',
+        apellido: 'Alarcón',
+        email: 'ximenaalarcon@udp.cl'
+      }
+    ]
     const docs = users.map((doc, i) => {
       return {
         value: i + 2,
@@ -264,12 +354,12 @@ const AddFirstAppoinments = () => {
       }
     })
 
-    console.log('docs', docs);
+    // console.log('docs', docs);
     setDoctor(docs)
   }
 
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
+    // console.log(date, dateString);
     setIsClicked(true);
   };
   const loadFile = (event) => {
@@ -277,41 +367,41 @@ const AddFirstAppoinments = () => {
   };
 
   const onSubmit = handleSubmit(async data => {
-    console.log('data', data);
+    // console.log('data', data);
     setSuccess('initial')
     const patientName = watch("name")
     const patientLastname = watch("lastName")
-    const patients = await fetchUsers()
+    // const patients = await fetchUsers()
 
     console.log('session.user.email', session.user.email);
-    const patient = patients.users.filter(user =>
-      user.email === session.user.email
-    )
-    const body = {
-      ...data,
-      "patient_id": patient[0].id,
-      "fecha": date,
-      "hora": time
-    }
+    // const patient = patients.users.filter(user =>
+    //   user.email === session.user.email
+    // )
+    // const body = {
+    //   ...data,
+    //   "patient_id": patient[0].id,
+    //   "fecha": date,
+    //   "hora": time
+    // }
 
     try {
-      const appointment = await createAppointment(body)
-      if (appointment.detalle === 'fail!!!') setSuccess('fail')
+      // const appointment = await createAppointment(body)
+      // if (appointment.detalle === 'fail!!!') setSuccess('fail')
       setSuccess('success')
       setOpenBackdrop(true)
     } catch (err) {
       setSuccess('fail')
-      console.log('ERRRR', err.message)
-      if (err.message === "Cannot read properties of undefined (reading 'id')") {
-        setError(`No se encontró al paciente`);
-      }
+      // console.log('ERRRR', err.message)
+      // if (err.message === "Cannot read properties of undefined (reading 'id')") {
+      //   setError(`No se encontró al paciente`);
+      // }
     } finally {
       setOpen(false)
     }
   })
 
   const motivo_consulta_seleccionado = watch('motivo_consulta')
-  console.log('motivo_consulta_seleccionado')
+  // console.log('motivo_consulta_seleccionado')
 
   const gender = [
     { value: 1, label: "Hombre" },
@@ -379,7 +469,7 @@ const AddFirstAppoinments = () => {
         activeClassName="add-first-appoinment"
       />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">
@@ -569,7 +659,7 @@ const AddFirstAppoinments = () => {
                                       defaultValue={selectedOption}
                                       onChange={onChange}
                                       options={gender}
-                                      menuPortalTarget={document.body}
+                                      menuPortalTarget={menuPortalTarget}
                                       styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                       id="genero"
                                       components={{
@@ -659,7 +749,7 @@ const AddFirstAppoinments = () => {
                                       defaultValue={selectedOption}
                                       onChange={onChange}
                                       options={career}
-                                      // menuPortalTarget={document.body}
+                                      menuPortalTarget={menuPortalTarget}
                                       styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                       id="career"
                                       components={{
@@ -731,7 +821,7 @@ const AddFirstAppoinments = () => {
                                       defaultValue={selectedOption}
                                       onChange={onChange}
                                       options={regiones}
-                                      // menuPortalTarget={document.body}
+                                      menuPortalTarget={menuPortalTarget}
                                       styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                       id="select-region"
                                       components={{
@@ -785,7 +875,7 @@ const AddFirstAppoinments = () => {
                                       defaultValue={selectedOption}
                                       onChange={onChange}
                                       options={comunas[selectedRegion?.name]}
-                                      // menuPortalTarget={document.body}
+                                      menuPortalTarget={menuPortalTarget}
                                       styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                       id="select-region"
                                       components={{
@@ -999,7 +1089,7 @@ const AddFirstAppoinments = () => {
                                     defaultValue={selectedOption}
                                     onChange={onChange}
                                     options={motivo_consulta}
-                                    // menuPortalTarget={document.body}
+                                    menuPortalTarget={menuPortalTarget}
                                     styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                     id="motivo"
                                     components={{
@@ -1210,14 +1300,20 @@ const AddFirstAppoinments = () => {
           <Modal open={open} handleClose={handleClose} onClick={onSubmit} errors={errors} />
         </div>
 
-        <SimpleBackdrop
+        {/*  <SimpleBackdrop
           open={openBackdrop}
           handleClose={handleCloseBackdrop}
-        />
-
+        /> */}
         {success === 'success'
           ?
-          <div >
+          <div  style={{
+            height: '100%',
+            position: 'fixed',
+            top: '0',
+            width: '100%',
+            zIndex: 99999,
+            background: '#00000080'
+          }}>
             {/* <div className="col-sm-12 col-lg-6"> */}
             <Alert
               severity="success"
@@ -1228,18 +1324,25 @@ const AddFirstAppoinments = () => {
                 left: '30%',
                 width: '50%',
                 padding: '50px',
-                top: '50vh'
+                bottom: '50vh'
               }}
               spacing={2}
             >
-              La cita se ha creado con éxito.
+              La cita se ha creado con éxito. Revisa tu bandeja de entrada para confirmarla.
             </Alert>
             {/* </div> */}
           </div>
 
           : success === 'fail'
             ?
-            <div className="row">
+            <div className="row" style={{
+              height: '100%',
+              position: 'fixed',
+              top: '0',
+              width: '100%',
+              zIndex: 99999,
+              background: '#00000080'
+            }}>
               <div className="col-sm-12 col-lg-6">
                 <Alert
                   severity="error"
@@ -1250,7 +1353,7 @@ const AddFirstAppoinments = () => {
                     left: '30%',
                     width: '50%',
                     padding: '50px',
-                    top: '50vh'
+                    bottom: '50vh'
                   }}
                   spacing={2}
                 >
@@ -1261,6 +1364,7 @@ const AddFirstAppoinments = () => {
             : ''
         }
       </>
+
     </ProtectedPage>
   );
 };

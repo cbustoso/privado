@@ -37,8 +37,6 @@ export const AuthWrapper = () => {
   return (
     <AuthContext.Provider value={{user, login, logout}}>
       <>
-        {/* <Headerupd /> */}
-        {/* <Approuter /> */}
         <RootLayout />
       </>
     </AuthContext.Provider>

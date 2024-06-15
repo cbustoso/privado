@@ -19,6 +19,60 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ProtectedPage from '@/components/ProtectedRoutes';
 
+const citas = [
+  {
+    nombre_alumno: 'Juan Perez',
+    nombre_profesional: 'Miguel González',
+    especialidad: 'Psicología',
+    telefono_alumno: '987654321',
+    mail_alumno: 'miguelgonzalez@udp.cl',
+    fecha: '12/07/2024',
+    hora: '09:30',
+    estado: 'Confirmada'
+  }, 
+  {
+    nombre_alumno: 'Juan Perez',
+    nombre_profesional: 'Miguel González',
+    especialidad: 'Psicología',
+    telefono_alumno: '987654321',
+    mail_alumno: 'miguelgonzalez@udp.cl',
+    fecha: '19/07/2024',
+    hora: '09:30',
+    estado: 'Pendiente'
+  },
+  {
+    nombre_alumno: 'Juan Perez',
+    nombre_profesional: 'Miguel González',
+    especialidad: 'Psicología',
+    telefono_alumno: '987654321',
+    mail_alumno: 'miguelgonzalez@udp.cl',
+    fecha: '26/07/2024',
+    hora: '09:30',
+    estado: 'Pendiente'
+  },
+  {
+    nombre_alumno: 'Juan Perez',
+    nombre_profesional: 'Miguel González',
+    especialidad: 'Psicología',
+    telefono_alumno: '987654321',
+    mail_alumno: 'miguelgonzalez@udp.cl',
+    fecha: '02/08/2024',
+    hora: '09:30',
+    estado: 'Pendiente'
+  },
+  {
+    nombre_alumno: 'Juan Perez',
+    nombre_profesional: 'Miguel González',
+    especialidad: 'Psicología',
+    telefono_alumno: '987654321',
+    mail_alumno: 'miguelgonzalez@udp.cl',
+    fecha: '09/07/2024',
+    hora: '09:30',
+    estado: 'Pendiente'
+  }
+]
+
+
 const AppoinmentList = () => {
   const ROL = ["alumno"]
   const { data: session } = useSession()
@@ -32,8 +86,9 @@ const AppoinmentList = () => {
   const matches = useMediaQuery('(min-width:600px)');
 
   useEffect(() => {
-    fetchAppointments(setAppointments)
-    fetchAppointments(setResults)
+    // fetchAppointments(setAppointments)
+    // fetchAppointments(setResults)
+    setResults()
   }, [])
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -80,25 +135,28 @@ const AppoinmentList = () => {
           </h2>
         </>
       ),
-      key: 'nombre_alumno'
+      key: 'nombre_alumno',
     },
     {
       title: "Profesional",
       dataIndex: "nombre_profesional",
       sorter: (a, b) => a['nombre_profesional'].length - b['nombre_profesional'].length,
-      key: 'nombre_profesional'
+      key: 'nombre_profesional',
+      responsive: ['md'],
     },
     {
       title: "Especialidad",
       dataIndex: "especialidad",
       sorter: (a, b) => a.especialidad.length - b.especialidad.length,
-      key: 'especialidad'
+      key: 'especialidad',
+      responsive: ['md'],
     },
     {
       title: "Teléfono",
       dataIndex: "telefono_alumno",
       sorter: (a, b) => a['telefono_alumno'].length - b['telefono_alumno'].length,
-      key: 'telefono_alumno'
+      key: 'telefono_alumno',
+      responsive: ['md'],
     },
     {
       title: "Correo electrónico",
@@ -109,26 +167,31 @@ const AppoinmentList = () => {
           <Link href="#">{record.mail_alumno}</Link>
         </>
       ),
-      key: 'mail_alumno'
+      key: 'mail_alumno',
+      responsive: ['md'],
     }, {
       title: "Día",
       dataIndex: "fecha",
       sorter: (a, b) => a['fecha'].length - b['fecha'].length,
-      key: 'fecha'
+      key: 'fecha',
+      responsive: ['md'],
     }, {
       title: "Hora",
       dataIndex: "hora",
       sorter: (a, b) => a['hora'].length - b['hora'].length,
-      key: 'hora'
+      key: 'hora',
+      responsive: ['md'],
     }, {
       title: "Estado",
       dataIndex: "estado",
       sorter: (a, b) => a.estado.length - b.estado.length,
-      key: 'estado'
+      key: 'estado',
+      responsive: ['lg'],
     }, {
       title: "",
       dataIndex: "field",
       fixed: 'right',
+      responsive: ['md'],
       render: (text, record) => (
         <>
           <div className="text-end">
@@ -181,7 +244,7 @@ const AppoinmentList = () => {
       {/* <Headerudp /> */}
       <Sidebar id='menu-item4' id1='menu-items4' activeClassName='appoinment-list' />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">
@@ -214,7 +277,7 @@ const AppoinmentList = () => {
                             {matches && <h3>Lista de citas </h3>}
                             <div className="doctor-search-blk">
                               <div className="top-nav-search table-search-blk col-6">
-                                <form>
+                                <form style={{width: `${matches ? '270px' : '150px' } ` }}>
                                   <input
                                     type="text"
                                     className="form-control"
@@ -229,6 +292,7 @@ const AppoinmentList = () => {
                                   </Link>
                                 </form>
                               </div>
+                            </div>
                               <div className="add-group">
                                 <Link href="/citas/agendarcita"
                                   className="btn btn-primary add-pluss ms-2"
@@ -243,7 +307,6 @@ const AppoinmentList = () => {
                                   <img src={refreshicon.src} alt="#" />
                                 </Link>
                               </div>
-                            </div>
                           </div>
                         </div>
                         {/* <div className="col-auto text-end float-end ms-auto download-grp">
@@ -265,7 +328,7 @@ const AppoinmentList = () => {
                     <div className="table-responsive patient-list">
                       <Table
                         pagination={{
-                          total: results.length,
+                          total: citas.length,
                           showTotal: (total, range) =>
                             `Mostrando ${range[0]} a ${range[1]} de ${total} entradas`,
                           //showSizeChanger: true,
@@ -273,7 +336,7 @@ const AppoinmentList = () => {
                           itemRender: itemRender,
                         }}
                         columns={columns}
-                        dataSource={results}
+                        dataSource={citas}
 
                         rowSelection={rowSelection}
                         rowKey={(record) => record.id_cita}
