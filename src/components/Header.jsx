@@ -64,7 +64,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0 , height: matches? '112px' : '98px', justifyContent: matches ?'center' : 'flex-end'}}>
+    <AppBar position="fixed" style={{ background: 'white', color: 'black', margin: 0, height: matches ? '112px' : '98px', justifyContent: matches ? 'center' : 'flex-end' }}>
       <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -188,16 +188,20 @@ const Header = () => {
                 </>
                 : session.user.picture ?
                   <button className="btn">
-                    <img
-                      className="avatar-img rounded-circle"
-                      src={session.user.picture}
-                      alt="avatar"
-                      height={40}
-                    />
+                    <Link href="/citas">
+                      <img
+                        className="avatar-img rounded-circle"
+                        src={session.user.picture}
+                        alt="avatar"
+                        height={40}
+                      />
+                    </Link>
                     {/* {session.user.name} */}
                   </button>
                   :
-                  <FaUserCircle style={{height:'40px'}}/>
+                  <Link href="/citas">
+                    <FaUserCircle style={{ height: '40px' }} />
+                  </Link>
             }
 
             {/* </IconButton> */}

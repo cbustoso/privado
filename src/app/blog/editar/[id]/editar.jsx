@@ -50,7 +50,7 @@ const Editblog = () => {
         <Sidebar id='menu-item11' id1='menu-items11' activeClassName='edit-blog' />
         {/* page-wrapper-start  */}
         <>
-          <div className="page-wrapper">
+          <div className="page-wrapper mt-5 pt-5">
 
             <div className="content">
               {/* Page Header */}

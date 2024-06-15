@@ -126,7 +126,7 @@ const AddDoctor = () => {
       {/* <Headerudp /> */}
       <Sidebar id="menu-item1" id1="menu-items1" activeClassName="add-doctor" />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">

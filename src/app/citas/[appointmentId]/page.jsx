@@ -146,7 +146,7 @@ const EditAppoinments = ({ params }) => {
         activeClassName="edit-appoinment"
       />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">
