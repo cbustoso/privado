@@ -30,17 +30,47 @@ const DoctorList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { users } = await fetchDoctors()
+      // const { users } = await fetchDoctors()
 
-      const usersAndSPeciality = users.map(async user => {
-        const result = await fetchSpeciality(user.id)
-        const newUser = {
-          ...user,
-          especialidad: result.especialidad.length === 0 ? 'Psicologia' : result.especialidad[0].especialidad
-        }
-        return newUser
-      })
-      const newUsers = await Promise.all(usersAndSPeciality)
+      // const usersAndSPeciality = users.map(async user => {
+      //   const result = await fetchSpeciality(user.id)
+      //   const newUser = {
+      //     ...user,
+      //     especialidad: result.especialidad.length === 0 ? 'Psicologia' : result.especialidad[0].especialidad
+      //   }
+      //   return newUser
+      // })
+      // const newUsers = await Promise.all(usersAndSPeciality)
+
+      const newUsers = [
+        {
+          id: 10,
+          nombre: 'Miguel',
+          apellido: 'González',
+          especialidad: 'Psicología',
+          telefono: '912345678',
+          email: 'miguelgonzalez@udp.cl',
+          status: 'Activo'
+        },
+        {
+          id: 11,
+          nombre: 'María',
+          apellido: 'Flores',
+          especialidad: 'Psicología',
+          telefono: '912345678',
+          email: 'mariaflores@udp.cl',
+          status: 'Activo'
+        },
+        {
+          id: 12,
+          nombre: 'Felipe',
+          apellido: 'Perez',
+          especialidad: 'Psicología',
+          telefono: '912345678',
+          email: 'felipeperez@udp.cl',
+          status: 'Activo'
+        },
+      ]
       setDoctors(newUsers)
       setResults(newUsers)
     }
@@ -71,10 +101,41 @@ const DoctorList = () => {
     setResults(doctors)
   }
 
+  const psicologos = [
+    {
+      id: 10,
+      nombre: 'Miguel',
+      apellido: 'González',
+      especialidad: 'Psicología',
+      telefono: '912345678',
+      email: 'miguelgonzalez@udp.cl',
+      status: 'Activo'
+    },
+    {
+      id: 11,
+      nombre: 'María',
+      apellido: 'Flores',
+      especialidad: 'Psicología',
+      telefono: '912345678',
+      email: 'mariaflores@udp.cl',
+      status: 'Activo'
+    },
+    {
+      id: 12,
+      nombre: 'Felipe',
+      apellido: 'Perez',
+      especialidad: 'Psicología',
+      telefono: '912345678',
+      email: 'felipeperez@udp.cl',
+      status: 'Activo'
+    },
+  ]
+
   const columns = [
     {
       title: "Nombre",
       dataIndex: "nameDoctor",
+      fixed: 'left',
       render: (text, record) => (
         <>
           <h2 className="profile-image">
@@ -127,12 +188,12 @@ const DoctorList = () => {
       sorter: (a, b) => a.status.length - b.status.length,
       render: (text, record) => (
         <div>
-          {record.status === "activo" && (
+          {record.status === "Activo" && (
             <span className="custom-badge status-green">
               {record.status}
             </span>
           )}
-          {record.status === "inactivo" && (
+          {record.status === "Inactivo" && (
             <span className="custom-badge status-pink">
               {record.status}
             </span>
@@ -143,6 +204,7 @@ const DoctorList = () => {
     {
       title: "",
       dataIndex: "FIELD8",
+      fixed: 'right',
       render: (text, record) => (
         <>
           <div className="text-end">
@@ -194,7 +256,7 @@ const DoctorList = () => {
       {/* <Headerudp /> */}
       <Sidebar id='menu-item1' id1='menu-items1' activeClassName='doctor-list' />
       <>
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-5 pt-5">
           <div className="content">
             {/* Page Header */}
             <div className="page-header">
@@ -287,7 +349,7 @@ const DoctorList = () => {
                           itemRender: itemRender,
                         }}
                         columns={columns}
-                        dataSource={results}
+                        dataSource={psicologos}
 
                         rowSelection={rowSelection}
                         rowKey={(record) => record.id}
