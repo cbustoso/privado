@@ -313,3 +313,10 @@ export { default as profesional01} from "../assets/img/homepage/sicologa.png"
 export { default as bot_icon } from "../assets/img/bot_salud_mental.png"
 
 export { default as map} from "../assets/img/mapa-udp.png"
+
+export {default as blog0101 } from "../assets/img/blog/ansiedad01.jpg"
+export {default as blog0102 } from "../assets/img/blog/ansiedad02.jpg"
+export {default as blog0201 } from "../assets/img/blog/suicidio01.jpg"
+export {default as blog0202 } from "../assets/img/blog/suicidio02.jpg"
+export {default as blog0301 } from "../assets/img/blog/drogas01.jpg"
+export {default as blog0302 } from "../assets/img/blog/drogas02.jpg"
