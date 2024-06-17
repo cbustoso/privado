@@ -380,7 +380,7 @@ const ImageSlider = ({ innerRef }) => {
                       }}> Ver más + </button>
                   </Link>
                   <img
-                    src={slides[currentIndex].imagenes[0]}
+                    src={slides[currentIndex].imagen}
                     alt=""
                     width={'90%'}
                     height={250}
