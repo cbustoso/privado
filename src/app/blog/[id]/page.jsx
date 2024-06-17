@@ -4,7 +4,7 @@
 import { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import TextEditor from '../../../components/TextEditor';
+// import TextEditor from '../../../components/TextEditor';
 import Sidebar from '../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import Select from "react-select";
@@ -26,7 +26,7 @@ import { FaDownload } from 'react-icons/fa';
 const card = (item) => (
   <Fragment>
     <CardContent sx={{ padding: 0, bgcolor: '#F1F1F1', height: '17rem' }}>
-      <Typography variant="h5" component="div"
+      <Typography variant="h5" component="div" className='sailec-medium'
         sx={{
           bgcolor: "#FABB00",
           height: '6rem',
@@ -35,7 +35,8 @@ const card = (item) => (
       >
         {item.titulo}
       </Typography>
-      <Typography variant="body2" sx={{
+      <Typography variant="body2" className='lato'
+        sx={{
         padding: '16px 24px 16px 24px',
         fontSize: '18px',
         lineHeight: '28px',
@@ -70,7 +71,8 @@ const card = (item) => (
 );
 
 const Blogdetails = ({ params }) => {
-  const [blog, setBlog] = useState({})
+  const [blog, setBlog] = useState(blogs[params.id])
+  // const [blog, setBlog] = useState({})
   const matches = useMediaQuery('(min-width:600px)');
   const router = useRouter()
 
@@ -80,13 +82,13 @@ const Blogdetails = ({ params }) => {
     //   setBlog(bloques[0])
     // }
     // fetchData()
-    setBlog(blogs[params.id])
+    // setBlog(blogs[params.id])
   }, [])
 
   return (
     <div>
       <>
-        <div className="main-wrapper sailec">
+        <div className="main-wrapper main-blog sailec">
           {matches && <div style={{
             marginTop: '100px',
             height: '520px',
@@ -94,7 +96,7 @@ const Blogdetails = ({ params }) => {
           }}>
             <img
               alt="#"
-              src={blog.imagen}
+              src={blog.imagenes[0]}
               width={'100%'}
               style={{
                 backgroundPosition: 'center'
@@ -173,16 +175,16 @@ const Blogdetails = ({ params }) => {
                       </div>
 
                       <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
-                        <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
-                          <img src={blog.imagen} alt="" style={{ width: '100%' }} />
-                        </div>
+                        {/* <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
+                          <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
+                        </div> */}
 
                         {blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
                       </div>
                     </article>
 
                     <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >
-                      {console.log('leblog', blog.downloads)}
+                      {/* {console.log('leblog', blog.downloads)} */}
                       <div className="col-12">
                         <h3 className='sailec-medium' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                       </div>

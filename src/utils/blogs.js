@@ -17,6 +17,8 @@ export const blogs = [
 <h2>Desarrolla Habilidades de Resistencia</h2>
 <p>Aprender a decir "no" es una habilidad crucial. En muchas situaciones, la presión social ejerce una gran influencia sobre el consumo de sustancias. Tener estrategias para manejar estas situaciones puede ser muy útil. Practica respuestas y mantén una postura firme sobre tus decisiones personales sin sentirte obligado a ceder.</p>
 
+<img src='${blog0302.src}' alt="" width="100%" class="blog-img"/>
+
 <h2>Apóyate en Redes Positivas</h2>
 <p>El apoyo social es un factor protector clave contra el consumo de sustancias. Rodéate de amigos y compañeros que respeten tus decisiones y compartan tus valores. Participa en actividades y clubs universitarios que promuevan un estilo de vida saludable. Según estudios, los estudiantes que tienen un sistema de apoyo sólido son menos propensos a participar en el consumo de drogas y alcohol.</p>
 
@@ -35,7 +37,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagen: blog0301.src,
+    imagenes: [blog0301.src, blog0302.src],
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -65,6 +67,8 @@ export const blogs = [
 </ol>
 <p>Recuerda, según el <em>Manual de prevención del suicidio</em> de DSME (2024), "Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento" (p. 19). No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
 
+<img src='${blog0202.src}' alt="" width="100%" class="blog-img"/>
+
 <h2>Cómo ayudar</h2>
 <p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
 <ol>
@@ -85,7 +89,7 @@ export const blogs = [
 <li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
 </ul>
 `,
-    imagen: blog0201.src,
+    imagenes: [blog0201.src, blog0202.src],
     video: '',
     // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
@@ -128,6 +132,8 @@ export const blogs = [
 <li>Realiza respiraciones cortas y rápidas durante un minuto para aumentar la energía cuando te sientas fatigado.</li>
 </ul>
 
+<img src='${blog0102.src}' alt="" width="100%" class="blog-img"/>
+
 <h2>Técnica 3: Ejercicio Físico Regular</h2>
 <p><strong>Ejercicio físico: Vitalidad para cuerpo y mente.</strong></p>
 <p>El ejercicio regular no solo mejora la salud física, sino que también tiene un impacto significativo en la salud mental. La actividad física libera endorfinas, mejora el estado de ánimo y actúa como un antídoto natural contra la ansiedad.</p>
@@ -166,7 +172,7 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    imagen: blog0101.src,
+    imagenes: [blog0101.src, blog0102.src],
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -192,7 +198,9 @@ export const blogs = [
     
     <h2 class="sailec-bold">Sobrecarga Académica</h2>
     <p>La sobrecarga académica se refiere a la situación en la que los estudiantes enfrentan una cantidad excesiva de tareas, proyectos y responsabilidades académicas. Este fenómeno no solo implica un elevado número de horas dedicadas al estudio, sino también la presión de cumplir con expectativas académicas a menudo poco realistas. La sobrecarga puede llevar a los estudiantes a sentirse abrumados, lo cual es un precursor común del agotamiento y la disminución del rendimiento académico.</p>
-    
+
+    <img src='${blog0101.src}' alt="" width="100%" class="blog-img"/>
+
     <h2 class="sailec-bold">Gestión del Tiempo Ineficiente</h2>
     <p>Una adecuada gestión del tiempo es crucial para el éxito académico y personal. Sin embargo, muchos estudiantes luchan con la planificación y priorización efectiva de sus actividades. La falta de habilidades de gestión del tiempo puede llevar a procrastinación, estrés por cumplimiento de plazos y un uso ineficaz del tiempo disponible para estudiar, lo que a su vez afecta negativamente su rendimiento y bienestar.</p>
     
@@ -239,8 +247,8 @@ export const blogs = [
     abordar la sobrecarga académica y mejorar las habilidades de gestión del tiempo. La implementación de talleres y recursos que enseñen técnicas efectivas de manejo del tiempo podría ser un paso vital hacia el mejoramiento del bienestar estudiantil y su éxito académico. Además, ajustar la carga de trabajo académico para hacerla más manejable puede ayudar a aliviar el estrés estudiantil y promover un ambiente educativo más saludable y productivo.</p>
     
     `,
-    imagen: blog0102.src,
-    video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    imagenes: [blog0102.src, blog0101.src],
+    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
         titulo: 'Ataques de pánico: ¿Qué hacer?',
@@ -326,6 +334,15 @@ la universidad es un periodo de grandes cambios y desafíos. Comprender y acepta
       }
     ]
   },
+
+]
+
+
+/* 
+
+
+
+
   {
     id: '5',
     titulo: 'Los Cimientos de la Terapia Cognitivo Conductual: Un Recorrido Histórico',
@@ -650,5 +667,4 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
       }
     ]
   },
-
-]
+*/

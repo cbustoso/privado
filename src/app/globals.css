@@ -10010,6 +10010,9 @@ textarea.form-control {
   }
 }
 @media only screen and (min-width: 768px) {
+  .blog-img {
+    max-width: 60%;
+  }
   .modal-md {
     width: 500px;
   }
@@ -11429,6 +11432,31 @@ d29e08
   margin-bottom: 0;
 }
 
+.blog-content h3 {
+  font-family: 'sailecmedium';
+}
+
+.blog-content table {
+  border: none;
+  width: 100%
+}
+
+.blog-content th {
+  font-family: sailecmedium;
+}
+.blog-content td {
+  height: 70px;
+}
+.blog-content tr {
+  margin: 0 70px;
+}
+.blog-content tr:nth-child(even) {
+  background-color: #E6E9EC;
+}
+
+/* .blog-content tr{
+
+} */
 
 .accordion-container {
   display: flex;
