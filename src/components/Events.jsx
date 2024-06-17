@@ -172,7 +172,7 @@ const Events = ({ events, innerRef }) => {
                           component="img"
                           alt={blogs[i % totalSlides]?.titulo}
                           height="200"
-                          image={blogs[i % totalSlides]?.imagenes[0]}
+                          image={blogs[i % totalSlides]?.imagen}
                         />
                         <Typography
                           variant="body2"
