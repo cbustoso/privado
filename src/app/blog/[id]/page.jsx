@@ -45,22 +45,26 @@ const card = (item) => (
       </Typography>
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
-      <button
-        className='btn btn-0'
-        style={{
-          backgroundColor: "#3886FF",
-          color: '#FFF',
-          height: '48px',
-          width: '200px',
-          padding: '4px 24px',
-          margin: '8px',
-          borderRadius: '100px',
-          fontSize: '16px',
-          fontWeight: 600,
-          border: '2px solid #A5C8FF'
-        }}>
-        Descargar <FaDownload />
-      </button>
+      <a href={`/downloads/${item.url}`} download={item.url} >
+
+        <button
+          className='btn btn-0'
+          style={{
+            backgroundColor: "#3886FF",
+            color: '#FFF',
+            height: '48px',
+            width: '200px',
+            padding: '4px 24px',
+            margin: '8px',
+            borderRadius: '100px',
+            fontSize: '16px',
+            fontWeight: 600,
+            border: '2px solid #A5C8FF'
+          }}>
+          Descargar <FaDownload />
+        </button>
+      </a>
+
     </CardActions>
   </Fragment>
 );
@@ -173,14 +177,14 @@ const Blogdetails = ({ params }) => {
                           <img src={blog.imagen} alt="" style={{ width: '100%' }} />
                         </div>
 
-                        {blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>}
+                        {blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
                       </div>
                     </article>
 
                     <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >
                       {console.log('leblog', blog.downloads)}
                       <div className="col-12">
-                        <h3 className='sailec-medium' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px'}}>Contenido descargable</h3>
+                        <h3 className='sailec-medium' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>
                       </div>
                       {blog?.downloads && blog['downloads'].map((item, index) => (
 

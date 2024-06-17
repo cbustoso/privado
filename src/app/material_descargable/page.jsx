@@ -124,7 +124,7 @@ export default function MaterialDescargable() {
             <div className="card-body flex-row d-flex justify-content-center mt-4">
               <h2
                 className="sailec"
-                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center',marginTop: !matches && '50px'  }}>
+                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center', marginTop: !matches && '50px' }}>
                 Material descargable
               </h2>
             </div>
@@ -136,7 +136,7 @@ export default function MaterialDescargable() {
             </div>
 
             <div className="row">
-              <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: matches? '45%': '', marginRight: matches ? '10px': 'auto' }}>
+              <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: matches ? '45%' : '', marginRight: matches ? '10px' : 'auto' }}>
                 {pares.map(item => (
                   <div className="col-12" key={item.titulo}>
                     <Accordion>
@@ -154,7 +154,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={item.archivo}>
+                          <a href={`/downloads/${item.url}`} download={item.url}>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -164,7 +164,7 @@ export default function MaterialDescargable() {
                 ))}
               </div>
 
-              <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: matches? '45%': '', marginLeft: matches ? '10px': 'auto', marginTop: matches? '' :'20px' }}>
+              <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: matches ? '45%' : '', marginLeft: matches ? '10px' : 'auto', marginTop: matches ? '' : '20px' }}>
                 {impares.map(item => (
                   <div className="col-12" key={item.titulo}>
                     <Accordion>
@@ -182,7 +182,7 @@ export default function MaterialDescargable() {
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={item.archivo} target="_blank">
+                          <a href={`/downloads/${item.url}`} download={item.url}>
                             Descargar <FaDownload />
                           </a>
                         </Button>

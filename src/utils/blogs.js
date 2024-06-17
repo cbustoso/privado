@@ -42,12 +42,12 @@ export const blogs = [
       {
         titulo: 'Alcohol y drogas, ¿cómo evito los excesos?',
         bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
-        url: 'https://drive.google.com/file/d/1Fl-YiudBb8MSY3fpbympdwPY-Kbepv01/view'
+        url: 'alcohol_y_drogas.pdf'
       },
       {
         titulo: 'Señales de riesgo en mi consumo de alcohol y drogas',
         bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
-        url: 'https://drive.google.com/file/d/1Zee45vwAIjRgPsQkdw62alBsCrSfaMu2/view'
+        url: 'senales_de_riesgo_en_alcohol_y_drogas.pdf'
       }
     ]
   },
@@ -92,12 +92,12 @@ export const blogs = [
       {
         titulo: 'Estrategias de intervención',
         bajada: '¿Hablemos de depresión?',
-        url: 'https://drive.google.com/file/d/1JJzNz09rk_Vj-yxQkkuJyf5Qv3jq2q7t/view'
+        url: 'estrategias_de_intervencion.pdf'
       },
       {
         titulo: 'Prevención del suicidio',
         bajada: '¿Hablemos de depresión?',
-        url: 'https://drive.google.com/file/d/1H0_sG0Bo11MxjcEsVuHr2WNJ34lW9MZh/view'
+        url: 'prevencion_del_suicidio.pdf'
       }
     ]
   },
@@ -173,12 +173,12 @@ export const blogs = [
       {
         titulo: '5 técnicas para reducir la ansiedad',
         bajada: 'A veces creemos que sentir estrés en la universidad es signo de "debilidad" y muchas veces somos juzgados por lo mismo. ¿Pero sabías que puede ser un sentir propio de una situación nueva y de un proceso de aprendizaje?',
-        url: 'https://drive.google.com/file/d/1JJsYKQs-DeZNrAA9LsNi_D0kXPJwZXQh/view?usp=drive_link'
+        url: '5_tecnicas_para_reducir_la_ansiedad.pdf'
       },
       {
         titulo: 'Mindfulness como técnica para reducir la ansiedad',
         bajada: 'Aquí encontrarás algunas estrategias de afrontamiento ante situaciones estresantes, que te pueden servir tanto en tu trayectoria universitaria como en tu quehacer diario.',
-        url: 'https://drive.google.com/file/d/1Bf7KaolT4CsuA2puUrWhw6viNaicwDX9/view'
+        url: 'mindfulness_como_tecnica_para_reducir_la_ansiedad.pdf'
       }
     ]
   },
@@ -245,7 +245,7 @@ export const blogs = [
       {
         titulo: 'Ataques de pánico: ¿Qué hacer?',
         bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B/view'
+        url: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B'
       }
     ]
   },
