@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Fragment } from "react";
+import { useRouter } from 'next/navigation';
 
 const style = {
   position: 'absolute',
@@ -130,7 +131,9 @@ const TestDepresion = () => {
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const router = useRouter()
+
+  const handleOpen = () => {setOpen(true)};
   const handleClose = () => setOpen(false);
 
   const { register, handleSubmit, watch,
@@ -152,7 +155,6 @@ const TestDepresion = () => {
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
   })
-
 
 
   return (
@@ -202,7 +204,7 @@ const TestDepresion = () => {
                             <h2
                               className="sailec"
                               style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
-                              Test de Depresión
+                              Test de Síntomas de Depresión (PHQ-9)
                             </h2>
                           </div>
                           <div className="row">
@@ -330,7 +332,8 @@ const TestDepresion = () => {
                           </button>
                           <button
                             type="submit"
-                            className="btn btn-primary cancel-form"
+                            className="btn btn-primary submit-form me-2"
+                            style={{textAlign: 'center'}}
                           >
                             Cancelar
                           </button>
@@ -417,7 +420,7 @@ const TestDepresion = () => {
                             name="gender"
                             className="form-check-input"
                           />
-                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con la USM, con fines de investigación.
+                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
                         </label>
                       </div>
                     </div>

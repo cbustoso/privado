@@ -46,7 +46,7 @@ const card = (item) => (
       </Typography>
     </CardContent>
     <CardActions sx={{ backgroundColor: "#F1F1F1", justifyContent: 'flex-end' }}>
-      <a href={`/downloads/${item.url}`} download={item.url} >
+      <a href={`/downloads/${item.url}`}  >
 
         <button
           className='btn btn-0'
@@ -179,7 +179,7 @@ const Blogdetails = ({ params }) => {
                           <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
                         </div> */}
 
-                        {blog.video !== '' && <iframe width="100%" height="315" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+                        {blog.video !== '' && <iframe width={matches ? "60%" : "100%"} height="615" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
                       </div>
                     </article>
 

@@ -156,7 +156,7 @@ const TestSlider = ({ slides, innerRef }) => {
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                                <Link href={slide.url} target="_blank" className="sailec-medium" >
+                                <Link href={slide.url} className="sailec-medium" >
                                   <button className="btn submit-form me-2"
                                     style={{
                                       padding: '16px 32px',
@@ -209,7 +209,7 @@ const TestSlider = ({ slides, innerRef }) => {
                           </CardContent>
                           <CardActions disableSpacing>
                             <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                              <Link href={slide.url} target="_blank">
+                              <Link href={slide.url} >
                                 <button
                                   className="btn submit-form me-2"
                                   style={{

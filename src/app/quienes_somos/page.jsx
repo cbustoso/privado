@@ -29,9 +29,6 @@ export default function Dash() {
           alt="#"
           src={carrousel01.src}
           width={'100%'}
-          style={{
-            backgroundPosition: 'center'
-          }}
         />
       </div>
       }
@@ -112,7 +109,7 @@ export default function Dash() {
                           fontSize: '20px',
                           lineHeight: '28px'
                         }}>
-                        Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
+                        El <strong>Departamento de Salud Mental Estudiantil (DSME)</strong> es un equipo cuya misión es contribuir al bienestar psicológico y emocional del estudiantado de la Universidad Diego Portales.
                       </Typography>
 
                       <Typography
@@ -148,7 +145,7 @@ export default function Dash() {
                       lineHeight: '32px'
                     }}>
                       <p className="media-body sailec" style={{ textWrap: 'balance' }}>
-                        Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
+                        El <strong>Departamento de Salud Mental Estudiantil (DSME)</strong> es un equipo cuya misión es contribuir al bienestar psicológico y emocional del estudiantado de la Universidad Diego Portales.
                       </p>
                       <p style={{ textWrap: 'balance' }}>
                         Nuestro modelo de intervención se basa en la <strong>Promoción, Prevención, Atención Grupal y Atención Clínica Individual</strong>; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
@@ -168,7 +165,12 @@ export default function Dash() {
                 {
                   matches
                     ?
-                    <h3 className="sailec-medium">¿Cómo puedo solicitar atención en el DSME?</h3>
+                    <>
+                      <h3 className="sailec-medium">¿Cómo puedo solicitar atención en el DSME?</h3>
+
+                      <p className="sailec" style={{ textWrap: 'center' }}>Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
+                      </p>
+                    </>
                     :
                     <>
                       <h3 className="sailec-medium">¿Cómo puedo solicitar </h3>
@@ -204,10 +206,19 @@ export default function Dash() {
             </div>
             <div className="row" style={{ margin: '0 10px' }} >
               <div className="card-body flex-column d-flex align-items-center">
-                <h3>¿Dónde se encuentra el</h3>
-                <h3><strong>DSME?</strong></h3>
+              {console.log('matches', matches)}
+                {
+                matches
+                  ? <h3 className="sailec-medium">¿Dónde se encuentra el <strong>DSME?</strong></h3>
+                  : <>
+                    <h3 className="sailec-medium">¿Dónde se encuentra el</h3>
+                    <h3 className="sailec-medium"><strong>DSME?</strong></h3>
+                  </>
+                }
                 <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
-                  <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 600 : '90%'} />
+                  <a href="https://maps.app.goo.gl/MgPjwoqPatGxty8W8" target="_blank">
+                    <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 800 : '90%'} />
+                  </a>
                 </div>
               </div>
             </div>

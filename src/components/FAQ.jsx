@@ -46,7 +46,7 @@ const FrequentAskedQuestions = () => {
             }
           >
             <AccordionSummary
-              sx={matches && (expanded === question.id) &&{ borderBottom: '1px solid #fff' }}
+              sx={{ borderBottom: matches && (expanded === question.id) && '1px solid #fff' }}
               expandIcon={matches && (expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
                 : <AddCircleOutlineOutlined />)

@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Fragment } from "react";
+import { useRouter } from 'next/navigation';
+
 
 const style = {
   position: 'absolute',
@@ -168,6 +170,7 @@ const TestAnsiedad = () => {
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
+  const router = useRouter()       
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -450,7 +453,7 @@ const TestAnsiedad = () => {
                             name="gender"
                             className="form-check-input"
                           />
-                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con la USM, con fines de investigación.
+                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSNE, con fines de investigación.
                         </label>
                       </div>
                     </div>
