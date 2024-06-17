@@ -37,7 +37,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagenes: blog0301.src, 
+    imagen: blog0301.src, 
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
