@@ -37,7 +37,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagenes: [blog0301.src, blog0302.src],
+    imagenes: blog0301.src, 
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -89,7 +89,7 @@ export const blogs = [
 <li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
 </ul>
 `,
-    imagenes: [blog0201.src, blog0202.src],
+    imagen: blog0201.src,
     video: '',
     // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
@@ -172,7 +172,7 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    imagenes: [blog0101.src, blog0102.src],
+    imagen: blog0101.src,
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -247,7 +247,7 @@ export const blogs = [
     abordar la sobrecarga académica y mejorar las habilidades de gestión del tiempo. La implementación de talleres y recursos que enseñen técnicas efectivas de manejo del tiempo podría ser un paso vital hacia el mejoramiento del bienestar estudiantil y su éxito académico. Además, ajustar la carga de trabajo académico para hacerla más manejable puede ayudar a aliviar el estrés estudiantil y promover un ambiente educativo más saludable y productivo.</p>
     
     `,
-    imagenes: [blog0102.src, blog0101.src],
+    imagen: blog0102.src,
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {

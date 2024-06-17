@@ -160,7 +160,7 @@ export default function Home() {
       });
     };
   }, [setActiveSection]);
-console.log('BLOGS', blogs.slice(-4 ))
+// console.log('BLOGS', blogs.slice(-4 ))
 
   return (
     <>

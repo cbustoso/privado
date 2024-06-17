@@ -96,7 +96,7 @@ const Blogdetails = ({ params }) => {
           }}>
             <img
               alt="#"
-              src={blog.imagenes[0]}
+              src={blog.imagen}
               width={'100%'}
               style={{
                 backgroundPosition: 'center'
