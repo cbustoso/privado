@@ -172,8 +172,8 @@ const TestAnsiedad = () => {
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
-  const router = useRouter()   
-  
+  const router = useRouter()
+
   const calculate = () => {
     const data = watch()
 
@@ -359,7 +359,10 @@ const TestAnsiedad = () => {
                           </div>
                         ))
                       }
-
+                      {Object.keys(errors).length !== 0 && <span className="login-danger">
+                        <small>Debes seleccionar una opción por cada pregunta</small>
+                      </span>
+                      }
                       <div className="col-12 mt-4">
                         <div className="doctor-submit text-end">
                           <button
@@ -371,8 +374,8 @@ const TestAnsiedad = () => {
                           </button>
                           <button
                             type="submit"
-                             className="btn btn-primary btn-hover me-2"
-                            style={{background: '#fff', color: '#333448' }}
+                            className="btn btn-primary btn-hover me-2"
+                            style={{ background: '#fff', color: '#333448' }}
                           >
                             Cancelar
                           </button>
@@ -459,6 +462,12 @@ const TestAnsiedad = () => {
                             type="checkbox"
                             name="gender"
                             className="form-check-input"
+                            {...register('consentimiento', {
+                              required: {
+                                value: true,
+                                message: 'Correo electrónico es requerido'
+                              }
+                            })}
                           />
                           Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSNE, con fines de investigación.
                         </label>

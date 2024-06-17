@@ -325,7 +325,8 @@ const TestDepresion = () => {
                       }
                       {Object.keys(errors).length !== 0 && <span className="login-danger">
                         <small>Debes seleccionar una opción por cada pregunta</small>
-                      </span>}
+                      </span>
+                      }
                       <div className="col-12 mt-4">
                         <div className="doctor-submit text-end">
                           <button
@@ -424,6 +425,12 @@ const TestDepresion = () => {
                             type="checkbox"
                             name="gender"
                             className="form-check-input"
+                            {...register('consentimiento', {
+                              required: {
+                                value: true,
+                                message: 'Correo electrónico es requerido'
+                              }
+                            })}
                           />
                           Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
                         </label>
