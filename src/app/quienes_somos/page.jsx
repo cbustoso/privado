@@ -23,13 +23,16 @@ export default function Dash() {
     <>
       {matches && <div style={{
         height: '520px',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundImage: `url(${carrousel01.src})`,
+        backgroundPosition: 'center 30%',
+        backgroundSize: 'cover'
       }}>
-        <img
+        {/* <img
           alt="#"
           src={carrousel01.src}
           width={'100%'}
-        />
+        /> */}
       </div>
       }
 
