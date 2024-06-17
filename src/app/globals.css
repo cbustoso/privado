@@ -11479,3 +11479,17 @@ d29e08
 .btn-hover:hover {
   background: #E6E9EC !important;
 }
+
+.dropdown-extra {
+  right: 35px;
+  top: 0
+}
+
+td:has(div.text-end){
+  background: transparent;
+}
+
+.ant-table-cell {
+  background: transparent !important;
+
+}

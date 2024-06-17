@@ -21,6 +21,8 @@ import ProtectedPage from '@/components/ProtectedRoutes';
 
 const citas = [
   {
+    id: 1,
+    id_cita: 1, 
     nombre_alumno: 'Juan Perez',
     nombre_profesional: 'Miguel González',
     especialidad: 'Psicología',
@@ -31,6 +33,8 @@ const citas = [
     estado: 'Confirmada'
   }, 
   {
+    id: 2,
+    id_cita: 2, 
     nombre_alumno: 'Juan Perez',
     nombre_profesional: 'Miguel González',
     especialidad: 'Psicología',
@@ -41,6 +45,8 @@ const citas = [
     estado: 'Pendiente'
   },
   {
+    id: 3,
+    id_cita: 3, 
     nombre_alumno: 'Juan Perez',
     nombre_profesional: 'Miguel González',
     especialidad: 'Psicología',
@@ -51,6 +57,8 @@ const citas = [
     estado: 'Pendiente'
   },
   {
+    id: 4,
+    id_cita: 4, 
     nombre_alumno: 'Juan Perez',
     nombre_profesional: 'Miguel González',
     especialidad: 'Psicología',
@@ -61,6 +69,8 @@ const citas = [
     estado: 'Pendiente'
   },
   {
+    id: 5,
+    id_cita: 5, 
     nombre_alumno: 'Juan Perez',
     nombre_profesional: 'Miguel González',
     especialidad: 'Psicología',
@@ -71,7 +81,6 @@ const citas = [
     estado: 'Pendiente'
   }
 ]
-
 
 const AppoinmentList = () => {
   const ROL = ["alumno"]
@@ -191,7 +200,7 @@ const AppoinmentList = () => {
       title: "",
       dataIndex: "field",
       fixed: 'right',
-      responsive: ['md'],
+      responsive: ['xs'],
       render: (text, record) => (
         <>
           <div className="text-end">
@@ -205,12 +214,13 @@ const AppoinmentList = () => {
               >
                 <i className="fas fa-ellipsis-v" />
               </Link>
+              {console.log('SHOW', show.id, record.id_cita)}
               <div
-                style={{ right: '30px' }}
+                style={{ right: '35px', top: 0 }}
                 className=
                 {show.state === true && show.id === record.id_cita
-                  ? "dropdown-menu dropdown-menu-end show"
-                  : "dropdown-menu dropdown-menu-end "
+                  ? "dropdown-menu dropdown-menu-end dropdown-extra show"
+                  : "dropdown-menu dropdown-menu-end dropdown-extra"
                 }
               >
                 <Link className="dropdown-item" href={`/fichas/${record.id_cita}`}>
@@ -349,7 +359,7 @@ const AppoinmentList = () => {
           </div>
 
         </div>
-        <div id="delete_patient" className="modal fade delete-modal" role="dialog">
+        <div id="delete_appointment" className="modal fade delete-modal" role="dialog">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-body text-center">
