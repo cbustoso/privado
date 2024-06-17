@@ -127,7 +127,7 @@ const ImageSlider = ({ innerRef }) => {
     setValue(newValue);
   };
 
-  const imgHeightMobile = '72vh'
+  const imgHeightMobile = '83vh'
   const imgHeightDesktop = '100vh'
 
   const sliderStyles = {
