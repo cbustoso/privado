@@ -132,8 +132,10 @@ const resultados = [
   },
 ]
 
-const determinarDescripcion = (puntaje) =>
-  resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
+const determinarDescripcion = (puntaje) => {
+  const categoria = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
+  return categoria
+}
 
 const ChildModal = ({ result }) => {
   const [open, setOpen] = useState(false);
@@ -146,8 +148,8 @@ const ChildModal = ({ result }) => {
 
   return (
     <Fragment>
-      <Button onClick={handleOpen}>Enviar correo</Button>
-      <Button onClick={handleOpen}>Resultados anónimos</Button>
+      <Button onClick={() => { handleOpen() }}>Enviar correo</Button>
+      <Button onClick={() => { handleOpen() }}>Resultados anónimos</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -170,29 +172,33 @@ const TestAnsiedad = () => {
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
-  const router = useRouter()       
-  const handleOpen = () => setOpen(true);
+  const router = useRouter()   
+  
+  const calculate = () => {
+    const data = watch()
+
+    let values = Object.values(data);
+    let filterValues = values.filter(elemento => !isNaN(Number(elemento)) && elemento !== null);
+    // Sumamos los valores
+    let sum = filterValues.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
+    return sum
+  }
+
+  const handleOpen = () => {
+    setOpen(true)
+    const result = calculate()
+    const response = determinarDescripcion(result)
+    setCategory(response)
+  };
   const handleClose = () => setOpen(false);
 
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm()
 
-  const calculate = () => {
-    const data = watch()
-
-    let values = Object.values(data);
-
-    // Sumamos los valores
-    let sum = values.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
-    setResultado(sum)
-    console.log(sum)
-  }
-
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
   })
-
 
   return (
     <>
@@ -263,7 +269,7 @@ const TestAnsiedad = () => {
                             className="col-12 col-md-11"
                             key={index + item.label}
                             style={{
-                              background: index % 2 === 0 && 'lightgrey'
+                              background: index % 2 === 0 && '#E6E9EC'
                             }}
                           >
                             <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
@@ -365,7 +371,8 @@ const TestAnsiedad = () => {
                           </button>
                           <button
                             type="submit"
-                            className="btn btn-primary cancel-form"
+                             className="btn btn-primary btn-hover me-2"
+                            style={{background: '#fff', color: '#333448' }}
                           >
                             Cancelar
                           </button>

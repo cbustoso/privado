@@ -80,12 +80,12 @@ const resultados = [
     puntaje: [10, 14],
     titulo: 'Sintomatología depresiva moderada',
     descripcion: `Tus síntomas son moderados. Pueden estar afectando tu vida diaria y podría ser útil considerar estrategias de manejo o buscar apoyo profesional.`
-  }, ,
+  },
   {
     puntaje: [15, 19],
     titulo: 'Sintomatología depresiva moderadamente severo',
     descripcion: `Estás experimentando síntomas depresivos moderadamente severos, los cuales probablemente están afectando de manera significativa tu rutina diaria. Sería aconsejable buscar ayuda profesional. Te invitamos a reservar hora con nuestros servicios de salud mental.`
-  }, ,
+  },
   {
     puntaje: [20, 27],
     titulo: 'Sintomatología depresiva grave',
@@ -93,8 +93,10 @@ const resultados = [
   },
 ]
 
-const determinarDescripcion = (puntaje) =>
-  resultados.find(({ puntaje: [min, max] }) => puntaje >= min && puntaje <= max) || 'Puntaje fuera de rango';
+const determinarDescripcion = (puntaje) => {
+  const categoria = resultados.find(resultado => puntaje >= resultado.puntaje[0] && puntaje <= resultado.puntaje[1]);
+  return categoria
+}
 
 const ChildModal = ({ result }) => {
   const [open, setOpen] = useState(false);
@@ -107,8 +109,8 @@ const ChildModal = ({ result }) => {
 
   return (
     <Fragment>
-      <Button onClick={handleOpen}>Enviar correo</Button>
-      <Button onClick={handleOpen}>Resultados anónimos</Button>
+      <Button onClick={() => { handleOpen() }}>Enviar correo</Button>
+      <Button onClick={() => { handleOpen() }}>Resultados anónimos</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -131,31 +133,34 @@ const TestDepresion = () => {
   const [resultado, setResultado] = useState(null)
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState()
   const router = useRouter()
 
-  const handleOpen = () => {setOpen(true)};
+  const calculate = () => {
+    const data = watch()
+
+    let values = Object.values(data);
+    let filterValues = values.filter(elemento => !isNaN(Number(elemento)) && elemento !== null);
+    // Sumamos los valores
+    let sum = filterValues.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
+    return sum
+  }
+
+  const handleOpen = () => {
+    setOpen(true)
+    const result = calculate()
+    const response = determinarDescripcion(result)
+    setCategory(response)
+  };
   const handleClose = () => setOpen(false);
 
   const { register, handleSubmit, watch,
     formState: { errors }
   } = useForm()
 
-
-  const calculate = () => {
-    const data = watch()
-
-    let values = Object.values(data);
-
-    // Sumamos los valores
-    let sum = values.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue), 0);
-    setResultado(sum)
-    console.log(sum)
-  }
-
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
   })
-
 
   return (
     <>
@@ -227,7 +232,7 @@ const TestDepresion = () => {
                             className="col-12 col-md-11"
                             key={index + item.label}
                             style={{
-                              background: index % 2 === 0 && 'lightgrey'
+                              background: index % 2 === 0 && '#E6E9EC'
                             }}
                           >
                             <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
@@ -325,15 +330,15 @@ const TestDepresion = () => {
                         <div className="doctor-submit text-end">
                           <button
                             type="button"
-                            className="btn btn-primary submit-form me-2"
+                            className="btn btn-primary me-2"
                             onClick={handleOpen}
                           >
                             Continuar
                           </button>
                           <button
                             type="submit"
-                            className="btn btn-primary submit-form me-2"
-                            style={{textAlign: 'center'}}
+                            className="btn btn-primary btn-hover me-2"
+                            style={{ background: '#fff', color: '#333448' }}
                           >
                             Cancelar
                           </button>
@@ -425,7 +430,7 @@ const TestDepresion = () => {
                       </div>
                     </div>
                   </div>
-                  <ChildModal result={determinarDescripcion(resultado)} />
+                  <ChildModal result={category} />
                 </Box>
               </Modal>
             </div>
