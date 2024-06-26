@@ -17,7 +17,7 @@ export const blogs = [
 <h2>Desarrolla Habilidades de Resistencia</h2>
 <p>Aprender a decir "no" es una habilidad crucial. En muchas situaciones, la presión social ejerce una gran influencia sobre el consumo de sustancias. Tener estrategias para manejar estas situaciones puede ser muy útil. Practica respuestas y mantén una postura firme sobre tus decisiones personales sin sentirte obligado a ceder.</p>
 
-<img src='${blog0302.src}' alt="" width="100%" class="blog-img"/>
+<img src="https://github.com/Niennis/imagesudp/blob/main/drogas02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
 
 <h2>Apóyate en Redes Positivas</h2>
 <p>El apoyo social es un factor protector clave contra el consumo de sustancias. Rodéate de amigos y compañeros que respeten tus decisiones y compartan tus valores. Participa en actividades y clubs universitarios que promuevan un estilo de vida saludable. Según estudios, los estudiantes que tienen un sistema de apoyo sólido son menos propensos a participar en el consumo de drogas y alcohol.</p>
@@ -37,7 +37,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagen: blog0301.src, 
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/drogas01.jpg?raw=true", 
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -67,7 +67,7 @@ export const blogs = [
 </ol>
 <p>Recuerda, según el <em>Manual de prevención del suicidio</em> de DSME (2024), "Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento" (p. 19). No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
 
-<img src='${blog0202.src}' alt="" width="100%" class="blog-img"/>
+<img src="https://github.com/Niennis/imagesudp/blob/main/suicidio02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
 
 <h2>Cómo ayudar</h2>
 <p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
@@ -89,7 +89,7 @@ export const blogs = [
 <li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
 </ul>
 `,
-    imagen: blog0201.src,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/suicidio01.jpg?raw=true",
     video: '',
     // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
@@ -132,7 +132,7 @@ export const blogs = [
 <li>Realiza respiraciones cortas y rápidas durante un minuto para aumentar la energía cuando te sientas fatigado.</li>
 </ul>
 
-<img src='${blog0102.src}' alt="" width="100%" class="blog-img"/>
+<img src="https://github.com/Niennis/imagesudp/blob/main/ansiedad02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
 
 <h2>Técnica 3: Ejercicio Físico Regular</h2>
 <p><strong>Ejercicio físico: Vitalidad para cuerpo y mente.</strong></p>
@@ -172,7 +172,7 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    imagen: blog0101.src,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/ansiedad01.jpg?raw=true",
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -190,147 +190,51 @@ export const blogs = [
   },
   {
     id: '3',
-    titulo: 'Desafíos del Estrés Universitario ',
-    bajada: `Sobrecarga Académica y Gestión del Tiempo`,
+    titulo: 'Cómo hacer más en menos tiempo',
+    bajada: `Descubre cómo mejorar tus métodos de estudio y aprovechar cada minuto al máximo con estas estrategias fáciles de seguir.`,
     texto: `
-    <h1>Desafíos del Estrés Universitario: Sobrecarga Académica y Gestión del Tiempo</h1>
-    <p>En el ámbito universitario, los estudiantes a menudo enfrentan una serie de desafíos que pueden afectar significativamente su bienestar y desempeño académico. Dos de los principales factores que contribuyen al estrés en este entorno son la sobrecarga académica y la ineficiente gestión del tiempo. Este artículo explora cómo estos elementos influyen en la vida de los estudiantes y ofrece una tabla descriptiva de los problemas más comunes asociados a estos factores.</p>
-    
-    <h2 class="sailec-bold">Sobrecarga Académica</h2>
-    <p>La sobrecarga académica se refiere a la situación en la que los estudiantes enfrentan una cantidad excesiva de tareas, proyectos y responsabilidades académicas. Este fenómeno no solo implica un elevado número de horas dedicadas al estudio, sino también la presión de cumplir con expectativas académicas a menudo poco realistas. La sobrecarga puede llevar a los estudiantes a sentirse abrumados, lo cual es un precursor común del agotamiento y la disminución del rendimiento académico.</p>
+    <p>En la universidad, aprender a administrar el tiempo de manera efectiva puede ser tan crucial como comprender las teorías más complejas de tu carrera. Si constantemente te encuentras luchando contra el reloj, preguntándote cómo puedes estudiar mejor y lograr un equilibrio entre tus diversas responsabilidades, aquí te presentamos técnicas y consejos fundamentados para optimizar tu tiempo y mejorar tu rendimiento académico.</p>
 
-    <img src='${blog0101.src}' alt="" width="100%" class="blog-img"/>
+<h2>1. Prioriza tus tareas</h2>
+<p>Identifica cuáles son las tareas más importantes y urgentes y dedica tu energía principalmente a ellas. Según María del Carmen Valero Jiménez, especialista en técnicas de estudio, la priorización te ayuda a no desperdiciar esfuerzos en actividades de menor impacto, permitiéndote concentrarte en lo que realmente contribuye a tus metas académicas (Valero Jiménez, 2011).</p>
 
-    <h2 class="sailec-bold">Gestión del Tiempo Ineficiente</h2>
-    <p>Una adecuada gestión del tiempo es crucial para el éxito académico y personal. Sin embargo, muchos estudiantes luchan con la planificación y priorización efectiva de sus actividades. La falta de habilidades de gestión del tiempo puede llevar a procrastinación, estrés por cumplimiento de plazos y un uso ineficaz del tiempo disponible para estudiar, lo que a su vez afecta negativamente su rendimiento y bienestar.</p>
-    
-    <h2 class="sailec-bold">Impacto en el Bienestar y Desempeño Académico</h2>
-    <p>El estrés generado por la sobrecarga académica y una mala gestión del tiempo puede tener consecuencias serias en el bienestar emocional y físico de los estudiantes. El estrés crónico está asociado con numerosos problemas de salud, incluyendo ansiedad, depresión y problemas de sueño, los cuales pueden impedir la capacidad del estudiante para funcionar efectivamente en su vida académica y personal.</p>
-    
-    <h3>Tabla Descriptiva: Problemas Asociados a la Gestión del Tiempo y Sobrecarga Académica</h3>
-    <table border="1">
-    <tr>
-    <th>Problema</th>
-    <th>Descripción</th>
-    <th>Impacto Potencial en el Bienestar y Desempeño</th>
-    </tr>
-    <tr>
-    <td>Procrastinación</td>
-    <td>Retraso habitual en el inicio o la finalización de las tareas.</td>
-    <td>Aumento del estrés, bajos resultados académicos.</td>
-    </tr>
-    <tr>
-    <td>Priorización ineficaz</td>
-    <td>Falta de habilidad para identificar tareas y actividades prioritarias.</td>
-    <td>Sobrecarga de trabajo, ansiedad.</td>
-    </tr>
-    <tr>
-    <td>Planificación deficiente</td>
-    <td>Inadecuada distribución del tiempo para las tareas académicas.</td>
-    <td>Estrés por plazos, rendimiento subóptimo.</td>
-    </tr>
-    <tr>
-    <td>Multitarea ineficiente</td>
-    <td>Intento de realizar múltiples tareas al mismo tiempo sin eficacia.</td>
-    <td>Fatiga mental, menor calidad de trabajo.</td>
-    </tr>
-    <tr>
-    <td>Sobrecarga de compromisos</td>
-    <td>Asumir más tareas y responsabilidades de las manejables.</td>
-    <td>Agotamiento, disminución del interés y motivación.</td>
-    </tr>
-    </table>
-    
-    <h2 class="sailec-bold">Conclusiones</h2>
-    <p>Es esencial que las instituciones educativas y los estudiantes reconozcan la importancia de
-    
-    abordar la sobrecarga académica y mejorar las habilidades de gestión del tiempo. La implementación de talleres y recursos que enseñen técnicas efectivas de manejo del tiempo podría ser un paso vital hacia el mejoramiento del bienestar estudiantil y su éxito académico. Además, ajustar la carga de trabajo académico para hacerla más manejable puede ayudar a aliviar el estrés estudiantil y promover un ambiente educativo más saludable y productivo.</p>
+<h2>2. Planifica cada semana</h2>
+<p>Utiliza una herramienta de planificación, ya sea digital o en papel, para organizar tus actividades semanales. Incluye clases, horas de estudio, compromisos sociales, y tiempo para descansar. Marina G. Cenamor y Esther Cano Ángel destacan la importancia de tener un horario flexible pero bien estructurado que contemple imprevistos, asegurando así que todos los aspectos de tu vida estudiantil están cubiertos (Cenamor & Cano Ángel, 2022).</p>
+
+<h2>3. Técnica Pomodoro</h2>
+<p>Francesco Cirillo desarrolló la Técnica Pomodoro en la década de 1980, que consiste en dividir tu trabajo en periodos de 25 minutos, seguidos de breves descansos de 5 minutos. Esta técnica ayuda a mantener la concentración y la frescura mental, permitiéndote estudiar de manera más eficiente durante períodos más largos.</p>
+
+<img src="https://github.com/Niennis/imagesudp/blob/main/estudio02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
+
+<h2>4. Establece un ambiente de estudio adecuado</h2>
+<p>El lugar donde estudias puede influir significativamente en tu eficacia. Asegúrate de tener un espacio designado para estudiar que sea tranquilo, ordenado y bien iluminado. Universia recomienda estudiar en un ambiente que favorezca la concentración y minimice las distracciones, lo que puede aumentar significativamente tu capacidad de retención (Universia, 2020).</p>
+
+<h2>5. Utiliza la tecnología a tu favor</h2>
+<p>Herramientas y aplicaciones como calendarios digitales, bloqueadores de sitios web distractores y apps de gestión de tareas pueden ser extremadamente útiles. Establece límites claros para el uso de dispositivos y redes sociales durante tus horas de estudio para maximizar tu productividad.</p>
+
+<h3>Reflexiones finales</h3>
+<p>Gestionar tu tiempo eficazmente mientras estás en la universidad no solo mejora tu rendimiento académico, sino que también reduce el estrés y te permite disfrutar de una vida estudiantil más equilibrada. Experimenta con diferentes técnicas hasta que encuentres las que mejor se adapten a tus necesidades y estilo de vida. Recuerda, el objetivo es trabajar de manera más inteligente, no más dura.</p>
+
+<h3>Referencias</h3>
+<ul>
+<li>Valero Jiménez, M. del C. (2011). Técnicas de estudio. <em>Revista de Clasehistoria</em>. Recuperado de http://www.claseshistoria.com/revista/index.html</li>
+<li>Cenamor, M. G., & Cano Ángel, E. (2022). Técnicas de estudio. <em>Asociación Alganda</em>. Recuperado de https://www.alganda.org/webalganda/wp-content/uploads/2022/02/Cuaderno-de-t%C3%A9cnicas-de-estudio.-Alganda-1.pdf</li>
+<li>Universia. (2020). Técnicas y hábitos de estudio para obtener buenos resultados académicos en la universidad. <em>Universia</em>.</li>
+</ul>
     
     `,
-    imagen: blog0102.src,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true",
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
-        titulo: 'Ataques de pánico: ¿Qué hacer?',
+        titulo: 'Procrastinación: Técnicas para superarla',
         bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B'
-      }
-    ]
-  },
-  {
-    id: '4',
-    titulo: 'Descifrando el Enigma de la Transición Universitaria',
-    bajada: `Iniciar la universidad es un paso significativo en la vida de cualquier joven. Este cambio no solo implica adaptarse a un nuevo entorno educativo sino también enfrentarse a una serie de retos personales y académicos. A través de experiencias compartidas por estudiantes, exploramos las principales dudas e incertidumbres que surgen durante esta transición crucial.`,
-    texto: `
-    <h1>Descifrando el Enigma de la Transición Universitaria: Desafíos y Apoyos para Estudiantes Recién Ingresados</h1>
-<h2 class="sailec-bold">Introducción</h2>
-<p>Iniciar la universidad es un paso significativo en la vida de cualquier joven. Este cambio no solo implica adaptarse a un nuevo entorno educativo sino también enfrentarse a una serie de retos personales y académicos. A través de experiencias compartidas por estudiantes, exploramos las principales dudas e incertidumbres que surgen durante esta transición crucial.</p>
-
-<h2 class="sailec-bold">El Choque del Nuevo Mundo Universitario</h2>
-<p>Para muchos estudiantes, la universidad representa un "nuevo mundo". Esta nueva etapa se caracteriza por ser un ambiente con mayores exigencias académicas y una estructura completamente distinta a la educación secundaria. Los recién llegados a menudo experimentan un choque cultural y educativo al enfrentarse a espacios más amplios, una diversidad de personas y un ritmo de vida acelerado que puede ser abrumador inicialmente.</p>
-
-<h3>Tabla: Principales Desafíos de la Transición a la Universidad</h3>
-<table border="1">
-<tr>
-<th>Desafío</th>
-<th>Descripción</th>
-</tr>
-<tr>
-<td>Adaptación a nuevas normas</td>
-<td>Ajustarse a las expectativas y reglas académicas de la universidad.</td>
-</tr>
-<tr>
-<td>Manejo del tiempo</td>
-<td>Aprender a equilibrar estudios, actividades sociales y descanso.</td>
-</tr>
-<tr>
-<td>Presión académica</td>
-<td>Enfrentar un nivel de dificultad y competencia más alto.</td>
-</tr>
-<tr>
-<td>Integración social</td>
-<td>Hacer nuevas amistades y adaptarse a un entorno diverso.</td>
-</tr>
-</table>
-
-<h2 class="sailec-bold">Experiencias Estudiantiles</h2>
-<p>Las voces de los estudiantes revelan un espectro de emociones y reacciones frente a esta nueva etapa. Algunos expresan entusiasmo y gratitud por las oportunidades de crecimiento y aprendizaje que la universidad ofrece, a pesar de la pesada carga académica. Otros, sin embargo, comparten sentimientos de ansiedad y miedo ante la posibilidad de fracasar académicamente, lo cual resalta la intensidad del estrés que puede acompañar a los primeros años universitarios.</p>
-
-<h2 class="sailec-bold">Estrategias de Ajuste</h2>
-<p>Para manejar estas transiciones, es crucial desarrollar habilidades de adaptación y aprovechar los recursos de apoyo disponibles. Las universidades ofrecen diversos programas como tutorías, asesoramiento psicológico y actividades de integración que pueden facilitar este proceso.</p>
-
-<h3>Tabla: Recursos de Apoyo Universitario</h3>
-<table border="1">
-<tr>
-<th>Recurso</th>
-<th>Beneficio Proporcionado</th>
-</tr>
-<tr>
-<td>Asesoramiento psicológico</td>
-<td>Ayuda con el manejo del estrés y la ansiedad.</td>
-</tr>
-<tr>
-<td>Programas de mentoría</td>
-<td>Orientación académica y personal por parte de estudiantes avanzados.</td>
-</tr>
-<tr>
-<td>Talleres de habilidades</td>
-<td>Desarrollo de técnicas de estudio y manejo del tiempo.</td>
-</tr>
-</table>
-
-<h2 class="sailec-bold">Conclusión</h2>
-<p>La transición a
-
-la universidad es un periodo de grandes cambios y desafíos. Comprender y aceptar que estas incertidumbres son una parte normal del proceso puede ayudar a los estudiantes a gestionar mejor sus expectativas y a adaptarse más eficazmente. Con el apoyo adecuado y una actitud proactiva, los estudiantes pueden no solo sobrevivir, sino prosperar en su nuevo entorno universitario, transformando los desafíos en oportunidades de crecimiento personal y académico.</p>
-`,
-    imagen: banner07.src,
-    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
-    downloads: [
+        url: 'procrastinacion_tecnicas.pdf'
+      },
       {
-        titulo: 'Depresión en Universitarios: ¿Qué es?, sintomatología y factores protectores',
+        titulo: 'Técnicas de estudio que sí funcionan',
         bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'https://drive.google.com/file/d/1ipMa0gTHavUkJ3MtsqPrQf3GfrFYxLdj/view'
+        url: 'tecnicas_de_estudio.pdf'
       }
     ]
   },
@@ -664,6 +568,156 @@ El análisis funcional es una técnica poderosa dentro de la TCC que ofrece un m
         titulo: 'Estrategias para el Estrés',
         bajada: 'Aquí encontrarás algunas estrategias de afrontamiento ante situaciones estresantes, que te pueden servir tanto en tu trayectoria universitaria como en tu quehacer diario.',
         url: 'https://saludmentalestudiantil.udp.cl/wp-content/uploads/2023/10/Como-afrontar-el-estres-academico.pdf'
+      }
+    ]
+  },
+
+
+
+  ,
+  {
+    id: '3',
+    titulo: 'Desafíos del Estrés Universitario ',
+    bajada: `Sobrecarga Académica y Gestión del Tiempo`,
+    texto: `
+    <h1>Desafíos del Estrés Universitario: Sobrecarga Académica y Gestión del Tiempo</h1>
+    <p>En el ámbito universitario, los estudiantes a menudo enfrentan una serie de desafíos que pueden afectar significativamente su bienestar y desempeño académico. Dos de los principales factores que contribuyen al estrés en este entorno son la sobrecarga académica y la ineficiente gestión del tiempo. Este artículo explora cómo estos elementos influyen en la vida de los estudiantes y ofrece una tabla descriptiva de los problemas más comunes asociados a estos factores.</p>
+    
+    <h2 class="sailec-bold">Sobrecarga Académica</h2>
+    <p>La sobrecarga académica se refiere a la situación en la que los estudiantes enfrentan una cantidad excesiva de tareas, proyectos y responsabilidades académicas. Este fenómeno no solo implica un elevado número de horas dedicadas al estudio, sino también la presión de cumplir con expectativas académicas a menudo poco realistas. La sobrecarga puede llevar a los estudiantes a sentirse abrumados, lo cual es un precursor común del agotamiento y la disminución del rendimiento académico.</p>
+
+    <img src='${blog0101.src}' alt="" width="100%" class="blog-img"/>
+
+    <h2 class="sailec-bold">Gestión del Tiempo Ineficiente</h2>
+    <p>Una adecuada gestión del tiempo es crucial para el éxito académico y personal. Sin embargo, muchos estudiantes luchan con la planificación y priorización efectiva de sus actividades. La falta de habilidades de gestión del tiempo puede llevar a procrastinación, estrés por cumplimiento de plazos y un uso ineficaz del tiempo disponible para estudiar, lo que a su vez afecta negativamente su rendimiento y bienestar.</p>
+    
+    <h2 class="sailec-bold">Impacto en el Bienestar y Desempeño Académico</h2>
+    <p>El estrés generado por la sobrecarga académica y una mala gestión del tiempo puede tener consecuencias serias en el bienestar emocional y físico de los estudiantes. El estrés crónico está asociado con numerosos problemas de salud, incluyendo ansiedad, depresión y problemas de sueño, los cuales pueden impedir la capacidad del estudiante para funcionar efectivamente en su vida académica y personal.</p>
+    
+    <h3>Tabla Descriptiva: Problemas Asociados a la Gestión del Tiempo y Sobrecarga Académica</h3>
+    <table border="1">
+    <tr>
+    <th>Problema</th>
+    <th>Descripción</th>
+    <th>Impacto Potencial en el Bienestar y Desempeño</th>
+    </tr>
+    <tr>
+    <td>Procrastinación</td>
+    <td>Retraso habitual en el inicio o la finalización de las tareas.</td>
+    <td>Aumento del estrés, bajos resultados académicos.</td>
+    </tr>
+    <tr>
+    <td>Priorización ineficaz</td>
+    <td>Falta de habilidad para identificar tareas y actividades prioritarias.</td>
+    <td>Sobrecarga de trabajo, ansiedad.</td>
+    </tr>
+    <tr>
+    <td>Planificación deficiente</td>
+    <td>Inadecuada distribución del tiempo para las tareas académicas.</td>
+    <td>Estrés por plazos, rendimiento subóptimo.</td>
+    </tr>
+    <tr>
+    <td>Multitarea ineficiente</td>
+    <td>Intento de realizar múltiples tareas al mismo tiempo sin eficacia.</td>
+    <td>Fatiga mental, menor calidad de trabajo.</td>
+    </tr>
+    <tr>
+    <td>Sobrecarga de compromisos</td>
+    <td>Asumir más tareas y responsabilidades de las manejables.</td>
+    <td>Agotamiento, disminución del interés y motivación.</td>
+    </tr>
+    </table>
+    
+    <h2 class="sailec-bold">Conclusiones</h2>
+    <p>Es esencial que las instituciones educativas y los estudiantes reconozcan la importancia de
+    
+    abordar la sobrecarga académica y mejorar las habilidades de gestión del tiempo. La implementación de talleres y recursos que enseñen técnicas efectivas de manejo del tiempo podría ser un paso vital hacia el mejoramiento del bienestar estudiantil y su éxito académico. Además, ajustar la carga de trabajo académico para hacerla más manejable puede ayudar a aliviar el estrés estudiantil y promover un ambiente educativo más saludable y productivo.</p>
+    
+    `,
+    imagen: blog0102.src,
+    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Ataques de pánico: ¿Qué hacer?',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B'
+      }
+    ]
+  },
+  {
+    id: '4',
+    titulo: 'Descifrando el Enigma de la Transición Universitaria',
+    bajada: `Iniciar la universidad es un paso significativo en la vida de cualquier joven. Este cambio no solo implica adaptarse a un nuevo entorno educativo sino también enfrentarse a una serie de retos personales y académicos. A través de experiencias compartidas por estudiantes, exploramos las principales dudas e incertidumbres que surgen durante esta transición crucial.`,
+    texto: `
+    <h1>Descifrando el Enigma de la Transición Universitaria: Desafíos y Apoyos para Estudiantes Recién Ingresados</h1>
+<h2 class="sailec-bold">Introducción</h2>
+<p>Iniciar la universidad es un paso significativo en la vida de cualquier joven. Este cambio no solo implica adaptarse a un nuevo entorno educativo sino también enfrentarse a una serie de retos personales y académicos. A través de experiencias compartidas por estudiantes, exploramos las principales dudas e incertidumbres que surgen durante esta transición crucial.</p>
+
+<h2 class="sailec-bold">El Choque del Nuevo Mundo Universitario</h2>
+<p>Para muchos estudiantes, la universidad representa un "nuevo mundo". Esta nueva etapa se caracteriza por ser un ambiente con mayores exigencias académicas y una estructura completamente distinta a la educación secundaria. Los recién llegados a menudo experimentan un choque cultural y educativo al enfrentarse a espacios más amplios, una diversidad de personas y un ritmo de vida acelerado que puede ser abrumador inicialmente.</p>
+
+<h3>Tabla: Principales Desafíos de la Transición a la Universidad</h3>
+<table border="1">
+<tr>
+<th>Desafío</th>
+<th>Descripción</th>
+</tr>
+<tr>
+<td>Adaptación a nuevas normas</td>
+<td>Ajustarse a las expectativas y reglas académicas de la universidad.</td>
+</tr>
+<tr>
+<td>Manejo del tiempo</td>
+<td>Aprender a equilibrar estudios, actividades sociales y descanso.</td>
+</tr>
+<tr>
+<td>Presión académica</td>
+<td>Enfrentar un nivel de dificultad y competencia más alto.</td>
+</tr>
+<tr>
+<td>Integración social</td>
+<td>Hacer nuevas amistades y adaptarse a un entorno diverso.</td>
+</tr>
+</table>
+
+<h2 class="sailec-bold">Experiencias Estudiantiles</h2>
+<p>Las voces de los estudiantes revelan un espectro de emociones y reacciones frente a esta nueva etapa. Algunos expresan entusiasmo y gratitud por las oportunidades de crecimiento y aprendizaje que la universidad ofrece, a pesar de la pesada carga académica. Otros, sin embargo, comparten sentimientos de ansiedad y miedo ante la posibilidad de fracasar académicamente, lo cual resalta la intensidad del estrés que puede acompañar a los primeros años universitarios.</p>
+
+<h2 class="sailec-bold">Estrategias de Ajuste</h2>
+<p>Para manejar estas transiciones, es crucial desarrollar habilidades de adaptación y aprovechar los recursos de apoyo disponibles. Las universidades ofrecen diversos programas como tutorías, asesoramiento psicológico y actividades de integración que pueden facilitar este proceso.</p>
+
+<h3>Tabla: Recursos de Apoyo Universitario</h3>
+<table border="1">
+<tr>
+<th>Recurso</th>
+<th>Beneficio Proporcionado</th>
+</tr>
+<tr>
+<td>Asesoramiento psicológico</td>
+<td>Ayuda con el manejo del estrés y la ansiedad.</td>
+</tr>
+<tr>
+<td>Programas de mentoría</td>
+<td>Orientación académica y personal por parte de estudiantes avanzados.</td>
+</tr>
+<tr>
+<td>Talleres de habilidades</td>
+<td>Desarrollo de técnicas de estudio y manejo del tiempo.</td>
+</tr>
+</table>
+
+<h2 class="sailec-bold">Conclusión</h2>
+<p>La transición a
+
+la universidad es un periodo de grandes cambios y desafíos. Comprender y aceptar que estas incertidumbres son una parte normal del proceso puede ayudar a los estudiantes a gestionar mejor sus expectativas y a adaptarse más eficazmente. Con el apoyo adecuado y una actitud proactiva, los estudiantes pueden no solo sobrevivir, sino prosperar en su nuevo entorno universitario, transformando los desafíos en oportunidades de crecimiento personal y académico.</p>
+`,
+    imagen: banner07.src,
+    video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Depresión en Universitarios: ¿Qué es?, sintomatología y factores protectores',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'https://drive.google.com/file/d/1ipMa0gTHavUkJ3MtsqPrQf3GfrFYxLdj/view'
       }
     ]
   },
