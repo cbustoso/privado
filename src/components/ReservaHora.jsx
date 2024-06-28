@@ -61,7 +61,7 @@ const ReservaTuHora = ({ slides }) => {
                       component="img"
                       height="240"
                       width="240"
-                      image={profesional01.src}
+                      image="https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true"
                       sx={{ borderRadius: '8px' }}
                     />
                   </Card>

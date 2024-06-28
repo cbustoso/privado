@@ -1,11 +1,11 @@
 'use client'
 /* eslint-disable no-unused-vars */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useSection } from "@/context/SectionContext";
 import ReserveBtn from "./ReserveBtn";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { logo, logoudp } from "./imagepath";
+import { logo } from "./imagepath";
 import { useMediaQuery } from "@mui/material";
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -42,6 +42,19 @@ const Header = () => {
   const currentPage = usePathname()
   const divRef = useRef();
   const matches = useMediaQuery('(min-width:600px)');
+
+  const isSmallDevice = useMediaQuery(
+    "only screen and (max-width : 640px)"
+  );
+  const isMediumDevice = useMediaQuery(
+    "only screen and (min-width : 641px) and (max-width : 768px)"
+  );
+  const isLargeDevice = useMediaQuery(
+    "only screen and (min-width : 769px) and (max-width : 1024px)"
+  );
+  const isExtraLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1025px)"
+  );
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -91,7 +104,7 @@ const Header = () => {
           </Typography>
 
           {/*  MENU MOBILE */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -153,7 +166,7 @@ const Header = () => {
           </Typography>
 
           {/* MENU DASHBOARD */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }, justifyContent: 'flex-end' }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {pages.map((page) => {
               return (
                 <Link style={{ color: 'black' }} href={page.url} key={page.title} >
@@ -164,7 +177,7 @@ const Header = () => {
                       }`}
 
                     onClick={() => handleNavClick(page.label)}
-                    sx={{ my: 2, color: 'black', display: 'block' }}
+                    sx={{ my: 2, color: 'black', display: 'block', width: isLargeDevice ? 'min-content' : 'fit-content' }}
                   >
 
                     {page.title}
@@ -183,7 +196,7 @@ const Header = () => {
                 ? <>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="/login#profesionales">
-                    <IoMdLogIn style={{ fontSize: '30px', color: '#000' }} />
+                    <IoMdLogIn style={{ fontSize: '50px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px',background: '#b82925', color: '#fff' }} />
                   </Link>
                 </>
                 : session.user.picture ?
