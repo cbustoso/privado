@@ -20,7 +20,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
       <button
         className='btn btn-rounded btn-reservar'
         style={{
-          width: matches ? '189px' : '121px',
+          width: matches ? '189px' : '100px',
           height: matches ? '56px' : '40px',
           // margin: '16px 0',
           backgroundColor: bgColor,

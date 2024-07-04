@@ -118,7 +118,7 @@ const Addblog = () => {
                               }
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-6">
+                          <div className="col-12">
                             <div className="form-group local-forms">
                               <label>
                                 Descripción <span className="login-danger">*</span>
@@ -285,7 +285,7 @@ const Addblog = () => {
                               />
                             </div>
                           </div> */}
-                          <div className="col-12 col-md-6 col-xl-6">
+                          {/* <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
                                 Agregar imágenes
@@ -300,7 +300,7 @@ const Addblog = () => {
                                 {...register('tags')}
                               />
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
@@ -317,7 +317,7 @@ const Addblog = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-6">
+                          <div className="col-12">
                             <div className="form-group select-gender">
                               <label className="gen-label">
                                 Estado <span className="login-danger">*</span>
@@ -356,6 +356,37 @@ const Addblog = () => {
                                   Inactivo
                                 </label>
                               </div>
+                              {
+                                errors.estado
+                                && <span className="login-danger">
+                                  <small>{errors.estado.message}</small>
+                                </span>
+                              }
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-6">
+                            <div className="form-group select-gender">
+                              <label className="gen-label">
+                                ¿Destacar? <span className="login-danger">*</span>
+                              </label>
+                              <div className="form-check-inline">
+                                <label className="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    name="estado"
+                                    value="activo"
+                                    className="form-check-input"
+                                    {...register('estado', {
+                                      required: {
+                                        value: true,
+                                        message: 'Estado es requerido',
+                                      }
+                                    })}
+                                  />
+                                  Sí
+                                </label>
+                              </div>
+                             
                               {
                                 errors.estado
                                 && <span className="login-danger">
