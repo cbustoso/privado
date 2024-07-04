@@ -47,7 +47,7 @@ export const blogs = [
         url: 'alcohol_y_drogas.pdf'
       },
       {
-        titulo: 'Señales de riesgo en mi consumo de alcohol y drogas',
+        titulo: 'Señales de riesgo',
         bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
         url: 'senales_de_riesgo_en_alcohol_y_drogas.pdf'
       }
@@ -95,12 +95,12 @@ export const blogs = [
     downloads: [
       {
         titulo: 'Estrategias de intervención',
-        bajada: '¿Hablemos de depresión?',
+        bajada: '¿Qué puedo hacer si estoy frente a alguien con ideación suicida?',
         url: 'estrategias_de_intervencion.pdf'
       },
       {
-        titulo: 'Prevención del suicidio',
-        bajada: '¿Hablemos de depresión?',
+        titulo: 'Prevención del suicidio en universitarios',
+        bajada: '¿Qué debemos saber?',
         url: 'prevencion_del_suicidio.pdf'
       }
     ]
@@ -212,17 +212,15 @@ export const blogs = [
 <h2>5. Utiliza la tecnología a tu favor</h2>
 <p>Herramientas y aplicaciones como calendarios digitales, bloqueadores de sitios web distractores y apps de gestión de tareas pueden ser extremadamente útiles. Establece límites claros para el uso de dispositivos y redes sociales durante tus horas de estudio para maximizar tu productividad.</p>
 
-<h3>Reflexiones finales</h3>
+<h2>Reflexiones finales</h2>
 <p>Gestionar tu tiempo eficazmente mientras estás en la universidad no solo mejora tu rendimiento académico, sino que también reduce el estrés y te permite disfrutar de una vida estudiantil más equilibrada. Experimenta con diferentes técnicas hasta que encuentres las que mejor se adapten a tus necesidades y estilo de vida. Recuerda, el objetivo es trabajar de manera más inteligente, no más dura.</p>
 
-<h3>Referencias</h3>
+<h2>Referencias</h2>
 <ul>
 <li>Valero Jiménez, M. del C. (2011). Técnicas de estudio. <em>Revista de Clasehistoria</em>. Recuperado de http://www.claseshistoria.com/revista/index.html</li>
 <li>Cenamor, M. G., & Cano Ángel, E. (2022). Técnicas de estudio. <em>Asociación Alganda</em>. Recuperado de https://www.alganda.org/webalganda/wp-content/uploads/2022/02/Cuaderno-de-t%C3%A9cnicas-de-estudio.-Alganda-1.pdf</li>
 <li>Universia. (2020). Técnicas y hábitos de estudio para obtener buenos resultados académicos en la universidad. <em>Universia</em>.</li>
-</ul>
-    
-    `,
+</ul>`,
     imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true",
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [

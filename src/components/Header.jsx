@@ -196,7 +196,7 @@ const Header = () => {
                 ? <>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="/login#profesionales">
-                    <IoMdLogIn style={{ fontSize: '50px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px',background: '#b82925', color: '#fff' }} />
+                    <IoMdLogIn style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px',background: '#b82925', color: '#fff' }} />
                   </Link>
                 </>
                 : session.user.picture ?

@@ -92,14 +92,17 @@ const Blogdetails = ({ params }) => {
           {matches && <div style={{
             marginTop: '100px',
             height: '520px',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            // display: 'flex',
+            // alignItems: 'center',
           }}>
             <img
               alt="#"
               src={blog.imagen}
               width={'100%'}
               style={{
-                backgroundPosition: 'center'
+                backgroundPosition: 'center',
+                // height: 'fit-content'
               }}
             />
 
@@ -174,13 +177,13 @@ const Blogdetails = ({ params }) => {
                         </div>
                       </div>
 
-                      <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
+                      {blog.video !== '' &&  <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
                         {/* <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
                           <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
                         </div> */}
 
-                        {blog.video !== '' && <iframe width={matches ? "60%" : "100%"} height="615" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
-                      </div>
+                        <iframe width={matches ? "60%" : "100%"} height="615" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                      </div>}
                     </article>
 
                     <div className="row d-flex my-4" style={{ padding: '20px 0', marginLeft: matches ? '56px' : '0px', borderTop: '1px solid grey', textAlign: 'center' }} >

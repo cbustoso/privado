@@ -11398,6 +11398,8 @@ d29e08
 }
 
 
+
+/* BLOG */
 .blog-content p, .blog-content li {
   font-size: 24px;
   line-height: 32px;
@@ -11412,6 +11414,7 @@ d29e08
   font-weight: 400;
   color: #000000;
   text-wrap: balance;
+  overflow-wrap: break-word
 }
 
 .blog-content h2 {
@@ -11453,7 +11456,6 @@ d29e08
 .blog-content tr:nth-child(even) {
   background-color: #E6E9EC;
 }
-
 /* .blog-content tr{
 
 } */

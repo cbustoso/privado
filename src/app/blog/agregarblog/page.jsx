@@ -4,7 +4,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
 import dynamic from 'next/dynamic'
- 
+
 // import TextEditor from '../../../components/TextEditor';
 // import Sidebar from '../../../components/Sidebar';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
@@ -19,7 +19,7 @@ import ProtectedPage from '@/components/ProtectedRoutes';
 const DynamicSidebar = dynamic(() => import('../../../components/Sidebar'), {
   loading: () => <p>Loading...</p>,
 })
- 
+
 const DynamicTextEditor = dynamic(() => import('../../../components/TextEditor'), {
   loading: () => <p>Loading...</p>,
 })
@@ -29,7 +29,7 @@ const Addblog = () => {
   const { data: session } = useSession()
   const router = useRouter();
   // useAuthorization(['alumno'])
-  
+
   const loadFile = (event) => {
     // Handle file loading logic here
   };
@@ -52,7 +52,7 @@ const Addblog = () => {
   } = useForm()
 
   const onSubmit = handleSubmit(async data => {
-  console.log(data)
+    console.log(data)
   })
 
   return (
@@ -121,7 +121,7 @@ const Addblog = () => {
                           <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
-                                Nombre autor <span className="login-danger">*</span>
+                                Descripción <span className="login-danger">*</span>
                               </label>
                               <input
                                 className="form-control"
@@ -142,7 +142,7 @@ const Addblog = () => {
                               }
                             </div>
                           </div>
-                          <div className="col-12 col-md-6 col-xl-6">
+                          {/* <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
                                 Profesión autor <span className="login-danger">*</span>
@@ -165,8 +165,8 @@ const Addblog = () => {
                                 </span>
                               }
                             </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-6">
+                          </div> */}
+                          {/* <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
                                 Categorías <span className="login-danger">*</span>
@@ -270,8 +270,8 @@ const Addblog = () => {
                                 )}
                               />
                             </div>
-                          </div>
-                          <div className="col-12 col-md-6 col-xl-6">
+                          </div> */}
+                          {/* <div className="col-12 col-md-6 col-xl-6">
                             <div className="form-group local-forms">
                               <label>
                                 Tags <small>(separadas con una coma)</small>{" "}
@@ -281,6 +281,38 @@ const Addblog = () => {
                                 type="text"
                                 data-role="tagsinput"
                                 className="form-control"
+                                {...register('tags')}
+                              />
+                            </div>
+                          </div> */}
+                          <div className="col-12 col-md-6 col-xl-6">
+                            <div className="form-group local-forms">
+                              <label>
+                                Agregar imágenes
+                                <span className="login-danger">*</span>
+                              </label>
+                              <input
+                                type="file"
+                                data-role="files"
+                                className="form-control"
+                                accept="image/*,.pdf"
+                                multiple
+                                {...register('tags')}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-6">
+                            <div className="form-group local-forms">
+                              <label>
+                                Agregar archivos descargables
+                                <span className="login-danger">*</span>
+                              </label>
+                              <input
+                                type="file"
+                                data-role="files"
+                                className="form-control"
+                                accept="image/*,.pdf"
+                                multiple
                                 {...register('tags')}
                               />
                             </div>
