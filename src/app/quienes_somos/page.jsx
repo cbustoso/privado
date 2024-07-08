@@ -1,58 +1,18 @@
 'use client'
-import Header from "@/components/Header";
-import BasicCard from "@/components/BasicCard";
-import Box from '@mui/material/Box';
-import Image from "next/image";
-import { carrousel01, profesional01, map } from "@/components/imagepath";
+import { profesional01, map } from "@/components/imagepath";
 import { useMediaQuery } from "@mui/material";
-import { Card, CardMedia, CardActions, Typography } from "@mui/material";
+import { Card, CardMedia, Typography } from "@mui/material";
 import { } from "@/components/imagepath";
-import { blogs } from "@/utils/blogs";
-import FooterDae from "@/components/FooterDae";
 import ReserveBtn from "@/components/ReserveBtn";
-import { FaArrowLeft } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import SimpleBackdrop from "@/components/Backdrop";
 import Elevation from "@/components/HowTo"
 
-export default function Dash() {
+export default function QuienesSomos() {
   const matches = useMediaQuery('(min-width:600px)');
-  const router = useRouter()
 
   return (
-    <>
-      {matches && <div style={{
-        height: '520px',
-        overflow: 'hidden',
-        backgroundImage: `url(${carrousel01.src})`,
-        backgroundPosition: 'center 30%',
-        backgroundSize: 'cover'
-      }}>
-        {/* <img
-          alt="#"
-          src={carrousel01.src}
-          width={'100%'}
-        /> */}
-      </div>
-      }
-
       <div className="row flex-column d-flex align-items-center sailec">
         <div className="col-12 col-lg-10" style={{ padding: 0 }}>
           <div>
-            {matches &&
-              <button className='btn mt-4 mb-5'
-                style={{
-                  border: '1px solid #A6A6A6',
-                  height: '56px',
-                  width: '163px',
-                  padding: '0px 24px',
-                  borderRadius: '100px',
-                  marginLeft: '76px'
-                }}
-                onClick={() => router.back()}
-              >
-                <FaArrowLeft /> Volver
-              </button>}
             <div className="card-body flex-row d-flex justify-content-center mt-4">
               <h2
                 className="sailec"
@@ -209,14 +169,14 @@ export default function Dash() {
             </div>
             <div className="row" style={{ margin: '0 10px' }} >
               <div className="card-body flex-column d-flex align-items-center">
-              {console.log('matches', matches)}
+                {console.log('matches', matches)}
                 {
-                matches
-                  ? <h3 className="sailec-medium">¿Dónde se encuentra el <strong>DSME?</strong></h3>
-                  : <>
-                    <h3 className="sailec-medium">¿Dónde se encuentra el</h3>
-                    <h3 className="sailec-medium"><strong>DSME?</strong></h3>
-                  </>
+                  matches
+                    ? <h3 className="sailec-medium">¿Dónde se encuentra el <strong>DSME?</strong></h3>
+                    : <>
+                      <h3 className="sailec-medium">¿Dónde se encuentra el</h3>
+                      <h3 className="sailec-medium"><strong>DSME?</strong></h3>
+                    </>
                 }
                 <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
                   <a href="https://maps.app.goo.gl/MgPjwoqPatGxty8W8" target="_blank">
@@ -228,9 +188,6 @@ export default function Dash() {
           </div>
         </div>
       </div>
-      <FooterDae />
-
-    </>
 
   );
 }

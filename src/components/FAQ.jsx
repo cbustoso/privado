@@ -8,23 +8,7 @@ import { useMediaQuery } from "@mui/material";
 
 import { AddCircleOutlineOutlined, RemoveCircleOutline } from '@mui/icons-material';
 
-const questions = [
-  {
-    id: 1,
-    title: '¿Cómo pedir ayuda?',
-    answer: 'Primero, debes saber que pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio. Y para iniciar ese proceso, es importante saber dos cosas: ¿Cuándo y donde pedir ayuda?'
-  }, {
-    id: 2,
-    title: '¿Cuándo pedir ayuda?',
-    answer: 'A menudo aparecen ciertas señales que nos pueden indicar que es necesario buscar apoyo profesional o de otras personas. Te recomendamos que en caso de que presentes alguno de estos ítems, solicites ayuda y converses de lo que te pasa.'
-  }, {
-    id: 3,
-    title: '¿A quién puedo acudir en la universidad?',
-    answer: 'En la Universidad Diego Portales contamos con diversos canales para que puedas pedir ayuda en caso de que lo necesites. Aquí te dejamos algunos de los medios por los cuáles te puedes poner en contacto con el Departamento de Salud Mental (DSM) de nuestra Universidad.'
-  }
-]
-
-const FrequentAskedQuestions = () => {
+const FrequentAskedQuestions = ({questions}) => {
   const [expanded, setExpanded] = useState(false);
   const matches = useMediaQuery('(min-width:600px)');
 
