@@ -39,7 +39,6 @@ const questions = [
 
 const IntervencionesClinicas = () => {
   const matches = useMediaQuery('(min-width:600px)');
-
   const [activeTab, setActiveTab] = useState('basictab1');
 
   const handleTabClick = (tabId) => {
@@ -47,14 +46,13 @@ const IntervencionesClinicas = () => {
   };
   return (
 
-    <div className="row" style={{ paddingRight: '0px', marginRight: '0px' }}>
+    <div className="row intervenciones-clinicas" style={{ paddingRight: '0px', marginRight: '0px' }}>
       <div className="col-12" style={{ paddingRight: '0px', marginRight: '0px' }}>
         <div className="card quienes-somos" style={{ padding: '0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ paddingRight: '0px', marginRight: '0px' }}>
             <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Intervenciones clínicas
             </h3>
-
             <ul className="nav nav-tabs">
               <li className="nav-item">
                 <Link

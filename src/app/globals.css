@@ -13411,11 +13411,22 @@ td:has(div.text-end) {
 
 
 /* QUIENES SOMOS */
+
+.navbarSupportedContent{
+  height: 64px;
+}
+
+#navbarSupportedContent li{
+  margin: 0;
+}
+
 .nav-link-quienes-somos {
   color: #000;
   font-size: 20px;
   line-height: 28px;
   /* // textWrap: 'balance', */
+  border-bottom: 2px solid #fff;
+
 }
 .nav-link-quienes-somos:hover {
   border-bottom: 2px solid #3886ff;
@@ -13429,7 +13440,7 @@ td:has(div.text-end) {
   text-wrap: pretty;
 }
 
-.section-quienes-somos li {
+.intervenciones-clinicas li {
   /* font-size: 20px; */
   text-wrap: pretty;
   margin: 20px 0;

@@ -48,24 +48,29 @@ export default function QuienesSomosLayout({ children }) {
                 <span className="navbar-toggler-icon"></span>
               </button> */}
 
-              <div className=" navbar" id="navbarSupportedContent">
+              <div  id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                  <li className="nav-item active" style={{border: '1px solid red'}}>
+                  <li className="nav-item" >
+                    <Link className="nav-link nav-link-quienes-somos" href="/quienes_somos">
+                      Quiénes somos
+                    </Link>
+                  </li>
+                  <li className="nav-item" >
                     <Link className="nav-link nav-link-quienes-somos" href="/quienes_somos/intervenciones-clinicas">
                       Intervenciones clínicas
                     </Link>
                   </li>
-                  <li className="nav-item my-2 my-lg-0" style={{border: '1px solid red'}}>
+                  <li className="nav-item">
                     <Link className="nav-link nav-link-quienes-somos" href="/quienes_somos/intervenciones-grupales">
                       Intervenciones grupales
                     </Link>
                   </li>
-                  <li className="nav-item my-2 my-lg-0">
+                  <li className="nav-item">
                     <Link className="nav-link nav-link-quienes-somos" href="/quienes_somos/protocolo-de-accion-en-salud-mental">
                       Protocolo de acción en salud mental
                     </Link>
                   </li>
-                  <li className="nav-item my-2 my-lg-0">
+                  <li className="nav-item">
                     <Link className="nav-link nav-link-quienes-somos" href="/quienes_somos/intervencion-en-promocion-y-prevencion">
                       Promoción y prevención
                     </Link>
