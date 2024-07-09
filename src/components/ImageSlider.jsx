@@ -228,7 +228,7 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   return (
-    <div id="topicos" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : sliderStyles} ref={innerRef}>
+    <div id="inicio" style={matches ? { ...sliderStyles, height: imgHeightDesktop } : sliderStyles} ref={innerRef}>
       <div style={matches ? slideStyles : {}}></div>
 
       {matches ?

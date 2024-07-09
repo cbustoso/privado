@@ -15,7 +15,7 @@ import { IoMdLogIn } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 
 const pagesWithEvents = [
-  { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
+  { title: 'INICIO', url: '/#inicio', label: 'inicio' },
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
@@ -24,7 +24,7 @@ const pagesWithEvents = [
 ];
 
 const pagesWithoutEvents = [
-  { title: 'TÓPICOS', url: '/#topicos', label: 'topicos' },
+  { title: 'INICIO', url: '/#inicio', label: 'inicio' },
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
   { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
