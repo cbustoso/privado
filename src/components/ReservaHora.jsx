@@ -50,7 +50,7 @@ const ReservaTuHora = () => {
                       boxShadow: 0,
                       display: 'inline-block',
                       padding: '2em 0',
-                      bgcolor: '#f1f1f1'
+                      // bgcolor: '#f1f1f1'
                     }}>
                     <CardMedia
                       component="img"
@@ -72,7 +72,7 @@ const ReservaTuHora = () => {
                       justifyContent: 'space-between',
                       paddingBottom: '10px',
                       padding: '2em',
-                      bgcolor: '#f1f1f1'
+                      // bgcolor: '#f1f1f1'
                     }}>
                     <Typography
                       variant="body2"
