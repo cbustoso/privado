@@ -26,42 +26,16 @@ const PromocionYPrevencion = () => {
                   href="#promocion-y-prevencion"
                   onClick={() => handleTabClick('promocion-y-prevencion')}
                 >
-                  ¡Visita la web de promoción y prevención!
+                  Promoción y Prevención
                 </Link>
               </li>
             </ul>
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'promocion-y-prevencion' ? 'show active' : ''}`} id="promocion-y-prevencion">
-                <h2>¡Visita la web de promoción y prevención!</h2>
+                <h2>Promoción y Prevención</h2>
                 <div className="blog-content">
                   <p>
-                    ¡Te invitamos a cuidar tu bienestar mental! En estos tiempos tan desafiantes, es fundamental priorizar nuestra salud mental. Hemos preparado recursos en línea que te brindarán consejos, herramientas y recursos para promover y preservar tu salud mental.
-                  </p>
-                  <p>
-                    Visita nuestro enlace especial de promoción y prevención en salud mental:
-                  </p>
-
-                  https://saludmentalestudiantil.udp.cl/
-
-                  <p>
-                    En este sitio encontrarás:
-                  </p>
-                  <ul>
-                    <li>
-                      Información sobre actividades del Departamento de Salud Mental Estudiantil
-                    </li>
-                    <li>
-                      Información sobre la prevención del suicidio, prevención del consumo de alcohol y drogas y autocuidado, entre otras.
-                    </li>
-                    <li>
-                      Recursos prácticos de cuidado en salud mental
-                    </li>
-                  </ul>
-                  <p>
-                    No subestimes el valor de cuidar tu bienestar emocional. Visita el enlace y descubre cómo puedes mejorar tu calidad de vida. ¡Tu salud mental es importante!
-                  </p>
-                  <p>
-                    ¡Haz clic en el enlace y comienza tu viaje hacia una mente más saludable hoy mismo!
+                    El Departamento de Salud Mental de la UDP aborda la promoción y prevención en salud mental, centrando esfuerzos en mejorar el bienestar emocional y psicológico de la comunidad universitaria. Implementa estrategias para reducir los riesgos de trastornos mentales y desarrolla un Plan de Formación en Salud Mental para capacitar a docentes y administrativos en habilidades de manejo de crisis y primeros auxilios psicológicos, incluyendo cursos específicos orientados a mejorar la salud mental en contextos universitarios.
                   </p>
                 </div>
               </div>
