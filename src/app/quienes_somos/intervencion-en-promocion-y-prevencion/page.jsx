@@ -5,7 +5,7 @@ import { useMediaQuery } from "@mui/material";
 
 const PromocionYPrevencion = () => {
   const matches = useMediaQuery('(min-width:600px)');
-  const [activeTab, setActiveTab] = useState('basictab1');
+  const [activeTab, setActiveTab] = useState('promocion-y-prevencion');
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -22,17 +22,17 @@ const PromocionYPrevencion = () => {
             <ul className="nav nav-tabs">
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
-                  href="#basictab1"
-                  onClick={() => handleTabClick('basictab1')}
+                  className={`nav-link-submenu ${activeTab === 'promocion-y-prevencion' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#promocion-y-prevencion"
+                  onClick={() => handleTabClick('promocion-y-prevencion')}
                 >
                   ¡Visita la web de promoción y prevención!
                 </Link>
               </li>
             </ul>
-            <div className="tab-content">
-              <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab1">
-                <h4>¡Visita la web de promoción y prevención!</h4>
+            <div className="tab-content tab-dsme-content">
+              <div className={`tab-pane ${activeTab === 'promocion-y-prevencion' ? 'show active' : ''}`} id="promocion-y-prevencion">
+                <h2>¡Visita la web de promoción y prevención!</h2>
                 <div className="blog-content">
                   <p>
                     ¡Te invitamos a cuidar tu bienestar mental! En estos tiempos tan desafiantes, es fundamental priorizar nuestra salud mental. Hemos preparado recursos en línea que te brindarán consejos, herramientas y recursos para promover y preservar tu salud mental.

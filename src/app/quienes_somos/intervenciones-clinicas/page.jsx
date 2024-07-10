@@ -39,7 +39,7 @@ const questions = [
 
 const IntervencionesClinicas = () => {
   const matches = useMediaQuery('(min-width:600px)');
-  const [activeTab, setActiveTab] = useState('basictab1');
+  const [activeTab, setActiveTab] = useState('descripcion-general');
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -56,43 +56,43 @@ const IntervencionesClinicas = () => {
             <ul className="nav nav-tabs">
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
-                  href="#basictab1"
-                  onClick={() => handleTabClick('basictab1')}
+                  className={`nav-link-submenu ${activeTab === 'descripcion-general' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#descripcion-general"
+                  onClick={() => handleTabClick('descripcion-general')}
                 >
                   Descripción general
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab2' ? 'active' : ''}`}
-                  href="#basictab2"
-                  onClick={() => handleTabClick('basictab2')}
+                  className={`nav-link-submenu ${activeTab === 'solicitud-de-hora' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#solicitud-de-hora"
+                  onClick={() => handleTabClick('solicitud-de-hora')}
                 >
                   Solicitud de hora
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab3' ? 'active' : ''}`}
-                  href="#basictab3"
-                  onClick={() => handleTabClick('basictab3')}
+                  className={`nav-link-submenu ${activeTab === 'entrevista-de-despeje' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#entrevista-de-despeje"
+                  onClick={() => handleTabClick('entrevista-de-despeje')}
                 >
                   ¿Qué es la entrevista de despeje?
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab4' ? 'active' : ''}`}
-                  href="#basictab4"
-                  onClick={() => handleTabClick('basictab4')}
+                  className={`nav-link-submenu ${activeTab === 'convenios-y-profesionales-recomendados' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#convenios-y-profesionales-recomendados"
+                  onClick={() => handleTabClick('convenios-y-profesionales-recomendados')}
                 >
                   Convenios y Profesionales recomendados
                 </Link>
               </li>
             </ul>
             <div className="tab-content tab-dsme-content">
-              <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab1">
+              <div className={`tab-pane ${activeTab === 'descripcion-general' ? 'show active' : ''}`} id="descripcion-general">
                 <h2>Descripción General</h2>
                 <div className="blog-content">
                   <p>
@@ -104,7 +104,7 @@ const IntervencionesClinicas = () => {
 
                 <FrequentAskedQuestions questions={questions} />
               </div>
-              <div className={`tab-pane ${activeTab === 'basictab2' ? 'show active' : ''}`} id="basictab2">
+              <div className={`tab-pane ${activeTab === 'solicitud-de-hora' ? 'show active' : ''}`} id="solicitud-de-hora">
                 <h2>Solicitud de hora</h2>
                 <div className="blog-content">
                   <p>Para acceder a entrevista de despeje debes seguir los siguientes pasos:</p>
@@ -117,7 +117,7 @@ const IntervencionesClinicas = () => {
                   <strong>Importante*: Si no se completan los 3 primeros pasos, la hora no será agendada</strong>
                 </div>
               </div>
-              <div className={`tab-pane ${activeTab === 'basictab3' ? 'show active' : ''}`} id="basictab3">
+              <div className={`tab-pane ${activeTab === 'entrevista-de-despeje' ? 'show active' : ''}`} id="entrevista-de-despeje">
                 <h2>¿Qué es la entrevista de despeje?</h2>
                 <div className="blog-content">
                   <p>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
@@ -125,7 +125,7 @@ const IntervencionesClinicas = () => {
                   <p>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p>
                 </div>
               </div>
-              <div className={`tab-pane ${activeTab === 'basictab4' ? 'show active' : ''}`} id="basictab4">
+              <div className={`tab-pane ${activeTab === 'convenios-y-profesionales-recomendados' ? 'show active' : ''}`} id="convenios-y-profesionales-recomendados">
                 <h2>Convenios y Profesionales recomendados</h2>
                 <div className="blog-content">
                   <h3>Convenios</h3>

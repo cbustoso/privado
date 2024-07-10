@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mui/material";
 
 const ProtocoloAccionSaludMental = () => {
   const matches = useMediaQuery('(min-width:600px)');
-  const [activeTab, setActiveTab] = useState('basictab1');
+  const [activeTab, setActiveTab] = useState('protocolo-de-accion-en-salud-mental');
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -23,16 +23,16 @@ const ProtocoloAccionSaludMental = () => {
             <ul className="nav nav-tabs">
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${activeTab === 'basictab1' ? 'active' : ''}`}
-                  href="#basictab1"
-                  onClick={() => handleTabClick('basictab1')}
+                  className={`nav-link-submenu ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
+                  href="#protocolo-de-accion-en-salud-mental"
+                  onClick={() => handleTabClick('protocolo-de-accion-en-salud-mental')}
                 >
                   Protocolo de acción en salud mental
                 </Link>
               </li>
             </ul>
-            <div className="tab-content">
-              <div className={`tab-pane ${activeTab === 'basictab1' ? 'show active' : ''}`} id="basictab1">
+            <div className="tab-content tab-dsme-content">
+              <div className={`tab-pane ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'show active' : ''}`} id="protocolo-de-accion-en-salud-mental">
                 <h4>Protocolo de acción en salud mental</h4>
                 <div className="blog-content">
                   <p>

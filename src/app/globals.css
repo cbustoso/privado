@@ -13424,12 +13424,23 @@ td:has(div.text-end) {
   color: #000;
   font-size: 20px;
   line-height: 28px;
-  /* // textWrap: 'balance', */
   border-bottom: 2px solid #fff;
-
+  font-weight: 400;
+  font-size: 14px;
 }
-.nav-link-quienes-somos:hover {
-  border-bottom: 2px solid #3886ff;
+
+.nav-link-submenu{
+  color: #000;
+  font-size: 20px;
+  line-height: 28px;
+  border-bottom: 2px solid #fff;
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0 20px;
+}
+
+.nav-link-quienes-somos:hover, .nav-link-submenu:hover {
+  border-bottom: 2px solid #3886ff !important;
   color: #000;
   /* font-size: 20px; */
   line-height: 28px;
@@ -13443,11 +13454,14 @@ td:has(div.text-end) {
 .intervenciones-clinicas li {
   /* font-size: 20px; */
   text-wrap: pretty;
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 .section-quienes-somos li::marker {
   color: #3886ff;
 }
 
+.quienes-somos-active {
+  border-bottom: 2px solid #3886ff;
+}
 /* QUIENES SOMOS */
