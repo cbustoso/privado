@@ -78,18 +78,7 @@ const QuienesSomos = () => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      El Departamento de Salud Mental Estudiantil (DSME) es un equipo cuya misión es contribuir al bienestar psicológico y emocional del estudiantado de la UDP.
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      className="sailec"
-                      sx={{
-                        color: '#000',
-                        // textWrap: 'balance',
-                        fontSize: '20px',
-                        lineHeight: '28px'
-                      }}>
-                      Nuestro modelo de intervención se basa en la Promoción, Prevención, Atención Grupal y Atención Clínica Individual; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
+                      El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
@@ -157,11 +146,7 @@ const QuienesSomos = () => {
                       </Typography>
 
                       <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
-                        El Departamento de Salud Mental Estudiantil (DSME) es un equipo cuya misión es contribuir al bienestar psicológico y emocional del estudiantado de la Universidad Diego Portales.
-                      </p>
-                      <p>
-                        Nuestro modelo de intervención se basa en la Promoción, Prevención, Atención Grupal y Atención Clínica Individual; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
-
+                        El Departamento de Salud Mental Estudiantil (DSME) de la UDP se dedica a fomentar el bienestar psicológico y emocional del estudiantado. Su enfoque incluye promoción, prevención, atención grupal y clínica individual para abordar problemas psicosociales durante la vida universitaria.
                       </p>
                       <Link href={`/quienes_somos`}>
                         <button
