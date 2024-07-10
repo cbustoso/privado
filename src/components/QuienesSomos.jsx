@@ -93,7 +93,7 @@ const QuienesSomos = () => {
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
-                        <Link href={`/quienes-somos`}>
+                        <Link href={`/quienes_somos`}>
                           <button
                             className={`btn submit-form me-2 sailec-medium `}
                             style={{
@@ -163,7 +163,7 @@ const QuienesSomos = () => {
                         Nuestro modelo de intervención se basa en la Promoción, Prevención, Atención Grupal y Atención Clínica Individual; con la finalidad de prestar apoyo para enfrentar las diversas problemáticas psicosociales que se presentan en el transcurso de la vida estudiantil.
 
                       </p>
-                      <Link href={`/quienes-somos`}>
+                      <Link href={`/quienes_somos`}>
                         <button
                           className="btn submit-form me-2"
                           style={{
