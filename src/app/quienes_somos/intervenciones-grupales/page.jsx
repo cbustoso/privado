@@ -63,7 +63,8 @@ const IntervencionesGrupales = () => {
               <div className={`tab-pane ${activeTab === 'descripcion-general' ? 'show active' : ''}`} id="descripcion-general">
                 <h2>Descripción General</h2>
                 <div className="blog-content">
-                  <p>El área de intervenciones grupales forma parte del Departamento de Salud Mental Estudiantil. Ésta tiene como objetivo ofrecer diversos espacios para fomentar el desarrollo de estrategias y herramientas para el cuidado de la Salud Mental, la obtención de un mayor bienestar y una experiencia universitaria integral y satisfactoria.
+                  <p>
+                    Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento. Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
                   </p>
                 </div>
               </div>
