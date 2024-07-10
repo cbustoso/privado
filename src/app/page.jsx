@@ -9,6 +9,7 @@ import ImageSlider from '../components/ImageSlider';
 import TestSlider from '../components/TestSlider';
 import Events from '../components/Events';
 import FrequentAskedQuestions from '../components/FAQ';
+import QuienesSomos from "@/components/QuienesSomos";
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import FooterDae from "@/components/FooterDae";
@@ -19,46 +20,46 @@ import SimpleBackdrop from "@/components/Backdrop";
 import { blogs } from "@/utils/blogs";
 
 const events = [
-    {
-      title: "Salud Mental",
-      address: "Av. Portugal 782, Santiago",
-      date: "2024/02/18",
-      time: "09:00",
-      campus: "Sede Santiago",
-      location: "Auditorio",
-      image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
-      highlight: false,
-    },
-    {
-      title: "Salud Mental",
-      address: "Av. Portugal 782, Santiago",
-      date: "2024/02/18",
-      time: "09:00",
-      campus: "Sede Centro",
-      location: "Auditorio",
-      image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
-      highlight: true,
-    },
-    {
-      title: "Salud Mental",
-      address: "Av. Portugal 782, Santiago",
-      date: "2024/03/18",
-      time: "09:00",
-      campus: "Sede Santiago",
-      location: "Auditorio",
-      image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
-      highlight: false,
-    },
-    {
-      title: "Salud Mental",
-      address: "Av. Portugal 782, Santiago",
-      date: "2024/02/18",
-      time: "09:00",
-      campus: "Sede Santiago",
-      location: "Auditorio",
-      image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
-      highlight: false,
-    }
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
+    highlight: false,
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Centro",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
+    highlight: true,
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/03/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
+    highlight: false,
+  },
+  {
+    title: "Salud Mental",
+    address: "Av. Portugal 782, Santiago",
+    date: "2024/02/18",
+    time: "09:00",
+    campus: "Sede Santiago",
+    location: "Auditorio",
+    image: 'https://posgrados.udp.cl/wp/wp-content/uploads/2023/12/MBA-UDP-92-scaled-1.jpg',
+    highlight: false,
+  }
 ]
 
 const tests = [
@@ -245,7 +246,7 @@ export default function Home() {
       return texto;
     }
   }
-  
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -273,7 +274,7 @@ export default function Home() {
       });
     };
   }, [setActiveSection]);
-// console.log('BLOGS', blogs.slice(-4 ))
+  // console.log('BLOGS', blogs.slice(-4 ))
 
   return (
     <>
@@ -283,23 +284,23 @@ export default function Home() {
           <SimpleBackdrop />
           :
           <>
-            {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(-4 )} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
-            {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
+            {blogs.length > 0 && isSmallDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
+            {blogs.length > 0 && isExtraLargeDevice && <ImageSlider slides={blogs.slice(-4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
             {/* {isLoading && <strong>Cargando...</strong>} */}
             {/* {isError && <p>Ha habido un error</p>} */}
             {/* {!isError && blogs.length === 0 && <Carrousel />} */}
+            {blogs.length > 0 && <div style={{background: '#f1f1f1'}}><ReservaTuHora innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} /> </div>}
+            {blogs.length > 0 && <div ><QuienesSomos /></div>}
+            {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
-            {blogs.length > 0 && <ReservaTuHora slides={blogs.slice(0, 5)} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
-            {blogs.length > 0 && <TestSlider slides={tests.slice(0, 4)}  innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
-
-            {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>}
+            {events.length !== 0 && <Events events={sortedEvents} matches={matches} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />}
 
             <div className="row" style={{ padding: 0, margin: 0 }}>
               <div className="col-sm-12 text-center" style={{ padding: 0, margin: '32px 0 0' }}>
                 <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
               </div>
             </div>
-            <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }}/>
+            <FrequentAskedQuestions questions={questions} innerRef={el => sectionRefs.current[0] = el} style={{ height: '100vh', padding: '1rem' }} />
             <FooterDae matches={matches} />
           </>
         }
