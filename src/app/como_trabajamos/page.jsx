@@ -52,7 +52,7 @@ const IntervencionesClinicas = () => {
 
   useEffect(() => {
     // Bootstrap JS requires window and document objects, which are not available in the Next.js SSR phase.
-    if (typeof window !== "undefined" && typeof document !== "undefined") {
+    if (typeof window !== "undefined" /* && typeof document !== "undefined" */) {
       require("bootstrap/dist/js/bootstrap.bundle.min.js");
     }
   }, []);
