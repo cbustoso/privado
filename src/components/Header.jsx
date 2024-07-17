@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { logo } from "./imagepath";
 import { useMediaQuery } from "@mui/material";
+import { Tooltip, Avatar } from '@mui/material';
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import { usePathname } from "next/navigation";
@@ -31,9 +32,17 @@ const pagesWithoutEvents = [
   { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' }
 ];
 
+const settings = [
+  { title: 'Intervenciones', url: '/como_trabajamos', label: '/como_trabajamos' },
+  { title: 'Protocolo de Acción', url: '/como_trabajamos/protocolo-de-accion-en-salud-mental', label: '/protocolo-de-accion-en-salud-mental' },
+  { title: 'Prevención', url: '/como_trabajamos/intervencion-en-promocion-y-prevencion', label: '/intervencion-en-promocion-y-prevencion' },
+  { title: 'Convenios y profesionales', url: '/como_trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
+];
+
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const { activeSection, setActiveSection } = useSection();
   const open = Boolean(anchorEl);
   const { data: session } = useSession()
@@ -71,6 +80,15 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+    // setActiveSection(id);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const handleNavClick = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(id);
@@ -93,6 +111,7 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontFamily: 'sailec'
             }}
           >
             <img
@@ -136,8 +155,8 @@ const Header = () => {
               {
                 pages.map((page) => (
                   <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <a href={page.url} style={{ color: 'black' }}>
+                    <Typography textAlign="center" className="sailec">
+                      <a href={page.url} style={{ color: 'black',fontFamily: 'sailec' }}>
                         {page.title}
                       </a>
                     </Typography>
@@ -160,6 +179,7 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontFamily: 'sailec'
             }}
           >
             <img src={logo.src} width={'180px'} alt="" />{" "}
@@ -169,7 +189,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {pages.map((page) => {
               return (
-                <Link style={{ color: 'black' }} href={page.url} key={page.title} >
+                <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                   <Button
                     className={`sailec ${activeSection === page.label
                       ? 'active-header'
@@ -177,15 +197,53 @@ const Header = () => {
                       }`}
 
                     onClick={() => handleNavClick(page.label)}
-                    sx={{ my: 2, color: 'black', display: 'block', width: isLargeDevice ? 'min-content' : 'fit-content' }}
+                    sx={{ fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block', width: isLargeDevice ? 'min-content' : 'fit-content' }}
                   >
-
                     {page.title}
                   </Button>
                 </Link>
               )
             }
             )}
+            <Tooltip title="Open settings">
+              <Button
+                className={`sailec ${activeSection === 'como_trabajamos'
+                  ? 'active-header'
+                  : ''
+                  }`}
+                onClick={handleOpenUserMenu} sx={{ p: 0, m: 0, fontFamily: 'sailecmedium', color: 'black' }}>
+                CÓMO TRABAJAMOS
+              </Button>
+            </Tooltip>
+
+            <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" className="sailec">
+                        <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                          {setting.title}
+                        </a>
+                      </Typography>
+                    </MenuItem>
+                  ))}
+              </Menu>
+            </Box>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -195,13 +253,13 @@ const Header = () => {
               !session
                 ? <>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="/login#profesionales">
-                    <IoMdLogIn style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px',background: '#b82925', color: '#fff' }} />
+                  <Link href="/login#profesionales" style={{textDecoration: 'none'}}>
+                    <IoMdLogIn style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
                   </Link>
                 </>
                 : session.user.picture ?
                   <button className="btn">
-                    <Link href="/citas">
+                    <Link href="/citas" style={{ textDecoration: 'none'}}>
                       <img
                         className="avatar-img rounded-circle"
                         src={session.user.picture}

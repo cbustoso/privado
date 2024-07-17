@@ -1,3 +1,15 @@
+:root {
+  --main-bg-red: #b82925;
+  --main-bg-blue: #3886ff;
+  --main-bg-yellow: #fabb00;
+  --main-bg-green: #1abc9c;
+  --main-light-red: #ff5253;
+  --main-light-blue: #a5c8ff;
+  --main-light-yellow: #ffcb7e;
+  --main-light-green: #73cdcd;
+}
+
+
 /*-----------------
 	1. General
 -----------------------*/
@@ -13465,3 +13477,26 @@ td:has(div.text-end) {
   border-bottom: 2px solid #3886ff;
 }
 /* QUIENES SOMOS */
+
+
+/* PROFESIONALES Y CONVENIOS */
+
+#convenios-y-profesionales-recomendados li {
+  margin: 20px 0px;
+}
+
+.bg-blue {
+  background: var(--main-bg-blue);
+}
+
+.bg-red {
+  background: var(--main-bg-red);
+}
+
+.bg-yellow {
+  background: var(--main-bg-yellow);
+}
+
+.bg-green {
+  background: var(--main-bg-green);
+}

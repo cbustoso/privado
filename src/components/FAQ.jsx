@@ -38,10 +38,10 @@ const FrequentAskedQuestions = ({questions}) => {
               aria-controls={`panel${i}bh-content`}
               id={`panel${i}bh-header`}
             >
-              <Typography sx={{ fontWeight: 700 }}>{question.title}</Typography>
+              <Typography sx={{ fontWeight: 700, fontFamily: 'sailec' }}>{question.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
+              <Typography sx={{ fontFamily: 'sailec'}}>
                 {question.answer}
               </Typography>
             </AccordionDetails>

@@ -20,20 +20,9 @@ const ProtocoloAccionSaludMental = () => {
             <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Protocolo de acción en salud mental
             </h3>
-            <ul className="nav nav-tabs">
-              <li className="nav-item">
-                <Link
-                  className={`nav-link-submenu ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
-                  href="#protocolo-de-accion-en-salud-mental"
-                  onClick={() => handleTabClick('protocolo-de-accion-en-salud-mental')}
-                >
-                  Protocolo de acción en salud mental
-                </Link>
-              </li>
-            </ul>
+       
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'protocolo-de-accion-en-salud-mental' ? 'show active' : ''}`} id="protocolo-de-accion-en-salud-mental">
-                <h2>Protocolo de acción en salud mental</h2>
                 <div className="blog-content">
                   <p>
                     Este protocolo tiene como objetivo establecer las acciones y directrices estandarizadas que permitan realizar una respuesta adecuada consistente en identificar, contener y derivar casos de urgencia y emergencia de carácter psiquiátrico y/o psicológico ocurridos en la Universidad.

@@ -16,11 +16,11 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
   return (
     <>
-      <Link href="/login#estudiantes" >
+      <Link href="/login#estudiantes" className="sailec-medium" >
       <button
         className='btn btn-rounded btn-reservar'
         style={{
-          width: matches ? '189px' : '100px',
+          width: matches ? '130px' : '100px',
           height: matches ? '56px' : '40px',
           // margin: '16px 0',
           backgroundColor: bgColor,
@@ -30,7 +30,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
         }}
       // onClick={handleOpen}
       >
-        <Today style={{ margin: '-2px 4px 0 0', fontSize: '15px' }} />
+        <Today style={{ margin: matches ? '-2px 4px 0 0': '-3px 0 0', fontSize: '15px' }} />
         {text}
       </button>
       </Link>
