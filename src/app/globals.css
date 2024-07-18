@@ -7,6 +7,7 @@
   --main-light-blue: #a5c8ff;
   --main-light-yellow: #ffcb7e;
   --main-light-green: #73cdcd;
+  --main-light-grey: #f1f1f1;
 }
 
 
@@ -13499,4 +13500,8 @@ td:has(div.text-end) {
 
 .bg-green {
   background: var(--main-bg-green);
+}
+
+.bg-light-grey {
+  background: var(--main-light-grey);
 }

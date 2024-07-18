@@ -29,7 +29,7 @@ export default function QuienesSomosLayout({ children }) {
       }
 
       <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos">
-        <div className="col-12 col-lg-10 mt--md-5" style={{ padding: 0 }}>
+        <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
           {matches &&
                 <>

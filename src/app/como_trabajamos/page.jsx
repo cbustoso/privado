@@ -62,8 +62,8 @@ const IntervencionesClinicas = () => {
   };
   return (
     <>
-      <div className="row intervenciones-clinicas" style={{ paddingRight: '0px', marginRight: '0px' }}>
-        <div className="col-12" style={{ paddingRight: '0px', marginRight: '0px' }}>
+      <div className="row intervenciones-clinicas flex-column d-flex align-items-center " >
+        <div className="col-12 col-lg-10">
           <div className="card quienes-somos" style={{ padding: '0px', margin: '0px', border: 'none' }}>
             <div className="card-body" style={{ paddingRight: '0px', marginRight: '0px' }}>
               <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
@@ -178,12 +178,13 @@ const IntervencionesClinicas = () => {
           </div>
         </div>
       </div>
-      <div id="entrevista-de-despeje">
+      <div id="entrevista-de-despeje" style={{ width: '100vw', margin: 'auto', padding:'0', background: '#f1f1f1'}}>
 
         <Section
           title={'¿Qué es la entrevista de despeje?'}
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={false}
+          bgColor={'#f1f1f1'}
         ><>
           <p style={{
             color: '#000',
@@ -209,11 +210,12 @@ const IntervencionesClinicas = () => {
 </div> */}
 
       </div>
-      <div>
+      <div style={{background: '#ffffff'}}>
         <Section
           title={'Intervenciones grupales'}
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={true}
+          bgColor={'#ffffff'}
         >
           <>
           <p style={{
@@ -234,11 +236,12 @@ const IntervencionesClinicas = () => {
         </Section>
       </div>
 
-      <div>
+      <div style={{background: '#f1f1f1'}}>
         <Section
           title={'Intervenciones psicoeducativas'}
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={false}
+          bgColor={'#f1f1f1'}
         >
           <>
           <p style={{

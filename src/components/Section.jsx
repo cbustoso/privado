@@ -12,7 +12,7 @@ import ReserveBtn from "./ReserveBtn";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { profesional01 } from "./imagepath";
 
-const Section = ({ title, image, left, children }) => {
+const Section = ({ title, image, left, children, bgColor }) => {
 
   const matches = useMediaQuery('(min-width:600px)');
 
@@ -27,9 +27,9 @@ const Section = ({ title, image, left, children }) => {
           // height: '45svh',
           // width: '90%',
           borderRadius: '32px',
-          // padding: '24px 16px',
+          padding: '50px 0',
           textWrap: 'pretty',
-          margin: '40px auto',
+          margin: 'auto',
         }}>
           <div className="row" style={{ margin: 0 }} >
             {
@@ -45,13 +45,14 @@ const Section = ({ title, image, left, children }) => {
                     marginTop: '20px',
                   }}
                 >
-                  {left  &&
+                  {left &&
                     <Card
                       className='col-12 col-lg-4 sailec'
                       sx={{
                         boxShadow: 0,
                         display: 'inline-block',
                         paddingRight: '1em',
+                        bgcolor: bgColor
                       }}>
                       <CardMedia
                         component="img"
@@ -73,6 +74,7 @@ const Section = ({ title, image, left, children }) => {
                       flexDirection: 'column',
                       justifyContent: 'flex-start',
                       paddingBottom: '10px',
+                      bgcolor: bgColor
                       // padding: '2em',
                     }}>
                     <Typography
@@ -85,7 +87,7 @@ const Section = ({ title, image, left, children }) => {
                         fontWeight: 700,
                         fontFamily: 'sailec'
                       }}>
-                        {title}
+                      {title}
                     </Typography>
                     {/* <Typography
                       variant="body2"
@@ -95,17 +97,18 @@ const Section = ({ title, image, left, children }) => {
                         lineHeight: '28px',
                         fontFamily: 'sailec'
                       }}> */}
-                      {children}
+                    {children}
                     {/* </Typography> */}
                   </Card>
 
-                  {!left  &&
+                  {!left &&
                     <Card
                       className='col-12 col-lg-4'
                       sx={{
                         boxShadow: 0,
                         display: 'inline-block',
                         paddingLeft: '1em',
+                        bgcolor: bgColor
                       }}>
                       <CardMedia
                         component="img"
@@ -146,7 +149,7 @@ const Section = ({ title, image, left, children }) => {
                         Quiénes somos
                       </Typography>
 
-                        {children}
+                      {children}
                       {/* <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
                       </p> */}
                     </div>
