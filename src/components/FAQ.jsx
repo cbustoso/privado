@@ -20,7 +20,7 @@ const FrequentAskedQuestions = ({questions}) => {
       {
         questions.map((question, i) => (
           <Accordion
-            key={i}
+            key={question.id}
             expanded={expanded === question.id}
             onChange={handleChange(question.id)}
             sx={

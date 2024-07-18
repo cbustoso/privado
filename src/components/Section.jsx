@@ -87,16 +87,16 @@ const Section = ({ title, image, left, children }) => {
                       }}>
                         {title}
                     </Typography>
-                    <Typography
+                    {/* <Typography
                       variant="body2"
                       sx={{
                         color: '#000',
                         fontSize: '20px',
                         lineHeight: '28px',
                         fontFamily: 'sailec'
-                      }}>
+                      }}> */}
                       {children}
-                    </Typography>
+                    {/* </Typography> */}
                   </Card>
 
                   {!left  &&
@@ -146,9 +146,9 @@ const Section = ({ title, image, left, children }) => {
                         Quiénes somos
                       </Typography>
 
-                      <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
                         {children}
-                      </p>
+                      {/* <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
+                      </p> */}
                     </div>
                   </Box>
                 </div>

@@ -4,8 +4,8 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import FrequentAskedQuestions from "@/components/FAQ";
 import { useMediaQuery } from "@mui/material";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const questions = [
   {
@@ -50,12 +50,12 @@ const IntervencionesClinicas = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const [activeTab, setActiveTab] = useState('descripcion-general');
 
-  useEffect(() => {
-    // Bootstrap JS requires window and document objects, which are not available in the Next.js SSR phase.
-    if (typeof window !== "undefined" /* && typeof document !== "undefined" */) {
-      require("bootstrap/dist/js/bootstrap.bundle.min.js");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Bootstrap JS requires window and document objects, which are not available in the Next.js SSR phase.
+  //   if (typeof window !== "undefined" /* && typeof document !== "undefined" */) {
+  //     require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  //   }
+  // }, []);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -184,10 +184,20 @@ const IntervencionesClinicas = () => {
           title={'¿Qué es la entrevista de despeje?'}
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={false}
-        >
-          <p>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
+        ><>
+          <p style={{
+            color: '#000',
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontFamily: 'sailec'
+          }}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
           </p>
-          <p>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p>
+          <p style={{
+            color: '#000',
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontFamily: 'sailec'
+          }}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
         </Section>
 
         {/* 
@@ -205,9 +215,22 @@ const IntervencionesClinicas = () => {
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={true}
         >
-          <p>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
+          <>
+          <p style={{
+            color: '#000',
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontFamily: 'sailec'
+          }}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
           </p>
-          <p> Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.</p>
+          <p style={{
+            color: '#000',
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontFamily: 'sailec'
+          }}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
+          </p>
+          </>
         </Section>
       </div>
 
@@ -217,8 +240,14 @@ const IntervencionesClinicas = () => {
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
           left={false}
         >
-          <p>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
-
+          <>
+          <p style={{
+            color: '#000',
+            fontSize: '20px',
+            lineHeight: '28px',
+            fontFamily: 'sailec'
+          }}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
+</>
         </Section>
       </div>
     </>

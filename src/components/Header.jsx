@@ -234,7 +234,7 @@ const Header = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center" className="sailec">
                         <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
                           {setting.title}
