@@ -4,8 +4,57 @@ import {
 }
   from '@/components/imagepath';
 export const blogs = [
+
   {
     id: '0',
+    titulo: 'Cómo hacer más en menos tiempo',
+    bajada: `Descubre cómo mejorar tus métodos de estudio y aprovechar cada minuto al máximo con estas estrategias fáciles de seguir.`,
+    texto: `
+      <p>En la universidad, aprender a administrar el tiempo de manera efectiva puede ser tan crucial como comprender las teorías más complejas de tu carrera. Si constantemente te encuentras luchando contra el reloj, preguntándote cómo puedes estudiar mejor y lograr un equilibrio entre tus diversas responsabilidades, aquí te presentamos técnicas y consejos fundamentados para optimizar tu tiempo y mejorar tu rendimiento académico.</p>
+  
+  <h2>1. Prioriza tus tareas</h2>
+  <p>Identifica cuáles son las tareas más importantes y urgentes y dedica tu energía principalmente a ellas. Según María del Carmen Valero Jiménez, especialista en técnicas de estudio, la priorización te ayuda a no desperdiciar esfuerzos en actividades de menor impacto, permitiéndote concentrarte en lo que realmente contribuye a tus metas académicas (Valero Jiménez, 2011).</p>
+  
+  <h2>2. Planifica cada semana</h2>
+  <p>Utiliza una herramienta de planificación, ya sea digital o en papel, para organizar tus actividades semanales. Incluye clases, horas de estudio, compromisos sociales, y tiempo para descansar. Marina G. Cenamor y Esther Cano Ángel destacan la importancia de tener un horario flexible pero bien estructurado que contemple imprevistos, asegurando así que todos los aspectos de tu vida estudiantil están cubiertos (Cenamor & Cano Ángel, 2022).</p>
+  
+  <h2>3. Técnica Pomodoro</h2>
+  <p>Francesco Cirillo desarrolló la Técnica Pomodoro en la década de 1980, que consiste en dividir tu trabajo en periodos de 25 minutos, seguidos de breves descansos de 5 minutos. Esta técnica ayuda a mantener la concentración y la frescura mental, permitiéndote estudiar de manera más eficiente durante períodos más largos.</p>
+  
+  <img src="https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true" alt="" width="100%" class="blog-img"/>
+  
+  <h2>4. Establece un ambiente de estudio adecuado</h2>
+  <p>El lugar donde estudias puede influir significativamente en tu eficacia. Asegúrate de tener un espacio designado para estudiar que sea tranquilo, ordenado y bien iluminado. Universia recomienda estudiar en un ambiente que favorezca la concentración y minimice las distracciones, lo que puede aumentar significativamente tu capacidad de retención (Universia, 2020).</p>
+  
+  <h2>5. Utiliza la tecnología a tu favor</h2>
+  <p>Herramientas y aplicaciones como calendarios digitales, bloqueadores de sitios web distractores y apps de gestión de tareas pueden ser extremadamente útiles. Establece límites claros para el uso de dispositivos y redes sociales durante tus horas de estudio para maximizar tu productividad.</p>
+  
+  <h2>Reflexiones finales</h2>
+  <p>Gestionar tu tiempo eficazmente mientras estás en la universidad no solo mejora tu rendimiento académico, sino que también reduce el estrés y te permite disfrutar de una vida estudiantil más equilibrada. Experimenta con diferentes técnicas hasta que encuentres las que mejor se adapten a tus necesidades y estilo de vida. Recuerda, el objetivo es trabajar de manera más inteligente, no más dura.</p>
+  
+  <h2>Referencias</h2>
+  <ul>
+  <li>Valero Jiménez, M. del C. (2011). Técnicas de estudio. <em>Revista de Clasehistoria</em>. Recuperado de http://www.claseshistoria.com/revista/index.html</li>
+  <li>Cenamor, M. G., & Cano Ángel, E. (2022). Técnicas de estudio. <em>Asociación Alganda</em>. Recuperado de https://www.alganda.org/webalganda/wp-content/uploads/2022/02/Cuaderno-de-t%C3%A9cnicas-de-estudio.-Alganda-1.pdf</li>
+  <li>Universia. (2020). Técnicas y hábitos de estudio para obtener buenos resultados académicos en la universidad. <em>Universia</em>.</li>
+  </ul>`,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio02.jpg?raw=true",
+    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
+    downloads: [
+      {
+        titulo: 'Procrastinación: Técnicas para superarla',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'procrastinacion_tecnicas.pdf'
+      },
+      {
+        titulo: 'Técnicas de estudio que sí funcionan',
+        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
+        url: 'tecnicas_de_estudio.pdf'
+      }
+    ]
+  },
+  {
+    id: '1',
     titulo: 'Drogas y Alcohol: Cómo Evitar el Exceso',
     bajada: `Descubre estrategias efectivas para prevenir y reducir el consumo problemático de drogas y alcohol durante tu vida universitaria.`,
     texto: `
@@ -17,7 +66,7 @@ export const blogs = [
 <h2>Desarrolla Habilidades de Resistencia</h2>
 <p>Aprender a decir "no" es una habilidad crucial. En muchas situaciones, la presión social ejerce una gran influencia sobre el consumo de sustancias. Tener estrategias para manejar estas situaciones puede ser muy útil. Practica respuestas y mantén una postura firme sobre tus decisiones personales sin sentirte obligado a ceder.</p>
 
-<img src="https://github.com/Niennis/imagesudp/blob/main/drogas02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
+<img src="https://github.com/Niennis/imagesudp/blob/main/drogas01.jpg?raw=true" alt="" width="100%" class="blog-img"/>
 
 <h2>Apóyate en Redes Positivas</h2>
 <p>El apoyo social es un factor protector clave contra el consumo de sustancias. Rodéate de amigos y compañeros que respeten tus decisiones y compartan tus valores. Participa en actividades y clubs universitarios que promuevan un estilo de vida saludable. Según estudios, los estudiantes que tienen un sistema de apoyo sólido son menos propensos a participar en el consumo de drogas y alcohol.</p>
@@ -37,7 +86,7 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagen: "https://github.com/Niennis/imagesudp/blob/main/drogas01.jpg?raw=true", 
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/drogas02.jpg?raw=true",
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
@@ -54,7 +103,7 @@ export const blogs = [
     ]
   },
   {
-    id: '1',
+    id: '2',
     titulo: 'Suicidio: Cómo buscar ayuda y ayudar',
     bajada: `Aprende a enfrentar el suicidio con herramientas y apoyo de la Universidad Diego Portales, fortaleciendo nuestra comunidad universitaria.`,
     texto: `
@@ -106,7 +155,7 @@ export const blogs = [
     ]
   },
   {
-    id: '2',
+    id: '3',
     titulo: '5 Técnicas para Reducir la Ansiedad',
     bajada: `Descubre cómo manejar eficazmente tu ansiedad con estas cinco estrategias clave.`,
     texto: `
@@ -185,54 +234,6 @@ export const blogs = [
         titulo: 'Mindfulness como técnica para reducir la ansiedad',
         bajada: 'Aquí encontrarás algunas estrategias de afrontamiento ante situaciones estresantes, que te pueden servir tanto en tu trayectoria universitaria como en tu quehacer diario.',
         url: 'mindfulness_como_tecnica_para_reducir_la_ansiedad.pdf'
-      }
-    ]
-  },
-  {
-    id: '3',
-    titulo: 'Cómo hacer más en menos tiempo',
-    bajada: `Descubre cómo mejorar tus métodos de estudio y aprovechar cada minuto al máximo con estas estrategias fáciles de seguir.`,
-    texto: `
-    <p>En la universidad, aprender a administrar el tiempo de manera efectiva puede ser tan crucial como comprender las teorías más complejas de tu carrera. Si constantemente te encuentras luchando contra el reloj, preguntándote cómo puedes estudiar mejor y lograr un equilibrio entre tus diversas responsabilidades, aquí te presentamos técnicas y consejos fundamentados para optimizar tu tiempo y mejorar tu rendimiento académico.</p>
-
-<h2>1. Prioriza tus tareas</h2>
-<p>Identifica cuáles son las tareas más importantes y urgentes y dedica tu energía principalmente a ellas. Según María del Carmen Valero Jiménez, especialista en técnicas de estudio, la priorización te ayuda a no desperdiciar esfuerzos en actividades de menor impacto, permitiéndote concentrarte en lo que realmente contribuye a tus metas académicas (Valero Jiménez, 2011).</p>
-
-<h2>2. Planifica cada semana</h2>
-<p>Utiliza una herramienta de planificación, ya sea digital o en papel, para organizar tus actividades semanales. Incluye clases, horas de estudio, compromisos sociales, y tiempo para descansar. Marina G. Cenamor y Esther Cano Ángel destacan la importancia de tener un horario flexible pero bien estructurado que contemple imprevistos, asegurando así que todos los aspectos de tu vida estudiantil están cubiertos (Cenamor & Cano Ángel, 2022).</p>
-
-<h2>3. Técnica Pomodoro</h2>
-<p>Francesco Cirillo desarrolló la Técnica Pomodoro en la década de 1980, que consiste en dividir tu trabajo en periodos de 25 minutos, seguidos de breves descansos de 5 minutos. Esta técnica ayuda a mantener la concentración y la frescura mental, permitiéndote estudiar de manera más eficiente durante períodos más largos.</p>
-
-<img src="https://github.com/Niennis/imagesudp/blob/main/estudio02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
-
-<h2>4. Establece un ambiente de estudio adecuado</h2>
-<p>El lugar donde estudias puede influir significativamente en tu eficacia. Asegúrate de tener un espacio designado para estudiar que sea tranquilo, ordenado y bien iluminado. Universia recomienda estudiar en un ambiente que favorezca la concentración y minimice las distracciones, lo que puede aumentar significativamente tu capacidad de retención (Universia, 2020).</p>
-
-<h2>5. Utiliza la tecnología a tu favor</h2>
-<p>Herramientas y aplicaciones como calendarios digitales, bloqueadores de sitios web distractores y apps de gestión de tareas pueden ser extremadamente útiles. Establece límites claros para el uso de dispositivos y redes sociales durante tus horas de estudio para maximizar tu productividad.</p>
-
-<h2>Reflexiones finales</h2>
-<p>Gestionar tu tiempo eficazmente mientras estás en la universidad no solo mejora tu rendimiento académico, sino que también reduce el estrés y te permite disfrutar de una vida estudiantil más equilibrada. Experimenta con diferentes técnicas hasta que encuentres las que mejor se adapten a tus necesidades y estilo de vida. Recuerda, el objetivo es trabajar de manera más inteligente, no más dura.</p>
-
-<h2>Referencias</h2>
-<ul>
-<li>Valero Jiménez, M. del C. (2011). Técnicas de estudio. <em>Revista de Clasehistoria</em>. Recuperado de http://www.claseshistoria.com/revista/index.html</li>
-<li>Cenamor, M. G., & Cano Ángel, E. (2022). Técnicas de estudio. <em>Asociación Alganda</em>. Recuperado de https://www.alganda.org/webalganda/wp-content/uploads/2022/02/Cuaderno-de-t%C3%A9cnicas-de-estudio.-Alganda-1.pdf</li>
-<li>Universia. (2020). Técnicas y hábitos de estudio para obtener buenos resultados académicos en la universidad. <em>Universia</em>.</li>
-</ul>`,
-    imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true",
-    // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
-    downloads: [
-      {
-        titulo: 'Procrastinación: Técnicas para superarla',
-        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'procrastinacion_tecnicas.pdf'
-      },
-      {
-        titulo: 'Técnicas de estudio que sí funcionan',
-        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'tecnicas_de_estudio.pdf'
       }
     ]
   },
