@@ -12,8 +12,8 @@ const PromocionYPrevencion = () => {
   }
 
   return (
-    <div className="row prevencion" style={{ paddingRight: '0px', marginRight: '0px' }}>
-      <div className="col-12" style={{ paddingRight: '0px', marginRight: '0px' }}>
+    <div className="row prevencion flex-column d-flex align-items-center " >
+      <div className="col-12 col-lg-10" >
         <div className="card quienes-somos" style={{ padding: '0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ paddingRight: '0px', marginRight: '0px' }}>
             <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
