@@ -90,8 +90,8 @@ const Blogdetails = ({ params }) => {
       <>
         <div className="main-wrapper main-blog sailec">
           {matches && <div style={{
-            marginTop: '100px',
-            height: '520px',
+            // marginTop: '100px',
+            height: '620px',
             overflow: 'hidden',
             // display: 'flex',
             // alignItems: 'center',
@@ -132,7 +132,7 @@ const Blogdetails = ({ params }) => {
                   <div className="blog-view">
                     <div className="col-lg-12" style={{ padding: matches ? 0 : '20px 20px 0 20px', margin: matches ? '0 0 0 56px' : '80px 0 0 0' }}>
                       <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '20px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
-                        {blog.titulo}
+                        {blog && blog.titulo}
                       </h3>
                     </div>
                     <article className="blog blog-single-post d-flex justify-content-between flex-wrap" >
@@ -172,12 +172,12 @@ const Blogdetails = ({ params }) => {
                       {/* TEXTO */}
 
                       <div className="sailec col-lg-10 col-12" style={{ marginLeft: matches ? '56px' : '0px' }}>
-                        <div className={matches ? "blog-content" : "blog-content-sm"} dangerouslySetInnerHTML={{ __html: blog.texto }}>
+                        <div className={matches ? "blog-content" : "blog-content-sm"} dangerouslySetInnerHTML={blog && { __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
                       </div>
 
-                      {blog.video !== '' &&  <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
+                      {blog && blog?.video !== '' &&  <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: matches ? '56px' : '0px', marginTop: matches ? '3rem' : 0 }}>
                         {/* <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
                           <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
                         </div> */}
