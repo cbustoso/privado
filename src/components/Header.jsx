@@ -20,21 +20,21 @@ const pagesWithEvents = [
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
   { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' }
 ];
 
 const pagesWithoutEvents = [
   { title: 'INICIO', url: '/#inicio', label: 'inicio' },
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
   { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' }
 ];
 
 const settings = [
   { title: 'Intervenciones', url: '/como_trabajamos', label: '/como_trabajamos' },
-  { title: 'Protocolo de Acción', url: '/como_trabajamos/protocolo-de-accion-en-salud-mental', label: '/protocolo-de-accion-en-salud-mental' },
+  { title: 'Plan de Acción', url: '/como_trabajamos/plan-de-accion-en-salud-mental', label: '/plan-de-accion-en-salud-mental' },
   { title: 'Prevención', url: '/como_trabajamos/intervencion-en-promocion-y-prevencion', label: '/intervencion-en-promocion-y-prevencion' },
   { title: 'Convenios y profesionales', url: '/como_trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
 ];
@@ -211,7 +211,7 @@ const Header = () => {
                   ? 'active-header'
                   : ''
                   }`}
-                onClick={handleOpenUserMenu} sx={{ p: 0, m: 0, fontFamily: 'sailecmedium', color: 'black' }}>
+                onClick={handleOpenUserMenu} sx={{ p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black' }}>
                 CÓMO TRABAJAMOS
               </Button>
             </Tooltip>
