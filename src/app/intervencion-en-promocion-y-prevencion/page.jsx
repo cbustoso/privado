@@ -28,6 +28,8 @@ const PromocionYPrevencion = () => {
                   </p>
                 </div>
               </div>
+              
+              <img src="https://github.com/Niennis/imagesudp/blob/main/promocion_prevencion_texto.jpg?raw=true" alt="" width="100%" className="blog-img"/>
             </div>
           </div>
         </div>

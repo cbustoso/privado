@@ -30,9 +30,10 @@ const ProtocoloAccionSaludMental = () => {
                   <p>
                     El documento, pone a disposición una serie de directrices y flujogramas de fácil comprensión, con el fin de facilitar las respuestas frente a sucesos de Salud Mental.
                   </p>
-                  <Link href="/downloads/Plan_de_Salud_Mental_Universitaria_versión_informe.pdf" style={{ marginLeft: '0px', fontSize: '26px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+                  <Link href="/downloads/Plan_de_Salud_Mental_Universitaria_versión_informe.pdf" style={{ marginLeft: '0px', fontSize: '24px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                     <FaArrowRightLong /> Ver protocolo aquí
                   </Link>
+                  <img src="https://github.com/Niennis/imagesudp/blob/main/plan_accion_texto.jpg?raw=true" alt="" width="100%" className="blog-img"/>
                 </div>
               </div>
             </div>
