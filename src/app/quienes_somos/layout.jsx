@@ -21,18 +21,18 @@ export default function QuienesSomosLayout({ children }) {
       {matches && <div style={{
         height: '520px',
         overflow: 'hidden',
-        backgroundImage: `url(${carrousel01.src})`,
-        backgroundPosition: 'center 30%',
+        backgroundImage: `url(https://github.com/Niennis/imagesudp/blob/main/quienes_somos_cabecera.jpg?raw=true)`,
+        backgroundPosition: 'center 80%',
         backgroundSize: 'cover'
       }}>
       </div>
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos">
-        <div className="col-12 col-lg-10 mt--md-5" style={{ padding: 0 }}>
+      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" style={{padding: matches ? '0 0 0 96px': 0, margin: 0}}>
+        <div className="col-12 col-lg-10 mt--md-5" /* style={{ padding: 0 }} */>
           <div>
 
-            <nav className="navbar navbar-expand-lg navbar-light ">
+            {/* <nav className="navbar navbar-expand-lg navbar-light "> */}
               {matches &&
                 <>
                   <button className='btn mt-4 mb-5'
@@ -93,7 +93,7 @@ export default function QuienesSomosLayout({ children }) {
                   </li>
                 </ul>
               </div> */}
-            </nav>
+            {/* </nav> */}
             {children}
           </div>
         </div>

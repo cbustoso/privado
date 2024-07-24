@@ -11,20 +11,20 @@ export default function QuienesSomos() {
 
   return (
     <div className="row flex-column d-flex align-items-center sailec">
-      <div className="col-12" style={{ padding: 0 }}>
+      <div className="col-12" >
         <div>
-          <div className="card-body flex-row d-flex mt-4">
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: matches ? '0px' : '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+          <div className="card-body flex-row d-flex mb-0">
+            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: '120px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Dirección de Salud Mental de Estudiantes
             </h3>
 
           </div>
           <h2
             className="sailec"
-            style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }}>
+            style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '40px' }}>
             ¿Qué es el DSME?
           </h2>
-          <div className="row" style={{ margin: '0 10px' }} >
+          <div className="row"  >
             {
               matches
                 ?

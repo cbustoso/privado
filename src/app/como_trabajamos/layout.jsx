@@ -21,14 +21,14 @@ export default function QuienesSomosLayout({ children }) {
       {matches && <div style={{
         height: '520px',
         overflow: 'hidden',
-        backgroundImage: `url(${carrousel01.src})`,
+        backgroundImage: `url(https://github.com/Niennis/imagesudp/blob/main/intervenciones_clinicas_cabecera.jpg?raw=true)`,
         backgroundPosition: 'center 30%',
         backgroundSize: 'cover'
       }}>
       </div>
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos">
+      <div className="row flex-column d-flex sailec mt--md-5 section-quienes-somos">
         <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
           {matches &&
@@ -40,7 +40,7 @@ export default function QuienesSomosLayout({ children }) {
                       width: '163px',
                       padding: '0px 24px',
                       borderRadius: '100px',
-                      marginLeft: '76px'
+                      marginLeft: '96px'
                     }}
                     onClick={() => router.back()}
                   >
