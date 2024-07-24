@@ -119,41 +119,43 @@ const Section = ({ title, image, left, children, bgColor }) => {
                       />
                     </Card>
                   }
-
                 </div>
 
                 :
                 <div
-                  className={`container col-12 ${matches ? 'd-flex' : ''} justify-content-center`}
+                  className={`container col-12  d-flex  justify-content-center`}
                   style={{
                     fontSize: '24px',
                     fontWeight: 400,
                     lineHeight: '32px',
                     borderRadius: '12px',
-                    padding: 0,
                   }}
                 >
-                  <Box sx={{ bgcolor: '#f1f1f1', fontFamily: 'sailec', lineHeight: '30px', }}>
-                    <div className="media-body sailec" style={{ margin: '0 20px', padding: '10px 0', fontSize: '20px', fontWeight: 400, lineHeight: '28px' }}>
-                      <Typography
-                        variant="body2"
-                        className="sailec"
-                        sx={{
-                          color: '#000',
-                          // textWrap: 'balance',
-                          fontSize: '32px',
-                          lineHeight: '40px',
-                          fontWeight: 700,
-                          margin: '16px 0'
-                        }}>
-                        Quiénes somos
-                      </Typography>
+                  <Card sx={{
+                    maxWidth: 'fit-content',
+                    bgcolor: bgColor, boxShadow: 'unset'
+                  }}>
+                    <CardMedia
+                      sx={{ height: 240 }}
+                      image={image}
+                    />
+                    {/* <CardContent> */}
+                    <Typography
+                      variant="body2"
+                      className="sailec"
+                      sx={{
+                        color: '#000',
+                        fontSize: '32px',
+                        lineHeight: '40px',
+                        fontWeight: 700,
+                        fontFamily: 'sailec'
+                      }}>
+                      {title}
+                    </Typography>
+                    {children}
+                    {/* </CardContent> */}
+                  </Card>
 
-                      {children}
-                      {/* <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
-                      </p> */}
-                    </div>
-                  </Box>
                 </div>
             }
           </div>

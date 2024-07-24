@@ -62,42 +62,13 @@ const IntervencionesClinicas = () => {
   };
   return (
     <>
-      <div className="row intervenciones-clinicas flex-column d-flex " >
-        <div className="col-12">
-          <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : 0, margin: '0px', border: 'none' }}>
-            <div className="card-body" style={{ paddingRight: '0px', marginRight: '0px' }}>
-              <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+      <div className="row prevencion flex-column d-flex " >
+        <div className="col-12" >
+          <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
+            <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
+              <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                 Intervenciones clínicas
               </h3>
-              {/* <ul className="nav nav-tabs">
-              <li className="nav-item">
-                <Link
-                  className={`nav-link-submenu ${activeTab === 'descripcion-general' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
-                  href="#descripcion-general"
-                  onClick={() => handleTabClick('descripcion-general')}
-                >
-                  Descripción general
-                </Link>
-              </li> */}
-              {/* <li className="nav-item">
-                <Link
-                  className={`nav-link-submenu ${activeTab === 'solicitud-de-hora' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
-                  href="#solicitud-de-hora"
-                  onClick={() => handleTabClick('solicitud-de-hora')}
-                >
-                  Solicitud de hora
-                </Link>
-              </li> */}
-              {/* <li className="nav-item">
-                <Link
-                  className={`nav-link-submenu ${activeTab === 'entrevista-de-despeje' ? 'quienes-somos-active' : 'nav-link-submenu'}`}
-                  href="#entrevista-de-despeje"
-                  onClick={() => handleTabClick('entrevista-de-despeje')}
-                >
-                  ¿Qué es la entrevista de despeje?
-                </Link>
-              </li>
-            </ul> */}
               <div className="tab-content tab-dsme-content">
                 <div id="descripcion-general">
                   {/* <h2>Descripción General</h2> */}
@@ -108,109 +79,42 @@ const IntervencionesClinicas = () => {
                     <p>
                       En caso de requerir una atención especializada, de urgencia o de largo plazo, se realizan derivaciones a las instancias pertinentes con convenio UDP o al sistema de salud público o privado, según sea la previsión de cada estudiante. El/la estudiante derivado/a, mantendrá atenciones en el DSME hasta que ingrese formalmente al tratamiento en el lugar de derivación determinado, para así resguardar su bienestar.
                     </p>
-                    {/* 
-                  <div id="carouselExample" className="carousel slide">
-                    <div className="carousel-inner sailec" style={{ color: 'white' }} >
-                      <div className="carousel-item active bg-blue" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Psicoterapia breve</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>Ingresan casos de baja a mediana complejidad. Se puede trabajar uno o dos objetivos según el motivo de consulta. Proceso terapéutico de 8 a 10 sesiones como máximo</p>
-                      </div>
-                      <div className="carousel-item bg-red" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Acompañamiento psicológico</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>
-                          Ingresan casos de baja complejidad. Se trabaja un objetivo terapéutico en concreto. Proceso de 2 a 4 sesiones de duración.
-                        </p>
-                      </div>
-                      <div className="carousel-item bg-green" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Grupos de acompañamiento</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>
-                          Espacio de contención, apoyo y compañía frente a problemáticas en torno a la salud mental de los estudiantes, mediante la realización de actividades lúdicas y conversación. No tiene criterios de exclusión y es de asistencia libre.
-                        </p>
-                      </div>
-                      <div className="carousel-item bg-blue" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Grupo psicopedagógico</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>
-                          Espacio psicoeducativo grupal, participativo y enfocado en el bienestar académico, a través de la realización de sesiones con temáticas especificas como: organización del tiempo, estrategias de estudio, estrés y ansiedad académica, entre otras. Es con inscripción previa y cupos limitados.
-                        </p>
-                      </div>
-                      <div className="carousel-item bg-red" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Grupo psicoterapéutico</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>
-                          Grupo psicoterapéutico de contención y crecimiento personal, que tiene como objetivo el desarrollo de herramientas y recursos personales, para así afrontar de manera sana las problemáticas de salud mental y la vida universitaria. Se ingresa por entrevista de despeje y tiene criterios de exclusión.
-                        </p>
-                      </div>
-                      <div className="carousel-item bg-green" style={{ height: '300px', textAlign: 'center', alignContent: 'center' }}>
-                        <h3>Atención psicopedagógica</h3>
-                        <p style={{ width: '80%', margin: 'auto', textAlign: "center", color: 'white' }}>
-                          Dispositivo orientado a apoyar y brindar herramientas al estudiantado para favorecer y mejorar los procesos de aprendizaje y el rendimiento académico.
-                        </p>
-                      </div>
-                    </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Next</span>
-                    </button>
-                  </div> */}
+
                   </div>
 
                   <FrequentAskedQuestions questions={questions} />
                 </div>
-                {/* <div className={`tab-pane ${activeTab === 'solicitud-de-hora' ? 'show active' : ''}`} id="solicitud-de-hora">
-                <h2>Solicitud de hora</h2>
-                <div className="blog-content">
-                  <p>Para acceder a entrevista de despeje debes seguir los siguientes pasos:</p>
-                  <ol>
-                    <li>Ingresar al sitio de Solicitud de hora para entrevista de despeje</li>
-                    <li>Completar el formulario</li>
-                    <li>Tomar una hora en la agenda electrónica</li>
-                    <li>Leer el consentimiento informado que se encuentra en el link</li>
-                  </ol>
-                  <strong>Importante*: Si no se completan los 3 primeros pasos, la hora no será agendada</strong>
-                </div>
-              </div> */}
 
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="entrevista-de-despeje" style={{ width: '100vw',  padding:'0', background: '#f1f1f1'}}>
 
+      <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'¿Qué es la entrevista de despeje?'}
           image={'https://github.com/Niennis/imagesudp/blob/main/intervenciones_entrevista_despeje.jpg?raw=true'}
           left={false}
           bgColor={'#f1f1f1'}
         ><>
-          <p style={{
-            color: '#000',
-            fontSize: '20px',
-            lineHeight: '28px',
-            fontFamily: 'sailec'
-          }}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
-          </p>
-          <p style={{
-            color: '#000',
-            fontSize: '20px',
-            lineHeight: '28px',
-            fontFamily: 'sailec'
-          }}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
+            <p style={{
+              color: '#000',
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontFamily: 'sailec'
+            }}>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
+            </p>
+            <p style={{
+              color: '#000',
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontFamily: 'sailec'
+            }}>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p></>
         </Section>
 
-        {/* 
-<h2>¿Qué es la entrevista de despeje?</h2>
-<div className="blog-content">
-<p>Cuando agendas una hora, estás agendando para una entrevista inicial de despeje. En esta entrevista se indaga sobre la solicitud de atención y características de la situación, como grado de sintomatología, recursos personales, redes de apoyo, entre otros.
-</p>
-<p>A partir de la entrevista inicial de despeje se define cuál es el camino más adecuado para las características particulares del o la estudiante, pudiendo ingresar a acompañamiento psicológico, psicoterapia breve, atención psicopedagógica, grupo psicoterapéutico o derivación externa.</p>
-</div> */}
-
       </div>
-      <div style={{background: '#ffffff'}}>
+      <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#ffffff' }}>
         <Section
           title={'Intervenciones grupales'}
           image={'https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true'}
@@ -218,25 +122,25 @@ const IntervencionesClinicas = () => {
           bgColor={'#ffffff'}
         >
           <>
-          <p style={{
-            color: '#000',
-            fontSize: '20px',
-            lineHeight: '28px',
-            fontFamily: 'sailec'
-          }}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
-          </p>
-          <p style={{
-            color: '#000',
-            fontSize: '20px',
-            lineHeight: '28px',
-            fontFamily: 'sailec'
-          }}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
-          </p>
+            <p style={{
+              color: '#000',
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontFamily: 'sailec'
+            }}>Las intervenciones grupales en el Plan de Salud Mental Universitaria de la Universidad Diego Portales incluyen varias modalidades destinadas a apoyar a los estudiantes en aspectos específicos de su bienestar mental y académico. Se organizan grupos psicoterapéuticos, psicopedagógicos, y de acompañamiento.
+            </p>
+            <p style={{
+              color: '#000',
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontFamily: 'sailec'
+            }}>Estos grupos ofrecen sesiones enfocadas en temas como el manejo de la ansiedad, estrategias de estudio y apoyo emocional, promoviendo habilidades y estrategias dentro de un ambiente colaborativo y de apoyo mutuo entre los participantes.
+            </p>
           </>
         </Section>
       </div>
 
-      <div style={{background: '#f1f1f1'}}>
+      <div className="card quienes-somos" style={{ padding: matches ? '0px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'Intervenciones psicoeducativas'}
           image={'https://github.com/Niennis/imagesudp/blob/main/intervenciones_clinicas_psicoeducativas.jpg?raw=true'}
@@ -244,13 +148,13 @@ const IntervencionesClinicas = () => {
           bgColor={'#f1f1f1'}
         >
           <>
-          <p style={{
-            color: '#000',
-            fontSize: '20px',
-            lineHeight: '28px',
-            fontFamily: 'sailec'
-          }}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
-</>
+            <p style={{
+              color: '#000',
+              fontSize: '20px',
+              lineHeight: '28px',
+              fontFamily: 'sailec'
+            }}>Intervenciones psicoeducativas dirigidas, cuyo objetivo es abordar temáticas que las escuelas u otros departamentos de la Universidad consideren relevantes para el desempeño académico y la salud mental de los y las estudiantes.</p>
+          </>
         </Section>
       </div>
     </>

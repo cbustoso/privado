@@ -10,11 +10,11 @@ export default function QuienesSomos() {
   const matches = useMediaQuery('(min-width:600px)');
 
   return (
-    <div className="row flex-column d-flex align-items-center sailec">
+    <div className="row prevencion flex-column d-flex " >
       <div className="col-12" >
-        <div>
-          <div className="card-body flex-row d-flex mb-0">
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: '120px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+        <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '0px 32px', margin: '0px', border: 'none' }}>
+          <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
+            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '120px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Dirección de Salud Mental de Estudiantes
             </h3>
 
@@ -101,12 +101,13 @@ export default function QuienesSomos() {
                     fontWeight: 400,
                     lineHeight: '24px',
                     borderRadius: '12px',
-                    padding: 0,
-                    margin: '0 10px'
+                    // padding: 0,
+                    // margin: '0 10px'
                   }}
                 >
                   <div className="media-body sailec" style={{
-                    margin: '0 20px', paddingTop: '10px',
+                    // margin: '0 20px', 
+                    paddingTop: '10px',
                     fontSize: '20px',
                     fontWeight: 400,
                     lineHeight: '32px'
@@ -124,50 +125,50 @@ export default function QuienesSomos() {
             }
           </div>
 
-          <div className="row" style={{ margin: '0 10px' }} >
-          </div>
+          {/* <div className="row" style={{ margin: '0 10px' }} >
+          </div> */}
 
-          <div className="row" style={{ margin: '0 10px' }} >
-            <div className="card-body flex-column d-flex  my-3 ">
+          <div className="row" style={{ margin: matches ? '0 10px' : 0 }} >
+            <div className="card-body flex-column d-flex my-3 " style={{ padding: !matches && 0 }} >
               {
                 matches
                   ?
                   <>
                     <h2
                       className="sailec"
-                      style={{  fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px'  }}>¿Cómo puedo solicitar atención en el DSME?
+                      style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }}>¿Cómo puedo solicitar atención en el DSME?
                     </h2>
-
-                    <Typography
-                      variant="body2"
-                      className="sailec"
-                      sx={{
-                        color: '#000',
-                        // textWrap: 'balance',
-                        fontSize: '20px',
-                        lineHeight: '28px'
-                      }}>Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
-                    </Typography>
                   </>
                   :
                   <>
-                    <h3 className="sailec-medium">¿Cómo puedo solicitar </h3>
-                    <h3 className="sailec-medium">atención en el DSME?</h3>
+                    <h2 className="sailec-medium">¿Cómo puedo solicitar </h2>
+                    <h2 className="sailec-medium">atención en el DSME?</h2>
                   </>
               }
+              <Typography
+                variant="body2"
+                className="sailec"
+                sx={{
+                  color: '#000',
+                  // textWrap: 'balance',
+                  fontSize: '20px',
+                  lineHeight: '28px'
+                }}>Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
+              </Typography>
+
               <Elevation matches={matches} />
             </div>
-            <div className="card-body flex-column d-flex align-items-center my-3 ">
+            <div className="card-body flex-column d-flex align-items-center my-2 ">
 
               <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
             </div>
 
             <div className="card-body flex-column d-flex align-items-center">
 
-              <h2 className="sailec" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }}>¿Tienes preguntas o sugerencias?</h2>
+              <h2 className="sailec" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '20px' }}>¿Tienes preguntas o sugerencias?</h2>
               <p style={{
-                margin: '0 25px',
-                textAlign: 'center',
+                margin: matches ? '0 25px' : 0,
+                textAlign: matches ? 'center' : 'left',
                 fontSize: '20px',
                 fontWeight: 400,
                 lineHeight: '32px',
@@ -187,15 +188,15 @@ export default function QuienesSomos() {
               {console.log('matches', matches)}
               {
                 matches
-                  ? <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }} className="sailec">¿Dónde se encuentra el <strong>DSME?</strong></h2>
+                  ? <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: '20px' }} className="sailec">¿Dónde se encuentra el <strong>DSME?</strong></h2>
                   : <>
-                    <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }} className="sailec">¿Dónde se encuentra el</h2>
-                    <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }} className="sailec"><strong>DSME?</strong></h2>
+                    <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }} className="sailec">¿Dónde se encuentra el <strong>DSME?</strong></h2>
+                  
                   </>
               }
               <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
                 <a href="https://maps.app.goo.gl/MgPjwoqPatGxty8W8" target="_blank">
-                  <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 800 : '90%'} />
+                  <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 800 : '100%'} />
                 </a>
               </div>
             </div>

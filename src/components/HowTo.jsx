@@ -17,7 +17,7 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 export default function Elevation({ matches }) {
   return (
     <>
-      <Grid spacing={2} sx={{ placeContent: 'center', margin: matches ? '' : '0 10px'}}>
+      <Grid spacing={2} sx={{ placeContent: 'center', margin: matches ? '' : '10px 0'}}>
         {[lightTheme].map((theme, index) => (
           <Grid item xs={6} key={index} >
             <ThemeProvider theme={theme}>
@@ -58,7 +58,7 @@ export default function Elevation({ matches }) {
           </Grid>
         ))}
       </Grid>
-      <Grid spacing={2} sx={{ placeContent: 'center', margin: matches ? '' : '0 10px' }}>
+      <Grid spacing={2} sx={{ placeContent: 'center', margin: matches ? '' : '10px 0' }}>
         {[lightTheme].map((theme, index) => (
           <Grid item xs={6} key={index}>
             <ThemeProvider theme={theme}>

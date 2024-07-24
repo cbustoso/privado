@@ -28,10 +28,9 @@ export default function QuienesSomosLayout({ children }) {
       </div>
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" style={{padding: matches ? '0 0 0 96px': 0, margin: 0}}>
-        <div className="col-12 col-lg-10 mt--md-5" /* style={{ padding: 0 }} */>
+<div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" /* style={{padding:0, margin: 0}} */>
+        <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
-
             {/* <nav className="navbar navbar-expand-lg navbar-light "> */}
               {matches &&
                 <>
@@ -42,7 +41,7 @@ export default function QuienesSomosLayout({ children }) {
                       width: '163px',
                       padding: '0px 24px',
                       borderRadius: '100px',
-                      marginLeft: '76px'
+                      marginLeft: '96px'
                     }}
                     onClick={() => router.back()}
                   >

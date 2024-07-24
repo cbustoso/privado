@@ -13,11 +13,11 @@ const ConveniosYProfesionales = () => {
   };
   return (
 
-    <div className="row intervenciones-clinicas flex-column d-flex  ">
-      <div className="col-12">
-        <div className="card quienes-somos" style={{ padding: '0px 96px', margin: '0px', border: 'none' }}>
+    <div className="row prevencion flex-column d-flex " >
+      <div className="col-12" >
+        <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+          <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
             Convenios y Profesionales recomendados
             </h3>
             <div className="tab-content tab-dsme-content">

@@ -14,12 +14,12 @@ const PromocionYPrevencion = () => {
   return (
     <div className="row prevencion flex-column d-flex " >
       <div className="col-12" >
-        <div className="card quienes-somos" style={{ padding: '0px 96px', margin: '0px', border: 'none' }}>
+        <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px 0px 20px 0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Promoción y Prevención
             </h3>
-         
+
             <div className="tab-content tab-dsme-content">
               <div className={`tab-pane ${activeTab === 'promocion-y-prevencion' ? 'show active' : ''}`} id="promocion-y-prevencion">
                 <div className="blog-content">
@@ -28,8 +28,8 @@ const PromocionYPrevencion = () => {
                   </p>
                 </div>
               </div>
-              
-              <img src="https://github.com/Niennis/imagesudp/blob/main/promocion_prevencion_texto.jpg?raw=true" alt="" width="100%" className="blog-img"/>
+
+              <img src="https://github.com/Niennis/imagesudp/blob/main/promocion_prevencion_texto.jpg?raw=true" alt="" width="100%" className="blog-img" />
             </div>
           </div>
         </div>
