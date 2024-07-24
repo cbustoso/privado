@@ -7,55 +7,143 @@ export const blogs = [
 
   {
     id: '0',
-    titulo: 'Cómo hacer más en menos tiempo',
-    bajada: `Descubre cómo mejorar tus métodos de estudio y aprovechar cada minuto al máximo con estas estrategias fáciles de seguir.`,
+    titulo: '5 Técnicas para Reducir la Ansiedad',
+    bajada: `Descubre cómo manejar eficazmente tu ansiedad con estas cinco estrategias clave.`,
     texto: `
-      <p>En la universidad, aprender a administrar el tiempo de manera efectiva puede ser tan crucial como comprender las teorías más complejas de tu carrera. Si constantemente te encuentras luchando contra el reloj, preguntándote cómo puedes estudiar mejor y lograr un equilibrio entre tus diversas responsabilidades, aquí te presentamos técnicas y consejos fundamentados para optimizar tu tiempo y mejorar tu rendimiento académico.</p>
+      <h2>Introducción:</h2>
+<p>La vida universitaria puede ser un caldo de cultivo para la ansiedad, con sus demandas académicas, sociales y personales. Afortunadamente, hay estrategias efectivas que puedes implementar para mantener tu ansiedad bajo control y mejorar tu experiencia universitaria. En este artículo, exploraremos cinco técnicas basadas en evidencia que te ayudarán a lidiar con la ansiedad.</p>
+<p><strong>¿Qué es la ansiedad y cuáles son sus impactos?</strong> La ansiedad es una respuesta emocional a una percepción de amenaza en el ambiente, que involucra sentimientos de nerviosismo y preocupación. No solo afecta tu bienestar emocional, sino también tu capacidad para funcionar en situaciones académicas. Los estudiantes con altos niveles de ansiedad a menudo experimentan dificultades en la concentración y retención de la información, lo que puede llevar a un rendimiento académico inferior.</p>
+
+<h2>Técnica 1: Mindfulness y Meditación</h2>
+<p><strong>Mindfulness y meditación: Conectar con el momento presente.</strong></p>
+<p>La práctica de mindfulness implica una atención plena y consciente del momento presente, ayudando a calmar la mente y reducir el estrés y la ansiedad. La meditación complementa esta práctica al proporcionar una ruta para profundizar en la experiencia del ahora, liberando las tensiones acumuladas.</p>
+<ul>
+<li>Dedica de 10 a 15 minutos diarios a practicar la meditación. Puedes comenzar con aplicaciones de meditación guiada como Headspace o Calm.</li>
+<li>Realiza pausas breves durante el día para practicar la atención plena; por ejemplo, enfócate en tu respiración o en los sonidos a tu alrededor por unos minutos.</li>
+<li>Anota tus pensamientos en un diario para practicar la atención plena sobre tus estados emocionales y mentales.</li>
+</ul>
+
+<h2>Técnica 2: Técnicas de Respiración Controlada</h2>
+<p><strong>Respiración controlada: La puerta hacia la calma interna.</strong></p>
+<p>Las técnicas de respiración son herramientas poderosas para gestionar la ansiedad en tiempo real. Al controlar conscientemente el ritmo y la profundidad de la respiración, puedes influir directamente en tu sistema nervioso, promoviendo la relajación y reduciendo los niveles de estrés.</p>
+<ul>
+<li>Practica la respiración diafragmática: respira profundamente por la nariz, asegurándote de que tu vientre se expanda con cada inhalación y se contraiga con cada exhalación.</li>
+<li>Utiliza la técnica de respiración 4-7-8: inhala durante 4 segundos, mantén la respiración durante 7 segundos y exhala durante 8 segundos.</li>
+<li>Realiza respiraciones cortas y rápidas durante un minuto para aumentar la energía cuando te sientas fatigado.</li>
+</ul>
+
+<h2>Técnica 3: Ejercicio Físico Regular</h2>
+<p><strong>Ejercicio físico: Vitalidad para cuerpo y mente.</strong></p>
+<p>El ejercicio regular no solo mejora la salud física, sino que también tiene un impacto significativo en la salud mental. La actividad física libera endorfinas, mejora el estado de ánimo y actúa como un antídoto natural contra la ansiedad.</p>
+<ul>
+<li>Participa en actividades deportivas organizadas en el campus, como fútbol, baloncesto o natación.</li>
+<li>Establece una rutina de ejercicios en el gimnasio; incluso 30 minutos al día pueden marcar una gran diferencia.</li>
+<li>Opta por caminatas largas o trota alrededor del campus como una forma de despejar tu mente y fortalecer tu cuerpo.</li>
+</ul>
+
   
-  <h2>1. Prioriza tus tareas</h2>
-  <p>Identifica cuáles son las tareas más importantes y urgentes y dedica tu energía principalmente a ellas. Según María del Carmen Valero Jiménez, especialista en técnicas de estudio, la priorización te ayuda a no desperdiciar esfuerzos en actividades de menor impacto, permitiéndote concentrarte en lo que realmente contribuye a tus metas académicas (Valero Jiménez, 2011).</p>
+  <img src="https://github.com/Niennis/imagesudp/blob/main/ansiedad02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
   
-  <h2>2. Planifica cada semana</h2>
-  <p>Utiliza una herramienta de planificación, ya sea digital o en papel, para organizar tus actividades semanales. Incluye clases, horas de estudio, compromisos sociales, y tiempo para descansar. Marina G. Cenamor y Esther Cano Ángel destacan la importancia de tener un horario flexible pero bien estructurado que contemple imprevistos, asegurando así que todos los aspectos de tu vida estudiantil están cubiertos (Cenamor & Cano Ángel, 2022).</p>
+<h2>Técnica 4: Exposición Gradual</h2>
+<p><strong>Exposición gradual: Enfrentando los miedos paso a paso.</strong></p>
+<p>Esta técnica se basa en la idea de enfrentar gradualmente aquello que provoca ansiedad, en lugar de evitarlo. Al exponerte lentamente y de manera controlada a tus miedos, puedes desensibilizarte a estos estímulos, reduciendo su impacto emocional.</p>
+<ul>
+<li>Identifica situaciones específicas que te causen ansiedad y clasifícalas por niveles de dificultad.</li>
+<li>Comienza enfrentando situaciones menos desafiantes y gradualmente avanza hacia situaciones más difíciles.</li>
+<li>Utiliza un diario para registrar tus progresos y cómo te sientes después de cada exposición.</li>
+</ul>
+
+<h2>Técnica 5: Regulación Emocional</h2>
+<p><strong>Regulación emocional: Manejando emociones intensas.</strong></p>
+<p>Aprender a regular tus emociones es clave para manejar la ansiedad. Esta técnica incluye reconocer, entender y modificar tus emociones, lo que permite una mejor gestión de las respuestas ansiosas.</p>
+<ul>
+<li>Practica el reconocimiento de tus emociones sin juzgarlas, simplemente observándolas como si fueran nubes pasando en el cielo.</li>
+<li>Desarrolla la habilidad de redireccionar tus emociones hacia actividades productivas, como el arte o la escritura.</li>
+<li>Aprende técnicas de reestructuración cognitiva para cambiar las narrativas negativas que puedas tener sobre ti mismo o las situaciones que enfrentas.</li>
+</ul>
+
+<h2>Reflexiones Finales:</h2>
+<p>La ansiedad no tiene que ser un impedimento para tu éxito y bienestar en la universidad. Al adoptar estas técnicas y hacerlas parte de tu rutina, podrás gestionar mejor tus emociones y disfrutar de una experiencia universitaria más plena y satisfactoria. Es esencial recordar que, como sugiere la terapia cognitivo-conductual, la manera en que interpretamos y pensamos sobre nuestras experiencias influye directamente en cómo nos sentimos y reaccionamos ante ellas. Al cambiar los patrones de pensamiento que alimentan la ansiedad, podemos transformar nuestra experiencia emocional y reducir significativamente los niveles de ansiedad.</p>
+
   
-  <h2>3. Técnica Pomodoro</h2>
-  <p>Francesco Cirillo desarrolló la Técnica Pomodoro en la década de 1980, que consiste en dividir tu trabajo en periodos de 25 minutos, seguidos de breves descansos de 5 minutos. Esta técnica ayuda a mantener la concentración y la frescura mental, permitiéndote estudiar de manera más eficiente durante períodos más largos.</p>
-  
-  <img src="https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true" alt="" width="100%" class="blog-img"/>
-  
-  <h2>4. Establece un ambiente de estudio adecuado</h2>
-  <p>El lugar donde estudias puede influir significativamente en tu eficacia. Asegúrate de tener un espacio designado para estudiar que sea tranquilo, ordenado y bien iluminado. Universia recomienda estudiar en un ambiente que favorezca la concentración y minimice las distracciones, lo que puede aumentar significativamente tu capacidad de retención (Universia, 2020).</p>
-  
-  <h2>5. Utiliza la tecnología a tu favor</h2>
-  <p>Herramientas y aplicaciones como calendarios digitales, bloqueadores de sitios web distractores y apps de gestión de tareas pueden ser extremadamente útiles. Establece límites claros para el uso de dispositivos y redes sociales durante tus horas de estudio para maximizar tu productividad.</p>
-  
-  <h2>Reflexiones finales</h2>
-  <p>Gestionar tu tiempo eficazmente mientras estás en la universidad no solo mejora tu rendimiento académico, sino que también reduce el estrés y te permite disfrutar de una vida estudiantil más equilibrada. Experimenta con diferentes técnicas hasta que encuentres las que mejor se adapten a tus necesidades y estilo de vida. Recuerda, el objetivo es trabajar de manera más inteligente, no más dura.</p>
-  
-  <h2>Referencias</h2>
-  <ul>
-  <li>Valero Jiménez, M. del C. (2011). Técnicas de estudio. <em>Revista de Clasehistoria</em>. Recuperado de http://www.claseshistoria.com/revista/index.html</li>
-  <li>Cenamor, M. G., & Cano Ángel, E. (2022). Técnicas de estudio. <em>Asociación Alganda</em>. Recuperado de https://www.alganda.org/webalganda/wp-content/uploads/2022/02/Cuaderno-de-t%C3%A9cnicas-de-estudio.-Alganda-1.pdf</li>
-  <li>Universia. (2020). Técnicas y hábitos de estudio para obtener buenos resultados académicos en la universidad. <em>Universia</em>.</li>
-  </ul>`,
-    imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio02.jpg?raw=true",
+ <h2>Referencias:</h2>
+<ul>
+<li>Clark, D. A., & Beck, A. T. (2016). <em>Manual práctico para la ansiedad y las preocupaciones. La solución cognitiva conductual</em>. Desclée De Brouwer.</li>
+<li>Ladejo, J. (2023). <em>A Thematic Analysis of the Reported Effect Anxiety Has on University Students</em>. Education and Urban Society, 55(3), 289–313.</li>
+<li>Malik, S., & Perveen, A. (2021). <em>Mindfulness and anxiety among university students: Moderating role of cognitive emotion regulation</em>. Journal of Current Psychology.</li>
+<li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
+</ul>
+`,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/ansiedad01.jpg?raw=true",
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
-        titulo: 'Procrastinación: Técnicas para superarla',
-        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'procrastinacion_tecnicas.pdf'
+        titulo: '5 Técnicas para Reducir la Ansiedad',
+        bajada: 'Descubre cinco poderosas técnicas para aliviar la ansiedad: respiración controlada, autoinstrucciones, grounding, visualización y meditación guiada, todas disponibles para descargar.',
+        url: '5_tecnicas_para_reducir_la_ansiedad.pdf'
       },
       {
-        titulo: 'Técnicas de estudio que sí funcionan',
-        bajada: 'El Departamento de Salud Mental Estudiantil (DSME) creó para la comunidad este Manual de Autocuidado que contiene diversas estrategias que te pueden servir.',
-        url: 'tecnicas_de_estudio.pdf'
+        titulo: 'Mindfulness como técnica para reducir la ansiedad',
+        bajada: 'Descubre cómo la práctica del mindfulness puede ayudarte a reducir la ansiedad, enfocándote en el momento presente y observando tus pensamientos sin juzgar.',
+        url: 'mindfulness_como_tecnica_para_reducir_la_ansiedad.pdf'
       }
     ]
   },
   {
     id: '1',
-    titulo: 'Drogas y Alcohol: Cómo Evitar el Exceso',
+    titulo: 'Suicidio: Cómo buscar ayuda y ayudar',
+    bajada: `Aprende a enfrentar el suicidio con herramientas y apoyo de la Universidad Diego Portales, fortaleciendo nuestra comunidad universitaria.`,
+    texto: `
+<h2>Cómo buscar ayuda</h2>
+<p>Si estás sintiendo que las cosas se te van de las manos, lo primero es reconocer que pedir ayuda es un signo de fortaleza, no de debilidad. <strong>No estás solo/a</strong> en esto. Es crucial pedir ayuda cuando los sentimientos de desesperanza o desolación se apoderan de ti. Aquí hay tres conductas concretas que puedes tomar para buscar ayuda:</p>
+<ol>
+<li><strong>Habla con alguien de confianza</strong>: Puede ser un amigo, un familiar, o un profesor. Expresar tus pensamientos y sentimientos es un paso importante hacia tu recuperación.</li>
+<li><strong>Visita el Departamento de Salud Mental Estudiantil de la UDP</strong>: Los profesionales de salud mental están capacitados para ofrecer apoyo y pueden ayudarte a entender y manejar lo que estás sintiendo.</li>
+<li><strong>Llama a la línea de atención nacional 4141</strong>: Si sientes que necesitas hablar con alguien inmediatamente, esta línea está disponible para ofrecerte el apoyo necesario en cualquier momento.</li>
+</ol>
+<p>Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento. No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
+
+<img src="https://github.com/Niennis/imagesudp/blob/main/suicidio02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
+
+<h2>Cómo ayudar</h2>
+<p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
+<ol>
+<li><strong>Escucha activamente</strong>: Dedica tiempo para escuchar de forma activa y sin juzgar. A veces, simplemente ser escuchado puede ser un gran alivio para alguien en crisis.</li>
+<li><strong>Reconoce y valida sus sentimientos</strong>: Es importante mostrar que tomas sus sentimientos en serio. Evita trivializar lo que están experimentando diciendo cosas como "todo mejorará pronto". En su lugar, usa frases como "parece que estás pasando por un momento realmente difícil", o "entiendo que esto debe ser muy duro para ti".</li>
+<li><strong>Informa y moviliza recursos de ayuda</strong>: Familiarízate con los recursos de ayuda disponibles, como el centro de salud mental de la universidad o la línea de crisis, y ofrece acompañar a la persona a estas instancias de apoyo.</li>
+</ol>
+<p>Intervenir de manera adecuada puede salvar vidas; siempre se debe actuar con urgencia y precaución. Puedes ser ese puente vital entre tu amigo y la ayuda profesional que necesitan.</p>
+
+<h2>Comentarios finales</h2>
+<p>Hablar del suicidio no es fácil, pero es necesario. Al ser más conscientes y activos en la prevención del suicidio, podemos crear un ambiente en el que todos se sientan seguros para expresar sus dificultades. El suicidio es prevenible, y tu rol es crucial en este esfuerzo colectivo.</p>
+
+<h2>Bibliografía</h2>
+<ul>
+<li>OMS. (2001). <em>Prevención del suicidio: un recurso para consejeros</em>. Ginebra.</li>
+<li>Dumon, E., & Portzky, G. (2014). <em>Directrices de actuación para la Prevención, Intervención y Postvención del suicidio en el entorno escolar</em>. Universidad de Gante.</li>
+<li>UBB. (2021). <em>Protocolo para acción de funcionarios/as ante riesgo suicida de estudiantes de la Universidad del Bío-Bío, sede Chillán</em>.</li>
+<li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
+</ul>
+`,
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/suicidio01.jpg?raw=true",
+    video: '',
+    // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
+    downloads: [
+      {
+        titulo: 'Estrategias de intervención para la prevención del suicidio ',
+        bajada: 'Explora estrategias efectivas de intervención para prevenir el suicidio, incluyendo cómo hablar abiertamente, escuchar con empatía y proporcionar apoyo adecuado.',
+        url: 'estrategias_de_intervencion.pdf'
+      },
+      {
+        titulo: 'Prevención del suicidio ¿Cómo identificar señales de alerta?',
+        bajada: 'Aprende a identificar señales de alerta y prevenir el suicidio con estrategias efectivas y un enfoque integral de apoyo.',
+        url: 'prevencion_del_suicidio.pdf'
+      }
+    ]
+  },
+  {
+    id: '2',
+    titulo: 'Drogas y Alcohol: Cómo evitar el exceso',
     bajada: `Descubre estrategias efectivas para prevenir y reducir el consumo problemático de drogas y alcohol durante tu vida universitaria.`,
     texto: `
    <p>La etapa universitaria está llena de desafíos y oportunidades, y uno de los mayores desafíos que enfrentan muchos estudiantes es la presión para consumir drogas y alcohol. Ya sea en fiestas, reuniones sociales o como una forma de manejar el estrés, el riesgo de caer en un consumo excesivo es real. Sin embargo, con las estrategias adecuadas, puedes proteger tu bienestar y tu futuro académico y profesional.</p>
@@ -91,73 +179,21 @@ export const blogs = [
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
-        titulo: 'Alcohol y drogas, ¿cómo evito los excesos?',
-        bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
+        titulo: 'Alcohol y drogas: ¿cómo evito los excesos?',
+        bajada: 'Descubre estrategias eficaces para evitar el consumo excesivo de alcohol y drogas, fomentando un ambiente universitario saludable y seguro.',
         url: 'alcohol_y_drogas.pdf'
       },
       {
-        titulo: 'Señales de riesgo',
-        bajada: '¿Qué alteraciones y/o manifestaciones psicológicas puedo sentir siendo estudiante universitario?',
-        url: 'senales_de_riesgo_en_alcohol_y_drogas.pdf'
-      }
-    ]
-  },
-  {
-    id: '2',
-    titulo: 'Suicidio: Cómo buscar ayuda y ayudar',
-    bajada: `Aprende a enfrentar el suicidio con herramientas y apoyo de la Universidad Diego Portales, fortaleciendo nuestra comunidad universitaria.`,
-    texto: `
-<h2>Cómo buscar ayuda</h2>
-<p>Si estás sintiendo que las cosas se te van de las manos, lo primero es reconocer que pedir ayuda es un signo de fortaleza, no de debilidad. <strong>No estás solo/a</strong> en esto. Como señala la OMS (2001), "es crucial pedir ayuda cuando los sentimientos de desesperanza o desolación se apoderan de ti" (p. 45). Aquí hay tres conductas concretas que puedes tomar para buscar ayuda:</p>
-<ol>
-<li><strong>Habla con alguien de confianza</strong>: Puede ser un amigo, un familiar, o un profesor. Expresar tus pensamientos y sentimientos es un paso importante hacia tu recuperación.</li>
-<li><strong>Visita el Departamento de Salud Mental Estudiantil de la UDP</strong>: Los profesionales de salud mental están capacitados para ofrecer apoyo y pueden ayudarte a entender y manejar lo que estás sintiendo.</li>
-<li><strong>Llama a la línea de atención nacional 4141</strong>: Si sientes que necesitas hablar con alguien inmediatamente, esta línea está disponible para ofrecerte el apoyo necesario en cualquier momento.</li>
-</ol>
-<p>Recuerda, según el <em>Manual de prevención del suicidio</em> de DSME (2024), "Identificar tus emociones y compartirlas es el primer paso para superar el aislamiento" (p. 19). No subestimes el poder de compartir cómo te sientes con alguien que pueda ofrecerte un apoyo genuino.</p>
-
-<img src="https://github.com/Niennis/imagesudp/blob/main/suicidio02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
-
-<h2>Cómo ayudar</h2>
-<p>Si conoces a alguien que está pasando por un momento difícil y considera el suicidio, aquí tienes tres pasos concretos que puedes seguir para ofrecer tu ayuda:</p>
-<ol>
-<li><strong>Escucha activamente</strong>: Dedica tiempo para escuchar de forma activa y sin juzgar. A veces, simplemente ser escuchado puede ser un gran alivio para alguien en crisis.</li>
-<li><strong>Reconoce y valida sus sentimientos</strong>: Es importante mostrar que tomas sus sentimientos en serio. Evita trivializar lo que están experimentando diciendo cosas como "todo mejorará pronto". En su lugar, usa frases como "parece que estás pasando por un momento realmente difícil", o "entiendo que esto debe ser muy duro para ti".</li>
-<li><strong>Informa y moviliza recursos de ayuda</strong>: Familiarízate con los recursos de ayuda disponibles, como el centro de salud mental de la universidad o la línea de crisis, y ofrece acompañar a la persona a estas instancias de apoyo.</li>
-</ol>
-<p>Según el <em>Protocolo para acción de funcionarios/as ante riesgo suicida de estudiantes</em> de la UBB (2021), "Intervenir de manera adecuada puede salvar vidas; siempre se debe actuar con urgencia y precaución" (p. 102). Puedes ser ese puente vital entre tu amigo y la ayuda profesional que necesitan.</p>
-
-<h2>Comentarios finales</h2>
-<p>Hablar del suicidio no es fácil, pero es necesario. Al ser más conscientes y activos en la prevención del suicidio, podemos crear un ambiente en el que todos se sientan seguros para expresar sus dificultades. El suicidio es prevenible, y tu rol es crucial en este esfuerzo colectivo.</p>
-
-<h2>Bibliografía</h2>
-<ul>
-<li>OMS. (2001). <em>Prevención del suicidio: un recurso para consejeros</em>. Ginebra.</li>
-<li>Dumon, E., & Portzky, G. (2014). <em>Directrices de actuación para la Prevención, Intervención y Postvención del suicidio en el entorno escolar</em>. Universidad de Gante.</li>
-<li>UBB. (2021). <em>Protocolo para acción de funcionarios/as ante riesgo suicida de estudiantes de la Universidad del Bío-Bío, sede Chillán</em>.</li>
-<li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
-</ul>
-`,
-    imagen: "https://github.com/Niennis/imagesudp/blob/main/suicidio01.jpg?raw=true",
-    video: '',
-    // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
-    downloads: [
-      {
-        titulo: 'Estrategias de intervención',
-        bajada: '¿Qué puedo hacer si estoy frente a alguien con ideación suicida?',
-        url: 'estrategias_de_intervencion.pdf'
-      },
-      {
-        titulo: 'Prevención del suicidio en universitarios',
-        bajada: '¿Qué debemos saber?',
-        url: 'prevencion_del_suicidio.pdf'
+        titulo: 'Señales de riesgo en mi consumo de alcohol y drogas',
+        bajada: 'Identifica las señales de riesgo en tu consumo de alcohol y drogas para tomar acción temprana y proteger tu bienestar general.',
+        url: 'senales_de_riesgo_en_consumo_de_alcohol_y_drogas.pdf'
       }
     ]
   },
   {
     id: '3',
-    titulo: '5 Técnicas para Reducir la Ansiedad',
-    bajada: `Descubre cómo manejar eficazmente tu ansiedad con estas cinco estrategias clave.`,
+    titulo: 'Cómo hacer más en menos tiempo',
+    bajada: `Descubre cómo mejorar tus métodos de estudio y aprovechar cada minuto al máximo con estas estrategias fáciles de seguir.`,
     texto: `
     <h2>Introducción:</h2>
 <p>La vida universitaria puede ser un caldo de cultivo para la ansiedad, con sus demandas académicas, sociales y personales. Afortunadamente, hay estrategias efectivas que puedes implementar para mantener tu ansiedad bajo control y mejorar tu experiencia universitaria. En este artículo, exploraremos cinco técnicas basadas en evidencia que te ayudarán a lidiar con la ansiedad.</p>
@@ -181,7 +217,7 @@ export const blogs = [
 <li>Realiza respiraciones cortas y rápidas durante un minuto para aumentar la energía cuando te sientas fatigado.</li>
 </ul>
 
-<img src="https://github.com/Niennis/imagesudp/blob/main/ansiedad02.jpg?raw=true" alt="" width="100%" class="blog-img"/>
+<img src="https://github.com/Niennis/imagesudp/blob/main/estudio01.jpg?raw=true" alt="" width="100%" class="blog-img"/>
 
 <h2>Técnica 3: Ejercicio Físico Regular</h2>
 <p><strong>Ejercicio físico: Vitalidad para cuerpo y mente.</strong></p>
@@ -221,19 +257,19 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    imagen: "https://github.com/Niennis/imagesudp/blob/main/ansiedad01.jpg?raw=true",
+    imagen: "https://github.com/Niennis/imagesudp/blob/main/estudio02.jpg?raw=true",
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
-        titulo: '5 técnicas para reducir la ansiedad',
-        bajada: 'A veces creemos que sentir estrés en la universidad es signo de "debilidad" y muchas veces somos juzgados por lo mismo. ¿Pero sabías que puede ser un sentir propio de una situación nueva y de un proceso de aprendizaje?',
-        url: '5_tecnicas_para_reducir_la_ansiedad.pdf'
+        titulo: 'Procrastinación: técnicas para superarla',
+        bajada: 'Aprende técnicas efectivas para superar la procrastinación, como establecer metas claras, planificar tareas y eliminar distracciones.',
+        url: 'procrastinacion_tecnicas_para_superarla.pdf'
       },
       {
-        titulo: 'Mindfulness como técnica para reducir la ansiedad',
-        bajada: 'Aquí encontrarás algunas estrategias de afrontamiento ante situaciones estresantes, que te pueden servir tanto en tu trayectoria universitaria como en tu quehacer diario.',
-        url: 'mindfulness_como_tecnica_para_reducir_la_ansiedad.pdf'
+        titulo: 'Técnicas de estudio que sí funcionan',
+        bajada: 'Explora técnicas de estudio efectivas, como el Método Pomodoro, Mapas Mentales y la Técnica Feynman, diseñadas para optimizar tu aprendizaje y desempeño académico.',
+        url: 'tecnicas_de_estudio_que_si_funcionan.pdf'
       }
     ]
   },
