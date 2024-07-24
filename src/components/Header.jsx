@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import MenuIcon from '@mui/icons-material/Menu';
 import { IoMdLogIn } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 const pagesWithEvents = [
   { title: 'INICIO', url: '/#inicio', label: 'inicio' },
@@ -156,13 +157,49 @@ const Header = () => {
                 pages.map((page) => (
                   <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center" className="sailec">
-                      <a href={page.url} style={{ color: 'black',fontFamily: 'sailec' }}>
+                      <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
                         {page.title}
                       </a>
                     </Typography>
                   </MenuItem>
                 ))
               }
+              <MenuItem onClick={handleOpenUserMenu}>
+                <Typography textAlign="center" className="sailec">
+                  <p style={{ color: 'black', fontFamily: 'sailec' }}>
+                    CÓMO TRABAJAMOS <FaChevronDown />
+                  </p>
+                </Typography>
+              </MenuItem>
+
+              <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" className="sailec">
+                        <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                          {setting.title}
+                        </a>
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Menu>
           </Box>
           <Typography
@@ -171,7 +208,7 @@ const Header = () => {
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: { xs: 0, lg: 2 },
               display: { xs: 'flex', lg: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -179,10 +216,10 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              fontFamily: 'sailec'
+              fontFamily: 'sailec',
             }}
           >
-            <img src={logo.src} width={'180px'} alt="" />{" "}
+            <img src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'} width={100} alt="" />{" "}
           </Typography>
 
           {/* MENU DASHBOARD */}
@@ -205,7 +242,7 @@ const Header = () => {
               )
             }
             )}
-            <Tooltip title="Open settings">
+            <Tooltip title="Como trabajamos">
               <Button
                 className={`sailec ${activeSection === 'como_trabajamos'
                   ? 'active-header'
@@ -234,14 +271,14 @@ const Header = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                    <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" className="sailec">
-                        <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
-                          {setting.title}
-                        </a>
-                      </Typography>
-                    </MenuItem>
-                  ))}
+                  <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center" className="sailec">
+                      <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                        {setting.title}
+                      </a>
+                    </Typography>
+                  </MenuItem>
+                ))}
               </Menu>
             </Box>
           </Box>
@@ -253,13 +290,13 @@ const Header = () => {
               !session
                 ? <>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="/login#profesionales" style={{textDecoration: 'none'}}>
+                  <Link href="/login#profesionales" style={{ textDecoration: 'none' }}>
                     <IoMdLogIn style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
                   </Link>
                 </>
                 : session.user.picture ?
                   <button className="btn">
-                    <Link href="/citas" style={{ textDecoration: 'none'}}>
+                    <Link href="/citas" style={{ textDecoration: 'none' }}>
                       <img
                         className="avatar-img rounded-circle"
                         src={session.user.picture}
