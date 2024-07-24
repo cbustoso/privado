@@ -133,7 +133,8 @@ const Section = ({ title, image, left, children, bgColor }) => {
                 >
                   <Card sx={{
                     maxWidth: 'fit-content',
-                    bgcolor: bgColor, boxShadow: 'unset'
+                    bgcolor: bgColor, 
+                    boxShadow: 'unset'
                   }}>
                     <CardMedia
                       sx={{ height: 240 }}
