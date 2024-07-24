@@ -283,7 +283,7 @@ const ImageSlider = ({ innerRef }) => {
               borderBottom: '1px solid white',
               height: '200px',
               marginTop: '-240px',
-              marginLeft: `calc((25vw * ${slides[currentIndex].id}) - (${slides[currentIndex].id} * 4px) )`,
+              marginLeft: `calc(25vw * ${slides[currentIndex].id})`,
               backgroundColor: styles[currentIndex].color,
               color: "#fff",
               display: 'flex',

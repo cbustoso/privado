@@ -36,6 +36,9 @@ body {
   height: 100%;
   padding: 0 !important;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 
 h1,
 h2,
@@ -8471,10 +8474,8 @@ table.table-inbox tbody tr.checked {
 
 .blog {
   position: relative;
-  margin: 0 0 25px;
   background: #ffffff;
   border-radius: 12px;
-  padding: 20px;
 }
 
 /* .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
