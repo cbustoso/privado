@@ -152,7 +152,7 @@ const TestSlider = ({ slides, innerRef }) => {
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" className="sailec-bold"
                                 sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary" className="lato">{slide.bajada}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="lato" sx={{height: '3rem'}}>{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
@@ -204,12 +204,12 @@ const TestSlider = ({ slides, innerRef }) => {
                         <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '90%', margin: 'auto' }}>
                           <CardMedia component="img" height="320" image={slides[currentIndex].imagen} alt="Slide image" />
                           <CardContent>
-                            <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slide.titulo}</Typography>
-                            <Typography variant="body2" color="text.secondary">{slide.bajada}</Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slides[currentIndex].titulo}</Typography>
+                            <Typography variant="body2" color="text.secondary">{slides[currentIndex].bajada}</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">
-                              <Link href={slide.url} >
+                              <Link href={slides[currentIndex].url} >
                                 <button
                                   className="btn submit-form me-2"
                                   style={{
