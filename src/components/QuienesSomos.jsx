@@ -111,7 +111,7 @@ const QuienesSomos = () => {
                       component="img"
                       height="240"
                       width="240"
-                      image="https://github.com/Niennis/imagesudp/blob/main/profesional01.jpg?raw=true"
+                      image="https://github.com/Niennis/imagesudp/blob/main/home_quienes_somos.jpg?raw=true"
                       sx={{ borderRadius: '8px' }}
                     />
                   </Card>

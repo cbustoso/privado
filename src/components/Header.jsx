@@ -35,8 +35,8 @@ const pagesWithoutEvents = [
 
 const settings = [
   { title: 'Intervenciones', url: '/como_trabajamos', label: '/como_trabajamos' },
-  { title: 'Plan de Acción', url: '/como_trabajamos/plan-de-accion-en-salud-mental', label: '/plan-de-accion-en-salud-mental' },
-  { title: 'Prevención', url: '/como_trabajamos/intervencion-en-promocion-y-prevencion', label: '/intervencion-en-promocion-y-prevencion' },
+  { title: 'Plan de Acción', url: '/plan-de-accion-en-salud-mental', label: '/plan-de-accion-en-salud-mental' },
+  { title: 'Prevención', url: '/intervencion-en-promocion-y-prevencion', label: '/intervencion-en-promocion-y-prevencion' },
   { title: 'Convenios y profesionales', url: '/como_trabajamos/convenios-y-profesionales', label: '/convenios-y-profesionales' },
 ];
 

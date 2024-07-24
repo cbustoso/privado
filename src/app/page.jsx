@@ -69,7 +69,7 @@ const tests = [
     titulo: 'Test de ansiedad de Beck',
     bajada: 'El test de ansiedad de Beck es un cuestionario que ayuda a saber cuánta ansiedad siente una persona. Tiene 21 preguntas sobre cómo se ha sentido recientemente.',
     url: '/tests/test_de_ansiedad',
-    imagen: saludMental05.src,
+    imagen: 'https://github.com/Niennis/imagesudp/blob/main/home_ansiedad.jpg?raw=true',
   },
   {
     id: '0',
