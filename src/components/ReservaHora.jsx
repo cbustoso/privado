@@ -17,7 +17,7 @@ const ReservaTuHora = () => {
 
 
   return (
-    <div className={`container col-12 col-lg-10 align-self-center p-0 ${matches && 'mb-5'}`} style={{ background: '#f1f1f1'}}>
+    <div className={`container col-12 col-lg-10 align-self-center p-0 ${matches && 'mb-5'}`} style={{ background: '#f1f1f1' }}>
 
       {/* <TestCard test={slides} /> */}
 
@@ -95,7 +95,7 @@ const ReservaTuHora = () => {
                         fontSize: '20px',
                         lineHeight: '28px'
                       }}>
-                      Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
+                      Si necesitas ayuda psicológica o psicopedagógica, reserva una hora con un profesional.
                     </Typography>
                     <Typography
                       variant="body2"
@@ -144,7 +144,7 @@ const ReservaTuHora = () => {
                       </Typography>
 
                       <p className="media-body sailec" style={{ textWrap: 'pretty' }}>
-                        Si necesitas ayuda psicológica, reserva una hora con un psicólogo.
+                        Si necesitas ayuda psicológica o psicopedagógica, reserva una hora con un profesional.
                       </p>
                       <p>
                         Un psicólogo puede ayudarte a mejorar tu salud mental y emocional. Reservar una hora es fácil y cómodo.
