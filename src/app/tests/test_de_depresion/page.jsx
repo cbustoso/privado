@@ -178,8 +178,8 @@ const TestDepresion = () => {
         />
       </div>
       }
-      <div className="page-wrapper" style={{ margin: 'auto' }}>
-        <div className="content">
+      <div className="page-wrapper sailec" style={{ margin: 'auto' }}>
+        <div style={{ marginTop: !matches && '47px' }}>
           {/* Page Header */}
           {matches &&
             <button className='btn mt-4 mb-2'
@@ -189,7 +189,7 @@ const TestDepresion = () => {
                 width: '163px',
                 padding: '0px 24px',
                 borderRadius: '100px',
-                marginLeft: '76px'
+                marginLeft: '86px'
               }}
               onClick={() => router.back()}
             >
@@ -200,20 +200,19 @@ const TestDepresion = () => {
           <div className="row">
             <div className="col-sm-12">
               <div className="card" style={{ border: 'none' }}>
-                <div className="card-body">
+                <div className="card-body" style={{ padding: matches ? '0 96px' : '32px' }}>
                   <form>
                     <div className="row d-flex flex-column align-items-center">
-                      <div className="col-12">
+                      <div className="col-12" style={{ padding: 0 }}>
                         <div className="form-heading">
-                          <div className="card-body flex-row d-flex justify-content-center mt-4">
+                          <div className="card-body flex-row d-flex mt-4" style={{ paddingLeft: 0 }}>
                             <h2
-                              className="sailec"
-                              style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
+                              className={matches ? 'blog-title' : 'blog-title-sm'}>
                               Test de Síntomas de Depresión (PHQ-9)
                             </h2>
                           </div>
                           <div className="row">
-                            <div className="col-12 col-md-10 ms-md-5">
+                            <div className={`${matches ? 'blog-text' : 'blog-text-sm'} col-12 col-md-10`}>
                               <p>
                                 Durante las dos últimas semanas ¿con qué frecuencia le han molestado los siguientes problemas?
                               </p>
@@ -229,21 +228,20 @@ const TestDepresion = () => {
                       {
                         preguntas.map((item, index) => (
                           <div
-                            className="col-12 col-md-11"
+                            className={`col-12 ${matches ? 'blog-text' : 'blog-text-sm'}`}
                             key={index + item.label}
                             style={{
                               background: index % 2 === 0 && '#E6E9EC'
                             }}
                           >
-                            <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px' }}>
-
+                            <div className="form-group select-gender d-flex justify-content-between" style={{ margin: 'auto', padding: '10px', alignItems: 'end' }}>
                               <label className="col-6 col-md-9">
                                 {item.pregunta}
                               </label>
                               <div className="col-5 col-md-3 text-end" style={{ margin: 'auto 0' }}>
                                 <div className="form-check-inline me-1 me-md-3" >
                                   <label
-                                    className="form-check-label"
+                                    className={matches ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}
                                   >
                                     <input
@@ -263,7 +261,7 @@ const TestDepresion = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className="form-check-label"
+                                    className={matches ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -282,7 +280,7 @@ const TestDepresion = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className="form-check-label"
+                                    className={matches ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -301,7 +299,7 @@ const TestDepresion = () => {
                                 </div>
                                 <div className="form-check-inline me-1 me-md-3" style={{ marginRight: '5px' }}>
                                   <label
-                                    className="form-check-label"
+                                    className={matches ? 'blog-text' : 'blog-text-sm'}
                                     style={{ textAlign: 'center' }}>
                                     <input
                                       type="radio"
@@ -420,7 +418,7 @@ const TestDepresion = () => {
                   <div className="col-12">
                     <div className="form-group select-gender">
                       <div className="form-check-inline">
-                        <label className="form-check-label">
+                        <label className={matches ? 'blog-text' : 'blog-text-sm'}>
                           <input
                             type="checkbox"
                             name="gender"

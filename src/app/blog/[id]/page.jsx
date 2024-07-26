@@ -37,11 +37,11 @@ const card = (item) => (
       </Typography>
       <Typography variant="body2" className='lato'
         sx={{
-        padding: '16px 24px 16px 24px',
-        fontSize: '18px',
-        lineHeight: '28px',
-        fontWeight: 400
-      }}>
+          padding: '16px 24px 16px 24px',
+          fontSize: '18px',
+          lineHeight: '28px',
+          fontWeight: 400
+        }}>
         {item.bajada}
       </Typography>
     </CardContent>
@@ -129,7 +129,7 @@ const Blogdetails = ({ params }) => {
 
                 {/* CONTENIDO DEL BLOG */}
                 <div className="col-12 " style={{ padding: matches ? 0 : '24px' }}>
-                  <div className="blog-view" style={{paddingLeft: matches && '96px'}}>
+                  <div className="blog-view" style={{ paddingLeft: matches && '96px' }}>
                     <div className="col-lg-12" style={{ padding: matches ? 0 : '32px 0 0 0', margin: matches ? '0' : '80px 0 0 0' }}>
                       <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginLeft: '0px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                         {blog && blog.titulo}
@@ -171,24 +171,24 @@ const Blogdetails = ({ params }) => {
                       </div> */}
                       {/* TEXTO */}
 
-                      <div className="sailec col-lg-10 col-12" style={{ marginLeft:  '0px' }}>
+                      <div className="sailec col-lg-10 col-12" style={{ marginLeft: '0px' }}>
                         <div className={matches ? "blog-content" : "blog-content-sm"} dangerouslySetInnerHTML={blog && { __html: blog.texto }}>
                           {/* {blog.texto} */}
                         </div>
                       </div>
 
-                      {blog && blog?.video ?  <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: '0px', marginTop: matches ? '3rem' : 0 , border: '1px solid red'}}>
+                      {blog && blog?.video ? <div className="col-lg-12 col-12 d-flex flex-wrap" style={{ marginLeft: '0px', marginTop: matches ? '3rem' : 0, border: '1px solid red' }}>
                         {/* <div className="blog-content" style={{ marginBottom: matches ? 'auto' : '20px' }} >
                           <img src={blog.imagenes[1]} alt="" style={{ width: '600px' }} />
                         </div> */}
 
                         <iframe width={matches ? "60%" : "100%"} height="615" src={blog.video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                       </div>
-                      : <></>
+                        : <></>
                       }
                     </article>
 
-                    <div className="row d-flex my-4" style={{ padding: '0', marginLeft:  '0px', marginRight: '96px', borderTop: '1px solid grey', textAlign: 'center' }} >
+                    <div className="row d-flex my-4" style={{ padding: '0', marginLeft: '0px', marginRight: '96px', borderTop: '1px solid grey', textAlign: 'center' }} >
                       {/* {console.log('leblog', blog.downloads)} */}
                       <div className="col-12">
                         <h3 className='sailec-medium' style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }}>Contenido descargable</h3>

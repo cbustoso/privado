@@ -103,8 +103,8 @@ export default function MaterialDescargable() {
         />
       </div>
       }
-      <div className="row flex-column d-flex align-items-center sailec mt-5">
-        <div className="col-10 col-lg-10" style={{ padding: '0 0 20px 0' }}>
+      <div className="row flex-column d-flex  sailec">
+        <div className="col-12" style={{ padding: matches ? '0 96px 20px' : '0 32px 20px' }}>
           <div>
             {matches &&
               <button className='btn mt-4 mb-5'
@@ -114,28 +114,27 @@ export default function MaterialDescargable() {
                   width: '163px',
                   padding: '0px 24px',
                   borderRadius: '100px',
-                  marginLeft: '76px'
                 }}
                 onClick={() => router.back()}
               >
                 <FaArrowLeft /> Volver
               </button>
             }
-            <div className="card-body flex-row d-flex justify-content-center mt-4">
+            <div className="card-body flex-row d-flex">
               <h2
-                className="sailec"
-                style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center', marginTop: !matches && '50px' }}>
+                className={matches ? 'blog-title' : 'blog-title-sm'}
+                style={{ marginTop: !matches && '50px' }}>
                 Material descargable
               </h2>
             </div>
 
-            <div className="card-body flex-md-column flex-lg-row d-flex align-self-center" style={{ fontSize: '20px', textAlign: 'center' }}>
+            <div className={`card-body flex-md-column flex-lg-row d-flex  ${matches ? 'blog-text' : 'blog-text-sm'}`} >
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>
             </div>
 
-            <div className="row">
+            <div className="row" style={{ margin: 0 }}>
               <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: matches ? '45%' : '', marginRight: matches ? '10px' : 'auto' }}>
                 {pares.map(item => (
                   <div className="col-12" key={item.titulo}>
@@ -149,13 +148,28 @@ export default function MaterialDescargable() {
                       >
                         {item.titulo}
                       </AccordionSummary>
-                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
+                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
                         {item.bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
                           <a href={`/downloads/${item.url}`} download={item.url}>
-                            Descargar <FaDownload />
+                            <button
+                              className='btn btn-0'
+                              style={{
+                                backgroundColor: "#3886FF",
+                                color: '#FFF',
+                                height: '48px',
+                                width: '200px',
+                                padding: '4px 24px',
+                                margin: '8px',
+                                borderRadius: '100px',
+                                fontSize: '16px',
+                                fontWeight: 600,
+                                border: '2px solid #A5C8FF'
+                              }}>
+                              Descargar <FaDownload />
+                            </button>
                           </a>
                         </Button>
                       </AccordionActions>
@@ -177,13 +191,28 @@ export default function MaterialDescargable() {
                       >
                         {item.titulo}
                       </AccordionSummary>
-                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }}>
+                      <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
                         {item.bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
                           <a href={`/downloads/${item.url}`} download={item.url}>
-                            Descargar <FaDownload />
+                            <button
+                              className='btn btn-0'
+                              style={{
+                                backgroundColor: "#3886FF",
+                                color: '#FFF',
+                                height: '48px',
+                                width: '200px',
+                                padding: '4px 24px',
+                                margin: '8px',
+                                borderRadius: '100px',
+                                fontSize: '16px',
+                                fontWeight: 600,
+                                border: '2px solid #A5C8FF'
+                              }}>
+                              Descargar <FaDownload />
+                            </button>
                           </a>
                         </Button>
                       </AccordionActions>

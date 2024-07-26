@@ -8,6 +8,7 @@
   --main-light-yellow: #ffcb7e;
   --main-light-green: #73cdcd;
   --main-light-grey: #f1f1f1;
+  --main-light-lightblue: #99D6E9
 }
 
 
@@ -13333,6 +13334,7 @@ d29e08
 }
 
 .blog-content-sm p, .blog-content-sm li {
+  font-family: lato;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -13507,4 +13509,75 @@ td:has(div.text-end) {
 
 .bg-light-grey {
   background: var(--main-light-grey);
+}
+
+.blog-title {
+  font-family: sailecbold;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+}
+
+.blog-title-sm {
+  font-family: sailecbold;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 52px;
+}
+
+.blog-subtitle {
+  font-family: sailecbold;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.blog-subtitle-sm {
+  font-family: sailecmedium;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.blog-text {
+  font-family: sailec;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.blog-text-sm {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.blog-time {
+  font-family: sailecmedium;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+
+.quienes-somos-list ol {
+  list-style: none;
+  counter-reset: item;
+}
+
+.quienes-somos-list li {
+  counter-increment: item;
+  margin-bottom: 5px;
+}
+
+.quienes-somos-list li:before {
+  margin-right: 10px;
+  content: counter(item);
+  background: var(--main-light-lightblue);
+  border-radius: 100%;
+  color: white;
+  width: 1.5rem;
+  text-align: center;
+  display: inline-block;
 }

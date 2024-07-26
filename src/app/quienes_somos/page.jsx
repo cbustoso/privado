@@ -128,8 +128,8 @@ export default function QuienesSomos() {
           {/* <div className="row" style={{ margin: '0 10px' }} >
           </div> */}
 
-          <div className="row" style={{ margin: matches ? '0 10px' : 0 }} >
-            <div className="card-body flex-column d-flex my-3 " style={{ padding: !matches && 0 }} >
+          <div className="row" style={{ margin: matches ? '0' : 0 }} >
+            <div className="card-body flex-column d-flex my-3 " style={{ padding:  0 }} >
               {
                 matches
                   ?
