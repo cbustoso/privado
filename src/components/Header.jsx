@@ -12,7 +12,7 @@ import { Tooltip, Avatar } from '@mui/material';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import { usePathname } from "next/navigation";
 import MenuIcon from '@mui/icons-material/Menu';
-import { IoMdLogIn } from "react-icons/io";
+// import { IoMdLogIn } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
@@ -291,7 +291,7 @@ const Header = () => {
                 ? <>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
                   <Link href="/login#profesionales" style={{ textDecoration: 'none' }}>
-                    <IoMdLogIn style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
+                    <FaUserCircle style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
                   </Link>
                 </>
                 : session.user.picture ?
