@@ -468,7 +468,7 @@ const TestAnsiedad = () => {
                               }
                             })}
                           />
-                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSNE, con fines de investigación.
+                          Al completar este formulario, Usted acepta que sus datos personales serán compartidos con el DSME, con fines de investigación.
                         </label>
                       </div>
                     </div>
