@@ -1,6 +1,6 @@
 'use client'
 /* eslint-disable no-unused-vars */
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSection } from "@/context/SectionContext";
 import ReserveBtn from "./ReserveBtn";
 import { useSession } from "next-auth/react";
@@ -10,14 +10,13 @@ import { useMediaQuery } from "@mui/material";
 import { Tooltip, Avatar } from '@mui/material';
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
-import { usePathname } from "next/navigation";
 import MenuIcon from '@mui/icons-material/Menu';
 // import { IoMdLogIn } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
 const pagesWithEvents = [
-  { title: 'INICIO', url: '/#inicio', label: 'inicio' },
+  // { title: 'INICIO', url: '/#inicio', label: 'inicio' },
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
@@ -26,7 +25,7 @@ const pagesWithEvents = [
 ];
 
 const pagesWithoutEvents = [
-  { title: 'INICIO', url: '/#inicio', label: 'inicio' },
+  // { title: 'INICIO', url: '/#inicio', label: 'inicio' },
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
   { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
@@ -49,9 +48,8 @@ const Header = () => {
   const { data: session } = useSession()
   const EVENTS = 0;
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
-  const currentPage = usePathname()
-  const divRef = useRef();
   const matches = useMediaQuery('(min-width:600px)');
+  const [style, setStyle] = useState({ width: 'min-content'});
 
   const isSmallDevice = useMediaQuery(
     "only screen and (max-width : 640px)"
@@ -65,6 +63,34 @@ const Header = () => {
   const isExtraLargeDevice = useMediaQuery(
     "only screen and (min-width : 1025px)"
   );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 900) {
+        console.log('< 900')
+        setStyle({ width: '6px' });
+      } else if (width < 1400) {
+        console.log('< 1400')
+        setStyle({ width: 'min-content'});
+      } else {
+        console.log('> 1400')
+        setStyle({ width: 'fit-content'});
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      handleResize(); 
+    }
+
+    // Limpia el event listener cuando el componente se desmonte
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -234,7 +260,7 @@ const Header = () => {
                       }`}
 
                     onClick={() => handleNavClick(page.label)}
-                    sx={{ fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block', width: isLargeDevice ? 'min-content' : 'fit-content' }}
+                    sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
                   >
                     {page.title}
                   </Button>
@@ -248,7 +274,7 @@ const Header = () => {
                   ? 'active-header'
                   : ''
                   }`}
-                onClick={handleOpenUserMenu} sx={{ p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black' }}>
+                onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
                 CÓMO TRABAJAMOS
               </Button>
             </Tooltip>
