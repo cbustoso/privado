@@ -8,6 +8,7 @@ import Image from "next/image";
 import { MdOutlineChromeReaderMode } from "react-icons/md";
 import { blogs } from "@/utils/blogs";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { fontSize } from "@mui/system";
 
 const theme = createTheme({
   palette: {
@@ -56,7 +57,7 @@ const estimateReadingTime = text => {
   return Math.ceil(readingTimeMinutes); // Retorna el tiempo estimado de lectura en minutos, redondeado al entero superior
 }
 
-const CustomTabPanel = ({ children, value, index, ...other }) => {
+const CustomTabPanel = ({ children, value, index, isShort, ...other }) => {
   return (
     <div
       role="tabpanel"
@@ -71,7 +72,7 @@ const CustomTabPanel = ({ children, value, index, ...other }) => {
             className="sailec-medium"
             sx={{
               fontWeight: 400,
-              fontSize: '20px',
+              fontSize: isShort ? '18px' : '20px',
               lineHeight: '28px',
             }}>{children}</Typography>
         </Box>
@@ -95,6 +96,7 @@ const ImageSlider = ({ innerRef }) => {
   const [color, setColor] = useState(blogs[0].color)
   const [idBlog, setIdBlog] = useState(blogs[0].id)
   const matches = useMediaQuery('(min-width:600px)');
+  const [isShort, setIsShort] = useState(false);
 
   const [value, setValue] = useState(0);
   const divRef = useRef();
@@ -108,17 +110,39 @@ const ImageSlider = ({ innerRef }) => {
   };
 
   useEffect(() => {
+    // Función para manejar el cambio de slide
+    const changeSlide = () => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+    };
+
+    // Función para manejar el cambio de tamaño de la ventana
+    const handleResize = () => {
+      const height = window.innerHeight;
+      if (height < 800) {
+        setIsShort(true);
+      } else if (height < 1450) {
+        setIsShort(true);
+      } else {
+        setIsShort(false);
+      }
+    };
+
+    // Configurar el timeout para cambiar el slide cada 8 segundos
     resetTimeout();
-    timeoutRef.current = setTimeout(
-      () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
+    timeoutRef.current = setTimeout(changeSlide, 8000);
 
-      },
-      8000 // Cambiar el slide cada 8 segundos
-    );
+    // Agregar el event listener para el cambio de tamaño de la ventana
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      handleResize(); // Llama a handleResize inicialmente para configurar el tamaño correcto
+    }
 
+    // Cleanup: Limpia el timeout y el event listener cuando el componente se desmonte o los valores dependientes cambien
     return () => {
       resetTimeout();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
     };
   }, [currentIndex, totalSlides]);
 
@@ -245,9 +269,9 @@ const ImageSlider = ({ innerRef }) => {
                     style={{
                       marginTop: '1em',
                       color: 'white',
-                      fontSize: '72px',
+                      fontSize: isShort ? '48px' : '72px',
                       fontWeight: 700,
-                      lineHeight: '116px',
+                      lineHeight: isShort ? '52px' : '116px',
                       textWrap: 'balance'
                     }}>
                     {slides[currentIndex].titulo}
@@ -263,7 +287,7 @@ const ImageSlider = ({ innerRef }) => {
                       className={`btn submit-form me-2 sailec-medium ${'btn-' + currentIndex}`}
                       style={{
                         width: '209px',
-                        height: '56px',
+                        height: !isShort && '56px',
                         backgroundColor: styles[currentIndex].color,
                         border: `1px solid ${styles[currentIndex].border}`,
                         borderRadius: '100px',
@@ -281,8 +305,8 @@ const ImageSlider = ({ innerRef }) => {
             className="col col-3"
             style={{
               borderBottom: '1px solid white',
-              height: '200px',
-              marginTop: '-240px',
+              height: isShort ? '180px' : '200px',
+              marginTop: isShort ? '-210px' : '-240px',
               marginLeft: `calc(25vw * ${slides[currentIndex].id})`,
               backgroundColor: styles[currentIndex].color,
               color: "#fff",
@@ -302,6 +326,7 @@ const ImageSlider = ({ innerRef }) => {
             <CustomTabPanel
               value={slides[currentIndex].key}
               index={slides[currentIndex].key}
+              isShort={isShort}
             >
               {slides[currentIndex].bajada.slice(0, 200)}
             </CustomTabPanel>
@@ -326,7 +351,7 @@ const ImageSlider = ({ innerRef }) => {
                     color: '#fff',
                     textTransform: 'capitalize',
                     fontWeight: 700,
-                    fontSize: '24px',
+                    fontSize: isShort ? '20px' : '24px',
                     lineHeight: '32px',
                     maxWidth: 'unset',
                     alignItems: 'baseline',
@@ -357,7 +382,15 @@ const ImageSlider = ({ innerRef }) => {
               <div className="col-sm-12 sailec">
                 <div style={{ minHeight: '2rem' }}>
                   <h2 style={{ color: 'white', fontSize: '30px', fontWeight: 700, lineHeight: '40px' }}>{title}</h2>
-                  <p style={{ color: 'white', fontSize: '20px', fontWeight: 400, lineHeight: '32px' }}>{content.slice(0, 205)}</p>
+                  <p style={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontWeight: 400,
+                    lineHeight: '32px',
+                  }}
+                  >
+                    {content.slice(0, 205)}
+                  </p>
                 </div>
                 <Grid
                   container

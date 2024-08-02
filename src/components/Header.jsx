@@ -68,13 +68,10 @@ const Header = () => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 900) {
-        console.log('< 900')
         setStyle({ width: '6px' });
-      } else if (width < 1400) {
-        console.log('< 1400')
+      } else if (width < 1450) {
         setStyle({ width: 'min-content'});
       } else {
-        console.log('> 1400')
         setStyle({ width: 'fit-content'});
       }
     };
