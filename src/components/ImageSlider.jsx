@@ -74,6 +74,7 @@ const CustomTabPanel = ({ children, value, index, isShort, ...other }) => {
               fontWeight: 400,
               fontSize: isShort ? '18px' : '20px',
               lineHeight: '28px',
+              fontFamily: 'sailec'
             }}>{children}</Typography>
         </Box>
       )}
@@ -120,8 +121,8 @@ const ImageSlider = ({ innerRef }) => {
       const height = window.innerHeight;
       if (height < 800) {
         setIsShort(true);
-      } else if (height < 1450) {
-        setIsShort(true);
+      // } else if (height < 1450) {
+      //   setIsShort(true);
       } else {
         setIsShort(false);
       }
@@ -272,7 +273,8 @@ const ImageSlider = ({ innerRef }) => {
                       fontSize: isShort ? '48px' : '72px',
                       fontWeight: 700,
                       lineHeight: isShort ? '52px' : '116px',
-                      textWrap: 'balance'
+                      textWrap: 'balance',
+                      fontFamily: 'sailec'
                     }}>
                     {slides[currentIndex].titulo}
                   </h2>
@@ -356,6 +358,7 @@ const ImageSlider = ({ innerRef }) => {
                     maxWidth: 'unset',
                     alignItems: 'baseline',
                     textAlign: 'left',
+                    fontFamily: 'sailec'
                   }}
                   label={slide.titulo}
                   {...a11yProps(slideIndex)}
