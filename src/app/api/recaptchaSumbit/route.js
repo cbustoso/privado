@@ -4,7 +4,7 @@ import axios from "axios";
 export async function POST(request, response) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY
 
-  const postData = await request.kson()
+  const postData = await request.json()
 
   const { gRecaptchaToken } = postData
 
