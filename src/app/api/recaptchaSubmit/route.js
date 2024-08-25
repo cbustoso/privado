@@ -6,11 +6,15 @@ export async function POST(request, response) {
 
   const postData = await request.json()
 
-  const { gRecaptchaToken } = postData
+  console.log('POSTDATA', postData)
+
+  const { token } = postData
 
   let res;
 
-  const formData = `secret=${secretKey}&response=${gRecaptchaToken}`
+  const formData = `secret=${secretKey}&response=${token}`
+
+  console.log('FOMR DATA', formData)
 
   try {
     res = await axios.post(

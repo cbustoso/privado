@@ -36,11 +36,14 @@ const handler = NextAuth({
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
+      name: 'Credentials',
       credentials: {
-        email: {label: "email", type: "email", placeholder: "jsmith" },
+        email: {label: "email", type: "email", placeholder: 'example@example.com'},
         password: { label: "password", type: "password" }
       },
       authorize: async (credentials) => {
+        console.log('CREDENTIALS', credentials);
+        
         let user = null
         // logic to salt and hash password
         // const pwHash = saltAndHashPassword(credentials.password)
@@ -67,6 +70,9 @@ const handler = NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
     async signIn({ account, profile, credentials }) {
       console.log('CREDENTIALS', credentials);
@@ -99,7 +105,8 @@ const handler = NextAuth({
       }
       return session;
     },
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 })
 
 export { handler as GET, handler as POST }

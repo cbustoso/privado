@@ -11,7 +11,6 @@ import { getServerSession } from "next-auth";
 const inter = Inter({ subsets: ["latin"] });
 import { blogs } from "@/utils/blogs";
 // import Hotjar from '@hotjar/browser';
-import GoogleReCaptchaWrapper from "@/providers/GoogleCaptchaWrapper";
 
 const siteId = 3920275;
 // const hotjarVersion = 6;
@@ -59,16 +58,14 @@ export default async function RootLayout({ children }) {
       </head>
       <body className={`${roboto_init.variable}`}>
         <AuthProvider session={session}>
-          <GoogleReCaptchaWrapper>
-            <SectionProvider>
-              <TanstackProvider>
-                <Header />
-                {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
+          <SectionProvider>
+            <TanstackProvider>
+              <Header />
+              {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
 
-                {children}
-              </TanstackProvider>
-            </SectionProvider>
-          </GoogleReCaptchaWrapper>
+              {children}
+            </TanstackProvider>
+          </SectionProvider>
         </AuthProvider>
         <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script>
       </body>

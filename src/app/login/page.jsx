@@ -1,12 +1,12 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react"
 
 import { useForm } from 'react-hook-form';
 import axios from "axios";
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import { AuthData } from "../../providers/AuthWrapper";
 
@@ -31,6 +31,7 @@ const Login = () => {
   const { login } = AuthData()
 
   const { executeRecaptcha } = useGoogleReCaptcha()
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -39,34 +40,6 @@ const Login = () => {
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('DATA', data);
     setSubmit('')
-
-//     if (!executeRecaptcha) {
-//       console.log('NO DISPONIBLE', executeRecaptcha)
-//       return
-//     }
-
-//     const gRecaptchaToken = await executeRecaptcha('inquirySubmit')
-// console.log('gRecaptchaToken', gRecaptchaToken);
-//     const response = await axios({
-//       method: "post",
-//       url: "/api/recaptchaSubmit",
-//       data: {
-//         gRecaptchaToken,
-//       },
-//       headers: {
-//         Accept: "application/json, text/plain, */*",
-//         "Content-Type": "application/json",
-//       }
-//     })
-
-//     if (response?.data?.success === true) {
-//       console.log(`Success with score: ${response?.data?.score}`);
-//       setSubmit('Recaptcha Verified!!')
-//     } else {
-//       console.log(`Failure with score: ${response?.data?.score}`);
-//       setSubmit('Feiled to Verify recaptcha! You must be a robot!')
-//     }  
-
 
     console.log('HOLA');
     try {
@@ -114,6 +87,44 @@ const Login = () => {
       }
     }
   }
+
+
+  const onSubmit = async (data) => {
+    if (!executeRecaptcha) {
+      console.log('Recaptcha not yet available');
+      return;
+    }
+
+    const token = await executeRecaptcha('login');
+
+    const response = await axios.post('/api/recaptchaSubmit', { token });
+
+    console.log('RESPONSE', response);
+    if (response.data.success) {
+      
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+
+      console.log('DATA', data);
+      
+      if (result.error) {
+        setSubmitMessage('Login failed');
+      } else {
+        setSubmitMessage('Login successful');
+      }
+    } else {
+      console.log('reCAPTCHA verification failed');
+      
+      setSubmitMessage('reCAPTCHA verification failed');
+    }
+  };
+
+
+
+
   return (
     <>
       {/* Main Wrapper */}
@@ -297,7 +308,7 @@ const Login = () => {
                                       <div className="form-group login-btn">
                                         <button
                                           className="btn btn-primary btn-block sailec-medium"
-                                          onClick={handleOnSubmit}
+                                          onClick={handleSubmit(onSubmit)}
                                         >
                                           Iniciar sesión
                                         </button>
@@ -396,6 +407,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };
