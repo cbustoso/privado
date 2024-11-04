@@ -181,7 +181,7 @@ const Login = () => {
                                 <ul className="nav nav-tabs">
                                   <li className="nav-item">
                                     <a
-                                      className={`sailec-medium nav-link ${hash === 'estudiantes' ? 'active' : ''}`}
+                                      className={`sailec-medium nav-link ${hash === 'estudiantes' ? 'active' : hash === '' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('estudiantes')}
                                       href="#estudiantes"
                                       style={{
@@ -208,7 +208,7 @@ const Login = () => {
                                 </ul>
                                 <div className="tab-content" style={{ height: '250px' }}>
 
-                                  <div className={`tab-pane ${hash === 'estudiantes' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="profesionales" style={{ height: '100%', textAlign: 'center', }}>
+                                  <div className={`tab-pane ${hash === 'estudiantes' ? 'show active d-flex flex-column justify-content-evenly '  : hash === '' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="profesionales" style={{ height: '100%', textAlign: 'center', }}>
                                     <p>Ingresa con tu mail UDP para poder realizar una reserva.</p>
                                     <div>
                                       <button className="gsi-material-button btn btn-primary btn-block"

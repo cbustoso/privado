@@ -59,12 +59,12 @@ export default async function RootLayout({ children }) {
       <body className={`${roboto_init.variable}`}>
         <AuthProvider session={session}>
           <SectionProvider>
-            <TanstackProvider>
+            {/* <TanstackProvider> */}
               <Header />
               {/* {blogs.length > 0 && <ImageSlider slides={blogs.slice(0, 5)} />} */}
 
               {children}
-            </TanstackProvider>
+            {/* </TanstackProvider> */}
           </SectionProvider>
         </AuthProvider>
         <Script src="./bot.js" data-args="Salud mental, #FFFFFF, #AA3C80FF, ./bot_salud_mental.png" id="bot"></Script>
