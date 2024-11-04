@@ -76,7 +76,7 @@ const tests = [
     titulo: 'Test de depresión',
     bajada: 'El PHQ-9 es un cuestionario breve que ayuda a identificar si una persona podría estar deprimida. Consiste en 9 preguntas sobre cómo se ha sentido alguien en las últimas dos semanas.',
     url: '/tests/test_de_depresion',
-    imagen: saludMental01.src,
+    imagen: 'https://github.com/Niennis/imagesudp/blob/main/saludMental01.jpeg?raw=true',
   },
 ]
 

@@ -301,10 +301,10 @@ export { default as banner05 } from "../assets/img/homepage/vida_universitaria.j
 export { default as banner06 } from "../assets/img/homepage/biblioteca_viva.jpg"
 export { default as banner07 } from "../assets/img/homepage/distraccion_positiva.jpg"
 
-export { default as saludMental01 } from "../assets/img/saludMental01.jpeg"
-export { default as saludMental02 } from "../assets/img/saludMental02.jpeg"
-export { default as saludMental03 } from "../assets/img/saludMental03.jpeg"
-export { default as saludMental04 } from "../assets/img/cafeina.jpg" 
+// export { default as saludMental01 } from "../assets/img/saludMental01.jpeg"
+// export { default as saludMental02 } from "../assets/img/saludMental02.jpeg"
+// export { default as saludMental03 } from "../assets/img/saludMental03.jpeg"
+// export { default as saludMental04 } from "../assets/img/cafeina.jpg" 
 export { default as saludMental05 } from "../assets/img/ansiedad.jpg" 
 
 export { default as conferencia } from "../assets/img/salon01.jpg"

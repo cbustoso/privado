@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
-import { redirect } from "next/navigation";
+import { redirect, useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react"
 
@@ -18,12 +18,18 @@ import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState('estudiantes');
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isInvalid, setIsInvalid] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const matches = useMediaQuery('(min-width:600px)');
   const [submit, setSubmit] = useState('')
+  const [hash, setHash] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHash(window.location.hash.substring(1));
+    }
+  }, []);
 
   const { register, handleSubmit, watch,
     formState: { errors }
@@ -40,8 +46,6 @@ const Login = () => {
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('DATA', data);
     setSubmit('')
-
-    console.log('HOLA');
     try {
       const res = await signIn('credentials', { callbackUrl: '/citas' })
       console.log(res);
@@ -58,7 +62,7 @@ const Login = () => {
 
 
   const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
+    setHash(tabId);
   };
   // const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -162,7 +166,7 @@ const Login = () => {
                     <div className="login-right-wrap">
                       <div className="account-logo">
                         <Link href="#">
-                          <img src={logo.src} width={380} alt="logo" />
+                          <img src={logo.src} width={380} alt="logo udp" style={{maxWidth: '-webkit-fill-available'}}/>
                         </Link>
                       </div>
 
@@ -177,12 +181,12 @@ const Login = () => {
                                 <ul className="nav nav-tabs">
                                   <li className="nav-item">
                                     <a
-                                      className={`sailec-medium nav-link ${activeTab === 'estudiantes' ? 'active' : ''}`}
+                                      className={`sailec-medium nav-link ${hash === 'estudiantes' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('estudiantes')}
                                       href="#estudiantes"
                                       style={{
-                                        background: activeTab === 'estudiantes' ? '#A6A6A6 ' : '',
-                                        color: activeTab === 'estudiantes' ? '#FFF ' : '',
+                                        background: hash === 'estudiantes' ? '#A6A6A6 ' : '',
+                                        color: hash === 'estudiantes' ? '#FFF ' : '',
                                       }}
                                     >
                                       Estudiantes
@@ -190,12 +194,12 @@ const Login = () => {
                                   </li>
                                   <li className="nav-item">
                                     <a
-                                      className={`sailec-medium nav-link ${activeTab === 'profesionales' ? 'active' : ''}`}
+                                      className={`sailec-medium nav-link ${hash === 'profesionales' ? 'active' : ''}`}
                                       onClick={() => handleTabClick('profesionales')}
                                       href="#profesionales"
                                       style={{
-                                        background: activeTab === 'profesionales' ? '#A6A6A6 ' : '',
-                                        color: activeTab === 'profesionales' ? '#FFF ' : '',
+                                        background: hash === 'profesionales' ? '#A6A6A6 ' : '',
+                                        color: hash === 'profesionales' ? '#FFF ' : '',
                                       }}
                                     >
                                       Profesionales
@@ -204,7 +208,7 @@ const Login = () => {
                                 </ul>
                                 <div className="tab-content" style={{ height: '250px' }}>
 
-                                  <div className={`tab-pane ${activeTab === 'estudiantes' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="profesionales" style={{ height: '100%', textAlign: 'center', }}>
+                                  <div className={`tab-pane ${hash === 'estudiantes' ? 'show active d-flex flex-column justify-content-evenly ' : ''}`} id="profesionales" style={{ height: '100%', textAlign: 'center', }}>
                                     <p>Ingresa con tu mail UDP para poder realizar una reserva.</p>
                                     <div>
                                       <button className="gsi-material-button btn btn-primary btn-block"
@@ -234,7 +238,7 @@ const Login = () => {
                                     </div>
 
                                   </div>
-                                  <div className={`tab-pane ${activeTab === 'profesionales' ? 'show active' : ''}`} id="estudiantes">
+                                  <div className={`tab-pane ${hash === 'profesionales' ? 'show active' : ''}`} id="estudiantes">
 
 
                                     <form >

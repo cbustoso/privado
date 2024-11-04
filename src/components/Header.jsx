@@ -17,19 +17,19 @@ import { FaChevronDown } from "react-icons/fa";
 
 const pagesWithEvents = [
   // { title: 'INICIO', url: '/#inicio', label: 'inicio' },
-  { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
-  { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'TEST AUTODIAGNÓSTICO?', url: '/#', label: 'test_autodiagnostico' },
+  { title: 'EVENTOS', url: '/#', label: 'eventos' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#', label: 'preguntas_frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/#', label: 'material_descargable' },
+  { title: 'QUIÉNES SOMOS', url: '/#', label: 'quienes_somos' },
 ];
 
 const pagesWithoutEvents = [
   // { title: 'INICIO', url: '/#inicio', label: 'inicio' },
-  { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
-  { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas_frecuentes', label: 'preguntas_frecuentes' },
-  { title: 'MATERIAL DESCARGABLE', url: '/material_descargable', label: 'material_descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes_somos', label: 'quienes_somos' },
+  { title: 'TEST AUTODIAGNÓSTICO', url: '/#', label: 'test_autodiagnostico' },
+  { title: 'PREGUNTAS FRECUENTES', url: '/#', label: 'preguntas_frecuentes' },
+  { title: 'MATERIAL DESCARGABLE', url: '/#', label: 'material_descargable' },
+  { title: 'QUIÉNES SOMOS', url: '/#', label: 'quienes_somos' },
 ];
 
 const settings = [
@@ -49,7 +49,7 @@ const Header = () => {
   const EVENTS = 0;
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
   const matches = useMediaQuery('(min-width:600px)');
-  const [style, setStyle] = useState({ width: 'min-content'});
+  const [style, setStyle] = useState({ width: 'min-content' });
 
   const isSmallDevice = useMediaQuery(
     "only screen and (max-width : 640px)"
@@ -70,15 +70,15 @@ const Header = () => {
       if (width < 900) {
         setStyle({ width: '6px' });
       } else if (width < 1450) {
-        setStyle({ width: 'min-content'});
+        setStyle({ width: 'min-content' });
       } else {
-        setStyle({ width: 'fit-content'});
+        setStyle({ width: 'fit-content' });
       }
     };
 
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', handleResize);
-      handleResize(); 
+      handleResize();
     }
 
     // Limpia el event listener cuando el componente se desmonte
@@ -188,10 +188,8 @@ const Header = () => {
                 ))
               }
               <MenuItem onClick={handleOpenUserMenu}>
-                <Typography textAlign="center" className="sailec">
-                  <p style={{ color: 'black', fontFamily: 'sailec' }}>
-                    CÓMO TRABAJAMOS <FaChevronDown />
-                  </p>
+                <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
+                  CÓMO TRABAJAMOS <FaChevronDown />
                 </Typography>
               </MenuItem>
 
@@ -307,8 +305,6 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open"> */}
-            {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
             {
               !session
                 ? <>
@@ -334,10 +330,6 @@ const Header = () => {
                     <FaUserCircle style={{ height: '40px' }} />
                   </Link>
             }
-
-            {/* </IconButton> */}
-            {/* </Tooltip> */}
-
           </Box>
         </Toolbar>
       </Container>

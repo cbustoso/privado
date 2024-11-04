@@ -288,11 +288,11 @@ export const createSchedule = async (schedule) => {
 // EDIT BLOQUES DISPONIBLES
 export const editBloqueDisponible = async (id_bloque, id_user) => {
   const EDIT_BLOQUE_URL = process.env.NEXT_PUBLIC_EDIT_BLOQUE_DISPONIBLE;
-  const body = { 
+  const body = {
     id_bloque: id_bloque,
     id_user: id_user,
     comentario: ''
-   }
+  }
   try {
     const data = await fetch(EDIT_BLOQUE_URL, {
       method: "POST",
@@ -369,3 +369,58 @@ export const getSpecialities = async () => {
     console.log('Error: ', error)
   }
 }
+
+/* 
+
+// Función para calcular los intervalos de tiempo
+function calcularIntervalos(horaInicio, horaFin, duracionServicio) {
+  const intervalos = [];
+  let hora = horaInicio;
+
+  while (hora <= horaFin) {
+    intervalos.push(hora);
+    // Agregar la duración del servicio a la hora actual
+    const [horas, minutos, segundos] = hora.split(":").map(Number);
+    const tiempoTotal = horas * 3600 + minutos * 60 + segundos;
+    const nuevoTiempoTotal = tiempoTotal + (duracionServicio * 60);
+    const nuevaHora = new Date(0, 0, 0, 0, 0, nuevoTiempoTotal);
+    hora = nuevaHora.toLocaleTimeString("en-US", { hour12: false });
+  }
+
+  return intervalos;
+}
+
+// Función para combinar los resultados
+function combinarResultados(resultados) {
+  return resultados.reduce((acumulador, resultado) => {
+    return acumulador.concat(resultado);
+  }, []);
+}
+
+// Calculando los intervalos de tiempo para cada usuario
+const resultadosIndividuales = servicio1Response.users.map(usuario => {
+  return calcularIntervalos(usuario.horaIni, usuario.horaFin, usuario.duracionServicio);
+});
+
+// Combinando los resultados individuales en un solo array
+const intervalosDeTiempo = combinarResultados(resultadosIndividuales);
+
+// Filtrando los bloques del segundo servicio que coincidan con los intervalos calculados
+const bloquesFiltrados = servicio2Response.bloques.filter(bloque => {
+  return intervalosDeTiempo.some(intervalo => {
+    const [bloqueHoraInicio, bloqueMinutosInicio] = bloque.hora_inicio.split(":").map(Number);
+    const [bloqueHoraFin, bloqueMinutosFin] = bloque.hora_fin.split(":").map(Number);
+    const [intervaloHora, intervaloMinutos] = intervalo.split(":").map(Number);
+    return (
+      bloqueHoraInicio === intervaloHora &&
+      bloqueMinutosInicio === intervaloMinutos &&
+      bloqueHoraFin >= intervaloHora &&
+      bloqueMinutosFin >= intervaloMinutos
+    );
+  });
+});
+
+// Formateando los datos resultantes
+const resultadoFinal = bloquesFiltrados.map(bloque => ({
+  horaInicio: bloque.hora_inicio
+})); */

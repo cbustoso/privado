@@ -121,8 +121,8 @@ const ImageSlider = ({ innerRef }) => {
       const height = window.innerHeight;
       if (height < 800) {
         setIsShort(true);
-      // } else if (height < 1450) {
-      //   setIsShort(true);
+        // } else if (height < 1450) {
+        //   setIsShort(true);
       } else {
         setIsShort(false);
       }
@@ -278,7 +278,10 @@ const ImageSlider = ({ innerRef }) => {
                     }}>
                     {slides[currentIndex].titulo}
                   </h2>
-                  <p style={{ color: '#FFF' }}> <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} /> {estimateReadingTime(slides[currentIndex].texto)} min. </p>
+                  <p style={{ color: '#FFF' }}> 
+                    <MdOutlineChromeReaderMode style={{ marginTop: '-3px' }} />
+                    {estimateReadingTime(slides[currentIndex].texto)} min.
+                  </p>
                 </div>
                 <Grid
                   container
